@@ -30,9 +30,9 @@ void sim_exit() {
 int main() {
 	sim_init();
 	top->x0 = 0b00;	top->x1 = 0b01;	top->x2 = 0b10;	top->x3 = 0b11;
-	top->y = 0b00;	top->step_and_dump_wave();
-	top->y = 0b01;	top->step_and_dump_wave();
-	top->y = 0b10;	top->step_and_dump_wave();
-	top->y = 0b11;	top->step_and_dump_wave();
+	top->y = 0b00;	step_and_dump_wave();
+	top->y = 0b01;	step_and_dump_wave();
+	top->y = 0b10;	step_and_dump_wave();
+	top->y = 0b11;	step_and_dump_wave();
 	sim_exit();
 }
