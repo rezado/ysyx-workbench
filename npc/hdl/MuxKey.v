@@ -50,3 +50,4 @@ module MuxKeyWithDefault #(NR_KEY = 2, KEY_LEN = 1, DATA_LEN = 1) (
 );
   MuxKeyInternal #(.NR_KEY(NR_KEY), .KEY_LEN(KEY_LEN), .DATA_LEN(DATA_LEN), .HAS_DEFAULT(1)) i0 (out, key, default_out, lut);
 endmodule
+
