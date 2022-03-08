@@ -5,7 +5,7 @@
 VerilatedContext* contextp = NULL;
 VerilatedVcdC* tfp = NULL;
 
-static Vmux21* top;
+static Vm_mux21* top;
 
 void step_and_dump_wave() {
     top->eval();
@@ -16,7 +16,7 @@ void step_and_dump_wave() {
 void sim_init() {
     contextp = new VerilatedContext;
     tfp = new VerilatedVcdC;
-    top = new Vmux21;
+    top = new Vm_mux21;
     contextp->traceEverOn(true);
     top->trace(tfp, 0);
     tfp->open("dump.vcd");
