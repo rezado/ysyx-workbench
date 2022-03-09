@@ -3,7 +3,6 @@
 
 #include "Vmux41b.h"
 #include "Vmux41b__Syms.h"
-#include "verilated_vcd_c.h"
 
 //============================================================
 // Constructors
@@ -50,7 +49,6 @@ static void _eval_initial_loop(Vmux41b__Syms* __restrict vlSymsp) {
     // Evaluate till stable
     int __VclockLoop = 0;
     QData __Vchange = 1;
-    vlSymsp->__Vm_activity = true;
     do {
         VL_DEBUG_IF(VL_DBG_MSGF("+ Initial loop\n"););
         Vmux41b___024root___eval_settle(&(vlSymsp->TOP));
@@ -62,7 +60,7 @@ static void _eval_initial_loop(Vmux41b__Syms* __restrict vlSymsp) {
             Verilated::debug(1);
             __Vchange = Vmux41b___024root___change_request(&(vlSymsp->TOP));
             Verilated::debug(__Vsaved_debug);
-            VL_FATAL_MT("mux41b.v", 1, "",
+            VL_FATAL_MT("/home/bill/ysyx-workbench/npc/hdl/mux41b/vsrc/mux41b.v", 1, "",
                 "Verilated model didn't DC converge\n"
                 "- See https://verilator.org/warn/DIDNOTCONVERGE");
         } else {
@@ -82,7 +80,6 @@ void Vmux41b::eval_step() {
     // Evaluate till stable
     int __VclockLoop = 0;
     QData __Vchange = 1;
-    vlSymsp->__Vm_activity = true;
     do {
         VL_DEBUG_IF(VL_DBG_MSGF("+ Clock loop\n"););
         Vmux41b___024root___eval(&(vlSymsp->TOP));
@@ -93,7 +90,7 @@ void Vmux41b::eval_step() {
             Verilated::debug(1);
             __Vchange = Vmux41b___024root___change_request(&(vlSymsp->TOP));
             Verilated::debug(__Vsaved_debug);
-            VL_FATAL_MT("mux41b.v", 1, "",
+            VL_FATAL_MT("/home/bill/ysyx-workbench/npc/hdl/mux41b/vsrc/mux41b.v", 1, "",
                 "Verilated model didn't converge\n"
                 "- See https://verilator.org/warn/DIDNOTCONVERGE");
         } else {
@@ -118,31 +115,4 @@ VerilatedContext* Vmux41b::contextp() const {
 
 const char* Vmux41b::name() const {
     return vlSymsp->name();
-}
-
-//============================================================
-// Trace configuration
-
-void Vmux41b___024root__traceInitTop(Vmux41b___024root* vlSelf, VerilatedVcd* tracep);
-
-static void traceInit(void* voidSelf, VerilatedVcd* tracep, uint32_t code) {
-    // Callback from tracep->open()
-    Vmux41b___024root* const __restrict vlSelf VL_ATTR_UNUSED = static_cast<Vmux41b___024root*>(voidSelf);
-    Vmux41b__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    if (!vlSymsp->_vm_contextp__->calcUnusedSigs()) {
-        VL_FATAL_MT(__FILE__, __LINE__, __FILE__,
-            "Turning on wave traces requires Verilated::traceEverOn(true) call before time 0.");
-    }
-    vlSymsp->__Vm_baseCode = code;
-    tracep->module(vlSymsp->name());
-    tracep->scopeEscape(' ');
-    Vmux41b___024root__traceInitTop(vlSelf, tracep);
-    tracep->scopeEscape('.');
-}
-
-void Vmux41b___024root__traceRegister(Vmux41b___024root* vlSelf, VerilatedVcd* tracep);
-
-void Vmux41b::trace(VerilatedVcdC* tfp, int, int) {
-    tfp->spTrace()->addInitCb(&traceInit, &(vlSymsp->TOP));
-    Vmux41b___024root__traceRegister(&(vlSymsp->TOP), tfp->spTrace());
 }

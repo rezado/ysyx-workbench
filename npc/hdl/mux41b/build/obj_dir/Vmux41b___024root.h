@@ -10,8 +10,6 @@
 //==========
 
 class Vmux41b__Syms;
-class Vmux41b_VerilatedVcd;
-
 
 //----------
 
@@ -27,15 +25,9 @@ VL_MODULE(Vmux41b___024root) {
     VL_OUT8(f,1,0);
 
     // LOCAL SIGNALS
-    CData/*1:0*/ mux41b__DOT__i0__DOT__i0__DOT__lut_out;
-    CData/*0:0*/ mux41b__DOT__i0__DOT__i0__DOT__hit;
     VlUnpacked<CData/*3:0*/, 4> mux41b__DOT__i0__DOT__i0__DOT__pair_list;
     VlUnpacked<CData/*1:0*/, 4> mux41b__DOT__i0__DOT__i0__DOT__key_list;
     VlUnpacked<CData/*1:0*/, 4> mux41b__DOT__i0__DOT__i0__DOT__data_list;
-
-    // LOCAL VARIABLES
-    SData/*15:0*/ mux41b__DOT____Vcellinp__i0____pinNumber3;
-    VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
 
     // INTERNAL VARIABLES
     Vmux41b__Syms* vlSymsp;  // Symbol table
