@@ -1,11 +1,11 @@
 #include "verilated.h"
 #include "verilated_vcd_c.h"
-#include "Vmux41b.h"
+#include "Vdecode24.h"
 
 VerilatedContext* contextp = NULL;
 VerilatedVcdC* tfp = NULL;
 
-static Vmux41b* top;
+static Vdecode24* top;
 
 void step_and_dump_wave() {
     top->eval();
@@ -16,7 +16,7 @@ void step_and_dump_wave() {
 void sim_init() {
     contextp = new VerilatedContext;
     tfp = new VerilatedVcdC;
-    top = new Vmux41b;
+    top = new Vdecode24;
     contextp->traceEverOn(true);
     top->trace(tfp, 0);
     tfp->open("dump.vcd");
