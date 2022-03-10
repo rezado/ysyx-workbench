@@ -51,7 +51,7 @@ all:
 sim:
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
-	cd hdl/decode24; verilator -Wall --trace --cc --exe --build ./vsrc/decode24.v ./csrc/main.cpp
+	cd hdl/encode42; verilator -Wall --trace --cc --exe --build ./vsrc/encode42.v ./csrc/encode42_tb.cpp
 
 include ../Makefile
 .PHONY: clean run
