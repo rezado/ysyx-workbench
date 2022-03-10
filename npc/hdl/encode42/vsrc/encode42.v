@@ -9,7 +9,7 @@ module encode42(
         if (en) begin
             y = 0;
             for (i = 0; i <= 3; i = i + 1)
-                if (x[i] == 1)  y = i[1:0]
+                if (x[i] == 1)  y = i[1:0];
         end
         else y = 2'b00;
     end
