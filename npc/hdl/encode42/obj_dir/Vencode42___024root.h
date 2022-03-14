@@ -23,6 +23,9 @@ VL_MODULE(Vencode42___024root) {
     VL_IN8(en,0,0);
     VL_OUT8(y,1,0);
 
+    // LOCAL SIGNALS
+    IData/*31:0*/ encode42__DOT__i;
+
     // INTERNAL VARIABLES
     Vencode42__Syms* vlSymsp;  // Symbol table
 

@@ -21,7 +21,7 @@ $(SRC_AUTO_BIND): $(NXDC_FILES)
 
 # project source
 VSRCS = $(shell find $(abspath ./vsrc) -name "*.v")
-CSRCS = $(shell find $(abspath ./csrc) -name "*.c" -or -name "*.cc" -or -name "*.cpp")
+CSRCS = $(shell find $(abspath ./csrc) -name "sim_main.cpp")
 CSRCS += $(SRC_AUTO_BIND)
 
 # rules for NVBoard
@@ -45,13 +45,4 @@ run: $(BIN)
 clean:
 	rm -rf $(BUILD_DIR)
 
-all:
-	@echo "Write this Makefile by your self."
-
-sim:
-	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
-	@echo "Write this Makefile by your self."
-	cd hdl/ex6/barrelshifter; verilator -Wall --trace --cc --exe --build ./vsrc/top.v ./csrc/sim_main.cpp
-
-include ../Makefile
 .PHONY: clean run

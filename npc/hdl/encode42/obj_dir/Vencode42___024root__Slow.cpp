@@ -55,4 +55,5 @@ void Vencode42___024root___ctor_var_reset(Vencode42___024root* vlSelf) {
     vlSelf->x = VL_RAND_RESET_I(4);
     vlSelf->en = VL_RAND_RESET_I(1);
     vlSelf->y = VL_RAND_RESET_I(2);
+    vlSelf->encode42__DOT__i = VL_RAND_RESET_I(32);
 }

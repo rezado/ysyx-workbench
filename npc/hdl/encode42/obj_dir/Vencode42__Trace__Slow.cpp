@@ -28,6 +28,7 @@ void Vencode42___024root__traceInitSub0(Vencode42___024root* vlSelf, VerilatedVc
         tracep->declBus(c+1,"encode42 x", false,-1, 3,0);
         tracep->declBit(c+2,"encode42 en", false,-1);
         tracep->declBus(c+3,"encode42 y", false,-1, 1,0);
+        tracep->declBus(c+4,"encode42 i", false,-1, 31,0);
     }
 }
 
@@ -67,5 +68,6 @@ void Vencode42___024root__traceFullSub0(Vencode42___024root* vlSelf, VerilatedVc
         tracep->fullCData(oldp+1,(vlSelf->x),4);
         tracep->fullBit(oldp+2,(vlSelf->en));
         tracep->fullCData(oldp+3,(vlSelf->y),2);
+        tracep->fullIData(oldp+4,(vlSelf->encode42__DOT__i),32);
     }
 }
