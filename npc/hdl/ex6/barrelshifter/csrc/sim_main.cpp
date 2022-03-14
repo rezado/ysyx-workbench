@@ -8,7 +8,7 @@ VerilatedVcdC* tfp = NULL;
 #define MAX_SIM_TIME 20
 vluint64_t sim_time = 0;
 
-static Vdecode24* top;
+static Vtop* top;
 
 
 void step_and_dump_wave() {
