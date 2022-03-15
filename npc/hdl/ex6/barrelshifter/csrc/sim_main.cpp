@@ -38,7 +38,9 @@ int main() {
   sim_init();
 
   top->clk = 0;
-  top->in = 0b00000001;
+  top->rst = 1;
+  step_and_dump_wave();
+  top->rst = 0;
   while (sim_time < MAX_SIM_TIME) {
       step_and_dump_wave();
       sim_time++;

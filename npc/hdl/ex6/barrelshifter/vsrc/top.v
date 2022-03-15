@@ -1,13 +1,17 @@
 module top(
     input         clk,
-    input   [7:0] in,
+    input         rst,
     output  reg [7:0] out
 );
 
     reg hi;
-    always @(posedge clk) begin
-        hi <= ^in[3:0];
-        out <= {hi, in[7:1]};
+    reg [7:0]t;
+    always @(posedge clk or posedge rst) begin
+        if (rst)    out <= 8'b00000001;
+        else begin
+        hi <= ^out[3:0];
+        out <= {hi, out[7:1]};
+        end
     end
 
 endmodule
