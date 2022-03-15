@@ -10,12 +10,15 @@ vluint64_t sim_time = 0;
 
 static Vtop* top;
 
+void single_cycle() {
+    top->clk = 0; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
+    top->clk = 1; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
+}
 
-void step_and_dump_wave() {
-    top->clk = !top->clk;
-    top->eval();
-    contextp->timeInc(1);
-    tfp->dump(contextp->time());
+void reset(int n) {
+    top->rst = 1;
+    while (n--) single_cycle();
+    top->rst = 0;
 }
 
 void sim_init() {
@@ -37,12 +40,9 @@ void sim_exit() {
 int main() {
   sim_init();
 
-  top->clk = 0;
-  top->rst = 1;
-  step_and_dump_wave();
-  top->rst = 0;
+  reset(10);
   while (sim_time < MAX_SIM_TIME) {
-      step_and_dump_wave();
+      single_cycle();
       sim_time++;
   }
 
