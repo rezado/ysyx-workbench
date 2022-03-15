@@ -22,7 +22,7 @@ int main() {
 	nvboard_bind_all_pins(&top);
 	nvboard_init();
 
-	reset(10); // 复位10个周期
+	reset(4); // 复位4个周期
 
 	while (1) {
 		nvboard_update();
