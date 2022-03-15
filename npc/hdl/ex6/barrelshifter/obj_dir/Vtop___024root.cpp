@@ -13,18 +13,24 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___sequent__TOP__1\n"); );
     // Variables
     CData/*7:0*/ __Vdly__out;
+    CData/*7:0*/ __Vdly__top__DOT__t;
     // Body
+    __Vdly__top__DOT__t = vlSelf->top__DOT__t;
     __Vdly__out = vlSelf->out;
     if (vlSelf->rst) {
         __Vdly__out = 1U;
     } else {
+        __Vdly__top__DOT__t = vlSelf->out;
         __Vdly__out = (((IData)(vlSelf->top__DOT__hi) 
                         << 7U) | (0x7fU & ((IData)(vlSelf->out) 
                                            >> 1U)));
-        vlSelf->top__DOT__hi = (1U & VL_REDXOR_32((0xfU 
-                                                   & (IData)(vlSelf->out))));
     }
     vlSelf->out = __Vdly__out;
+    if ((1U & (~ (IData)(vlSelf->rst)))) {
+        vlSelf->top__DOT__hi = (1U & VL_REDXOR_32((0xfU 
+                                                   & (IData)(vlSelf->top__DOT__t))));
+    }
+    vlSelf->top__DOT__t = __Vdly__top__DOT__t;
 }
 
 void Vtop___024root___eval(Vtop___024root* vlSelf) {
