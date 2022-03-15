@@ -31,7 +31,7 @@ void sim_init() {
 }
 
 void sim_exit() {
-    step_and_dump_wave();
+    single_cycle();
     tfp->close();
     delete contextp;
     delete tfp;
