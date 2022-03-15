@@ -5,7 +5,6 @@ module top(
 );
 
     reg hi;
-    reg [7:0]t;
     always @(posedge clk or posedge rst) begin
         if (rst)    out <= 8'b00000001;
         else begin

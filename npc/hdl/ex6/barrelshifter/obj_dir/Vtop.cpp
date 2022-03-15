@@ -11,7 +11,7 @@
 Vtop::Vtop(VerilatedContext* _vcontextp__, const char* _vcname__)
     : vlSymsp{new Vtop__Syms(_vcontextp__, _vcname__, this)}
     , clk{vlSymsp->TOP.clk}
-    , in{vlSymsp->TOP.in}
+    , rst{vlSymsp->TOP.rst}
     , out{vlSymsp->TOP.out}
     , rootp{&(vlSymsp->TOP)}
 {

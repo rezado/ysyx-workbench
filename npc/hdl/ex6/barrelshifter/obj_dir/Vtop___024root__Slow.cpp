@@ -31,6 +31,7 @@ void Vtop___024root___eval_initial(Vtop___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval_initial\n"); );
     // Body
     vlSelf->__Vclklast__TOP__clk = vlSelf->clk;
+    vlSelf->__Vclklast__TOP__rst = vlSelf->rst;
 }
 
 void Vtop___024root___eval_settle(Vtop___024root* vlSelf) {
@@ -51,7 +52,8 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___ctor_var_reset\n"); );
     // Body
     vlSelf->clk = VL_RAND_RESET_I(1);
-    vlSelf->in = VL_RAND_RESET_I(8);
+    vlSelf->rst = VL_RAND_RESET_I(1);
     vlSelf->out = VL_RAND_RESET_I(8);
     vlSelf->top__DOT__hi = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__t = VL_RAND_RESET_I(8);
 }
