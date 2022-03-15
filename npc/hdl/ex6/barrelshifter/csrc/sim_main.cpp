@@ -40,7 +40,7 @@ void sim_exit() {
 int main() {
   sim_init();
 
-  reset(10);
+  reset(4);
   while (sim_time < MAX_SIM_TIME) {
       single_cycle();
       sim_time++;
