@@ -28,8 +28,6 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declBit(c+1,"top clk", false,-1);
         tracep->declBit(c+2,"top rst", false,-1);
         tracep->declBus(c+3,"top out", false,-1, 7,0);
-        tracep->declBit(c+4,"top hi", false,-1);
-        tracep->declBus(c+5,"top t", false,-1, 7,0);
     }
 }
 
@@ -69,7 +67,5 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->fullBit(oldp+1,(vlSelf->clk));
         tracep->fullBit(oldp+2,(vlSelf->rst));
         tracep->fullCData(oldp+3,(vlSelf->out),8);
-        tracep->fullBit(oldp+4,(vlSelf->top__DOT__hi));
-        tracep->fullCData(oldp+5,(vlSelf->top__DOT__t),8);
     }
 }
