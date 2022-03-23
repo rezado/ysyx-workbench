@@ -41,8 +41,9 @@ int main() {
   sim_init();
 
   reset(4);
+  top->reset = 0;
+  top->in = 0;
   while (sim_time < MAX_SIM_TIME) {
-      top->reset = 0;
       single_cycle();
       sim_time++;
   }
