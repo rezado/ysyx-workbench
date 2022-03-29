@@ -33,8 +33,8 @@ always @(*) begin
       else next_state = F;
     end
     F: begin
-      if (in == 1) next_state = B;
-      else next_state = G;
+      if (in == 1) next_state = G;
+      else next_state = B;
     end
     G: begin
       if (in == 1) next_state = H;
