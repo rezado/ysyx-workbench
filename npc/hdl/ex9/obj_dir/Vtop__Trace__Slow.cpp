@@ -114,7 +114,10 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
     if (false && oldp) {}  // Prevent unused
     // Body
     {
-        tracep->fullSData(oldp+1,(vlSelf->top__DOT__v_addr),10);
+        tracep->fullSData(oldp+1,(((IData)(vlSelf->top__DOT__my_vga_ctrl__DOT__v_valid)
+                                    ? (0x3ffU & ((IData)(vlSelf->top__DOT__my_vga_ctrl__DOT__y_cnt) 
+                                                 - (IData)(0x24U)))
+                                    : 0U)),10);
         tracep->fullIData(oldp+2,(vlSelf->top__DOT__vga_data),24);
         tracep->fullCData(oldp+3,(vlSelf->top__DOT__v_haddr),7);
         tracep->fullCData(oldp+4,(vlSelf->top__DOT__v_vaddr),5);

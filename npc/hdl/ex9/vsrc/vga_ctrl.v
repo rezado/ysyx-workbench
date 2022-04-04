@@ -50,6 +50,62 @@ module vga_ctrl(
         else if (x_cnt == h_total)
             y_cnt <= y_cnt + 10'd1;
       end
+
+  //矩阵计数值
+  reg [6:0]   vmem_haddr;
+  reg [4:0]   vmem_vaddr;
+  reg [3:0]   vmem_xcnt;
+  reg [4:0]   vmem_ycnt;
+  wire        vmem_valid;  // 属于字符显示范围
+  parameter vmem_xtotal = 8;
+  parameter vmem_ytotal = 15;
+
+  assign vmem_valid = valid && h_addr <= 630;
+
+  //生成矩阵行
+  always @(posedge pclk) begin
+    if (reset == 1'b1) begin
+      vmem_xcnt <= 0;
+      vmem_haddr <= 0;
+    end
+    else if (h_valid && h_addr <= 10'd630) begin  // 行有效并且处于字符显示范围内
+      if (vmem_xcnt == vmem_xtotal) begin  // 到达计数边界
+        if (h_addr == 10'd630) begin  // 正好处于行尾
+          vmem_xcnt <= 0;
+          vmem_haddr <= 0;
+        end
+        else begin  // 
+          vmem_xcnt <= 0;
+          vmem_haddr <= vmem_haddr + 7'd1;
+        end
+      end
+      else  // 继续计数
+        vmem_xcnt <= vmem_xcnt + 4'd1;
+    end
+  end
+
+  // 生成矩阵列
+  always @(posedge pclk) begin
+    if (reset == 1'b1) begin
+      vmem_ycnt <= 0;
+      vmem_vaddr <= 5'd0;
+    end
+    else if (v_valid) begin
+      if (vmem_vaddr == 5'd29 && h_addr == 10'd630) begin
+        // 位于最后一行最后一列
+        vmem_ycnt <= 0;
+        vmem_vaddr <= 5'd0;
+      end
+      else if (vmem_ycnt == vmem_ytotal && h_addr == 10'd630) begin
+        // 到达最后一个像素点
+        vmem_ycnt <= 0;
+        vmem_vaddr <= vmem_vaddr + 5'd1;
+      end
+      else if (h_addr == 10'd630)
+        vmem_ycnt <= vmem_ycnt + 1;
+    end
+  end
+
   //生成同步信号
   assign hsync = (x_cnt > h_frontporch);
   assign vsync = (y_cnt > v_frontporch);

@@ -35,11 +35,9 @@ VL_MODULE(Vtop___024root) {
     CData/*7:0*/ top__DOT__vdata;
     CData/*3:0*/ top__DOT__vcnt;
     CData/*3:0*/ top__DOT__hcnt;
-    CData/*3:0*/ top__DOT_____05Fcnt_vdata;
     CData/*0:0*/ top__DOT__my_vga_ctrl__DOT__h_valid;
     CData/*0:0*/ top__DOT__my_vga_ctrl__DOT__v_valid;
     SData/*9:0*/ top__DOT__h_addr;
-    SData/*9:0*/ top__DOT__v_addr;
     SData/*9:0*/ top__DOT__my_vga_ctrl__DOT__x_cnt;
     SData/*9:0*/ top__DOT__my_vga_ctrl__DOT__y_cnt;
     IData/*23:0*/ top__DOT__vga_data;

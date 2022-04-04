@@ -24,7 +24,11 @@ void Vtop___024root__traceChgSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep) 
     // Body
     {
         if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[1U])) {
-            tracep->chgSData(oldp+0,(vlSelf->top__DOT__v_addr),10);
+            tracep->chgSData(oldp+0,(((IData)(vlSelf->top__DOT__my_vga_ctrl__DOT__v_valid)
+                                       ? (0x3ffU & 
+                                          ((IData)(vlSelf->top__DOT__my_vga_ctrl__DOT__y_cnt) 
+                                           - (IData)(0x24U)))
+                                       : 0U)),10);
             tracep->chgIData(oldp+1,(vlSelf->top__DOT__vga_data),24);
             tracep->chgCData(oldp+2,(vlSelf->top__DOT__v_haddr),7);
             tracep->chgCData(oldp+3,(vlSelf->top__DOT__v_vaddr),5);
