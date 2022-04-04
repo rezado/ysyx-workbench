@@ -95,8 +95,7 @@ void difftest_init(int port) {
 }
 
 void difftest_raise_intr(uint64_t NO) {
-  trap_t t(NO);
-  p->take_trap_public(t, state->pc);
+  assert(0);
 }
 
 }
