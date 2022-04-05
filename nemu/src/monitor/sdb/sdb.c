@@ -63,20 +63,20 @@ static int cmd_info(char *args) {
   char *arg = strtok(NULL, " ");
 
   if (arg == NULL) {
-	/* no argument given ERROR */
-	printf("There is no argument, Please append 'r' or 'w'\n");
+    /* no argument given ERROR */
+    printf("There is no argument, Please append 'r' or 'w'\n");
   }
   else {
-	if (strcmp(arg, "r") == 0) {
-	  isa_reg_display(); 
-	}
-	else if (strcmp(arg, "w") == 0) {
-	  //TODO: complete watchpoint	  
+    if (strcmp(arg, "r") == 0) {
+      isa_reg_display(); 
+    }
+    else if (strcmp(arg, "w") == 0) {
+      //TODO: complete watchpoint	  
 
-	}
-	else {
-	  printf("Wrong argument!\n");
-	}
+    }
+    else {
+      printf("Wrong argument!\n");
+    }
   }
   return 0;
 }
@@ -98,8 +98,8 @@ paddr_t htoi(char *str) {
 	return addr;
   }
   else {
-	printf("Please input 16 base number\n");
-	return 0; // error
+    printf("Please input 16 base number\n");
+    return 0; // error
   }
 }
 static int cmd_x(char *args) {
