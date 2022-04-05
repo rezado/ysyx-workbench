@@ -112,6 +112,7 @@ static int cmd_x(char *args) {
 	printf("Wrong!Please input lenght and addr(16ind)\n");
   }
   else {
+    puts(arg);
     num = atoi(arg);
     arg = strtok(NULL, " ");
     if (arg == NULL) {
