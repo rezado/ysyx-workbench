@@ -98,7 +98,7 @@ paddr_t htoi(char *str) {
 	return addr;
   }
   else {
-    printf("Please input 16 base number\n");
+    printf("Please input 16 base number start with 0x\n");
     return 0; // error
   }
 }
@@ -109,24 +109,24 @@ static int cmd_x(char *args) {
   paddr_t paddr;
 
   if (arg == NULL) {
-	printf("Wrong!There is no arguments\n");
+	printf("Wrong!Please input addr and length(16ind)\n");
   }
   else {
-	num = atoi(arg);
-	arg = strtok(NULL, " ");
-	if (arg == NULL) {
-	  printf("Wrong!There is only one argument");
+    num = atoi(arg);
+    arg = strtok(NULL, " ");
+    if (arg == NULL) {
+      printf("Wrong!Please input length");
     }
-	else {
+    else {
       paddr = htoi(arg);
-	  if (paddr == 0) {
-		return 0;
-	  }
-	  for (i = 0; i < num; i++) {
-		paddr_t cur_addr = paddr + i * sizeof(paddr_t);
-	    printf("%8lx at %8x\n", paddr_read(cur_addr, sizeof(paddr_t)), cur_addr);
-	  }
-	}
+      if (paddr == 0) {
+      return 0;
+      }
+      for (i = 0; i < num; i++) {
+      paddr_t cur_addr = paddr + i * sizeof(paddr_t);
+        printf("%8lx at %8x\n", paddr_read(cur_addr, sizeof(paddr_t)), cur_addr);
+      }
+    }
   }
   return 0;
 }
