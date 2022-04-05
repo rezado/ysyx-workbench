@@ -109,7 +109,7 @@ static int cmd_x(char *args) {
   paddr_t paddr;
 
   if (arg == NULL) {
-	printf("Wrong!Please input lenght and addr(16ind)\n");
+	printf("Wrong!Please input lenght(10ind) and addr(16ind)\n");
   }
   else {
     puts(arg);
