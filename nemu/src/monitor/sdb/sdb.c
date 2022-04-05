@@ -120,12 +120,12 @@ static int cmd_x(char *args) {
     }
     else {
       paddr = htoi(arg);
-      printf("addr:%x length:%d\n", paddr, num);
+      printf("addr:%x length:%x\n", paddr, num);
       if (paddr == 0) {
-      return 0;
+        return 0;
       }
       for (i = 0; i < num; i++) {
-      paddr_t cur_addr = paddr + i * sizeof(paddr_t);
+        paddr_t cur_addr = paddr + i * sizeof(paddr_t);
         printf("%8lx at %8x\n", paddr_read(cur_addr, sizeof(paddr_t)), cur_addr);
       }
     }
