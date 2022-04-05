@@ -119,6 +119,7 @@ static int cmd_x(char *args) {
     }
     else {
       paddr = htoi(arg);
+      printf("addr:%x length:%d\n", paddr, num);
       if (paddr == 0) {
       return 0;
       }
