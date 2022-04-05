@@ -109,13 +109,13 @@ static int cmd_x(char *args) {
   paddr_t paddr;
 
   if (arg == NULL) {
-	printf("Wrong!Please input addr and length(16ind)\n");
+	printf("Wrong!Please input lenght and addr(16ind)\n");
   }
   else {
     num = atoi(arg);
     arg = strtok(NULL, " ");
     if (arg == NULL) {
-      printf("Wrong!Please input length");
+      printf("Wrong!Please input addr");
     }
     else {
       paddr = htoi(arg);
