@@ -85,7 +85,7 @@ static bool make_token(char *e) {
          * of tokens, some extra actions should be performed.
          */
 
-        printf("matched! %s\n", rules[i].regex);
+        // printf("matched! %s\n", rules[i].regex);
 
         switch (rules[i].token_type) {
           case(TK_NOTYPE): break;
@@ -224,6 +224,7 @@ int eval(int p, int q, bool *legal) {
      * Return the value of the number.
      */
     int t = atoi(tokens[p].str);
+    printf("%d\n", t);
     return t;
   }
   else if (check_parentheses(p, q, legal) == true) {
