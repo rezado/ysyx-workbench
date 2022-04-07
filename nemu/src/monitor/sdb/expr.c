@@ -235,6 +235,7 @@ int eval(int p, int q, bool *legal) {
   }
   else if (*legal) {
     int op = get_mainoperator_pos(p, q);
+    printf("(%d-%d):main operator at %d\n", p, q, op);
     int val1 = eval(p, op - 1, legal);
     int val2 = eval(op + 1, q, legal);
 
