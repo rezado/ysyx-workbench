@@ -9,7 +9,7 @@ enum {
   TK_NOTYPE = 256, TK_EQ,
 
   /* TODO: Add more token types */
-
+  TK_INTEGER,
 };
 
 static struct rule {
@@ -20,9 +20,15 @@ static struct rule {
   /* TODO: Add more rules.
    * Pay attention to the precedence level of different rules.
    */
-
+  
   {" +", TK_NOTYPE},    // spaces
   {"\\+", '+'},         // plus
+  {"-", '-'},           // substract
+  {"\\*", '*'},         // multiple
+  {"/", '/'},           // divide
+  {"\\(", '('},         // left bracket
+  {"\\)", ')'},         // right bracket
+  {"[0-9]+", TK_INTEGER},       // demical integer
   {"==", TK_EQ},        // equal
 };
 
@@ -80,6 +86,55 @@ static bool make_token(char *e) {
          */
 
         switch (rules[i].token_type) {
+          case('+'): {
+            Token *p = (Token*)malloc(sizeof(Token));
+            p->type = '+';
+            tokens[nr_token++] = *p;
+            break;
+          }
+          case('-'): {
+            Token *p = (Token*)malloc(sizeof(Token));
+            p->type = '-';
+            tokens[nr_token++] = *p;
+            break;
+          }
+          case('*'): {
+            Token *p = (Token*)malloc(sizeof(Token));
+            p->type = '*';
+            tokens[nr_token++] = *p;
+            break;
+          }
+          case('/'): {
+            Token *p = (Token*)malloc(sizeof(Token));
+            p->type = '/';
+            tokens[nr_token++] = *p;
+            break;
+          }
+          case('('): {
+            Token *p = (Token*)malloc(sizeof(Token));
+            p->type = '(';
+            tokens[nr_token++] = *p;
+            break;
+          }
+          case(')'): {
+            Token *p = (Token*)malloc(sizeof(Token));
+            p->type = ')';
+            tokens[nr_token++] = *p;
+            break;
+          }
+          case(TK_INTEGER): {
+            if (substr_len > 31) {
+              // too big
+            }
+            else {
+              Token *p = (Token*)malloc(sizeof(Token));
+              p->type = TK_INTEGER;
+              strncpy(p->str, substr_start, substr_len);
+              p->str[substr_len + 1] = '\0';
+              tokens[nr_token++] = *p;
+            }
+            break;
+          }
           default: TODO();
         }
 
