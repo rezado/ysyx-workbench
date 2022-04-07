@@ -88,6 +88,7 @@ static bool make_token(char *e) {
         printf("matched! %s\n", rules[i].regex);
 
         switch (rules[i].token_type) {
+          case(TK_NOTYPE): break;
           case('+'): {
             Token *p = (Token*)malloc(sizeof(Token));
             p->type = '+';
