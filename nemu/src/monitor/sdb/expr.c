@@ -127,6 +127,7 @@ static bool make_token(char *e) {
           case(TK_INTEGER): {
             if (substr_len > 31) {
               // too big
+              assert(0);
             }
             else {
               Token *p = (Token*)malloc(sizeof(Token));
@@ -154,6 +155,99 @@ static bool make_token(char *e) {
   return true;
 }
 
+// check parentheses pair
+bool check_parentheses(int p, int q, bool *legal) {
+  *legal = true;
+  bool surround = false;
+  int stack[50];
+  int top = 0;  // initial stack
+  for (int i = p; i <= q; i++) {
+    if (tokens[i].type == '(') {
+      stack[top++] = i; // push
+    }
+    if (tokens[i].type == ')') {
+      if (top >= 0) {
+        if (stack[top] == p && i == q) surround = true;
+        top--;  // pop
+      }
+      else {
+        *legal = false;
+        break;
+      }
+    }
+  }
+  return *legal & surround;
+}
+
+int get_mainoperator_pos(int p, int q) {
+  bool in_par = false;
+  int presence = 3;  // 最低级
+  int pos = p;
+  /*
+    各运算符优先级：
+    * / : 1
+    + - : 2
+  */
+
+  for (int i = p; i <= q; i++) {
+    if (tokens[i].type == '(')
+      in_par = true;
+    if (tokens[i].type == ')')
+      in_par = false;
+    
+    if (in_par) continue;  // 不处理括号中的运算符
+    if (tokens[i].type == '+' || tokens[i].type == '-') {
+      if (presence >= 2) {
+        pos = i;
+        presence = 2;
+      }
+    }
+    if (tokens[i].type == '*' || tokens[i].type == '/') {
+      if (presence >= 1) {
+        pos = i;
+        presence = 1;
+      }
+    }
+  }
+  return pos;
+}
+
+int eval(int p, int q, bool *legal) {
+  if (p > q) {
+    /* Bad expression */
+    *legal = false;
+    return 0;
+  }
+  else if (p == q) {
+    /* Single token.
+     * For now this token should be a number.
+     * Return the value of the number.
+     */
+    int t = atoi(tokens[p].str);
+    return t;
+  }
+  else if (check_parentheses(p, q, legal) == true) {
+    /* The expression is surrounded by a matched pair of parentheses.
+     * If that is the case, just throw away the parentheses.
+     */
+    return eval(p + 1, q - 1, legal);
+  }
+  else if (*legal) {
+    int op = get_mainoperator_pos(p, q);
+    int val1 = eval(p, op - 1, legal);
+    int val2 = eval(op + 1, q, legal);
+
+    char op_type = tokens[op].type;
+    switch (op_type) {
+      case '+': return val1 + val2;
+      case '-': return val1 - val2;
+      case '*': return val1 * val2;
+      case '/': return val1 / val2;
+      default: assert(0);
+    }
+  }
+  else return 0;
+}
 
 word_t expr(char *e, bool *success) {
   if (!make_token(e)) {
@@ -163,6 +257,7 @@ word_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   TODO();
+  
 
   return 0;
 }
