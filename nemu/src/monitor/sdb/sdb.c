@@ -134,6 +134,14 @@ static int cmd_x(char *args) {
 }
 
 static int cmd_p(char *args) {
+  bool success = true;
+  word_t val = expr(args, &success);
+  if (!success) {
+    printf("表达式求值不正确\n");
+  }
+  else {
+    printf("%ld\n", val);
+  }
 
   return 0;
 }

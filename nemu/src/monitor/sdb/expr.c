@@ -256,8 +256,12 @@ word_t expr(char *e, bool *success) {
   }
 
   /* TODO: Insert codes to evaluate the expression. */
-  TODO();
-  
+  bool legal = true;
+  int val = eval(0, nr_token - 1, &legal);
+  if (!legal) {
+    printf("表达式不正确\n");
+    *success = false;
+  }
 
-  return 0;
+  return val;
 }
