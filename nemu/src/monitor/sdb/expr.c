@@ -176,6 +176,7 @@ bool check_parentheses(int p, int q, bool *legal) {
       }
     }
   }
+  printf("%d\n", top);
   if (top == -1)
     *legal = true;
   else *legal = false;
