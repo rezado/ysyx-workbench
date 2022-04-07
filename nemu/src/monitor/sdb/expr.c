@@ -167,8 +167,8 @@ bool check_parentheses(int p, int q, bool *legal) {
     }
     if (tokens[i].type == ')') {
       if (top >= 0) {
-        if (stack[top] == p && i == q) surround = true;
         top--;  // pop
+        if (stack[top] == p && i == q) surround = true;
       }
       else {
         *legal = false;
