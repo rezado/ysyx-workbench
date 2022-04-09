@@ -215,7 +215,7 @@ int get_mainoperator_pos(int p, int q) {
   return pos;
 }
 
-int eval(int p, int q, bool *legal) {
+uint32_t eval(uint32_t p, uint32_t q, bool *legal) {
   if (p > q) {
     /* Bad expression */
     *legal = false;
@@ -226,8 +226,8 @@ int eval(int p, int q, bool *legal) {
      * For now this token should be a number.
      * Return the value of the number.
      */
-    int t = atoi(tokens[p].str);
-    printf("%d\n", t);
+    uint32_t t = atoi(tokens[p].str);
+    printf("%ud\n", t);
     return t;
   }
   else if (check_parentheses(p, q, legal) == true) {
@@ -237,10 +237,10 @@ int eval(int p, int q, bool *legal) {
     return eval(p + 1, q - 1, legal);
   }
   else if (*legal) {
-    int op = get_mainoperator_pos(p, q);
+    uint32_t op = get_mainoperator_pos(p, q);
     printf("(%d-%d):main operator at %d\n", p, q, op);
-    int val1 = eval(p, op - 1, legal);
-    int val2 = eval(op + 1, q, legal);
+    uint32_t val1 = eval(p, op - 1, legal);
+    uint32_t val2 = eval(op + 1, q, legal);
 
     char op_type = tokens[op].type;
     switch (op_type) {
@@ -262,7 +262,7 @@ word_t expr(char *e, bool *success) {
 
   /* TODO: Insert codes to evaluate the expression. */
   bool legal = true;
-  int val = eval(0, nr_token - 1, &legal);
+  uint32_t val = eval(0, nr_token - 1, &legal);
   if (!legal) {
     printf("表达式不正确\n");
     *success = false;
