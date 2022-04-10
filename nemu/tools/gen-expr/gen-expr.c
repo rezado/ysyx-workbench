@@ -16,9 +16,43 @@ static char *code_format =
 "  return 0; "
 "}";
 
+int buf_ptr;
+
+uint32_t choose(uint32_t n) {
+  return rand() % n;
+}
+
+void gen_num() {
+  // 生成随机数
+  int n = choose(UINT32_MAX);
+
+  // 将随机数转字符串
+  char num[12];
+  int cnt = 0, t = n;
+  while (t) {
+    num[cnt++] = t % 10 + '0';
+    t = t / 10;
+  }
+
+  // 写入缓存区
+  for (int i = cnt - 1; i >= 0; i--)
+    buf[buf_ptr++] = num[i];
+}
+
+void gen(char c) {
+  buf[buf_ptr++] = c;
+}
+
 static void gen_rand_expr() {
   buf[0] = '\0';
+  buf_ptr = 0;
+  switch (choose(3)) {
+    case 0: gen_num(); break;
+    case 1: gen('('); gen_rand_expr(); gen(')'); break;
+    default: gen_rand_expr(); gen_rand_op(); gen_rand_expr(); break;
+  }
 }
+
 
 int main(int argc, char *argv[]) {
   int seed = time(0);
