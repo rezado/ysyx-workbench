@@ -17,6 +17,7 @@ static char *code_format =
 "}";
 
 int buf_ptr;
+int buf_overflow;
 
 uint32_t choose(uint32_t n) {
   return rand() % n;
@@ -37,20 +38,34 @@ void gen_num() {
   // 写入缓存区
   for (int i = cnt - 1; i >= 0; i--)
     buf[buf_ptr++] = num[i];
+  buf[buf_ptr++] = 'u';  // 无符号数
 }
 
 void gen(char c) {
   buf[buf_ptr++] = c;
 }
 
+void gen_rand_op() {
+  switch (choose(4)) {
+    case 0: buf[buf_ptr++] = '+'; break;
+    case 1: buf[buf_ptr++] = '-'; break;
+    case 2: buf[buf_ptr++] = '*'; break;
+    default: buf[buf_ptr++] = '/'; break;
+  }
+}
+
 static void gen_rand_expr() {
-  buf[0] = '\0';
-  buf_ptr = 0;
-  switch (choose(3)) {
+  if(buf_ptr > 65535) {
+    buf_overflow = 1;
+    return;
+  }
+  switch (choose(4)) {
     case 0: gen_num(); break;
     case 1: gen('('); gen_rand_expr(); gen(')'); break;
+    case 2: gen(' ');
     default: gen_rand_expr(); gen_rand_op(); gen_rand_expr(); break;
   }
+  // puts(buf);
 }
 
 
@@ -63,7 +78,17 @@ int main(int argc, char *argv[]) {
   }
   int i;
   for (i = 0; i < loop; i ++) {
+    // buf初始化 生成随机表达式
+    buf[0] = '\0';
+    buf_ptr = 0;
+    buf_overflow = 0;  // 缓冲区越界标志
+
     gen_rand_expr();
+    if (buf_overflow) {
+      i--;
+      continue;  // 丢弃过长的表达式
+    }
+    buf[buf_ptr++] = 0;  // 表达式结束
 
     sprintf(code_buf, code_format, buf);
 
