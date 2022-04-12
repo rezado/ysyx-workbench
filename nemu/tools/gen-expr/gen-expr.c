@@ -38,7 +38,6 @@ void gen_num() {
   // 写入缓存区
   for (int i = cnt - 1; i >= 0; i--)
     buf[buf_ptr++] = num[i];
-  buf[buf_ptr++] = 'u';  // 无符号数
 }
 
 void gen(char c) {
@@ -78,14 +77,14 @@ int main(int argc, char *argv[]) {
   }
   int i;
   for (i = 0; i < loop; i ++) {
-    // buf初始化 生成随机表达式
+    // buf初始化 生成随机表达式 
     buf[0] = '\0';
     buf_ptr = 0;
     buf_overflow = 0;  // 缓冲区越界标志
 
     gen_rand_expr();
     if (buf_overflow) {
-      i--;
+      // i--;
       continue;  // 丢弃过长的表达式
     }
     buf[buf_ptr++] = 0;  // 表达式结束
@@ -97,7 +96,7 @@ int main(int argc, char *argv[]) {
     fputs(code_buf, fp);
     fclose(fp);
 
-    int ret = system("gcc /tmp/.code.c -o /tmp/.expr");
+    int ret = system("gcc /tmp/.code.c -o /tmp/.expr -Werror");
     if (ret != 0) continue;
 
     fp = popen("/tmp/.expr", "r");
