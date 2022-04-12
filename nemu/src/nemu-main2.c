@@ -7,8 +7,6 @@ int is_exit_status_bad();
 
 static char buf[65536] = {};
 
-extern word_t expr(char *e, bool *success);
-
 int main(int argc, char *argv[]) {
   /* Initialize the monitor. */
 #ifdef CONFIG_TARGET_AM
@@ -22,8 +20,7 @@ int main(int argc, char *argv[]) {
   FILE *fp = fopen("input", "r");
   assert(fp != NULL);
   while (fscanf(fp, "%u %s\n", &result, buf) != EOF) {
-    bool flag = true;
-    uint32_t tmp = expr(buf, &flag);
+    uint32_t tmp = cmd_p(buf);
     if (tmp != result) {
         printf("Wrong:%s\nexpected:%u but get %u\n", buf, result, tmp);
     }
