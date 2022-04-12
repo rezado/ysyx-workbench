@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 
   /* Test expr */
   uint32_t result;
-  FILE *fp = fopen("input", "r");
+  FILE *fp = fopen("/home/bill/ysyx-workbench/nemu/src/input", "r");
   assert(fp != NULL);
   while (fscanf(fp, "%u %s\n", &result, buf) != EOF) {
     bool flag = true;
