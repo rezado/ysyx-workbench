@@ -38,6 +38,7 @@ void gen_num() {
   // 写入缓存区
   for (int i = cnt - 1; i >= 0; i--)
     buf[buf_ptr++] = num[i];
+  buf[buf_ptr++] = 'u';
 }
 
 void gen(char c) {
