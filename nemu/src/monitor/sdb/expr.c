@@ -184,12 +184,12 @@ bool check_parentheses(int p, int q, bool *legal) {
 
 int get_mainoperator_pos(int p, int q) {
   int par_num = 0;
-  int presence = 3;  // 最低级
+  int presence = 3;  // 最高级
   int pos = p;
   /*
     各运算符优先级：
-    * / : 1
-    + - : 2
+    * / : 2
+    + - : 1
   */
 
   for (int i = p; i <= q; i++) {
@@ -201,15 +201,15 @@ int get_mainoperator_pos(int p, int q) {
     
     if (!par_num) continue;  // 不处理括号中的运算符
     if (tokens[i].type == '+' || tokens[i].type == '-') {
-      if (presence >= 2) {
-        pos = i;
-        presence = 2;
-      }
-    }
-    if (tokens[i].type == '*' || tokens[i].type == '/') {
       if (presence >= 1) {
         pos = i;
         presence = 1;
+      }
+    }
+    if (tokens[i].type == '*' || tokens[i].type == '/') {
+      if (presence >= 2) {
+        pos = i;
+        presence = 2;
       }
     }
   }
