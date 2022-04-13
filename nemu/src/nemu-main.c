@@ -33,6 +33,7 @@ int main(int argc, char *argv[]) {
         fprintf(output, "Wrong:%s\nexpected:%u but get %u\n", buf, result, tmp);
         // printf("Wrong:%s\nexpected:%u but get %u\n", buf, result, tmp);
         fputs(buf, wrong);
+        fputc('\n', wrong);
     }
   }
   fclose(fp);
