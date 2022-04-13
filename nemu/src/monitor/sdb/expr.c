@@ -207,7 +207,7 @@ int get_mainoperator_pos(int p, int q) {
       }
     }
     if (tokens[i].type == '*' || tokens[i].type == '/') {
-      if (presence >= 2) {
+      if (presence  >= 2) {
         pos = i;
         presence = 2;
       }
@@ -239,7 +239,7 @@ uint32_t eval(uint32_t p, uint32_t q, bool *legal) {
   }
   else if (*legal) {
     int op = get_mainoperator_pos(p, q);
-    printf("(%u-%u):main operator %c at %d\n", p, q, tokens[op].type, op);
+    // printf("(%u-%u):main operator %c at %d\n", p, q, tokens[op].type, op);
     uint32_t val1 = eval(p, op - 1, legal);
     uint32_t val2 = eval(op + 1, q, legal);
 
