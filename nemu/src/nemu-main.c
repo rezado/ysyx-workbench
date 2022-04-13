@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
   uint32_t result;
   FILE *fp = fopen("/home/bill/ysyx-workbench/nemu/src/wrong", "r");
   FILE *output = fopen("/home/bill/ysyx-workbench/nemu/src/output", "w");
-  // FILE *wrong = fopen("/home/bill/ysyx-workbench/nemu/src/wrong", "w");
+  FILE *wrong = fopen("/home/bill/ysyx-workbench/nemu/src/wrong", "w");
   assert(fp != NULL);
   while (fscanf(fp, "%u", &result) != EOF) {
     if (fgets(buf, sizeof buf, fp) == NULL) break;
@@ -32,13 +32,12 @@ int main(int argc, char *argv[]) {
     if (tmp != result) {
         fprintf(output, "Wrong:%s\nexpected:%u but get %u\n", buf, result, tmp);
         // printf("Wrong:%s\nexpected:%u but get %u\n", buf, result, tmp);
-        // fputs(buf, wrong);
-        // fputc('\n', wrong);
+        fprintf(wrong, "%u %s\n", result, buf);
     }
   }
   fclose(fp);
   fclose(output);
-  // fclose(wrong);
+  fclose(wrong);
 
   return is_exit_status_bad();
 }
