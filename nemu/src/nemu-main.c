@@ -24,6 +24,7 @@ int main(int argc, char *argv[]) {
   int cnt = 0;
   while (fscanf(fp, "%u", &result) != EOF) {
     if (fgets(buf, sizeof buf, fp) == NULL) break;
+    buf[strlen(buf) - 1] = 0;
     printf("%u %s\n", result, buf);
     bool flag = true;
     uint32_t tmp = expr(buf, &flag);
