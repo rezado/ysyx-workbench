@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 
   /* Test expr */
   uint32_t result;
-  FILE *fp = fopen("/home/bill/ysyx-workbench/nemu/src/wrong", "r");
+  FILE *fp = fopen("/home/bill/ysyx-workbench/nemu/src/input", "r");
   FILE *output = fopen("/home/bill/ysyx-workbench/nemu/src/output", "w");
   FILE *wrong = fopen("/home/bill/ysyx-workbench/nemu/src/wrong", "w");
   assert(fp != NULL);
