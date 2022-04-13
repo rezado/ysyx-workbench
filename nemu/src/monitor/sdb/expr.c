@@ -244,6 +244,8 @@ uint32_t eval(uint32_t p, uint32_t q, bool *legal) {
     uint32_t val1 = eval(p, op - 1, legal);
     uint32_t val2 = eval(op + 1, q, legal);
 
+    printf("%u %c %u\n", val1, tokens[op].type, val2);
+
     char op_type = tokens[op].type;
     switch (op_type) {
       case '+': return val1 + val2; break;
