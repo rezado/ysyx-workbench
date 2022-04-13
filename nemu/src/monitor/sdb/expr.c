@@ -200,7 +200,7 @@ int get_mainoperator_pos(int p, int q) {
       par_num--;
     printf("par_num:%d\n", par_num);
     
-    if (!par_num) continue;  // 不处理括号中的运算符
+    if (par_num) continue;  // 不处理括号中的运算符
     if (tokens[i].type == '+' || tokens[i].type == '-') {
       if (presence >= 1) {
         pos = i;
