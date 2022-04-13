@@ -227,7 +227,7 @@ uint32_t eval(uint32_t p, uint32_t q, bool *legal) {
      * Return the value of the number.
      */
     uint32_t t = atoi(tokens[p].str);
-    printf("%u\n", t);
+    // printf("%u\n", t);
     return t;
   }
   else if (check_parentheses(p, q, legal) == true) {

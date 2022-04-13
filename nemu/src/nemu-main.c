@@ -21,7 +21,9 @@ int main(int argc, char *argv[]) {
   uint32_t result;
   FILE *fp = fopen("/home/bill/ysyx-workbench/nemu/src/input", "r");
   assert(fp != NULL);
-  while (fscanf(fp, "%u %s\n", &result, buf) != EOF) {
+  while (fscanf(fp, "%u", &result) != EOF) {
+    if (fgets(buf, sizeof buf, fp) == NULL) break;
+    printf("%u %s\n", result, buf);
     bool flag = true;
     uint32_t tmp = expr(buf, &flag);
     if (tmp != result) {
