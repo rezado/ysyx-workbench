@@ -20,8 +20,8 @@ int main(int argc, char *argv[]) {
   /* Test expr */
   uint32_t result;
   FILE *fp = fopen("/home/bill/ysyx-workbench/nemu/src/input", "r");
+  FILE *output = fopen("/home/bill/ysyx-workbench/nemu/src/output", "w");
   assert(fp != NULL);
-  int cnt = 0;
   while (fscanf(fp, "%u", &result) != EOF) {
     if (fgets(buf, sizeof buf, fp) == NULL) break;
     buf[strlen(buf) - 1] = 0;
@@ -29,11 +29,11 @@ int main(int argc, char *argv[]) {
     bool flag = true;
     uint32_t tmp = expr(buf, &flag);
     if (tmp != result) {
-        printf("Wrong:%s\nexpected:%u but get %u\n", buf, result, tmp);
+        fprintf(output, "Wrong:%s\nexpected:%u but get %u\n", buf, result, tmp);
     }
-    cnt++;
-    if (cnt == 10) break;
   }
+  fclose(fp);
+  fclose(output);
 
   return is_exit_status_bad();
 }
