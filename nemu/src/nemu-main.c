@@ -29,7 +29,8 @@ int main(int argc, char *argv[]) {
     bool flag = true;
     uint32_t tmp = expr(buf, &flag);
     if (tmp != result) {
-        fprintf(output, "Wrong:%s\nexpected:%u but get %u\n", buf, result, tmp);
+        // fprintf(output, "Wrong:%s\nexpected:%u but get %u\n", buf, result, tmp);
+        printf("Wrong:%s\nexpected:%u but get %u\n", buf, result, tmp);
     }
   }
   fclose(fp);
