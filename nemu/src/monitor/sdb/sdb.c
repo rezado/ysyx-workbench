@@ -140,7 +140,7 @@ static int cmd_p(char *args) {
     printf("表达式求值不正确\n");
   }
   else {
-    printf("%ld\n", val);
+    printf("%lu\n", val);
   }
 
   return 0;
