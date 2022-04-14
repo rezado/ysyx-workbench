@@ -306,7 +306,7 @@ word_t eval(word_t p, word_t q, bool *legal) {
       case TK_DEC: return strtoll(tokens[p].str, NULL, 10);
       case TK_REG: {
         bool success = false;
-        word_t tmp = isa_reg_str2val(tokens[p].str, &success);
+        word_t tmp = isa_reg_str2val(tokens[p].str + 1, &success);
         if (!success) assert(0);
         return tmp;
       }
