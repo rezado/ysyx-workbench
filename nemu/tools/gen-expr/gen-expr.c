@@ -19,7 +19,7 @@ static char *code_format =
 int buf_ptr;
 int buf_overflow;
 
-uint32_t choose(uint32_t n) {
+word_t choose(word_t n) {
   return rand() % n;
 }
 

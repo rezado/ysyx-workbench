@@ -1,4 +1,5 @@
 #include <isa.h>
+#include <memory/vaddr.h>
 
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
@@ -6,10 +7,27 @@
 #include <regex.h>
 
 enum {
-  TK_NOTYPE = 256, TK_EQ,
+  TK_NOTYPE = 0,
 
   /* TODO: Add more token types */
-  TK_INTEGER,
+  TK_DEC,
+  TK_HEX,
+  TK_REG,
+  TK_NE,
+  TK_AND,
+  TK_OR,
+  TK_NOR,
+  TK_EQ,
+  TK_LE,
+  TK_GE,
+  TK_LT,
+  TK_GT,
+  TK_SL,
+  TK_SR,
+  TK_BAND,
+  TK_BOR,
+  TK_BNOR,
+  TK_DEREF,
 };
 
 static struct rule {
@@ -22,14 +40,27 @@ static struct rule {
    */
   
   {" +", TK_NOTYPE},    // spaces
+  {"\\b0[xX][0-9a-fA-F]+\\b", TK_HEX},  // hexadecimal-number
+  {"\\b[0-9]+\\b", TK_DEC},       // decimal-number
+  {"\\$(\\w+)", TK_REG},  // reg_name
+  {"\\(", '('},         // left bracket
+  {"\\)", ')'},         // right bracket
   {"\\+", '+'},         // plus
   {"-", '-'},           // substract
   {"\\*", '*'},         // multiple
   {"/", '/'},           // divide
-  {"\\(", '('},         // left bracket
-  {"\\)", ')'},         // right bracket
-  {"[0-9]+", TK_INTEGER},       // demical integer
   {"==", TK_EQ},        // equal
+  {"!=", TK_NE},        // not equal
+  {"<=", TK_LE},        // less equal
+  {">=", TK_GE},        // greater equal
+  {"&&", TK_AND},       // logical and
+  {"||", TK_OR},        // logical or
+  {"<<", TK_SL},        // shift left
+  {">>", TK_SR},        // shift right
+  {"&", TK_BAND},       // bit and
+  {"|", TK_BOR},        // bit or
+  {"^", TK_BNOR},       // bit nor
+
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -89,50 +120,23 @@ static bool make_token(char *e) {
 
         switch (rules[i].token_type) {
           case(TK_NOTYPE): break;
-          case('+'): {
+          case('+'): case('-'): case('*'): case('/'): case('('): case(')'):
+          case(TK_EQ): case(TK_NE): case(TK_LE): case(TK_GE):
+          case(TK_AND): case(TK_OR): case(TK_BAND):
+          case(TK_BNOR): case(TK_BOR): case(TK_SL): case(TK_SR): {
             Token *p = (Token*)malloc(sizeof(Token));
-            p->type = '+';
+            p->type = rules[i].token_type;
             tokens[nr_token++] = *p;
             break;
           }
-          case('-'): {
-            Token *p = (Token*)malloc(sizeof(Token));
-            p->type = '-';
-            tokens[nr_token++] = *p;
-            break;
-          }
-          case('*'): {
-            Token *p = (Token*)malloc(sizeof(Token));
-            p->type = '*';
-            tokens[nr_token++] = *p;
-            break;
-          }
-          case('/'): {
-            Token *p = (Token*)malloc(sizeof(Token));
-            p->type = '/';
-            tokens[nr_token++] = *p;
-            break;
-          }
-          case('('): {
-            Token *p = (Token*)malloc(sizeof(Token));
-            p->type = '(';
-            tokens[nr_token++] = *p;
-            break;
-          }
-          case(')'): {
-            Token *p = (Token*)malloc(sizeof(Token));
-            p->type = ')';
-            tokens[nr_token++] = *p;
-            break;
-          }
-          case(TK_INTEGER): {
+          case(TK_DEC): case(TK_HEX): case(TK_REG): {
             if (substr_len > 31) {
               // too big
               assert(0);
             }
             else {
               Token *p = (Token*)malloc(sizeof(Token));
-              p->type = TK_INTEGER;
+              p->type = rules[i].token_type;
               strncpy(p->str, substr_start, substr_len);
               p->str[substr_len + 1] = '\0';
               tokens[nr_token++] = *p;
@@ -184,12 +188,20 @@ bool check_parentheses(int p, int q, bool *legal) {
 
 int get_mainoperator_pos(int p, int q) {
   int par_num = 0;
-  int presence = 3;  // 最高级
+  int presence = 0;  // 最高级
   int pos = p;
   /*
     各运算符优先级：
-    * / : 2
-    + - : 1
+    *(解引用)          : 0
+    * /               : 1
+    + -               : 2
+    << >>             : 3
+    > >= < <= == !=   : 4
+    &                 : 5
+    ^                 : 6
+    |                 : 7
+    &&                : 8
+    ||                : 9
   */
 
   for (int i = p; i <= q; i++) {
@@ -201,23 +213,84 @@ int get_mainoperator_pos(int p, int q) {
     // printf("par_num:%d\n", par_num);
     
     if (par_num) continue;  // 不处理括号中的运算符
-    if (tokens[i].type == '+' || tokens[i].type == '-') {
-      if (presence >= 1) {
+
+    // 按照优先级递减顺序确定主运算符
+    if (tokens[i].type == TK_DEREF) {
+      if (presence <= 0) {
+        pos = i;
+        presence = 0;
+      }
+    }
+
+    if (tokens[i].type == '*' || tokens[i].type == '/') {
+      if (presence <= 1) {
         pos = i;
         presence = 1;
       }
     }
-    if (tokens[i].type == '*' || tokens[i].type == '/') {
-      if (presence  >= 2) {
+
+    if (tokens[i].type == '+' || tokens[i].type == '-') {
+      if (presence  <= 2) {
         pos = i;
         presence = 2;
+      }
+    }
+
+    if (tokens[i].type == TK_SL || tokens[i].type == TK_SR) {
+      if (presence <= 3) {
+        pos = i;
+        presence = 3;
+      }
+    }
+
+    if (tokens[i].type == TK_GT || tokens[i].type == TK_LT
+      || tokens[i].type == TK_EQ || tokens[i].type == TK_NE
+      || tokens[i].type == TK_GE || tokens[i].type == TK_LE) {
+        if (presence <= 4) {
+          pos = i;
+          presence = 4;
+        }
+      }
+
+    if (tokens[i].type == TK_BAND) {
+      if (presence <= 5) {
+        pos = i;
+        presence = 5;
+      }
+    }
+
+    if (tokens[i].type == TK_BNOR) {
+      if (presence <= 6) {
+        pos = i;
+        presence = 6;
+      }
+    }
+
+    if (tokens[i].type == TK_BOR) {
+      if (presence <= 7) {
+        pos = i;
+        presence = 7;
+      }
+    }
+
+    if (tokens[i].type == TK_AND) {
+      if (presence <= 8) {
+        pos = i;
+        presence = 8;
+      }
+    }
+
+    if (tokens[i].type == TK_OR) {
+      if (presence <= 9) {
+        pos = i;
+        presence = 9;
       }
     }
   }
   return pos;
 }
 
-uint32_t eval(uint32_t p, uint32_t q, bool *legal) {
+word_t eval(word_t p, word_t q, bool *legal) {
   if (p > q) {
     /* Bad expression */
     *legal = false;
@@ -228,9 +301,17 @@ uint32_t eval(uint32_t p, uint32_t q, bool *legal) {
      * For now this token should be a number.
      * Return the value of the number.
      */
-    uint32_t t = atoi(tokens[p].str);
-    // printf("%u\n", t);
-    return t;
+    switch (tokens[p].type) {
+      case TK_HEX: return strtoll(tokens[p].str, NULL, 16);
+      case TK_DEC: return strtoll(tokens[p].str, NULL, 10);
+      case TK_REG: {
+        bool success = false;
+        word_t tmp = isa_reg_str2val(tokens[p].str, &success);
+        if (!success) assert(0);
+        return tmp;
+      }
+      default: assert(0);
+    }
   }
   else if (check_parentheses(p, q, legal) == true) {
     /* The expression is surrounded by a matched pair of parentheses.
@@ -241,17 +322,37 @@ uint32_t eval(uint32_t p, uint32_t q, bool *legal) {
   else if (*legal) {
     int op = get_mainoperator_pos(p, q);
     // printf("(%u-%u):main operator %c at %d\n", p, q, tokens[op].type, op);
-    uint32_t val1 = eval(p, op - 1, legal);
-    uint32_t val2 = eval(op + 1, q, legal);
+    // 指针解引用
+    if (tokens[op].type == TK_DEREF) {
+      word_t val = eval(op + 1, q, legal);
+      return vaddr_read(val, 64);
+    }
+
+    word_t val1 = eval(p, op - 1, legal);
+    word_t val2 = eval(op + 1, q, legal);
 
     // printf("%u %c %u\n", val1, tokens[op].type, val2);
 
     char op_type = tokens[op].type;
     switch (op_type) {
-      case '+': return val1 + val2; break;
-      case '-': return val1 - val2; break;
-      case '*': return val1 * val2; break;
-      case '/': return val1 / val2; break;
+      case '+': return val1 + val2;
+      case '-': return val1 - val2;
+      case '*': return val1 * val2;
+      case '/': return val1 / val2;
+      case TK_EQ: return val1 == val2;
+      case TK_AND: return val1 && val2;
+      case TK_BAND: return val1 & val2;
+      case TK_BNOR: return val1 ^ val2;
+      case TK_BOR: return val1 | val2;
+      case TK_GE: return val1 >= val2;
+      case TK_GT: return val1 > val2;
+      case TK_LE: return val1 <= val2;
+      case TK_LT: return val1 < val2;
+      case TK_NE: return val1 != val2;
+      case TK_NOR: return val1 ^ val2;
+      case TK_OR: return val1 || val2;
+      case TK_SL: return val1 << val2;
+      case TK_SR: return val1 >> val2;
       default: assert(0);
     }
   }
@@ -264,9 +365,20 @@ word_t expr(char *e, bool *success) {
     return 0;
   }
 
-  /* TODO: Insert codes to evaluate the expression. */
+  /* TODO: Insert codes to evaluate the expression. */;
   bool legal = true;
-  uint32_t val = eval(0, nr_token - 1, &legal);
+  for (int i = 0; i < nr_token; i ++) {
+    if (tokens[i].type == '*' && (i == 0 || tokens[i - 1].type == TK_AND 
+    || tokens[i - 1].type == TK_BAND || tokens[i - 1].type == TK_BNOR || tokens[i - 1].type == TK_BOR
+    || tokens[i - 1].type == TK_DEREF || tokens[i - 1].type == TK_EQ || tokens[i - 1].type == TK_GE
+    || tokens[i - 1].type == TK_GT || tokens[i - 1].type == TK_LE || tokens[i - 1].type == TK_LT
+    || tokens[i - 1].type == TK_NE || tokens[i - 1].type == TK_NOR || tokens[i - 1].type == TK_OR
+    || tokens[i - 1].type == TK_SL || tokens[i - 1].type == TK_SR || tokens[i - 1].type == '+'
+    || tokens[i - 1].type == '-' || tokens[i - 1].type == '*' || tokens[i - 1].type == '/') ) {
+      tokens[i].type = TK_DEREF;
+    }
+  }
+  word_t val = eval(0, nr_token - 1, &legal);
   if (!legal) {
     printf("表达式不正确\n");
     *success = false;
