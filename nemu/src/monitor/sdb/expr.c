@@ -54,12 +54,12 @@ static struct rule {
   {"<=", TK_LE},        // less equal
   {">=", TK_GE},        // greater equal
   {"&&", TK_AND},       // logical and
-  {"||", TK_OR},        // logical or
+  {"\\|\\|", TK_OR},        // logical or
   {"<<", TK_SL},        // shift left
   {">>", TK_SR},        // shift right
   {"&", TK_BAND},       // bit and
-  {"|", TK_BOR},        // bit or
-  {"^", TK_BNOR},       // bit nor
+  {"\\|", TK_BOR},        // bit or
+  {"\\^", TK_BNOR},       // bit nor
 
 };
 
