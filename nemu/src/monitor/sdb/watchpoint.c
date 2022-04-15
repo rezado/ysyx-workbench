@@ -41,7 +41,8 @@ void new_wp(char *args) {
   free_ = free_->next;
   p->NO = wp_num;
   printf("%s\n", args);
-  p->expr = args;
+  p->expr = (char*)malloc(sizeof args);
+  strcpy(p->expr, args);
   p->value = 0;
   p->vis = false;
   p->next = head;
