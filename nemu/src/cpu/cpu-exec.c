@@ -21,12 +21,20 @@ rtlreg_t tmp_reg[4];
 void device_update();
 void fetch_decode(Decode *s, vaddr_t pc);
 
+extern bool scan_wp();
+extern void set_nemu_state(int state, vaddr_t pc, int halt_ret);
+
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
   if (ITRACE_COND) log_write("%s\n", _this->logbuf);
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
+  // scan watchpoints
+  bool flag = scan_wp();
+  if (!flag) {
+    set_nemu_state(NEMU_STOP, _this->pc, -1);
+  }
 }
 
 #include <isa-exec.h>

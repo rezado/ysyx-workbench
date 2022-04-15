@@ -59,6 +59,7 @@ static int cmd_si(char *args) {
   return 0;
 }
 
+extern void print_wp();
 static int cmd_info(char *args) {
   char *arg = strtok(NULL, " ");
 
@@ -72,7 +73,8 @@ static int cmd_info(char *args) {
     }
     else if (strcmp(arg, "w") == 0) {
       //TODO: complete watchpoint	  
-
+      printf("Num\tWhat\n");
+      print_wp();
     }
     else {
       printf("Wrong argument!\n");
@@ -146,12 +148,18 @@ static int cmd_p(char *args) {
   return 0;
 }
 
+extern void new_wp(char *args);
+extern void free_wp(int NO);
+
 static int cmd_w(char *args) {
+  new_wp(args);
 
   return 0;
 }
 
 static int cmd_d(char *args) {
+  int NO = atoi(args);
+  free_wp(NO);
 
   return 0;
 }
