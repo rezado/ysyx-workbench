@@ -81,10 +81,10 @@ bool scan_wp() {
     bool success = true;
     word_t val = expr(p->expr, &success);
     if (!success) assert(0);
-    
+
     if (val != p->value) {
       printf("Hardware watchpoint %d: %s\n\n", p->NO, p->expr);
-      printf("Old value = %lu\nNew value = %lu", p->value, val);
+      printf("Old value = %lu\nNew value = %lu\n", p->value, val);
       p->value = val;
       flag = false;
     }
