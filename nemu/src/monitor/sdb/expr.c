@@ -1,5 +1,5 @@
 #include <isa.h>
-#include <memory/vaddr.h>
+#include <memory/paddr.h>
 
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
@@ -399,7 +399,7 @@ word_t eval(word_t p, word_t q, bool *legal)
     if (tokens[op].type == TK_DEREF)
     {
       word_t val = eval(op + 1, q, legal);
-      return vaddr_read(val, 64);
+      return paddr_read(val, 64);
     }
 
     word_t val1 = eval(p, op - 1, legal);
