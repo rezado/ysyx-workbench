@@ -9,7 +9,6 @@ typedef struct watchpoint {
   /* TODO: Add more members if necessary */
   char *expr;
   word_t value;
-  bool vis;
 } WP;
 
 static WP wp_pool[NR_WP] = {};
@@ -23,7 +22,6 @@ void init_wp_pool() {
     wp_pool[i].next = (i == NR_WP - 1 ? NULL : &wp_pool[i + 1]);
     wp_pool[i].expr = NULL;
     wp_pool[i].value = 0;
-    wp_pool[i].vis = false;
   }
 
   head = NULL;
@@ -44,7 +42,6 @@ void new_wp(char *args) {
   p->expr = (char*)malloc(strlen(args) * 8);
   strcpy(p->expr, args);
   p->value = 0;
-  p->vis = false;
   p->next = head;
   head = p;
   wp_num++;
@@ -84,11 +81,8 @@ bool scan_wp() {
     bool success = true;
     word_t val = expr(p->expr, &success);
     if (!success) assert(0);
-    if (!p->vis) {
-      p->value = val;
-      p->vis = true;
-    }
-    else if (val != p->value) {
+    
+    if (val != p->value) {
       printf("Hardware watchpoint %d: %s\n\n", p->NO, p->expr);
       printf("Old value = %lu\nNew value = %lu", p->value, val);
       p->value = val;
