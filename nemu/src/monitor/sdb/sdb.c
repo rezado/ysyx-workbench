@@ -152,13 +152,15 @@ extern void new_wp(char *args);
 extern void free_wp(int NO);
 
 static int cmd_w(char *args) {
-  new_wp(args);
+  char *arg = strtok(NULL, " ");
+  new_wp(arg);
 
   return 0;
 }
 
 static int cmd_d(char *args) {
-  int NO = atoi(args);
+  char *arg = strtok(NULL, " ");
+  int NO = atoi(arg);
   free_wp(NO);
 
   return 0;
