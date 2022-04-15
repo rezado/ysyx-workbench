@@ -185,10 +185,10 @@ config DIFFTEST_REF_NAME
   default "spike" if DIFFTEST_REF_SPIKE
   default "none"
 
-config CONFIG_WATCHPOINT
+config WATCHPOINT
   bool "Enable watchpoint checking"
   default y
-  
+
 endmenu
 
 if MODE_SYSTEM
