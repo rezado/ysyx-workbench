@@ -57,14 +57,21 @@ void free_wp(int NO) {
   }
   if (!p) {
     printf("不存在监视点\n");
-    return;
   }
-
-  // 头插法
-  pre->next = p->next;
-  p->next = free_;
-  free_ = p;
-  wp_num--;
+  else if (p == head) {
+    // 头结点就是删除节点
+    head = p->next;
+    p->next = free_;
+    free_ = p;
+    wp_num--;
+  }
+  else {
+    // 头插法
+    pre->next = p->next;
+    p->next = free_;
+    free_ = p;
+    wp_num--;
+  }
 }
 
 // 扫描监视点
