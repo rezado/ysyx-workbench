@@ -40,6 +40,7 @@ void new_wp(char *args) {
   WP *p = free_;
   free_ = free_->next;
   p->NO = wp_num;
+  printf("%s\n", args);
   p->expr = args;
   p->value = 0;
   p->vis = false;
