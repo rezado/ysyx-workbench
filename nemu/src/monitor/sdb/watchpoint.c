@@ -84,7 +84,7 @@ bool scan_wp() {
 
     if (val != p->value) {
       printf("Hardware watchpoint %d: %s\n\n", p->NO, p->expr);
-      printf("Old value = %lu\nNew value = %lu\n", p->value, val);
+      printf("Old value = %lx\nNew value = %lx\n", p->value, val);
       p->value = val;
       flag = false;
     }
