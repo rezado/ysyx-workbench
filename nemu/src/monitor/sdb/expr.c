@@ -153,6 +153,7 @@ static bool make_token(char *e)
           Token *p = (Token *)malloc(sizeof(Token));
           p->type = rules[i].token_type;
           tokens[nr_token++] = *p;
+          free(p);
           break;
         }
         case (TK_DEC):
