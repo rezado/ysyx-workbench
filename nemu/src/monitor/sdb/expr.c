@@ -482,7 +482,7 @@ word_t expr(char *e, bool *success)
 
   // 回收内存
   for (int i = 0; i < nr_token; i++) {
-    free(tokens[i].str);
+    if (tokens[i].str) free(tokens[i].str);
   }
 
   return val;
