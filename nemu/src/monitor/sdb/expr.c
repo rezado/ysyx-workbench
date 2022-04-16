@@ -169,7 +169,7 @@ static bool make_token(char *e)
             Token *p = (Token *)malloc(sizeof(Token));
             p->type = rules[i].token_type;
             strncpy(p->str, substr_start, substr_len);
-            p->str[substr_len + 1] = '\0';
+            p->str[substr_len] = '\0';
             tokens[nr_token++] = *p;
           }
           break;
