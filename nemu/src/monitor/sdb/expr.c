@@ -171,6 +171,7 @@ static bool make_token(char *e)
             strncpy(p->str, substr_start, substr_len);
             p->str[substr_len] = '\0';
             tokens[nr_token++] = *p;
+            free(p);
           }
           break;
         }
@@ -479,11 +480,6 @@ word_t expr(char *e, bool *success)
     printf("表达式不正确\n");
     *success = false;
   }
-
-  // 回收内存
-  // for (int i = 0; i < nr_token; i++) {
-  //   if (tokens[i].str) free(tokens[i].str);
-  // }
 
   return val;
 }
