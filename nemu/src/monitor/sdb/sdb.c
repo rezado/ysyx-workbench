@@ -3,7 +3,6 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "sdb.h"
-#include "memory/paddr.h"
 
 static int is_batch_mode = false;
 
@@ -38,133 +37,7 @@ static int cmd_q(char *args) {
   return -1;
 }
 
-static int cmd_si(char *args) {
-  int n;
-  char *arg = strtok(NULL, " ");
-
-  if (arg == NULL) {
-    /* no argument given, exec 1 inst */ 
-	cpu_exec(1);
-  }
-  else {
-	n = atoi(arg);
-	if (n == 0 ) {
-		printf("Wrong number!\n");
-	}
-	else {
-    cpu_exec(n);
-	}
-  }
-
-  return 0;
-}
-
-extern void print_wp();
-static int cmd_info(char *args) {
-  char *arg = strtok(NULL, " ");
-
-  if (arg == NULL) {
-    /* no argument given ERROR */
-    printf("There is no argument, Please append 'r' or 'w'\n");
-  }
-  else {
-    if (strcmp(arg, "r") == 0) {
-      isa_reg_display(); 
-    }
-    else if (strcmp(arg, "w") == 0) {
-      //TODO: complete watchpoint	  
-      printf("Num\tWhat\n");
-      print_wp();
-    }
-    else {
-      printf("Wrong argument!\n");
-    }
-  }
-  return 0;
-}
-
-paddr_t htoi(char *str) {
-  //TODO: write codes now
-  int i, num = 0;
-  paddr_t addr = 0;
-  if (str[0] == '0' || (str[1] == 'x' && str[1] == 'X')) {
-	for (i = 2; i < strlen(str); i++) {
-	  if (str[i] >= 'a' && str[i] <= 'f') {
-	    num = str[i] - 'a' + 10;
-	  }
-	  else if (str[i] >= '0' && str[i] <= '9') {
-	    num = str[i] - '0';
-	  }
-	  addr = addr * 16 + num;
-	}
-	return addr;
-  }
-  else {
-    printf("Please input 16 base number start with 0x\n");
-    return 0; // error
-  }
-}
-static int cmd_x(char *args) {
-  char *arg = strtok(NULL, " ");
-  int i;
-  int num;
-  paddr_t paddr;
-
-  if (arg == NULL) {
-	printf("Wrong!Please input lenght(10ind) and addr(16ind)\n");
-  }
-  else {
-    puts(arg);
-    num = atoi(arg);
-    arg = strtok(NULL, " ");
-    if (arg == NULL) {
-      printf("Wrong!Please input addr");
-    }
-    else {
-      paddr = htoi(arg);
-      printf("addr:%x length:%x\n", paddr, num);
-      if (paddr == 0) {
-        return 0;
-      }
-      for (i = 0; i < num; i++) {
-        paddr_t cur_addr = paddr + i * sizeof(paddr_t);
-        printf("%8lx at %8x\n", paddr_read(cur_addr, sizeof(paddr_t)), cur_addr);
-      }
-    }
-  }
-  return 0;
-}
-
-static int cmd_p(char *args) {
-  bool success = true;
-  word_t val = expr(args, &success);
-  if (!success) {
-    printf("表达式求值不正确\n");
-  }
-  else {
-    printf("%0lx\n", val);
-  }
-
-  return 0;
-}
-
-extern void new_wp(char *args);
-extern void free_wp(int NO);
-
-static int cmd_w(char *args) {
-  new_wp(args);
-
-  return 0;
-}
-
-static int cmd_d(char *args) {
-  int NO = atoi(args);
-  free_wp(NO);
-
-  return 0;
-}
-
-static int cmd_help(char *args); 
+static int cmd_help(char *args);
 
 static struct {
   const char *name;
@@ -176,12 +49,7 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
 
   /* TODO: Add more commands */
-  { "si", "Step instruction in specified number(default 1)", cmd_si},
-  { "info", "Print program's informations", cmd_info},
-  { "x", "Scanning memory and print N bytes from EXPR", cmd_x},
-  { "p", "Solving EXPR", cmd_p},
-  { "w", "Set watchpoint", cmd_w},
-  { "d", "Delete watchpoint", cmd_d}
+
 };
 
 #define NR_CMD ARRLEN(cmd_table)

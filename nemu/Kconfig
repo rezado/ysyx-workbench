@@ -57,8 +57,10 @@ choice
   default TARGET_NATIVE_ELF
 config TARGET_NATIVE_ELF
   bool "Executable on Linux Native"
+config TARGET_SHARE
+  bool "Shared object (used as REF for differential testing)"
 config TARGET_AM
-  bool "Application on Abstract-Machine"
+  bool "Application on Abstract-Machine (DON'T CHOOSE)"
 endchoice
 
 menu "Build Options"
@@ -184,11 +186,6 @@ config DIFFTEST_REF_NAME
   default "kvm" if DIFFTEST_REF_KVM
   default "spike" if DIFFTEST_REF_SPIKE
   default "none"
-
-config WATCHPOINT
-  bool "Enable watchpoint checking"
-  default y
-
 endmenu
 
 if MODE_SYSTEM
@@ -212,7 +209,4 @@ config RT_CHECK
   bool "Enable runtime checking"
   default y
 
-
-
 endmenu
-
