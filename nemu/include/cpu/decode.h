@@ -77,7 +77,7 @@ finish:
   uint64_t key, mask, shift; \
   pattern_decode(pattern, STRLEN(pattern), &key, &mask, &shift); \
   if (((INSTPAT_INST(s) >> shift) & mask) == key) { \
-    INSTPAT_MATCH(s, ##__VA_ARGS__); \
+    INSTPAT_MATCH(s, ##__VA_ARGS__/*可变参数宏*/); \
     goto *(__instpat_end); \
   } \
 } while (0)
