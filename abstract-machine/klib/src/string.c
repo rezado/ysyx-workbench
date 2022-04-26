@@ -43,7 +43,7 @@ char *strcat(char *dst, const char *src) {
 int strcmp(const char *s1, const char *s2) {
   size_t i;
   i = 0;
-  while (s1[i] != '/0' || s2[i] != '/0') {
+  while (s1[i] != '\0' || s2[i] != '\0') {
     if (s1[i] > s2[i]) return 1;
     if (s1[i] < s2[i]) return -1;
     i++;
@@ -55,7 +55,7 @@ int strcmp(const char *s1, const char *s2) {
 int strncmp(const char *s1, const char *s2, size_t n) {
   size_t i;
   for (i = 0; i < n; i++) {
-    if (s1[i] == '/0' && s2[i] == '/0')
+    if (s1[i] == '\0' && s2[i] == '\0')
       break;
     if (s1[i] > s2[i]) return 1;
     if (s1[i] < s2[i]) return -1;
