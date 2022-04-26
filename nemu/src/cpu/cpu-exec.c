@@ -16,6 +16,7 @@ static uint64_t g_timer = 0; // unit: us
 static bool g_print_step = false;
 
 void device_update();
+
 #ifdef CONFIG_WATCHPOINT
 bool scan_wp();
 #endif
