@@ -19,6 +19,7 @@ CFLAGS += -I$(AM_HOME)/am/src/platform/nemu/include
 
 TMPDEFCONFIG = tmp_defconfig
 TMPDEFCONFIG_FILE = $(NEMU_HOME)/configs/$(TMPDEFCONFIG)
+WORK_DIR = $(shell pwd)
 
 image: $(IMAGE).elf
 	@$(OBJDUMP) -d $(IMAGE).elf > $(IMAGE).txt
@@ -33,11 +34,10 @@ restore_config:
 	$(MAKE) -C $(NEMU_HOME) ARCH=$(ARCH) $(TMPDEFCONFIG)
 	rm $(TMPDEFCONFIG_FILE)
 
-run: image
-	$(MAKE) save_config
+run: image save_config
 	$(MAKE) -C $(NEMU_HOME) ISA=$(ISA) run ARGS="$(NEMUFLAGS)" IMG=$(IMAGE).bin || \
 		($(MAKE) restore_config; false)
-	$(MAKE) restore_config
+	$(MAKE) -C $(WORK_DIR) restore_config
 
 gdb: image
 	$(MAKE) -C $(NEMU_HOME) ISA=$(ISA) gdb ARGS="$(NEMUFLAGS)" IMG=$(IMAGE).bin
