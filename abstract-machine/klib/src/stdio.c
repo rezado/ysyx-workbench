@@ -23,6 +23,8 @@ int sprintf(char *out, const char *fmt, ...) {
   int flag = 0, argDec;
   char op;
   char *argStr = NULL;
+  char num[50];
+  int t, cnt;  // 一些临时变量
   for (i = 0; i < len; i++) {
     if (fmt[i] == '%') {
       flag = 1;
@@ -41,10 +43,9 @@ int sprintf(char *out, const char *fmt, ...) {
         }
         else if (argDec == 0)
           *out++ = '0';
-        
-        char num[50];
-        int t = argDec;
-        int cnt = 0;
+
+        t = argDec;
+        cnt = 0;
         while (t) {
           num[cnt++] = argDec % 10 + '0';
           t = t / 10;
