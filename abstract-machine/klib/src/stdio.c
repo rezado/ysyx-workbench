@@ -20,9 +20,9 @@ int sprintf(char *out, const char *fmt, ...) {
   assert(out != NULL && fmt != NULL);
   size_t i;
   size_t len = strlen(fmt);
-  int flag = 0, t;
-  char op, c;
-  char *str = NULL;
+  int flag = 0, argDec;
+  char op;
+  char *argStr = NULL;
   for (i = 0; i < len; i++) {
     if (fmt[i] == '%') {
       flag = 1;
@@ -34,20 +34,31 @@ int sprintf(char *out, const char *fmt, ...) {
     else {
       op = fmt[i];
       if (op == 'd') {
-        t = va_arg(ap, int);
+        argDec = va_arg(ap, int);
+        if (argDec < 0) {
+          *out++ = '-';
+          argDec = -argDec;
+        }
+        else if (argDec == 0)
+          *out++ = '0';
+        
+        char num[50];
+        int t = argDec;
+        int cnt = 0;
         while (t) {
-          c = t % 10 + '0';
-          *out = c;
-          out++;
+          num[cnt++] = argDec % 10 + '0';
           t = t / 10;
+        }
+        while (cnt > 0) {
+          *out++ = num[--cnt];
         }
       }
       else if (op == 's') {
-        str = va_arg(ap, char*);
-        while (*str != '\0') {
-          *out = *str;
+        argStr = va_arg(ap, char*);
+        while (*argStr != '\0') {
+          *out = *argStr;
           out++;
-          str++;
+          argStr++;
         }
       }
     }
