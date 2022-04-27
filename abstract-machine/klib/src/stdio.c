@@ -17,7 +17,6 @@ int sprintf(char *out, const char *fmt, ...) {
   char *pri = out;
   va_list ap;
   va_start(ap, fmt);
-  assert(out != NULL && fmt != NULL);
   size_t i;
   size_t len = strlen(fmt);
   int flag = 0, argDec;
@@ -34,6 +33,7 @@ int sprintf(char *out, const char *fmt, ...) {
       out++;
     }
     else {
+      flag = 0;
       op = fmt[i];
       if (op == 'd') {
         argDec = va_arg(ap, int);
@@ -50,6 +50,7 @@ int sprintf(char *out, const char *fmt, ...) {
           num[cnt++] = argDec % 10 + '0';
           t = t / 10;
         }
+        
         while (cnt > 0) {
           *out++ = num[--cnt];
         }
@@ -64,6 +65,7 @@ int sprintf(char *out, const char *fmt, ...) {
       }
     }
   }
+  *out++ = 0;
   va_end(ap);
 
   return out - pri;
