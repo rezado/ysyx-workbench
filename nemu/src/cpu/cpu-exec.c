@@ -28,7 +28,7 @@ static void prbuf() {
   int i;
   for (i = 0; i < 20; i++) {
     if (rbuf[i][0] == 0) break;
-    if (i != rptr) printf("    ");
+    if (i != rptr - 1) printf("    ");
     else printf(" -->");
     puts(rbuf[i]);
   }
