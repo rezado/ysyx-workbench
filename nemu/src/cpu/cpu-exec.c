@@ -21,6 +21,20 @@ void device_update();
 bool scan_wp();
 #endif
 
+#ifdef CONFIG_ITRACE
+char rbuf[20][128];
+int rptr;
+static void prbuf() {
+  int i;
+  for (i = 0; i < 20; i++) {
+    if (rbuf[i][0] == 0) break;
+    if (i != rptr) printf("    ");
+    else printf(" -->");
+    log_write("%s\n", rbuf[i]);
+  }
+}
+#endif
+
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
   if (ITRACE_COND) { log_write("%s\n", _this->logbuf); }
@@ -60,6 +74,10 @@ static void exec_once(Decode *s, vaddr_t pc) {
   void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
   disassemble(p, s->logbuf + sizeof(s->logbuf) - p,
       MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.inst.val, ilen);
+  
+  // iringbuf
+  strcpy(rbuf[rptr], s->logbuf);
+  rptr = (rptr + 1) % 20;
 #endif
 }
 
@@ -114,6 +132,9 @@ void cpu_exec(uint64_t n) {
            (nemu_state.halt_ret == 0 ? ANSI_FMT("HIT GOOD TRAP", ANSI_FG_GREEN) :
             ANSI_FMT("HIT BAD TRAP", ANSI_FG_RED))),
           nemu_state.halt_pc);
+      // output iringbuf
+      if (nemu_state.state == NEMU_ABORT || nemu_state.halt_ret != 0)
+        prbuf();
       // fall through
     case NEMU_QUIT: statistic();
   }
