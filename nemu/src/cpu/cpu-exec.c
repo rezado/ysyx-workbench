@@ -30,7 +30,7 @@ static void prbuf() {
     if (rbuf[i][0] == 0) break;
     if (i != rptr) printf("    ");
     else printf(" -->");
-    log_write("%s\n", rbuf[i]);
+    puts(rbuf[i]);
   }
 }
 #endif
