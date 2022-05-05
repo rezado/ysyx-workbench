@@ -57,6 +57,9 @@ void sim_init() {
 	int ret = fread(pmem, size, 1, fp);
 	assert(ret == 1);
 	fclose(fp);
+	for (int i = 0; i < size; i++)
+		printf("%c ", pmem[i]);
+	printf("\n");
 }
 
 void sim_exit() {
