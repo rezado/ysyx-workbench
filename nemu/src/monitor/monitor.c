@@ -50,6 +50,11 @@ static long load_img() {
   assert(ret == 1);
 
   fclose(fp);
+
+  for (int i = 0; i < size; i++)
+    printf("%c ", *guest_to_host(CONFIG_MBASE + i));
+  puts("");
+
   return size;
 }
 
