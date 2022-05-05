@@ -12,7 +12,7 @@ VerilatedVcdC* tfp = NULL;
 #define CONFIG_MBASE 0x80000000
 uint64_t sim_time = 0;
 uint8_t pmem[10010] = {};
-uint8_t* guest_to_host(uint64_t paddr) { return paddr - CONFIG_MBASE; }
+uint8_t* guest_to_host(uint64_t paddr) { return pmem + paddr - CONFIG_MBASE; }
 
 static inline uint64_t host_read(void *addr, int len) {
   switch (len) {

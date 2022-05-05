@@ -21,13 +21,26 @@ VL_MODULE(Vtop___024root) {
     // PORTS
     VL_IN8(clk,0,0);
     VL_IN8(rst,0,0);
-    VL_OUT16(led,15,0);
+    VL_IN(inst,31,0);
+    VL_OUT64(pc,63,0);
 
     // LOCAL SIGNALS
-    IData/*31:0*/ top__DOT__count;
+    CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addi;
+    CData/*0:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_cin;
+    QData/*63:0*/ top__DOT__rf_wdata;
+    QData/*63:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__pc_add;
+    QData/*63:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__immI_sext;
+    QData/*63:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__rf_rdata1;
+    QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__slt_result;
+    QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__sltu_result;
+    QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__or_result;
+    QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_b;
+    QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_result;
+    VlUnpacked<QData/*63:0*/, 32> top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf;
 
     // LOCAL VARIABLES
     CData/*0:0*/ __Vclklast__TOP__clk;
+    VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
 
     // INTERNAL VARIABLES
     Vtop__Syms* vlSymsp;  // Symbol table
