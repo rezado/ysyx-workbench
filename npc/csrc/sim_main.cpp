@@ -74,7 +74,8 @@ int main() {
 
   reset(4);
   while (sim_time < MAX_SIM_TIME) {
-	  top->inst = pmem_read(top->pc);
+	//top->inst = pmem_read(top->pc);
+	  top->inst = 1048723;
 	  printf("%u\n", top->inst);
       single_cycle();
       sim_time++;
