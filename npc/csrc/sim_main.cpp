@@ -24,7 +24,7 @@ static inline uint64_t host_read(void *addr, int len) {
 }
 
 static uint64_t pmem_read(uint64_t addr) {
-  uint64_t ret = host_read(guest_to_host(addr), 8);
+  uint64_t ret = host_read(guest_to_host(addr), 4);
   return ret;
 }
 
