@@ -14,6 +14,8 @@ uint64_t sim_time = 0;
 uint8_t pmem[10010] = {};
 uint8_t* guest_to_host(uint64_t paddr) { return pmem + paddr - CONFIG_MBASE; }
 
+uint32_t insts[10010] = {};
+
 static inline uint64_t host_read(void *addr, int len) {
   switch (len) {
     case 1: return *(uint8_t  *)addr;
@@ -57,9 +59,13 @@ void sim_init() {
 	int ret = fread(pmem, size, 1, fp);
 	assert(ret == 1);
 	fclose(fp);
-	for (int i = 0; i < size; i++)
-		printf("%c ", pmem[i]);
-	printf("\n");
+	// for (int i = 0; i < size; i++)
+	// 	printf("%c ", pmem[i]);
+	// printf("\n");
+
+	insts[0] = 1048723;
+	insts[1] = 0x108113;
+	insts[2] = 0xFFF0C193;
 }
 
 void sim_exit() {
@@ -74,9 +80,9 @@ int main() {
 
   reset(4);
   while (sim_time < MAX_SIM_TIME) {
-	  top->inst = pmem_read(top->pc);
-	//  top->inst = 1048723;
-	  printf("%u\n", top->inst);
+	//   top->inst = pmem_read(top->pc);
+	  top->inst = insts[(top->pc - CONFIG_MBASE) / 4];
+	  printf("%x\n", top->inst);
       single_cycle();
       sim_time++;
   }
