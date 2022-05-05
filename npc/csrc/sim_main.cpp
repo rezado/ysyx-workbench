@@ -49,7 +49,7 @@ void sim_init() {
     top->trace(tfp, 0);
     tfp->open("dump.vcd");
 
-	FILE *fp = fopen("/home/bill/ysyx-workbench/npc/csrc/insts.txt", "rb");
+	FILE *fp = fopen("/home/bill/ysyx-workbench/npc/csrc/insts.bin", "rb");
 	assert(fp);
 	fseek(fp, 0, SEEK_END);
 	long size = ftell(fp);
@@ -74,8 +74,8 @@ int main() {
 
   reset(4);
   while (sim_time < MAX_SIM_TIME) {
-	//top->inst = pmem_read(top->pc);
-	  top->inst = 1048723;
+	  top->inst = pmem_read(top->pc);
+	//  top->inst = 1048723;
 	  printf("%u\n", top->inst);
       single_cycle();
       sim_time++;
