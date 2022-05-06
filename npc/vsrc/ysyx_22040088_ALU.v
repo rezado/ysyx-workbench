@@ -80,7 +80,8 @@ assign srl_result = alu_src1 >> alu_src2[5:0];
 assign sra_result = ($signed(alu_src1) >>> alu_src2[5:0]);
 
 assign  alu_result = ({64{op_add|op_sub	}} & add_sub_result)
-				   | ({64{op_sltu      	}} & slt_result)
+				   | ({64{op_sltu      	}} & sltu_result)
+				   | ({64{op_slt      	}} & slt_result)
 				   | ({64{op_and       	}} & and_result)
 				   | ({64{op_nor		}} & nor_result)
 				   | ({64{op_or			}} & or_result)

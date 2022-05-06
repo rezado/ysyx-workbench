@@ -34,7 +34,6 @@ VL_MODULE(Vtop___024root) {
     QData/*63:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__immI_sext;
     QData/*63:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__rf_rdata1;
     QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__slt_result;
-    QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__sltu_result;
     QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__or_result;
     QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_b;
     QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_result;
