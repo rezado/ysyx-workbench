@@ -1,4 +1,4 @@
-// Verilated -*- C++ -*-
+// Verilated -*- SystemC -*-
 // DESCRIPTION: Verilator output: Primary model header
 //
 // This header should be included by all source files instantiating the design.
@@ -8,16 +8,19 @@
 #ifndef VERILATED_VTOP_H_
 #define VERILATED_VTOP_H_  // guard
 
+#include "systemc.h"
+#include "verilated_sc.h"
 #include "verilated_heavy.h"
+#include "svdpi.h"
 
 class Vtop__Syms;
 class Vtop___024root;
-class VerilatedVcdC;
+class VerilatedVcdSc;
 class Vtop_VerilatedVcd;
 
 
 // This class is the main interface to the Verilated model
-class Vtop VL_NOT_FINAL {
+SC_MODULE(Vtop) {
   private:
     // Symbol table holding complete model state (owned by this class)
     Vtop__Syms* const vlSymsp;
@@ -27,10 +30,10 @@ class Vtop VL_NOT_FINAL {
     // PORTS
     // The application code writes and reads these signals to
     // propagate new values into/out from the Verilated model.
-    VL_IN8(&clk,0,0);
-    VL_IN8(&rst,0,0);
-    VL_IN(&inst,31,0);
-    VL_OUT64(&pc,63,0);
+    sc_in<bool> &clk;
+    sc_in<bool> &rst;
+    sc_in<uint32_t> &inst;
+    sc_out<vluint64_t> &pc;
 
     // CELLS
     // Public to allow access to /* verilator public */ items.
@@ -41,35 +44,25 @@ class Vtop VL_NOT_FINAL {
     Vtop___024root* const rootp;
 
     // CONSTRUCTORS
-    /// Construct the model; called by application code
-    /// If contextp is null, then the model will use the default global context
-    /// If name is "", then makes a wrapper with a
-    /// single model invisible with respect to DPI scope names.
-    explicit Vtop(VerilatedContext* contextp, const char* name = "TOP");
-    explicit Vtop(const char* name = "TOP");
-    /// Destroy the model; called (often implicitly) by application code
+    SC_CTOR(Vtop);
     virtual ~Vtop();
   private:
     VL_UNCOPYABLE(Vtop);  ///< Copying not allowed
 
   public:
     // API METHODS
-    /// Evaluate the model.  Application must call when inputs change.
+  private:
     void eval() { eval_step(); }
-    /// Evaluate when calling multiple units/models per time step.
     void eval_step();
-    /// Evaluate at end of a timestep for tracing, when using eval_step().
-    /// Application must call after all eval() and before time changes.
-    void eval_end_step() {}
-    /// Simulation complete, run final blocks.  Application must call on completion.
+  public:
     void final();
     /// Trace signals in the model; called by application code
     void trace(VerilatedVcdC* tfp, int levels, int options = 0);
+    /// SC tracing; avoid overloaded virtual function lint warning
+    virtual void trace(sc_trace_file* tfp) const override { ::sc_core::sc_module::trace(tfp); }
     /// Return current simulation context for this model.
     /// Used to get to e.g. simulation time via contextp()->time()
     VerilatedContext* contextp() const;
-    /// Retrieve name of this model instance (as passed to constructor).
-    const char* name() const;
 } VL_ATTR_ALIGNED(VL_CACHE_LINE_BYTES);
 
 #endif  // guard

@@ -1,7 +1,7 @@
 module ysyx_22040088_controlunit(
     input   [ 6:0] opcode,
     input   [ 2:0] funct3,
-    input   [ 6:0] funct7,
+    // input   [ 6:0] funct7,
     output  [11:0] alu_op,
     output         rf_we
 );

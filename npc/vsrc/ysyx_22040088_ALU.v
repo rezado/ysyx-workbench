@@ -63,14 +63,14 @@ assign {adder_cout, adder_result} = adder_a + adder_b + {{63{1'b0}}, adder_cin};
 
 assign add_sub_result = adder_result;
 
-assign slt_result[31:1] = 31'b0;
+assign slt_result[63:1] = 63'b0;
 //带符号数比较
 //1.如果src1为正数，src2为负数，src1>src2，返回0；
 //2.如果src1与src2同号，则看相减结果的符号位，为正则src1 > src2，返回0；为负则src1 < src2，返回1
 assign slt_result[0] = (alu_src1[31] & ~alu_src2[31])
 					 | (~(alu_src1[31] ^ alu_src2[31]) & adder_result[31]);
 //无符号数比较
-assign sltu_result[31:1] = 31'b0;
+assign sltu_result[63:1] = 63'b0;
 assign sltu_result[0]    = ~adder_cout;
 //逻辑左移
 assign sll_result = alu_src1 << alu_src2[5:0];

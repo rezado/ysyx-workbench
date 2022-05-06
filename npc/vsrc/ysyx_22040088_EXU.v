@@ -1,6 +1,6 @@
 module ysyx_22040088_EXU(
-    input       clk,
-    input       rst,
+    // input       clk,
+    // input       rst,
     // 控制信号
     input [11:0] alu_op,
 

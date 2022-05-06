@@ -1,4 +1,4 @@
-// Verilated -*- C++ -*-
+// Verilated -*- SystemC -*-
 // DESCRIPTION: Verilator output: Symbol table internal header
 //
 // Internal details; most calling programs do not need this header,
@@ -7,6 +7,8 @@
 #ifndef VERILATED_VTOP__SYMS_H_
 #define VERILATED_VTOP__SYMS_H_  // guard
 
+#include "systemc.h"
+#include "verilated_sc.h"
 #include "verilated_heavy.h"
 
 // INCLUDE MODEL CLASS
@@ -15,6 +17,8 @@
 
 // INCLUDE MODULE CLASSES
 #include "Vtop___024root.h"
+
+// DPI TYPES for DPI Export callbacks (Internal use)
 
 // SYMS CLASS (contains all model state)
 class Vtop__Syms final : public VerilatedSyms {
