@@ -37,8 +37,8 @@ static uint64_t pmem_read(uint64_t addr) {
 static Vtop* top;
 
 void single_cycle() {
-    sc_start(1, SC_NS); top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
-    sc_start(1, SC_NS); top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
+    top->clk = 0; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
+    top->clk = 1; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
 }
 
 void reset(int n) {
@@ -48,7 +48,6 @@ void reset(int n) {
 }
 
 void sim_init() {
-	Verilated::commandArgs(argc, argv);
     contextp = new VerilatedContext;
     tfp = new VerilatedVcdC;
     top = new Vtop;
@@ -87,8 +86,6 @@ void sim_exit() {
 
 int main() {
   sim_init();
-  sc_clock clk{"clk", 10, SC_NS, 0.5, 3, SC_NS, true};
-  top->clk(clk);
 
   reset(4);
   while (sim_time < MAX_SIM_TIME && flag) {
