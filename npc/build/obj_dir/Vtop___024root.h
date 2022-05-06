@@ -19,10 +19,11 @@ VL_MODULE(Vtop___024root) {
     // PORTS
     VL_IN8(clk,0,0);
     VL_IN8(rst,0,0);
-    VL_OUT16(led,15,0);
+    VL_IN(inst,31,0);
+    VL_OUT64(pc,63,0);
 
     // LOCAL SIGNALS
-    IData/*31:0*/ top__DOT__count;
+    QData/*63:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__pc_add;
 
     // LOCAL VARIABLES
     CData/*0:0*/ __Vclklast__TOP__clk;

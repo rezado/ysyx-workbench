@@ -72,7 +72,6 @@ static int cmd_info(char *args) {
       isa_reg_display(); 
     }
     else if (strcmp(arg, "w") == 0) {
-      //TODO: complete watchpoint	  
       printf("Num\tWhat\n");
       print_wp();
     }
@@ -84,7 +83,6 @@ static int cmd_info(char *args) {
 }
 
 paddr_t htoi(char *str) {
-  //TODO: write codes now
   int i, num = 0;
   paddr_t addr = 0;
   if (str[0] == '0' || (str[1] == 'x' && str[1] == 'X')) {
@@ -104,6 +102,7 @@ paddr_t htoi(char *str) {
     return 0; // error
   }
 }
+
 static int cmd_x(char *args) {
   char *arg = strtok(NULL, " ");
   int i;
