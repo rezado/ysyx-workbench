@@ -44,7 +44,7 @@ ysyx_22040088_controlunit u_ysyx_22040088_controlunit(
 	.alu_op (alu_op ),
 	.rf_we  (rf_we  )
 );
-
+/* verilator lint_off UNUSED */
 wire [63:0] rf_rdata1, rf_rdata2;
 ysyx_22040088_regfile u_ysyx_22040088_regfile(
     .clk    (clk    ),
