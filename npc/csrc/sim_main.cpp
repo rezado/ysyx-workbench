@@ -64,9 +64,9 @@ void sim_init() {
 	int ret = fread(pmem, size, 1, fp);
 	assert(ret == 1);
 	fclose(fp);
-	for (int i = 0; i < size; i++)
-		printf("%c ", pmem[i]);
-	printf("\n");
+	// for (int i = 0; i < size; i++)
+	// 	printf("%c ", pmem[i]);
+	// printf("\n");
 
 	insts[0] = 0x100093;
 	insts[1] = 0x108113;

@@ -43,7 +43,10 @@ import "DPI-C" function void finish_sim();
 wire ebreak;
 assign ebreak = (inst == 32'b000000000001_00000_000_00000_1110011);
 always @(posedge clk) begin
-	if (ebreak) finish_sim();
+	if (ebreak) begin
+		finish_sim();
+		$finish();
+	end
 end
 
 endmodule
