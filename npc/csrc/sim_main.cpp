@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
+#include "svdpi.h"
+#include "Vtop__Dpi.h"
 
 VerilatedContext* contextp = NULL;
 VerilatedVcdC* tfp = NULL;
@@ -15,6 +17,8 @@ uint8_t pmem[10010] = {};
 uint8_t* guest_to_host(uint64_t paddr) { return pmem + paddr - CONFIG_MBASE; }
 
 uint32_t insts[10010] = {};
+
+bool flag = true;
 
 static inline uint64_t host_read(void *addr, int len) {
   switch (len) {
@@ -50,6 +54,7 @@ void sim_init() {
     contextp->traceEverOn(true);
     top->trace(tfp, 0);
     tfp->open("dump.vcd");
+	flag = true;
 
 	FILE *fp = fopen("/home/bill/ysyx-workbench/npc/csrc/1.bin", "rb");
 	assert(fp);
@@ -68,6 +73,10 @@ void sim_init() {
 	insts[2] = 0xFFF0C193;
 }
 
+void finish_sim() {
+	flag = false;
+}
+
 void sim_exit() {
     single_cycle();
     tfp->close();
@@ -79,7 +88,7 @@ int main() {
   sim_init();
 
   reset(4);
-  while (sim_time < MAX_SIM_TIME) {
+  while (sim_time < MAX_SIM_TIME && flag) {
 	  top->inst = pmem_read(top->pc);
 	//   top->inst = insts[(top->pc - CONFIG_MBASE) / 4];
 	  printf("%x\n", top->inst);
