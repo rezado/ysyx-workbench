@@ -63,7 +63,7 @@ void sim_init() {
 		printf("%c ", pmem[i]);
 	printf("\n");
 
-	insts[0] = 1048723;
+	insts[0] = 0x100093;
 	insts[1] = 0x108113;
 	insts[2] = 0xFFF0C193;
 }
