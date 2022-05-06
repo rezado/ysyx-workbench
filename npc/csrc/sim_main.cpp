@@ -51,7 +51,7 @@ void sim_init() {
     top->trace(tfp, 0);
     tfp->open("dump.vcd");
 
-	FILE *fp = fopen("/home/bill/ysyx-workbench/npc/csrc/insts.bin", "rb");
+	FILE *fp = fopen("/home/bill/ysyx-workbench/npc/csrc/1.bin", "rb");
 	assert(fp);
 	fseek(fp, 0, SEEK_END);
 	long size = ftell(fp);
@@ -59,9 +59,9 @@ void sim_init() {
 	int ret = fread(pmem, size, 1, fp);
 	assert(ret == 1);
 	fclose(fp);
-	// for (int i = 0; i < size; i++)
-	// 	printf("%c ", pmem[i]);
-	// printf("\n");
+	for (int i = 0; i < size; i++)
+		printf("%c ", pmem[i]);
+	printf("\n");
 
 	insts[0] = 1048723;
 	insts[1] = 0x108113;
@@ -80,8 +80,8 @@ int main() {
 
   reset(4);
   while (sim_time < MAX_SIM_TIME) {
-	//   top->inst = pmem_read(top->pc);
-	  top->inst = insts[(top->pc - CONFIG_MBASE) / 4];
+	  top->inst = pmem_read(top->pc);
+	//   top->inst = insts[(top->pc - CONFIG_MBASE) / 4];
 	  printf("%x\n", top->inst);
       single_cycle();
       sim_time++;
