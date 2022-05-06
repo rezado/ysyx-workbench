@@ -20,7 +20,7 @@ wire [63:0] rf_wdata;
 // IDU
 ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.clk      (clk      ),
-	.rst      (rst      ),
+	// .rst      (rst      ),
 	.inst     (inst     ),
 	.rf_wdata (rf_wdata ),
 	.alu_op   (alu_op   ),
@@ -30,8 +30,8 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 
 // EXU
 ysyx_22040088_EXU u_ysyx_22040088_EXU(
-	.clk        (clk        ),
-	.rst        (rst        ),
+	// .clk        (clk        ),
+	// .rst        (rst        ),
 	.alu_op     (alu_op     ),
 	.alu_src1   (alu_src1   ),
 	.alu_src2   (alu_src2   ),
