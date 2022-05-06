@@ -74,6 +74,7 @@ void sim_init() {
 }
 
 void finish_sim() {
+	printf("simulation finished\n");
 	flag = false;
 }
 
