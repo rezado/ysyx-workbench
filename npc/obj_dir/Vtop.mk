@@ -20,11 +20,11 @@ SYSTEMC_LIBDIR ?= /usr/local/systemc-2.3.3/lib-linux64
 # C++ code coverage  0/1 (from --prof-c)
 VM_PROFC = 0
 # SystemC output mode?  0/1 (from --sc)
-VM_SC = 1
+VM_SC = 0
 # Legacy or SystemC output mode?  0/1 (from --sc)
 VM_SP_OR_SC = $(VM_SC)
 # Deprecated
-VM_PCLI = 0
+VM_PCLI = 1
 # Deprecated: SystemC architecture to find link library path (from $SYSTEMC_ARCH)
 VM_SC_TARGET_ARCH = linux
 

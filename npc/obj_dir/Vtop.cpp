@@ -1,28 +1,27 @@
-// Verilated -*- SystemC -*-
+// Verilated -*- C++ -*-
 // DESCRIPTION: Verilator output: Model implementation (design independent parts)
 
 #include "Vtop.h"
 #include "Vtop__Syms.h"
-#include "verilated_vcd_sc.h"
+#include "verilated_vcd_c.h"
 #include "verilated_dpi.h"
 
 //============================================================
 // Constructors
 
-Vtop::Vtop(sc_module_name /* unused */)
-    : vlSymsp{new Vtop__Syms(nullptr, name(), this)}
+Vtop::Vtop(VerilatedContext* _vcontextp__, const char* _vcname__)
+    : vlSymsp{new Vtop__Syms(_vcontextp__, _vcname__, this)}
     , clk{vlSymsp->TOP.clk}
     , rst{vlSymsp->TOP.rst}
     , inst{vlSymsp->TOP.inst}
     , pc{vlSymsp->TOP.pc}
     , rootp{&(vlSymsp->TOP)}
 {
-    // Sensitivities on all clocks and combinational inputs
-    SC_METHOD(eval);
-    sensitive << clk;
-    sensitive << rst;
-    sensitive << inst;
+}
 
+Vtop::Vtop(const char* _vcname__)
+    : Vtop(nullptr, _vcname__)
+{
 }
 
 //============================================================
@@ -114,6 +113,10 @@ void Vtop::final() {
 
 VerilatedContext* Vtop::contextp() const {
     return vlSymsp->_vm_contextp__;
+}
+
+const char* Vtop::name() const {
+    return vlSymsp->name();
 }
 
 //============================================================
