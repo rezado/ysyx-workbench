@@ -37,14 +37,14 @@ static uint64_t pmem_read(uint64_t addr) {
 static Vtop* top;
 
 void single_cycle() {
-    top->clk = false; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
-    top->clk = true; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
+    top->clk = 0; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
+    top->clk = 1; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
 }
 
 void reset(int n) {
-    top->rst = true;
+    top->rst = 1;
     while (n--) single_cycle();
-    top->rst = false;
+    top->rst = 0;
 }
 
 void sim_init() {
