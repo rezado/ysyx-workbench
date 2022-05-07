@@ -86,7 +86,7 @@ ysyx_22040088_regfile u_ysyx_22040088_regfile(
 // alu源操作数生成逻辑
 ysyx_22040088_genALUsrc1 u_ysyx_22040088_genALUsrc1(
     .rdata1      (rf_rdata1      ),
-    .pc          (          ),
+    .pc          (pc          ),
     .sel_alusrc1 (sel_alusrc1 ),
     .alu_src1    (alu_src1    )
 );
