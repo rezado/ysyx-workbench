@@ -97,7 +97,8 @@ int main(int argc, char **argv) {
 	  printf("%x\n", top->inst);
       single_cycle();
       sim_time++;
+	  puts("1");
   }
-
+  puts("finish");
   sim_exit();
 }
