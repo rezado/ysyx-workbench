@@ -81,6 +81,7 @@ void finish_sim() {
 void sim_exit() {
     single_cycle();
     tfp->close();
+	puts("saved");
     delete contextp;
     delete tfp;
 }
