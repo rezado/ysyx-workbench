@@ -98,7 +98,7 @@ int main(int argc, char **argv) {
       single_cycle();
       sim_time++;
 	//   puts("1");
-	  printf("%u\n", top->pc);
+	  printf("%lu\n", top->pc);
   }
   puts("finish");
   sim_exit();
