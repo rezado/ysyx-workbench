@@ -26,7 +26,7 @@ assign inst_sd = (opcode == 7'b0100011) &&(funct3 == 3'b011);
 
 // 控制信号生成
 assign alu_op = {11'b0, inst_addi};
-assign rf_we = inst_addi;
+assign rf_we = inst_addi | inst_jal | inst_jalr | inst_lui | inst_auipc;
 assign sel_alusrc1 = {inst_auipc | inst_jal | inst_jalr,
                       inst_addi};
 assign sel_alusrc2 = {inst_jal | inst_jalr,
