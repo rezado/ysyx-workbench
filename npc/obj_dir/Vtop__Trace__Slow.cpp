@@ -115,25 +115,25 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         {int i; for (i=0; i<32; i++) {
                 tracep->declQuad(c+145+i*2,"top u_ysyx_22040088_IDU u_ysyx_22040088_regfile rf", true,(i+0), 63,0);}}
         tracep->declQuad(c+19,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 rdata1", false,-1, 63,0);
-        tracep->declQuad(c+241,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 pc", false,-1, 63,0);
+        tracep->declQuad(c+212,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 pc", false,-1, 63,0);
         tracep->declBus(c+16,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 sel_alusrc1", false,-1, 1,0);
         tracep->declQuad(c+2,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 alu_src1", false,-1, 63,0);
-        tracep->declBus(c+243,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+243,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+241,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+241,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault KEY_LEN", false,-1, 31,0);
         tracep->declBus(c+234,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault DATA_LEN", false,-1, 31,0);
         tracep->declQuad(c+2,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault out", false,-1, 63,0);
         tracep->declBus(c+16,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault key", false,-1, 1,0);
-        tracep->declQuad(c+244,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault default_out", false,-1, 63,0);
+        tracep->declQuad(c+242,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault default_out", false,-1, 63,0);
         tracep->declArray(c+24,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault lut", false,-1, 131,0);
-        tracep->declBus(c+243,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+243,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+241,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+241,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 KEY_LEN", false,-1, 31,0);
         tracep->declBus(c+234,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 DATA_LEN", false,-1, 31,0);
-        tracep->declBus(c+246,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 HAS_DEFAULT", false,-1, 31,0);
+        tracep->declBus(c+244,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 HAS_DEFAULT", false,-1, 31,0);
         tracep->declQuad(c+2,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 out", false,-1, 63,0);
         tracep->declBus(c+16,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 key", false,-1, 1,0);
-        tracep->declQuad(c+244,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 default_out", false,-1, 63,0);
+        tracep->declQuad(c+242,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 default_out", false,-1, 63,0);
         tracep->declArray(c+24,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 lut", false,-1, 131,0);
-        tracep->declBus(c+247,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 PAIR_LEN", false,-1, 31,0);
+        tracep->declBus(c+245,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 PAIR_LEN", false,-1, 31,0);
         {int i; for (i=0; i<2; i++) {
                 tracep->declArray(c+29+i*3,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 pair_list", true,(i+0), 65,0);}}
         {int i; for (i=0; i<2; i++) {
@@ -142,28 +142,28 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
                 tracep->declQuad(c+37+i*2,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 data_list", true,(i+0), 63,0);}}
         tracep->declQuad(c+41,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 lut_out", false,-1, 63,0);
         tracep->declBit(c+43,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 hit", false,-1);
-        tracep->declBus(c+248,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 i", false,-1, 31,0);
+        tracep->declBus(c+246,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 i", false,-1, 31,0);
         tracep->declQuad(c+224,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 rdata2", false,-1, 63,0);
         tracep->declQuad(c+11,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 immI", false,-1, 63,0);
         tracep->declQuad(c+222,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 immU", false,-1, 63,0);
         tracep->declBus(c+17,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 sel_alusrc2", false,-1, 3,0);
         tracep->declQuad(c+4,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 alu_src2", false,-1, 63,0);
-        tracep->declBus(c+249,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+249,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+247,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+247,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault KEY_LEN", false,-1, 31,0);
         tracep->declBus(c+234,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault DATA_LEN", false,-1, 31,0);
         tracep->declQuad(c+4,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault out", false,-1, 63,0);
         tracep->declBus(c+17,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault key", false,-1, 3,0);
-        tracep->declQuad(c+244,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault default_out", false,-1, 63,0);
+        tracep->declQuad(c+242,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault default_out", false,-1, 63,0);
         tracep->declArray(c+44,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault lut", false,-1, 271,0);
-        tracep->declBus(c+249,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault i0 NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+249,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault i0 KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+247,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault i0 NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+247,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault i0 KEY_LEN", false,-1, 31,0);
         tracep->declBus(c+234,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault i0 DATA_LEN", false,-1, 31,0);
-        tracep->declBus(c+246,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault i0 HAS_DEFAULT", false,-1, 31,0);
+        tracep->declBus(c+244,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault i0 HAS_DEFAULT", false,-1, 31,0);
         tracep->declQuad(c+4,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault i0 out", false,-1, 63,0);
         tracep->declBus(c+17,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault i0 key", false,-1, 3,0);
-        tracep->declQuad(c+244,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault i0 default_out", false,-1, 63,0);
+        tracep->declQuad(c+242,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault i0 default_out", false,-1, 63,0);
         tracep->declArray(c+44,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault i0 lut", false,-1, 271,0);
-        tracep->declBus(c+250,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault i0 PAIR_LEN", false,-1, 31,0);
+        tracep->declBus(c+248,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault i0 PAIR_LEN", false,-1, 31,0);
         {int i; for (i=0; i<4; i++) {
                 tracep->declArray(c+53+i*3,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault i0 pair_list", true,(i+0), 67,0);}}
         {int i; for (i=0; i<4; i++) {
@@ -172,7 +172,7 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
                 tracep->declQuad(c+69+i*2,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault i0 data_list", true,(i+0), 63,0);}}
         tracep->declQuad(c+77,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault i0 lut_out", false,-1, 63,0);
         tracep->declBit(c+79,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault i0 hit", false,-1);
-        tracep->declBus(c+251,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault i0 i", false,-1, 31,0);
+        tracep->declBus(c+249,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 u_MuxKeyWithDefault i0 i", false,-1, 31,0);
         tracep->declQuad(c+212,"top u_ysyx_22040088_IDU u_ysyx_22040088_pcbranch pc", false,-1, 63,0);
         tracep->declQuad(c+11,"top u_ysyx_22040088_IDU u_ysyx_22040088_pcbranch immI", false,-1, 63,0);
         tracep->declQuad(c+13,"top u_ysyx_22040088_IDU u_ysyx_22040088_pcbranch immJ", false,-1, 63,0);
@@ -185,22 +185,22 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declQuad(c+21,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc jalrpc", false,-1, 63,0);
         tracep->declBus(c+18,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc sel_nextpc", false,-1, 2,0);
         tracep->declQuad(c+8,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc nextpc", false,-1, 63,0);
-        tracep->declBus(c+252,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+252,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+250,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+250,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault KEY_LEN", false,-1, 31,0);
         tracep->declBus(c+234,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault DATA_LEN", false,-1, 31,0);
         tracep->declQuad(c+8,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault out", false,-1, 63,0);
         tracep->declBus(c+18,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault key", false,-1, 2,0);
-        tracep->declQuad(c+244,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault default_out", false,-1, 63,0);
+        tracep->declQuad(c+242,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault default_out", false,-1, 63,0);
         tracep->declArray(c+80,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault lut", false,-1, 200,0);
-        tracep->declBus(c+252,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+252,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+250,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+250,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 KEY_LEN", false,-1, 31,0);
         tracep->declBus(c+234,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 DATA_LEN", false,-1, 31,0);
-        tracep->declBus(c+246,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 HAS_DEFAULT", false,-1, 31,0);
+        tracep->declBus(c+244,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 HAS_DEFAULT", false,-1, 31,0);
         tracep->declQuad(c+8,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 out", false,-1, 63,0);
         tracep->declBus(c+18,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 key", false,-1, 2,0);
-        tracep->declQuad(c+244,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 default_out", false,-1, 63,0);
+        tracep->declQuad(c+242,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 default_out", false,-1, 63,0);
         tracep->declArray(c+80,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 lut", false,-1, 200,0);
-        tracep->declBus(c+253,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 PAIR_LEN", false,-1, 31,0);
+        tracep->declBus(c+251,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 PAIR_LEN", false,-1, 31,0);
         {int i; for (i=0; i<3; i++) {
                 tracep->declArray(c+87+i*3,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 pair_list", true,(i+0), 66,0);}}
         {int i; for (i=0; i<3; i++) {
@@ -209,7 +209,7 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
                 tracep->declQuad(c+99+i*2,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 data_list", true,(i+0), 63,0);}}
         tracep->declQuad(c+105,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 lut_out", false,-1, 63,0);
         tracep->declBit(c+107,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 hit", false,-1);
-        tracep->declBus(c+254,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 i", false,-1, 31,0);
+        tracep->declBus(c+252,"top u_ysyx_22040088_IDU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 i", false,-1, 31,0);
         tracep->declBus(c+1,"top u_ysyx_22040088_EXU alu_op", false,-1, 11,0);
         tracep->declQuad(c+2,"top u_ysyx_22040088_EXU alu_src1", false,-1, 63,0);
         tracep->declQuad(c+4,"top u_ysyx_22040088_EXU alu_src2", false,-1, 63,0);
@@ -496,17 +496,16 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->fullIData(oldp+238,(0xcU),32);
         tracep->fullIData(oldp+239,(0x15U),32);
         tracep->fullIData(oldp+240,(0x14U),32);
-        tracep->fullQData(oldp+241,(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT__pc),64);
-        tracep->fullIData(oldp+243,(2U),32);
-        tracep->fullQData(oldp+244,(0ULL),64);
-        tracep->fullIData(oldp+246,(1U),32);
-        tracep->fullIData(oldp+247,(0x42U),32);
-        tracep->fullIData(oldp+248,(2U),32);
+        tracep->fullIData(oldp+241,(2U),32);
+        tracep->fullQData(oldp+242,(0ULL),64);
+        tracep->fullIData(oldp+244,(1U),32);
+        tracep->fullIData(oldp+245,(0x42U),32);
+        tracep->fullIData(oldp+246,(2U),32);
+        tracep->fullIData(oldp+247,(4U),32);
+        tracep->fullIData(oldp+248,(0x44U),32);
         tracep->fullIData(oldp+249,(4U),32);
-        tracep->fullIData(oldp+250,(0x44U),32);
-        tracep->fullIData(oldp+251,(4U),32);
+        tracep->fullIData(oldp+250,(3U),32);
+        tracep->fullIData(oldp+251,(0x43U),32);
         tracep->fullIData(oldp+252,(3U),32);
-        tracep->fullIData(oldp+253,(0x43U),32);
-        tracep->fullIData(oldp+254,(3U),32);
     }
 }
