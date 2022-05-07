@@ -47,7 +47,7 @@ void reset(int n) {
     top->rst = 0;
 }
 
-void sim_init() {
+void sim_init(char *path) {
     contextp = new VerilatedContext;
     tfp = new VerilatedVcdC;
     top = new Vtop;
@@ -56,7 +56,7 @@ void sim_init() {
     tfp->open("dump.vcd");
 	flag = true;
 
-	FILE *fp = fopen("/home/bill/ysyx-workbench/npc/csrc/1.bin", "rb");
+	FILE *fp = fopen(path, "rb");
 	assert(fp);
 	fseek(fp, 0, SEEK_END);
 	long size = ftell(fp);
@@ -85,9 +85,11 @@ void sim_exit() {
     delete tfp;
 }
 
-int main() {
-  sim_init();
-
+int main(int argc, char **argv) {
+  Verilated::commandArgs(argc, argv);
+  assert(argv[1] != NULL);
+  sim_init(argv[1]);
+  
   reset(4);
   while (sim_time < MAX_SIM_TIME && flag) {
 	  top->inst = pmem_read(top->pc);

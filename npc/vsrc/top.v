@@ -7,9 +7,10 @@ module top(
 
 // IFU
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
-	.clk (clk ),
-	.rst (rst ),
-	.pc  (pc  )
+	.clk    (clk    ),
+	.rst    (rst    ),
+	.nextpc (nextpc ),
+	.pc     (pc     )
 );
 
 // 控制信号
@@ -17,16 +18,19 @@ wire [11:0] alu_op;
 // 数据
 wire [63:0] alu_src1, alu_src2;
 wire [63:0] rf_wdata;
+wire [63:0] nextpc;
 // IDU
 ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.clk      (clk      ),
-	// .rst      (rst      ),
+	.pc       (pc       ),
 	.inst     (inst     ),
 	.rf_wdata (rf_wdata ),
 	.alu_op   (alu_op   ),
 	.alu_src1 (alu_src1 ),
-	.alu_src2 (alu_src2 )
+	.alu_src2 (alu_src2 ),
+	.nextpc   (nextpc   )
 );
+
 
 // EXU
 ysyx_22040088_EXU u_ysyx_22040088_EXU(
@@ -48,5 +52,6 @@ always @(posedge clk) begin
 		$finish();
 	end
 end
+
 
 endmodule
