@@ -39,8 +39,6 @@ void Vtop___024root___settle__TOP__2(Vtop___024root* vlSelf) {
     VlWide<3>/*95:0*/ __Vtemp78;
     VlWide<3>/*95:0*/ __Vtemp79;
     // Body
-    vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_jalr 
-        = (IData)((0x67U == (0x707fU & vlSelf->inst)));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immJ 
         = ((0x100000U & (vlSelf->inst >> 0xbU)) | (
                                                    (0xff000U 
@@ -55,6 +53,8 @@ void Vtop___024root___settle__TOP__2(Vtop___024root* vlSelf) {
         = (((- (QData)((IData)((vlSelf->inst >> 0x1fU)))) 
             << 0xcU) | (QData)((IData)((vlSelf->inst 
                                         >> 0x14U))));
+    vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_jalr 
+        = (IData)((0x67U == (0x707fU & vlSelf->inst)));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addi 
         = (IData)((0x13U == (0x707fU & vlSelf->inst)));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__rf_rdata1 
