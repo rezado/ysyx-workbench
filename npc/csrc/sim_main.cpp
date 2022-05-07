@@ -10,7 +10,7 @@
 VerilatedContext* contextp = NULL;
 VerilatedVcdC* tfp = NULL;
 
-#define MAX_SIM_TIME 100
+#define MAX_SIM_TIME 30
 #define CONFIG_MBASE 0x80000000
 uint64_t sim_time = 0;
 uint8_t pmem[10010] = {};
