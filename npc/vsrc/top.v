@@ -49,7 +49,7 @@ assign ebreak = (inst == 32'b000000000001_00000_000_00000_1110011);
 always @(posedge clk) begin
 	if (ebreak) begin
 		finish_sim();
-		$finish();
+		// $finish();
 	end
 end
 
