@@ -73,6 +73,7 @@ void sim_init(char *arg) {
     top->trace(tfp, 0);
     tfp->open("dump.vcd");
 	flag = true;
+	puts("1");
 
 	FILE *fp = fopen(arg, "rb");
 	assert(fp);
