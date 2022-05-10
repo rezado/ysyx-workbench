@@ -30,7 +30,7 @@ include $(NVBOARD_HOME)/scripts/nvboard.mk
 # rules for verilator
 INCFLAGS = $(addprefix -I, $(INC_PATH))
 CFLAGS += $(INCFLAGS) -DTOP_NAME="\"V$(TOPNAME)\""
-LDFLAGS += -lSDL2 -lSDL2_image -lreadline
+LDFLAGS += -lSDL2 -lSDL2_image
 
 $(BIN): $(VSRCS) $(CSRCS) $(NVBOARD_ARCHIVE)
 	@rm -rf $(OBJ_DIR)
@@ -51,7 +51,7 @@ all:
 sim:
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
-	verilator -Wall --trace --cc --exe --build --top-module top ./vsrc/*.v ./csrc/*.cpp
+	verilator -Wall --trace --cc --exe --build --top-module top ./vsrc/*.v ./csrc/*.cpp -lreadline
 
 include ../Makefile
 .PHONY: clean run
