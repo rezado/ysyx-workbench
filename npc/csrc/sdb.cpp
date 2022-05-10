@@ -67,7 +67,33 @@ static int cmd_info(char *args) {
 }
 
 static int cmd_x(char *args) {
+  char *arg = strtok(NULL, " ");
+  int i;
+  int num;
+  uint64_t paddr;
 
+  if (arg == NULL) {
+	  printf("Wrong!Please input lenght(10ind) and addr(16ind)\n");
+  }
+  else {
+    puts(arg);
+    num = atoi(arg);
+    arg = strtok(NULL, " ");
+    if (arg == NULL) {
+      printf("Wrong!Please input addr");
+    }
+    else {
+      paddr = strtoull(arg, NULL, 16);
+      printf("addr:%x length:%x\n", paddr, num);
+      if (paddr == 0) {
+        return 0;
+      }
+      for (i = 0; i < num; i++) {
+        uint64_t cur_addr = paddr + i * sizeof(uint64_t);
+        printf("%8lx at %8x\n", paddr_read(cur_addr, sizeof(paddr_t)), cur_addr);
+      }
+    }
+  }
   return 0;
 }
 

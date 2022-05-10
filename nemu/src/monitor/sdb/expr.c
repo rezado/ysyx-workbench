@@ -370,11 +370,11 @@ word_t eval(word_t p, word_t q, bool *legal)
      */
     switch (tokens[p].type)
     {
-    case TK_HEX:
-      return strtoll(tokens[p].str, NULL, 16);
-    case TK_DEC:
-      return strtoll(tokens[p].str, NULL, 10);
-    case TK_REG:
+      case TK_HEX:
+        return strtoull(tokens[p].str, NULL, 16);
+      case TK_DEC:
+        return strtoull(tokens[p].str, NULL, 10);
+      case TK_REG:
     {
       if (strcmp(tokens[p].str, "$pc") == 0)
         return cpu.pc;
