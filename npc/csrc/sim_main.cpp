@@ -74,8 +74,10 @@ void sim_init(char *arg) {
     tfp->open("dump.vcd");
 	flag = true;
 	puts("1");
+	puts(arg);
 
 	FILE *fp = fopen(arg, "rb");
+	puts("1");
 	assert(fp);
 	fseek(fp, 0, SEEK_END);
 	long size = ftell(fp);
