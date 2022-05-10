@@ -64,7 +64,7 @@ void reset(int n) {
 
 /* 仿真开始结束相关 */
 
-void sim_init() {
+void sim_init(char *arg) {
     contextp = new VerilatedContext;
     tfp = new VerilatedVcdC;
     top = new Vtop;
@@ -73,7 +73,7 @@ void sim_init() {
     tfp->open("dump.vcd");
 	flag = true;
 
-	FILE *fp = fopen("/home/bill/ysyx-workbench/npc/csrc/1.bin", "rb");
+	FILE *fp = fopen(arg, "rb");
 	assert(fp);
 	fseek(fp, 0, SEEK_END);
 	long size = ftell(fp);
@@ -100,8 +100,9 @@ void sim_exit() {
 
 extern void sdb_mainloop();
 
-int main() {
-  sim_init();
+int main(int argc, char *argv[]) {
+  asset(argv[0] == NULL);
+  sim_init(argv[0]);
 
   reset(4);
 
