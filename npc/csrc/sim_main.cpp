@@ -98,6 +98,8 @@ void sim_exit() {
     delete tfp;
 }
 
+extern void sdb_mainloop();
+
 int main() {
   sim_init();
 
