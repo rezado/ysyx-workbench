@@ -90,8 +90,8 @@ static int cmd_x(char *args) {
         return 0;
       }
       for (i = 0; i < num; i++) {
-        uint64_t cur_addr = paddr + i * sizeof(uint64_t);
-        printf("%8lx at %8lx\n", pmem_read(cur_addr), cur_addr);
+        uint32_t cur_addr = paddr + i * sizeof(uint32_t);
+        printf("%8lx at %8x\n", pmem_read(cur_addr, 4), cur_addr);
       }
     }
   }
