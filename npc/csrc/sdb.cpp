@@ -11,6 +11,7 @@
 
 static int is_batch_mode = false;
 extern void cpu_exec(uint64_t n);
+extern uint64_t pmem_read(uint64_t addr)
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
@@ -90,7 +91,7 @@ static int cmd_x(char *args) {
       }
       for (i = 0; i < num; i++) {
         uint64_t cur_addr = paddr + i * sizeof(uint64_t);
-        printf("%8lx at %8x\n", paddr_read(cur_addr, sizeof(paddr_t)), cur_addr);
+        printf("%8lx at %8x\n", pmem_read(cur_addr, sizeof(uint64_t)), cur_addr);
       }
     }
   }
