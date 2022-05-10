@@ -65,7 +65,6 @@ void reset(int n) {
 /* 仿真开始结束相关 */
 
 void sim_init(char *arg) {
-	puts("1");
     contextp = new VerilatedContext;
     tfp = new VerilatedVcdC;
     top = new Vtop;
@@ -73,11 +72,9 @@ void sim_init(char *arg) {
     top->trace(tfp, 0);
     tfp->open("dump.vcd");
 	flag = true;
-	puts("1");
-	puts(arg);
+	printf("image form:%s\n", arg);
 
 	FILE *fp = fopen(arg, "rb");
-	puts("1");
 	assert(fp);
 	fseek(fp, 0, SEEK_END);
 	long size = ftell(fp);
@@ -106,9 +103,7 @@ extern void sdb_mainloop();
 
 int main(int argc, char *argv[]) {
   assert(argv[1]);
-  puts("1");
   sim_init(argv[1]);
-  printf("1");
 
   reset(4);
 
