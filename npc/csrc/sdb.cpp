@@ -6,8 +6,23 @@
 #include <assert.h>
 #include "svdpi.h"
 #include "Vtop__Dpi.h"
+#include "verilated_dpi.h"
 #include <readline/readline.h>
 #include <readline/history.h>
+
+// 读取寄存器相关
+uint64_t *cpu_gpr = NULL;
+extern "C" void set_gpr_ptr(const svOpenArrayHandle r) {
+  cpu_gpr = (uint64_t *)(((VerilatedDpiOpenVar*)r)->datap());
+}
+
+// 一个输出RTL中通用寄存器的值的示例
+void dump_gpr() {
+  int i;
+  for (i = 0; i < 32; i++) {
+    printf("gpr[%d] = 0x%lx\n", i, cpu_gpr[i]);
+  }
+}
 
 static int is_batch_mode = false;
 extern void cpu_exec(uint64_t n);
@@ -62,8 +77,23 @@ static int cmd_si(char *args) {
   return 0;
 }
 
-extern void print_wp();
 static int cmd_info(char *args) {
+  char *arg = strtok(NULL, " ");
+  if (arg == NULL) {
+    /* no argument given ERROR */
+    printf("There is no argument, Please append 'r' or 'w'\n");
+  }
+  else {
+    if (strcmp(arg, "r") == 0) {
+      dump_gpr();
+    }
+    else if (strcmp(arg, "w") == 0) {
+    }
+    else {
+      printf("Wrong argument!\n");
+    }
+  }
+
   return 0;
 }
 

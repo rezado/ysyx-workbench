@@ -38,6 +38,8 @@ ysyx_22040088_EXU u_ysyx_22040088_EXU(
 	.alu_result (rf_wdata   )
 );
 
+/* DPI-C */
+
 // ebreak
 import "DPI-C" function void finish_sim();
 wire ebreak;
