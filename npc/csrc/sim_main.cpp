@@ -65,6 +65,7 @@ void reset(int n) {
 /* 仿真开始结束相关 */
 
 void sim_init(char *arg) {
+	puts("1");
     contextp = new VerilatedContext;
     tfp = new VerilatedVcdC;
     top = new Vtop;
