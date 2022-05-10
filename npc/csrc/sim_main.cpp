@@ -105,9 +105,9 @@ void sim_exit() {
 extern void sdb_mainloop();
 
 int main(int argc, char *argv[]) {
-  assert(*argv);
+  assert(argv[1]);
   puts("1");
-  sim_init(*argv);
+  sim_init(argv[1]);
   printf("1");
 
   reset(4);
