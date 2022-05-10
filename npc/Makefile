@@ -51,7 +51,7 @@ all:
 sim:
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
-	verilator -Wall --trace --cc --exe --build --top-module top ./vsrc/*.v ./csrc/*.cpp -lreadline
+	verilator -Wall --trace --cc --exe --build --top-module top ./vsrc/*.v ./csrc/*.cpp
 
 include ../Makefile
 .PHONY: clean run
