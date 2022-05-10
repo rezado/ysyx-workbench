@@ -32,8 +32,8 @@ static inline uint64_t host_read(void *addr, int len) {
   }
 }
 
-uint64_t pmem_read(uint64_t addr) {
-  uint64_t ret = host_read(guest_to_host(addr), 4);
+uint64_t pmem_read(uint64_t addr, int len) {
+  uint64_t ret = host_read(guest_to_host(addr), len);
   return ret;
 }
 
@@ -47,7 +47,7 @@ void single_cycle() {
 void cpu_exec(uint64_t n) {
 	uint64_t t = 0;
 	while (t < n && sim_time < MAX_SIM_TIME && flag) {
-	  top->inst = pmem_read(top->pc);
+	  top->inst = pmem_read(top->pc, 4);
 	//   top->inst = insts[(top->pc - CONFIG_MBASE) / 4];
 	  printf("%x\n", top->inst);
       single_cycle();
