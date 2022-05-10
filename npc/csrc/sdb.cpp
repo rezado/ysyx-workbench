@@ -11,7 +11,7 @@
 
 static int is_batch_mode = false;
 extern void cpu_exec(uint64_t n);
-// extern uint64_t pmem_read(uint64_t addr);
+extern uint64_t pmem_read(uint64_t addr);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
