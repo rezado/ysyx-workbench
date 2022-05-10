@@ -103,6 +103,7 @@ extern void sdb_mainloop();
 int main(int argc, char *argv[]) {
   assert(*argv);
   sim_init(*argv);
+  printf("1");
 
   reset(4);
 
