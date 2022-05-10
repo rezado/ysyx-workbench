@@ -91,7 +91,7 @@ static int cmd_x(char *args) {
       }
       for (i = 0; i < num; i++) {
         uint64_t cur_addr = paddr + i * sizeof(uint64_t);
-        printf("%8lx at %8lx\n", pmem_read(cur_addr, sizeof(uint64_t)), cur_addr);
+        printf("%8lx at %8lx\n", pmem_read(cur_addr), cur_addr);
       }
     }
   }
