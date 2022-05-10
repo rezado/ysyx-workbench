@@ -17,11 +17,13 @@ VL_INLINE_OPT void Vtop___024root____Vdpiimwrap_top__DOT__finish_sim_TOP() {
     finish_sim();
 }
 
-VL_INLINE_OPT void Vtop___024root___combo__TOP__1(Vtop___024root* vlSelf) {
+VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___combo__TOP__1\n"); );
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___sequent__TOP__1\n"); );
     // Body
+<<<<<<< HEAD
+=======
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immJ 
         = ((0x100000U & (vlSelf->inst >> 0xbU)) | (
                                                    (0xff000U 
@@ -47,11 +49,16 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__3(Vtop___024root* vlSelf) {
     CData/*0:0*/ __Vdlyvset__top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf__v0;
     QData/*63:0*/ __Vdlyvval__top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf__v0;
     // Body
+>>>>>>> 8eae29a... > sim RTL
     if ((0x100073U == vlSelf->inst)) {
         Vtop___024root____Vdpiimwrap_top__DOT__finish_sim_TOP();
     }
-    __Vdlyvset__top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf__v0 = 0U;
     vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000ULL
+<<<<<<< HEAD
+                   : vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__pc_add);
+    vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__pc_add 
+        = (4ULL + vlSelf->pc);
+=======
                    : vlSelf->top__DOT__nextpc);
     if ((((((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addi) 
             | (0x6fU == (0x7fU & vlSelf->inst))) | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_jalr)) 
@@ -628,6 +635,7 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__4(Vtop___024root* vlSelf) {
                                         | (QData)((IData)(
                                                           ((IData)(top__DOT__alu_src2) 
                                                            << 0xcU))))));
+>>>>>>> 8eae29a... > sim RTL
 }
 
 void Vtop___024root___eval(Vtop___024root* vlSelf) {
@@ -635,11 +643,9 @@ void Vtop___024root___eval(Vtop___024root* vlSelf) {
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval\n"); );
     // Body
-    Vtop___024root___combo__TOP__1(vlSelf);
     if (((IData)(vlSelf->clk) & (~ (IData)(vlSelf->__Vclklast__TOP__clk)))) {
-        Vtop___024root___sequent__TOP__3(vlSelf);
+        Vtop___024root___sequent__TOP__1(vlSelf);
     }
-    Vtop___024root___combo__TOP__4(vlSelf);
     // Final
     vlSelf->__Vclklast__TOP__clk = vlSelf->clk;
 }

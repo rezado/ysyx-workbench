@@ -7,18 +7,21 @@
 #include "svdpi.h"
 #include "Vtop__Dpi.h"
 
+/* 全局变量定义 声明 */
+
+static Vtop* top;
 VerilatedContext* contextp = NULL;
 VerilatedVcdC* tfp = NULL;
 
 #define MAX_SIM_TIME 100
-#define CONFIG_MBASE 0x80000000
 uint64_t sim_time = 0;
+bool flag = true;
+
+/* 访存相关 */
+
+#define CONFIG_MBASE 0x80000000
 uint8_t pmem[10010] = {};
 uint8_t* guest_to_host(uint64_t paddr) { return pmem + paddr - CONFIG_MBASE; }
-
-uint32_t insts[10010] = {};
-
-bool flag = true;
 
 static inline uint64_t host_read(void *addr, int len) {
   switch (len) {
@@ -34,11 +37,23 @@ static uint64_t pmem_read(uint64_t addr) {
   return ret;
 }
 
-static Vtop* top;
+/* CPU执行相关 */
 
 void single_cycle() {
     top->clk = 0; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
     top->clk = 1; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
+}
+
+void cpu_exec(uint64_t n) {
+	uint64_t t = 0;
+	while (t < n && sim_time < MAX_SIM_TIME && flag) {
+	  top->inst = pmem_read(top->pc);
+	//   top->inst = insts[(top->pc - CONFIG_MBASE) / 4];
+	  printf("%x\n", top->inst);
+      single_cycle();
+      sim_time++;
+	  t++;
+  }
 }
 
 void reset(int n) {
@@ -47,7 +62,9 @@ void reset(int n) {
     top->rst = 0;
 }
 
-void sim_init(char *path) {
+/* 仿真开始结束相关 */
+
+void sim_init() {
     contextp = new VerilatedContext;
     tfp = new VerilatedVcdC;
     top = new Vtop;
@@ -56,7 +73,7 @@ void sim_init(char *path) {
     tfp->open("dump.vcd");
 	flag = true;
 
-	FILE *fp = fopen(path, "rb");
+	FILE *fp = fopen("/home/bill/ysyx-workbench/npc/csrc/1.bin", "rb");
 	assert(fp);
 	fseek(fp, 0, SEEK_END);
 	long size = ftell(fp);
@@ -67,10 +84,6 @@ void sim_init(char *path) {
 	// for (int i = 0; i < size; i++)
 	// 	printf("%c ", pmem[i]);
 	// printf("\n");
-
-	insts[0] = 0x100093;
-	insts[1] = 0x108113;
-	insts[2] = 0xFFF0C193;
 }
 
 void finish_sim() {
@@ -81,26 +94,16 @@ void finish_sim() {
 void sim_exit() {
     single_cycle();
     tfp->close();
-	puts("saved");
     delete contextp;
     delete tfp;
 }
 
-int main(int argc, char **argv) {
-  Verilated::commandArgs(argc, argv);
-  assert(argv[1] != NULL);
-  sim_init(argv[1]);
-  
+int main() {
+  sim_init();
+
   reset(4);
-  while (sim_time < MAX_SIM_TIME && flag) {
-	  top->inst = pmem_read(top->pc);
-	//   top->inst = insts[(top->pc - CONFIG_MBASE) / 4];
-	  printf("%x\n", top->inst);
-      single_cycle();
-      sim_time++;
-	//   puts("1");
-	  printf("%lx\n", top->pc);
-  }
-  puts("finish");
+
+  sdb_mainloop();
+
   sim_exit();
 }

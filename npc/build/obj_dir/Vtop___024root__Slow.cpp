@@ -31,6 +31,11 @@ void Vtop___024root___settle__TOP__2(Vtop___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___settle__TOP__2\n"); );
+<<<<<<< HEAD
+    // Body
+    vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__pc_add 
+        = (4ULL + vlSelf->pc);
+=======
     // Variables
     CData/*1:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__sel_alusrc1;
     CData/*3:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__sel_alusrc2;
@@ -598,6 +603,7 @@ void Vtop___024root___settle__TOP__2(Vtop___024root* vlSelf) {
                                         | (QData)((IData)(
                                                           ((IData)(top__DOT__alu_src2) 
                                                            << 0xcU))))));
+>>>>>>> 8eae29a... > sim RTL
 }
 
 void Vtop___024root___eval_initial(Vtop___024root* vlSelf) {
@@ -631,6 +637,9 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->rst = 0;
     vlSelf->inst = 0;
     vlSelf->pc = 0;
+<<<<<<< HEAD
+    vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__pc_add = 0;
+=======
     vlSelf->top__DOT__rf_wdata = 0;
     vlSelf->top__DOT__nextpc = 0;
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immJ = 0;
@@ -667,4 +676,5 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     for (int __Vi0=0; __Vi0<3; ++__Vi0) {
         vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_gennextpc__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__data_list[__Vi0] = 0;
     }
+>>>>>>> 8eae29a... > sim RTL
 }
