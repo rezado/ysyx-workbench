@@ -73,7 +73,6 @@ void sim_init(char *arg) {
     tfp->open("dump.vcd");
 	flag = true;
 
-	printf("1");
 	FILE *fp = fopen(arg, "rb");
 	assert(fp);
 	fseek(fp, 0, SEEK_END);
@@ -103,6 +102,7 @@ extern void sdb_mainloop();
 
 int main(int argc, char *argv[]) {
   assert(*argv);
+  puts("1");
   sim_init(*argv);
   printf("1");
 
