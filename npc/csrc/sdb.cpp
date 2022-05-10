@@ -10,6 +10,7 @@
 #include <readline/history.h>
 
 static int is_batch_mode = false;
+extern void cpu_exec(uint64_t n);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
@@ -20,7 +21,7 @@ static char* rl_gets() {
     line_read = NULL;
   }
 
-  line_read = readline();
+  line_read = readline("");
 
   if (line_read && *line_read) {
     add_history(line_read);
@@ -65,27 +66,6 @@ static int cmd_info(char *args) {
   return 0;
 }
 
-paddr_t htoi(char *str) {
-  int i, num = 0;
-  paddr_t addr = 0;
-  if (str[0] == '0' || (str[1] == 'x' && str[1] == 'X')) {
-	for (i = 2; i < strlen(str); i++) {
-	  if (str[i] >= 'a' && str[i] <= 'f') {
-	    num = str[i] - 'a' + 10;
-	  }
-	  else if (str[i] >= '0' && str[i] <= '9') {
-	    num = str[i] - '0';
-	  }
-	  addr = addr * 16 + num;
-	}
-	return addr;
-  }
-  else {
-    printf("Please input 16 base number start with 0x\n");
-    return 0; // error
-  }
-}
-
 static int cmd_x(char *args) {
 
   return 0;
@@ -127,6 +107,7 @@ static struct {
   { "d", "Delete watchpoint", cmd_d}
 };
 
+#define ARRLEN(arr) (int)(sizeof(arr) / sizeof(arr[0]))
 #define NR_CMD ARRLEN(cmd_table)
 
 static int cmd_help(char *args) {
