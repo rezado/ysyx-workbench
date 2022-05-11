@@ -15,6 +15,7 @@ bool run_flag = true;
 
 /* 函数声明 */
 void init_sdb();
+bool scan_wp();
 
 
 /* CPU执行相关 */
