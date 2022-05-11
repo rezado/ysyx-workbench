@@ -1,12 +1,4 @@
-#include "verilated.h"
-#include "verilated_vcd_c.h"
-#include "Vtop.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <assert.h>
-#include "svdpi.h"
-#include "Vtop__Dpi.h"
-#include "verilated_dpi.h"
+#include <common.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "memory/paddr.h"

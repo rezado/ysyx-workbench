@@ -1,11 +1,3 @@
-#include "verilated.h"
-#include "Vtop.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <assert.h>
-#include "svdpi.h"
-#include "Vtop__Dpi.h"
-#include "verilated_dpi.h"
 #include <common.h>
 
 const char *regs[] = {
