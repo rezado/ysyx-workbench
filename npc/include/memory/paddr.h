@@ -3,8 +3,9 @@
 
 #include <common.h>
 
-static uint8_t pmem[CONFIG_MBASE] PG_ALIGN = {};
 #define CONFIG_MBASE 0x80000000
+
+static uint8_t pmem[CONFIG_MBASE] PG_ALIGN = {};
 
 /* convert the guest physical address in the guest program to host virtual address in NEMU */
 uint8_t* guest_to_host(paddr_t paddr);
