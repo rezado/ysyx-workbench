@@ -9,24 +9,11 @@
 #include "verilated_dpi.h"
 #include <readline/readline.h>
 #include <readline/history.h>
-
-// 读取寄存器相关
-uint64_t *cpu_gpr = NULL;
-extern "C" void set_gpr_ptr(const svOpenArrayHandle r) {
-  cpu_gpr = (uint64_t *)(((VerilatedDpiOpenVar*)r)->datap());
-}
-
-// 一个输出RTL中通用寄存器的值的示例
-void dump_gpr() {
-  int i;
-  for (i = 0; i < 32; i++) {
-    printf("gpr[%d] = 0x%lx\n", i, cpu_gpr[i]);
-  }
-}
+#include "memory/paddr.h"
+#include "reg.h"
 
 static int is_batch_mode = false;
 extern void cpu_exec(uint64_t n);
-extern uint64_t pmem_read(uint64_t addr, int len);
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
@@ -86,7 +73,6 @@ static int cmd_info(char *args) {
   else {
     if (strcmp(arg, "r") == 0) {
       dump_gpr();
-      printf("1");
     }
     else if (strcmp(arg, "w") == 0) {
     }
@@ -130,9 +116,18 @@ static int cmd_x(char *args) {
 }
 
 static int cmd_p(char *args) {
+  bool success = true;
+  word_t val = expr(args, &success);
+  if (!success) {
+    printf("表达式求值不正确\n");
+  }
+  else {
+    printf("%0lx\n", val);
+  }
 
   return 0;
 }
+
 
 
 static int cmd_w(char *args) {

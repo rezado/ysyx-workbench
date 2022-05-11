@@ -6,6 +6,9 @@
 #include <assert.h>
 #include "svdpi.h"
 #include "Vtop__Dpi.h"
+#include <common.h>
+#include <reg.h>
+#include <memory/paddr.h>
 
 /* 全局变量定义 声明 */
 
@@ -17,25 +20,6 @@ VerilatedVcdC* tfp = NULL;
 uint64_t sim_time = 0;
 bool flag = true;
 
-/* 访存相关 */
-
-#define CONFIG_MBASE 0x80000000
-uint8_t pmem[10010] = {};
-uint8_t* guest_to_host(uint64_t paddr) { return pmem + paddr - CONFIG_MBASE; }
-
-static inline uint64_t host_read(void *addr, int len) {
-  switch (len) {
-    case 1: return *(uint8_t  *)addr;
-    case 2: return *(uint16_t *)addr;
-    case 4: return *(uint32_t *)addr;
-    case 8: return *(uint64_t *)addr;
-  }
-}
-
-uint64_t pmem_read(uint64_t addr, int len) {
-  uint64_t ret = host_read(guest_to_host(addr), len);
-  return ret;
-}
 
 /* CPU执行相关 */
 
