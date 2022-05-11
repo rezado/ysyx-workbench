@@ -13,6 +13,10 @@ uint64_t sim_time = 0;
 bool flag = true;
 
 
+/* 函数声明 */
+void init_sdb();
+
+
 /* CPU执行相关 */
 
 void single_cycle() {
@@ -61,6 +65,8 @@ void sim_init(char *arg) {
 	// for (int i = 0; i < size; i++)
 	// 	printf("%c ", pmem[i]);
 	// printf("\n");
+
+  init_sdb();
 }
 
 void finish_sim() {
