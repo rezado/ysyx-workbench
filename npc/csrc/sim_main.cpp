@@ -23,7 +23,7 @@ void single_cycle() {
 void cpu_exec(uint64_t n) {
 	uint64_t t = 0;
 	while (t < n && sim_time < MAX_SIM_TIME && flag) {
-	  top->inst = pmem_read(top->pc, 4);
+	  top->inst = paddr_read(top->pc, 4);
 	//   top->inst = insts[(top->pc - CONFIG_MBASE) / 4];
 	  printf("%x\n", top->inst);
       single_cycle();
