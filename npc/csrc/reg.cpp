@@ -8,7 +8,7 @@ const char *regs[] = {
 };
 
 // 读取寄存器相关
-extern uint64_t *cpu_gpr;
+uint64_t *cpu_gpr;
 extern "C" void set_gpr_ptr(const svOpenArrayHandle r) {
   cpu_gpr = (uint64_t *)(((VerilatedDpiOpenVar*)r)->datap());
 }
