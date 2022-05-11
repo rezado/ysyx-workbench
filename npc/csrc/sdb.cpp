@@ -74,7 +74,6 @@ static int cmd_info(char *args) {
       printf("Num\tWhat\n");
       print_wp();
     }
-    }
     else {
       printf("Wrong argument!\n");
     }
