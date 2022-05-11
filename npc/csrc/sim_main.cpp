@@ -1,4 +1,4 @@
-#include <common.h>
+#include <common.h> 
 #include <memory/paddr.h>
 
 /* 全局变量定义 声明 */
@@ -10,7 +10,7 @@ VerilatedVcdC* tfp = NULL;
 #define MAX_SIM_TIME 100
 uint64_t sim_time = 0;
 bool run_flag = true;
-
+extern void p();
 
 /* 函数声明 */
 void init_sdb();
@@ -25,6 +25,7 @@ void single_cycle() {
 }
 
 void cpu_exec(uint64_t n) {
+  p();
 	uint64_t t = 0;
 	while (t < n && sim_time < MAX_SIM_TIME && run_flag) {
 	  top->inst = paddr_read(top->pc, 4);
