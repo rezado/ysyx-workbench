@@ -125,12 +125,18 @@ static int cmd_p(char *args) {
 
 
 
+extern void new_wp(char *args);
+extern void free_wp(int NO);
+
 static int cmd_w(char *args) {
+  new_wp(args);
 
   return 0;
 }
 
 static int cmd_d(char *args) {
+  int NO = atoi(args);
+  free_wp(NO);
 
   return 0;
 }
