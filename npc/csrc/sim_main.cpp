@@ -81,6 +81,8 @@ void sim_exit() {
     delete tfp;
 }
 
+extern void sdb_mainloop();
+
 int main(int argc, char *argv[]) {
   assert(argv[1]);
   sim_init(argv[1]);
