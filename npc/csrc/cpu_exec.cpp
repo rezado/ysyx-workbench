@@ -1,15 +1,12 @@
 #include <common.h>
+#include <memory/paddr.h>
 
 #define MAX_SIM_TIME 100
 uint64_t sim_time = 0;
 bool run_flag = true;
 
 bool scan_wp();
-
-void single_cycle() {
-    top->clk = 0; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
-    top->clk = 1; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
-}
+void single_cycle();
 
 void cpu_exec(uint64_t n) {
 	uint64_t t = 0;

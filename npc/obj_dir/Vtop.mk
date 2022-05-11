@@ -44,6 +44,7 @@ VM_USER_LDLIBS = \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
+	cpu_exec \
 	expr \
 	paddr \
 	reg \
@@ -65,6 +66,8 @@ include $(VERILATOR_ROOT)/include/verilated.mk
 ### Executable rules... (from --exe)
 VPATH += $(VM_USER_DIR)
 
+cpu_exec.o: /home/bill/ysyx-workbench/npc/csrc/cpu_exec.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 expr.o: /home/bill/ysyx-workbench/npc/csrc/expr.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 paddr.o: /home/bill/ysyx-workbench/npc/csrc/paddr.cpp

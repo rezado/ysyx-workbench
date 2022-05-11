@@ -1,5 +1,4 @@
 #include <common.h> 
-#include <memory/paddr.h>
 #include <cpu.h>
 
 /* 全局变量定义 声明 */
@@ -12,6 +11,11 @@ VerilatedVcdC* tfp = NULL;
 void init_sdb();
 
 /* 仿真开始结束相关 */
+
+void single_cycle() {
+    top->clk = 0; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
+    top->clk = 1; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
+}
 
 void sim_init(char *arg) {
   contextp = new VerilatedContext;
