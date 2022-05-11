@@ -59,7 +59,7 @@ void sim_init(char *arg) {
 	fseek(fp, 0, SEEK_END);
 	long size = ftell(fp);
 	fseek(fp, 0, SEEK_SET);
-	int ret = fread(pmem, size, 1, fp);
+	int ret = fread(guest_to_host(CONFIG_MBASE), size, 1, fp);
 	assert(ret == 1);
 	fclose(fp);
 	// for (int i = 0; i < size; i++)
