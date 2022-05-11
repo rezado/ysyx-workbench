@@ -59,6 +59,7 @@ static int cmd_si(char *args) {
   return 0;
 }
 
+extern void print_wp();
 static int cmd_info(char *args) {
   char *arg = strtok(NULL, " ");
   if (arg == NULL) {
@@ -70,6 +71,9 @@ static int cmd_info(char *args) {
       dump_gpr();
     }
     else if (strcmp(arg, "w") == 0) {
+      printf("Num\tWhat\n");
+      print_wp();
+    }
     }
     else {
       printf("Wrong argument!\n");
