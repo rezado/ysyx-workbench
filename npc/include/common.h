@@ -11,6 +11,12 @@
 #include <assert.h>
 #include <stdlib.h>
 
+#include "verilated.h"
+#include "Vtop.h"
+#include "svdpi.h"
+#include "Vtop__Dpi.h"
+#include "verilated_dpi.h"
+
 typedef uint64_t word_t;
 typedef int64_t sword_t;
 #define FMT_WORD "0x%016lx"

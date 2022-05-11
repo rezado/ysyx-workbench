@@ -1,9 +1,3 @@
-#include "verilated.h"
-#include "Vtop.h"
-#include <stdlib.h>
-#include "svdpi.h"
-#include "Vtop__Dpi.h"
-#include "verilated_dpi.h"
 #include <common.h>
 
 uint64_t *cpu_gpr = NULL;
