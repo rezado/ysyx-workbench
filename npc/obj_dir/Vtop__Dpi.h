@@ -13,9 +13,9 @@ extern "C" {
 
 
     // DPI IMPORTS
-    // DPI import at vsrc/top.v:44:30
+    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:44:30
     extern void finish_sim();
-    // DPI import at vsrc/ysyx_22040088_regfile.v:21:30
+    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/ysyx_22040088_regfile.v:21:30
     extern void set_gpr_ptr(const svOpenArrayHandle a);
 
 #ifdef __cplusplus
