@@ -8,6 +8,7 @@
 static int is_batch_mode = false;
 extern void cpu_exec(uint64_t n);
 void init_regex();
+void init_wp_pool();
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
