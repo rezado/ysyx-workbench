@@ -1,4 +1,5 @@
 #include <common.h> 
+#include <memory/paddr.h>
 #include <cpu.h>
 
 /* 全局变量定义 声明 */
