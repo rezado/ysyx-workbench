@@ -1,32 +1,13 @@
-#include "verilated.h"
-#include "verilated_vcd_c.h"
-#include "Vtop.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <assert.h>
-#include "svdpi.h"
-#include "Vtop__Dpi.h"
-#include "verilated_dpi.h"
+#include <common.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-
-// 读取寄存器相关
-uint64_t *cpu_gpr = NULL;
-extern "C" void set_gpr_ptr(const svOpenArrayHandle r) {
-  cpu_gpr = (uint64_t *)(((VerilatedDpiOpenVar*)r)->datap());
-}
-
-// 一个输出RTL中通用寄存器的值的示例
-void dump_gpr() {
-  int i;
-  for (i = 0; i < 32; i++) {
-    printf("gpr[%d] = 0x%lx\n", i, cpu_gpr[i]);
-  }
-}
+#include "memory/paddr.h"
+#include "reg.h"
+#include "sdb.h"
 
 static int is_batch_mode = false;
 extern void cpu_exec(uint64_t n);
-extern uint64_t pmem_read(uint64_t addr, int len);
+void init_regex();
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
@@ -121,7 +102,7 @@ static int cmd_x(char *args) {
       }
       for (i = 0; i < num; i++) {
         uint32_t cur_addr = paddr + i * sizeof(uint32_t);
-        printf("%8lx at %8u\n", pmem_read(cur_addr, 4), cur_addr);
+        printf("%8lx at %8u\n", paddr_read(cur_addr, 4), cur_addr);
       }
     }
   }
@@ -239,4 +220,12 @@ void sdb_mainloop() {
 
     if (i == NR_CMD) { printf("Unknown command '%s'\n", cmd); }
   }
+}
+
+void init_sdb() {
+  /* Compile the regular expressions. */
+  init_regex();
+
+  /* Initialize the watchpoint pool. */
+  // init_wp_pool();
 }
