@@ -372,7 +372,6 @@ word_t eval(word_t p, word_t q, bool *legal)
         return strtoull(tokens[p].str, NULL, 10);
       case TK_REG:
     {
-      extern Vtop* top;
       if (strcmp(tokens[p].str, "$pc") == 0)
         return top->pc;
       bool success = false;
