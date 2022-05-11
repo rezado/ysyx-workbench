@@ -12,6 +12,7 @@
 #include <stdlib.h>
 
 #include "verilated.h"
+#include "verilated_vcd_c.h"
 #include "Vtop.h"
 #include "svdpi.h"
 #include "Vtop__Dpi.h"
