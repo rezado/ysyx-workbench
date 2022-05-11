@@ -10,7 +10,7 @@ VerilatedVcdC* tfp = NULL;
 
 #define MAX_SIM_TIME 100
 uint64_t sim_time = 0;
-bool flag = true;
+bool run_flag = true;
 
 
 /* 函数声明 */
@@ -26,13 +26,17 @@ void single_cycle() {
 
 void cpu_exec(uint64_t n) {
 	uint64_t t = 0;
-	while (t < n && sim_time < MAX_SIM_TIME && flag) {
+	while (t < n && sim_time < MAX_SIM_TIME && run_flag) {
 	  top->inst = paddr_read(top->pc, 4);
 	//   top->inst = insts[(top->pc - CONFIG_MBASE) / 4];
 	  printf("%x\n", top->inst);
-      single_cycle();
-      sim_time++;
+    single_cycle();
+    bool flag = scan_wp();
+    sim_time++;
 	  t++;
+    if (!flag) {
+      break;
+    }
   }
 }
 
@@ -51,7 +55,7 @@ void sim_init(char *arg) {
     contextp->traceEverOn(true);
     top->trace(tfp, 0);
     tfp->open("dump.vcd");
-	flag = true;
+	run_flag = true;
 	printf("image form:%s\n", arg);
 
 	FILE *fp = fopen(arg, "rb");
@@ -71,7 +75,7 @@ void sim_init(char *arg) {
 
 void finish_sim() {
 	printf("simulation finished\n");
-	flag = false;
+	run_flag = false;
 }
 
 void sim_exit() {
