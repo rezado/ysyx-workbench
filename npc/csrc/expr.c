@@ -464,6 +464,7 @@ word_t expr(char *e, bool *success)
     return 0;
   }
 
+  puts("expr");
   /* TODO: Insert codes to evaluate the expression. */;
   bool legal = true;
   for (int i = 0; i < nr_token; i++)
