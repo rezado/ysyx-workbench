@@ -36,7 +36,6 @@ VM_MODPREFIX = Vtop
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
 	-I/home/bill/ysyx-workbench/npc/include \
-	-I/home/bill/ysyx-workbench/nvboard/include \
 	-DTOP_NAME="Vtop" \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
@@ -45,7 +44,6 @@ VM_USER_LDLIBS = \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
-	auto_bind \
 	expr \
 	paddr \
 	reg \
@@ -54,7 +52,6 @@ VM_USER_CLASSES = \
 
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
-	/home/bill/ysyx-workbench/npc/build \
 	/home/bill/ysyx-workbench/npc/csrc \
 
 
@@ -67,8 +64,6 @@ include $(VERILATOR_ROOT)/include/verilated.mk
 ### Executable rules... (from --exe)
 VPATH += $(VM_USER_DIR)
 
-auto_bind.o: /home/bill/ysyx-workbench/npc/build/auto_bind.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 expr.o: /home/bill/ysyx-workbench/npc/csrc/expr.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 paddr.o: /home/bill/ysyx-workbench/npc/csrc/paddr.cpp

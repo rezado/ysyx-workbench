@@ -12,7 +12,7 @@
 
 /* 全局变量定义 声明 */
 
-static Vtop* top;
+Vtop* top;
 VerilatedContext* contextp = NULL;
 VerilatedVcdC* tfp = NULL;
 
