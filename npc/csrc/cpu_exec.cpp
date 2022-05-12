@@ -12,7 +12,7 @@ void single_cycle();
 uint32_t instr;
 char logbuf[128];
 // DPI-C得到指令
-extern "C" void get_inst(uint32_t inst) {
+extern void get_inst(uint32_t inst) {
   instr = inst;
 }
 
