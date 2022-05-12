@@ -12,7 +12,7 @@ void single_cycle();
 uint32_t instr;
 char logbuf[128];
 // DPI-C得到指令
-void get_inst(uint32_t inst) {
+extern "C" void get_inst(uint32_t inst) {
   instr = inst;
 }
 
@@ -33,7 +33,7 @@ static void exec_once() {
   uint64_t snpc = top->pc + 4;
 
   single_cycle();
-  
+
   char *p = logbuf;
   p += snprintf(p, sizeof(logbuf), FMT_WORD ":", pc);
   int ilen = snpc - pc;
