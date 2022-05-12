@@ -8,13 +8,65 @@ bool run_flag = true;
 bool scan_wp();
 void single_cycle();
 
+/* itrace */
+uint32_t instr;
+char logbuf[128];
+// DPI-C得到指令
+void get_inst(uint32_t inst) {
+  instr = inst;
+}
+
+char rbuf[20][128];
+int rptr;
+static void prbuf() {
+  int i;
+  for (i = 0; i < 20; i++) {
+    if (rbuf[i][0] == 0) break;
+    if (i != rptr - 1) printf("    ");
+    else printf(" -->");
+    puts(rbuf[i]);
+  }
+}
+
+static void exec_once() {
+  uint64_t pc = top->pc;
+  uint64_t snpc = top->pc + 4;
+
+  single_cycle();
+  
+  char *p = logbuf;
+  p += snprintf(p, sizeof(logbuf), FMT_WORD ":", pc);
+  int ilen = snpc - pc;
+  int i;
+  uint8_t *inst = (uint8_t *)&instr;
+  for (i = ilen - 1; i >= 0; i --) {
+    p += snprintf(p, 4, " %02x", inst[i]);
+  }
+  int ilen_max = 4;
+  int space_len = ilen_max - ilen;
+  if (space_len < 0) space_len = 0;
+  space_len = space_len * 3 + 1;
+  memset(p, ' ', space_len);
+  p += space_len;
+  puts(logbuf);
+
+  // void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
+  // disassemble(p, logbuf + sizeof(logbuf) - p,
+  //     pc, (uint8_t *)instr, ilen);
+  
+  puts(logbuf);
+  // iringbuf
+  strcpy(rbuf[rptr], logbuf);
+  rptr = (rptr + 1) % 20;
+}
+
 void cpu_exec(uint64_t n) {
 	uint64_t t = 0;
 	while (t < n && sim_time < MAX_SIM_TIME && run_flag) {
 	  top->inst = paddr_read(top->pc, 4);
 	//   top->inst = insts[(top->pc - CONFIG_MBASE) / 4];
 	  printf("%x\n", top->inst);
-    single_cycle();
+    exec_once();
     bool flag = scan_wp();
     sim_time++;
 	  t++;

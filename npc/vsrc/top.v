@@ -51,4 +51,10 @@ always @(posedge clk) begin
 	end
 end
 
+// inst
+import "DPI-C" function void get_inst(int inst);
+always@(*) begin
+	get_inst(inst);
+end
+
 endmodule
