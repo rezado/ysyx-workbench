@@ -23,7 +23,7 @@ INCFLAGS = $(addprefix -I, $(INC_PATH))
 CFLAGS += $(INCFLAGS) -DTOP_NAME="\"V$(TOPNAME)\""
 CFLAGS += $(shell llvm-config --cxxflags) -fPIE
 LDFLAGS += -lreadline
-LIBS += $(shell llvm-config --libs)
+LDFLGAS += $(shell llvm-config --libs)
 
 run: $(BIN)
 	@$^
@@ -38,7 +38,7 @@ sim:
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
 	$(VERILATOR) $(VERILATOR_SIM_CFLAGS) --top-module $(TOPNAME) $(VSRCS) $(CSRCS) $(addprefix -LDFLAGS , $(LDFLAGS)) \
-		$(addprefix -CFLAGS , $(CFLAGS)) $(LIBS)
+		$(addprefix -CFLAGS , $(CFLAGS))
 
 include ../Makefile
 .PHONY: clean run
