@@ -23,7 +23,7 @@ INCFLAGS = $(addprefix -I, $(INC_PATH))
 CFLAGS += $(INCFLAGS) -DTOP_NAME="\"V$(TOPNAME)\""
 CFLAGS += $(shell llvm-config --cxxflags) -fPIE
 LDFLAGS += -lreadline
-LDFLGAS += $(shell llvm-config --libs)
+LDFLAGS += $(shell llvm-config --libs)
 
 run: $(BIN)
 	@$^
