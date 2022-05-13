@@ -18,6 +18,7 @@ void single_cycle() {
     top->clk = 1; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
 }
 
+void init_disasm(const char *triple);
 void sim_init(char *arg) {
   contextp = new VerilatedContext;
   tfp = new VerilatedVcdC;
@@ -40,6 +41,8 @@ void sim_init(char *arg) {
 	// printf("\n");
 
   init_sdb();
+
+  init_disasm("riscv64" "-pc-linux-gnu");
 }
 
 void sim_exit() {
