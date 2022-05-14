@@ -53,7 +53,7 @@ static void exec_once() {
 
   
   disassemble(p, logbuf + sizeof(logbuf) - p,
-      snpc, (uint8_t *)instr, ilen);
+      pc, (uint8_t *)instr, ilen);
   
   puts(logbuf);
   // iringbuf
