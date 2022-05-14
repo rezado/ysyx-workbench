@@ -45,6 +45,7 @@ VM_USER_CFLAGS = \
 	-D__STDC_FORMAT_MACROS \
 	-D__STDC_LIMIT_MACROS \
 	-fPIE \
+	-g \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
