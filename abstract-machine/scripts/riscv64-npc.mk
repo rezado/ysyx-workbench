@@ -26,4 +26,4 @@ run: image
 	$(BINARY) $(IMAGE).bin
 
 gdb: image
-	gdb -s $(BINARY) --args $(IMAGE).bin
+	gdb -s $(BINARY) --args $(BINARY) $(IMAGE).bin
