@@ -50,7 +50,7 @@ static void exec_once() {
   p += space_len;
   puts(logbuf);
 
-  // void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
+  void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
   disassemble(p, logbuf + sizeof(logbuf) - p,
       pc, (uint8_t *)instr, ilen);
   
