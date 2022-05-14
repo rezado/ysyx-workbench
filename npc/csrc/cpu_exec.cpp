@@ -28,6 +28,7 @@ static void prbuf() {
   }
 }
 
+extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
 static void exec_once() {
   uint64_t pc = top->pc;
   uint64_t snpc = top->pc + 4;
@@ -50,7 +51,7 @@ static void exec_once() {
   p += space_len;
   puts(logbuf);
 
-  extern "C" {void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);}
+  
   disassemble(p, logbuf + sizeof(logbuf) - p,
       pc, (uint8_t *)instr, ilen);
   

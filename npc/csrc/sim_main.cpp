@@ -18,7 +18,7 @@ void single_cycle() {
     top->clk = 1; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
 }
 
-void init_disasm(const char *triple);
+extern "C" void init_disasm(const char *triple);
 void sim_init(char *arg) {
   contextp = new VerilatedContext;
   tfp = new VerilatedVcdC;
