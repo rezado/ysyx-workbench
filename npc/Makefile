@@ -1,13 +1,10 @@
 TOPNAME = top
-NXDC_FILES = constr/top.nxdc
 INC_PATH = $(abspath ./include)
 
 VERILATOR = verilator
 VERILATOR_CFLAGS += -MMD --build -cc  \
 				-O3 --x-assign fast --x-initial fast --noassert
 VERILATOR_SIM_CFLAGS += -Wall --trace --cc --exe --build
-
-VERILATOR_CFLAGS_SIM += 
 
 BUILD_DIR = ./build
 OBJ_DIR = $(BUILD_DIR)/obj_dir
@@ -24,7 +21,9 @@ CSRCS = $(shell find $(abspath ./csrc) -name "*.c" -or -name "*.cc" -or -name "*
 # rules for verilator
 INCFLAGS = $(addprefix -I, $(INC_PATH))
 CFLAGS += $(INCFLAGS) -DTOP_NAME="\"V$(TOPNAME)\""
-LDFLAGS += -lreadline
+CFLAGS += $(shell llvm-config --cxxflags) -fPIE
+LDFLAGS += -lreadline -g
+LDFLAGS += $(shell llvm-config --libs)
 
 run: $(BIN)
 	@$^

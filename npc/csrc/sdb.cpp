@@ -8,6 +8,7 @@
 static int is_batch_mode = false;
 extern void cpu_exec(uint64_t n);
 void init_regex();
+void init_wp_pool();
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
@@ -58,6 +59,7 @@ static int cmd_si(char *args) {
   return 0;
 }
 
+extern void print_wp();
 static int cmd_info(char *args) {
   char *arg = strtok(NULL, " ");
   if (arg == NULL) {
@@ -69,6 +71,8 @@ static int cmd_info(char *args) {
       dump_gpr();
     }
     else if (strcmp(arg, "w") == 0) {
+      printf("Num\tWhat\n");
+      print_wp();
     }
     else {
       printf("Wrong argument!\n");
@@ -124,12 +128,18 @@ static int cmd_p(char *args) {
 
 
 
+extern void new_wp(char *args);
+extern void free_wp(int NO);
+
 static int cmd_w(char *args) {
+  new_wp(args);
 
   return 0;
 }
 
 static int cmd_d(char *args) {
+  int NO = atoi(args);
+  free_wp(NO);
 
   return 0;
 }
@@ -227,5 +237,5 @@ void init_sdb() {
   init_regex();
 
   /* Initialize the watchpoint pool. */
-  // init_wp_pool();
+  init_wp_pool();
 }
