@@ -50,8 +50,6 @@ static void exec_once() {
   memset(p, ' ', space_len);
   p += space_len;
   puts(logbuf);
-  printf("ilen:%d\n", ilen);
-
   
   // disassemble(p, logbuf + sizeof(logbuf) - p,
   //     pc, (uint8_t *)instr, ilen);
