@@ -10,7 +10,7 @@ void single_cycle();
 
 /* itrace */
 union{
-  uint32_t val;
+  uint32_t val; 
 }instr;
 
 char logbuf[128];
@@ -42,7 +42,7 @@ static void exec_once() {
   p += snprintf(p, sizeof(logbuf), FMT_WORD ":", pc);
   int ilen = snpc - pc;
   int i;
-  uint8_t *inst = (uint8_t *)&instr;
+  uint8_t *inst = (uint8_t *)&instr.val;
   for (i = ilen - 1; i >= 0; i --) {
     p += snprintf(p, 4, " %02x", inst[i]);
   }
