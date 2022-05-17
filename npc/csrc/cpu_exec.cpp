@@ -9,11 +9,14 @@ bool scan_wp();
 void single_cycle();
 
 /* itrace */
-uint32_t instr;
+union{
+  uint32_t val;
+}instr;
+
 char logbuf[128];
 // DPI-C得到指令
 extern void get_inst(int inst) {
-  instr = inst;
+  instr.val = inst;
 }
 
 char rbuf[20][128];
@@ -52,7 +55,7 @@ static void exec_once() {
   puts(logbuf);
   
   disassemble(p, logbuf + sizeof(logbuf) - p,
-      pc, (uint8_t *)instr, ilen);
+      pc, (uint8_t *)instr.val, ilen);
   
   // puts(logbuf);
   // iringbuf
