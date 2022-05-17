@@ -78,7 +78,6 @@ extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int
   uint64_t dummy_size = 0;
   printf("%s %d %lx %d\n", str, size, pc, nbyte);
   gDisassembler->getInstruction(inst, dummy_size, arr, pc, llvm::nulls());
-  puts("1");
 
   std::string s;
   raw_string_ostream os(s);
