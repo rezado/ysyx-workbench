@@ -52,7 +52,7 @@ static void exec_once() {
   space_len = space_len * 3 + 1;
   memset(p, ' ', space_len);
   p += space_len;
-  puts(logbuf);
+  // puts(logbuf);
   
   disassemble(p, logbuf + sizeof(logbuf) - p,
       pc, (uint8_t *)&instr.val, ilen);
