@@ -18,8 +18,6 @@ void putch(char ch) {
 }
 
 void halt(int code) {
-  asm volatile("ebreak");
-  putstr("Should not reach here!\n");
   while (1);
 }
 
