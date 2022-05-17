@@ -64,8 +64,6 @@ void cpu_exec(uint64_t n) {
 	uint64_t t = 0;
 	while (t < n && sim_time < MAX_SIM_TIME && run_flag) {
 	  top->inst = paddr_read(top->pc, 4);
-	//   top->inst = insts[(top->pc - CONFIG_MBASE) / 4];
-	  printf("%x\n", top->inst);
     exec_once();
     bool flag = scan_wp();
     sim_time++;
