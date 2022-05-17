@@ -1,5 +1,6 @@
-#include <isa.h>
+#include <common.h>
 #include <memory/paddr.h>
+#include <reg.h>
 
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
@@ -84,7 +85,7 @@ void init_regex()
     if (ret != 0)
     {
       regerror(ret, &re[i], error_msg, 128);
-      panic("regex compilation failed: %s\n%s", error_msg, rules[i].regex);
+      assert(0);
     }
   }
 }
@@ -115,9 +116,6 @@ static bool make_token(char *e)
       {
         char *substr_start = e + position;
         int substr_len = pmatch.rm_eo;
-
-        Log("match rules[%d] = \"%s\" at position %d with len %d: %.*s",
-            i, rules[i].regex, position, substr_len, substr_len, substr_start);
 
         position += substr_len;
 
@@ -176,8 +174,6 @@ static bool make_token(char *e)
           }
           break;
         }
-        default:
-          TODO();
         }
 
         break;
@@ -377,7 +373,7 @@ word_t eval(word_t p, word_t q, bool *legal)
       case TK_REG:
     {
       if (strcmp(tokens[p].str, "$pc") == 0)
-        return cpu.pc;
+        return top->pc;
       bool success = false;
       word_t tmp = isa_reg_str2val(tokens[p].str + 1, &success);
       if (!success)
@@ -466,7 +462,6 @@ word_t expr(char *e, bool *success)
     return 0;
   }
 
-  /* TODO: Insert codes to evaluate the expression. */;
   bool legal = true;
   for (int i = 0; i < nr_token; i++)
   {
