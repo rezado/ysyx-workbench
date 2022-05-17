@@ -13,17 +13,10 @@ extern "C" {
 
 
     // DPI IMPORTS
-<<<<<<< HEAD
-    // DPI import at vsrc/top.v:42:30
+    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:46:30
     extern void finish_sim();
-=======
-    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:44:30
-    extern void finish_sim();
-    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:55:30
+    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:57:30
     extern void get_inst(int inst);
-    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/ysyx_22040088_regfile.v:21:30
-    extern void set_gpr_ptr(const svOpenArrayHandle a);
->>>>>>> npc
 
 #ifdef __cplusplus
 }
