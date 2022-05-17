@@ -57,7 +57,7 @@ static void exec_once() {
   disassemble(p, logbuf + sizeof(logbuf) - p,
       pc, (uint8_t *)&instr.val, ilen);
   
-  // puts(logbuf);
+  puts(logbuf);
   // iringbuf
   strcpy(rbuf[rptr], logbuf);
   rptr = (rptr + 1) % 20;
