@@ -4,10 +4,12 @@
 #include <memory/paddr.h>
 
 void difftest_memcpy(paddr_t addr, void *buf, size_t n, bool direction) {
+  // memcpy(buf, addr, n);
   assert(0);
 }
 
 void difftest_regcpy(void *dut, bool direction) {
+  // dut = (CPU_STATE*)dut;
   assert(0);
 }
 
