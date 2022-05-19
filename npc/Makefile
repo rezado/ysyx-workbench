@@ -37,12 +37,8 @@ all:
 sim:
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
-<<<<<<< HEAD
-	verilator -Wall --trace --cc --exe --build --top-module top ./vsrc/*.v ./csrc/sim_main.cpp
-=======
 	$(VERILATOR) $(VERILATOR_SIM_CFLAGS) --top-module $(TOPNAME) $(VSRCS) $(CSRCS) $(addprefix -LDFLAGS , $(LDFLAGS)) \
 		$(addprefix -CFLAGS , $(CFLAGS))
->>>>>>> npc
 
 include ../Makefile
 .PHONY: clean run
