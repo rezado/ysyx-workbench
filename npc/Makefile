@@ -1,3 +1,6 @@
+# config system
+include $(NPC_HOME)/scripts/config.mk
+
 TOPNAME = top
 INC_PATH = $(abspath ./include)
 
