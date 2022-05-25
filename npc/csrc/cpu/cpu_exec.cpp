@@ -49,12 +49,12 @@ static void exec_once() {
   space_len = space_len * 3 + 1;
   memset(p, ' ', space_len);
   p += space_len;
-  puts(logbuf);
+  // puts(logbuf);
   
   disassemble(p, logbuf + sizeof(logbuf) - p,
       pc, (uint8_t *)&instr, ilen);
   
-  // puts(logbuf);
+  puts(logbuf);
   // iringbuf
   strcpy(rbuf[rptr], logbuf);
   rptr = (rptr + 1) % 20;
@@ -64,8 +64,6 @@ void cpu_exec(uint64_t n) {
 	uint64_t t = 0;
 	while (t < n && sim_time < MAX_SIM_TIME && run_flag) {
 	  top->inst = paddr_read(top->pc, 4);
-	//   top->inst = insts[(top->pc - CONFIG_MBASE) / 4];
-	  printf("%x\n", top->inst);
     exec_once();
     bool flag = scan_wp();
     sim_time++;
