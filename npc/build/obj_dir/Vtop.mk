@@ -55,17 +55,23 @@ VM_USER_LDLIBS = \
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
 	cpu_exec \
-	disasm \
-	expr \
-	paddr \
 	reg \
+	paddr \
+	vaddr \
+	expr \
 	sdb \
-	sim_main \
 	watchpoint \
+	sim_main \
+	disasm \
 
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
 	/home/bill/ysyx-workbench/npc/csrc \
+	/home/bill/ysyx-workbench/npc/csrc/cpu \
+	/home/bill/ysyx-workbench/npc/csrc/isa/riscv64 \
+	/home/bill/ysyx-workbench/npc/csrc/memory \
+	/home/bill/ysyx-workbench/npc/csrc/monitor/sdb \
+	/home/bill/ysyx-workbench/npc/csrc/utils \
 
 
 ### Default rules...
@@ -77,21 +83,23 @@ include $(VERILATOR_ROOT)/include/verilated.mk
 ### Executable rules... (from --exe)
 VPATH += $(VM_USER_DIR)
 
-cpu_exec.o: /home/bill/ysyx-workbench/npc/csrc/cpu_exec.cpp
+cpu_exec.o: /home/bill/ysyx-workbench/npc/csrc/cpu/cpu_exec.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-disasm.o: /home/bill/ysyx-workbench/npc/csrc/disasm.cc
+reg.o: /home/bill/ysyx-workbench/npc/csrc/isa/riscv64/reg.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-expr.o: /home/bill/ysyx-workbench/npc/csrc/expr.c
+paddr.o: /home/bill/ysyx-workbench/npc/csrc/memory/paddr.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-paddr.o: /home/bill/ysyx-workbench/npc/csrc/paddr.cpp
+vaddr.o: /home/bill/ysyx-workbench/npc/csrc/memory/vaddr.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-reg.o: /home/bill/ysyx-workbench/npc/csrc/reg.cpp
+expr.o: /home/bill/ysyx-workbench/npc/csrc/monitor/sdb/expr.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-sdb.o: /home/bill/ysyx-workbench/npc/csrc/sdb.cpp
+sdb.o: /home/bill/ysyx-workbench/npc/csrc/monitor/sdb/sdb.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+watchpoint.o: /home/bill/ysyx-workbench/npc/csrc/monitor/sdb/watchpoint.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 sim_main.o: /home/bill/ysyx-workbench/npc/csrc/sim_main.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-watchpoint.o: /home/bill/ysyx-workbench/npc/csrc/watchpoint.c
+disasm.o: /home/bill/ysyx-workbench/npc/csrc/utils/disasm.cc
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)
