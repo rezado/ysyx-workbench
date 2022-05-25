@@ -34,11 +34,11 @@ void Vtop___024root__traceChgSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep) 
     // Body
     {
         if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[1U])) {
-            tracep->chgQData(oldp+0,(vlSelf->top__DOT__nextpc),64);
-            tracep->chgSData(oldp+2,(vlSelf->top__DOT__alu_op),12);
-            tracep->chgQData(oldp+3,(vlSelf->top__DOT__alu_src1),64);
-            tracep->chgQData(oldp+5,(vlSelf->top__DOT__alu_src2),64);
-            tracep->chgQData(oldp+7,(vlSelf->top__DOT__rf_wdata),64);
+            tracep->chgSData(oldp+0,(vlSelf->top__DOT__alu_op),12);
+            tracep->chgQData(oldp+1,(vlSelf->top__DOT__alu_src1),64);
+            tracep->chgQData(oldp+3,(vlSelf->top__DOT__alu_src2),64);
+            tracep->chgQData(oldp+5,(vlSelf->top__DOT__rf_wdata),64);
+            tracep->chgQData(oldp+7,(vlSelf->top__DOT__nextpc),64);
             tracep->chgIData(oldp+9,(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immJ),21);
             tracep->chgQData(oldp+10,(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immI_sext),64);
             tracep->chgQData(oldp+12,((((- (QData)((IData)(
