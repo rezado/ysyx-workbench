@@ -15,7 +15,7 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 );
 
 // 控制信号
-wire [11:0] alu_op;
+wire [10:0] alu_op;
 // 数据
 wire [63:0] alu_src1, alu_src2;
 wire [63:0] rf_wdata;
