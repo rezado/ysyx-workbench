@@ -55,8 +55,12 @@ VM_USER_LDLIBS = \
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
 	cpu_exec \
+	hostcall \
+	init \
+	init \
 	reg \
 	paddr \
+	monitor \
 	expr \
 	sdb \
 	watchpoint \
@@ -67,8 +71,10 @@ VM_USER_CLASSES = \
 VM_USER_DIR = \
 	/home/bill/ysyx-workbench/npc/csrc \
 	/home/bill/ysyx-workbench/npc/csrc/cpu \
+	/home/bill/ysyx-workbench/npc/csrc/engine/interpreter \
 	/home/bill/ysyx-workbench/npc/csrc/isa/riscv64 \
 	/home/bill/ysyx-workbench/npc/csrc/memory \
+	/home/bill/ysyx-workbench/npc/csrc/monitor \
 	/home/bill/ysyx-workbench/npc/csrc/monitor/sdb \
 	/home/bill/ysyx-workbench/npc/csrc/utils \
 
@@ -84,9 +90,17 @@ VPATH += $(VM_USER_DIR)
 
 cpu_exec.o: /home/bill/ysyx-workbench/npc/csrc/cpu/cpu_exec.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+hostcall.o: /home/bill/ysyx-workbench/npc/csrc/engine/interpreter/hostcall.c
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+init.o: /home/bill/ysyx-workbench/npc/csrc/engine/interpreter/init.c
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+init.o: /home/bill/ysyx-workbench/npc/csrc/isa/riscv64/init.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 reg.o: /home/bill/ysyx-workbench/npc/csrc/isa/riscv64/reg.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 paddr.o: /home/bill/ysyx-workbench/npc/csrc/memory/paddr.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+monitor.o: /home/bill/ysyx-workbench/npc/csrc/monitor/monitor.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 expr.o: /home/bill/ysyx-workbench/npc/csrc/monitor/sdb/expr.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
