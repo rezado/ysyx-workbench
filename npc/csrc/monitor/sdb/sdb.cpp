@@ -4,6 +4,7 @@
 #include "memory/paddr.h"
 #include "reg.h"
 #include "sdb.h"
+#include "isa.h"
 
 static int is_batch_mode = false;
 extern void cpu_exec(uint64_t n);
