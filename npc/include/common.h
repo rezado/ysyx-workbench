@@ -30,4 +30,6 @@ typedef uint16_t ioaddr_t;
 
 extern Vtop* top;
 
+#include <debug.h>
+
 #endif
