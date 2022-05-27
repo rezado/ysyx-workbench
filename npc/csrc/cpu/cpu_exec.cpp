@@ -105,6 +105,7 @@ void execute(uint64_t n) {
     g_nr_guest_inst ++;
     sim_time++;
 	  t++;
+    trace_and_difftest(&s, top->pc);
     if (nemu_state.state != NEMU_RUNNING) break;
     IFDEF(CONFIG_DEVICE, device_update());
   }
