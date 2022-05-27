@@ -88,7 +88,7 @@ static void exec_once(Decode *s) {
   // puts(logbuf);
   
   disassemble(p, logbuf + sizeof(logbuf) - p,
-      pc, (uint8_t *)&instr.val, ilen);
+      s->pc, (uint8_t *)&instr.val, ilen);
   
   puts(logbuf);
   // iringbuf
