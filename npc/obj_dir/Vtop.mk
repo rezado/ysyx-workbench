@@ -60,46 +60,19 @@ VM_USER_LDLIBS = \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
-	cpu_exec \
 	dut \
 	ref \
-	alarm \
-	audio \
-	device \
-	disk \
-	intr \
 	map \
 	mmio \
 	port-io \
-	keyboard \
-	sdcard \
-	serial \
-	timer \
-	vga \
 	hostcall \
 	init \
 	dut \
-	init \
-	inst \
-	logo \
-	reg \
 	intr \
 	mmu \
-	dut \
-	init \
-	inst \
-	logo \
-	reg \
-	intr \
-	mmu \
-	paddr \
-	vaddr \
-	monitor \
 	expr \
-	sdb \
 	watchpoint \
 	npc-main \
-	disasm \
 	log \
 	rand \
 	state \
@@ -107,22 +80,14 @@ VM_USER_CLASSES = \
 
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
-	/home/bill/ysyx-workbench/npc/csrc \
-	/home/bill/ysyx-workbench/npc/csrc/cpu \
-	/home/bill/ysyx-workbench/npc/csrc/cpu/difftest \
-	/home/bill/ysyx-workbench/npc/csrc/device \
-	/home/bill/ysyx-workbench/npc/csrc/device/io \
-	/home/bill/ysyx-workbench/npc/csrc/engine/interpreter \
-	/home/bill/ysyx-workbench/npc/csrc/isa/riscv32 \
-	/home/bill/ysyx-workbench/npc/csrc/isa/riscv32/difftest \
-	/home/bill/ysyx-workbench/npc/csrc/isa/riscv32/system \
-	/home/bill/ysyx-workbench/npc/csrc/isa/riscv64 \
-	/home/bill/ysyx-workbench/npc/csrc/isa/riscv64/difftest \
-	/home/bill/ysyx-workbench/npc/csrc/isa/riscv64/system \
-	/home/bill/ysyx-workbench/npc/csrc/memory \
-	/home/bill/ysyx-workbench/npc/csrc/monitor \
-	/home/bill/ysyx-workbench/npc/csrc/monitor/sdb \
-	/home/bill/ysyx-workbench/npc/csrc/utils \
+	csrc \
+	csrc/cpu/difftest \
+	csrc/device/io \
+	csrc/engine/interpreter \
+	csrc/isa/riscv64/difftest \
+	csrc/isa/riscv64/system \
+	csrc/monitor/sdb \
+	csrc/utils \
 
 
 ### Default rules...
@@ -134,93 +99,39 @@ include $(VERILATOR_ROOT)/include/verilated.mk
 ### Executable rules... (from --exe)
 VPATH += $(VM_USER_DIR)
 
-cpu_exec.o: /home/bill/ysyx-workbench/npc/csrc/cpu/cpu_exec.cpp
+dut.o: csrc/cpu/difftest/dut.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-dut.o: /home/bill/ysyx-workbench/npc/csrc/cpu/difftest/dut.c
+ref.o: csrc/cpu/difftest/ref.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-ref.o: /home/bill/ysyx-workbench/npc/csrc/cpu/difftest/ref.c
+map.o: csrc/device/io/map.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-alarm.o: /home/bill/ysyx-workbench/npc/csrc/device/alarm.c
+mmio.o: csrc/device/io/mmio.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-audio.o: /home/bill/ysyx-workbench/npc/csrc/device/audio.c
+port-io.o: csrc/device/io/port-io.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-device.o: /home/bill/ysyx-workbench/npc/csrc/device/device.c
+hostcall.o: csrc/engine/interpreter/hostcall.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-disk.o: /home/bill/ysyx-workbench/npc/csrc/device/disk.c
+init.o: csrc/engine/interpreter/init.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-intr.o: /home/bill/ysyx-workbench/npc/csrc/device/intr.c
+dut.o: csrc/isa/riscv64/difftest/dut.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-map.o: /home/bill/ysyx-workbench/npc/csrc/device/io/map.c
+intr.o: csrc/isa/riscv64/system/intr.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-mmio.o: /home/bill/ysyx-workbench/npc/csrc/device/io/mmio.c
+mmu.o: csrc/isa/riscv64/system/mmu.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-port-io.o: /home/bill/ysyx-workbench/npc/csrc/device/io/port-io.c
+expr.o: csrc/monitor/sdb/expr.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-keyboard.o: /home/bill/ysyx-workbench/npc/csrc/device/keyboard.c
+watchpoint.o: csrc/monitor/sdb/watchpoint.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-sdcard.o: /home/bill/ysyx-workbench/npc/csrc/device/sdcard.c
+npc-main.o: csrc/npc-main.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-serial.o: /home/bill/ysyx-workbench/npc/csrc/device/serial.c
+log.o: csrc/utils/log.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-timer.o: /home/bill/ysyx-workbench/npc/csrc/device/timer.c
+rand.o: csrc/utils/rand.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-vga.o: /home/bill/ysyx-workbench/npc/csrc/device/vga.c
+state.o: csrc/utils/state.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-hostcall.o: /home/bill/ysyx-workbench/npc/csrc/engine/interpreter/hostcall.c
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-init.o: /home/bill/ysyx-workbench/npc/csrc/engine/interpreter/init.c
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-dut.o: /home/bill/ysyx-workbench/npc/csrc/isa/riscv32/difftest/dut.c
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-init.o: /home/bill/ysyx-workbench/npc/csrc/isa/riscv32/init.c
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-inst.o: /home/bill/ysyx-workbench/npc/csrc/isa/riscv32/inst.c
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-logo.o: /home/bill/ysyx-workbench/npc/csrc/isa/riscv32/logo.c
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-reg.o: /home/bill/ysyx-workbench/npc/csrc/isa/riscv32/reg.c
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-intr.o: /home/bill/ysyx-workbench/npc/csrc/isa/riscv32/system/intr.c
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-mmu.o: /home/bill/ysyx-workbench/npc/csrc/isa/riscv32/system/mmu.c
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-dut.o: /home/bill/ysyx-workbench/npc/csrc/isa/riscv64/difftest/dut.c
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-init.o: /home/bill/ysyx-workbench/npc/csrc/isa/riscv64/init.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-inst.o: /home/bill/ysyx-workbench/npc/csrc/isa/riscv64/inst.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-logo.o: /home/bill/ysyx-workbench/npc/csrc/isa/riscv64/logo.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-reg.o: /home/bill/ysyx-workbench/npc/csrc/isa/riscv64/reg.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-intr.o: /home/bill/ysyx-workbench/npc/csrc/isa/riscv64/system/intr.c
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-mmu.o: /home/bill/ysyx-workbench/npc/csrc/isa/riscv64/system/mmu.c
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-paddr.o: /home/bill/ysyx-workbench/npc/csrc/memory/paddr.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-vaddr.o: /home/bill/ysyx-workbench/npc/csrc/memory/vaddr.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-monitor.o: /home/bill/ysyx-workbench/npc/csrc/monitor/monitor.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-expr.o: /home/bill/ysyx-workbench/npc/csrc/monitor/sdb/expr.c
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-sdb.o: /home/bill/ysyx-workbench/npc/csrc/monitor/sdb/sdb.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-watchpoint.o: /home/bill/ysyx-workbench/npc/csrc/monitor/sdb/watchpoint.c
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-npc-main.o: /home/bill/ysyx-workbench/npc/csrc/npc-main.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-disasm.o: /home/bill/ysyx-workbench/npc/csrc/utils/disasm.cc
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-log.o: /home/bill/ysyx-workbench/npc/csrc/utils/log.c
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-rand.o: /home/bill/ysyx-workbench/npc/csrc/utils/rand.c
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-state.o: /home/bill/ysyx-workbench/npc/csrc/utils/state.c
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-timer.o: /home/bill/ysyx-workbench/npc/csrc/utils/timer.c
+timer.o: csrc/utils/timer.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)
