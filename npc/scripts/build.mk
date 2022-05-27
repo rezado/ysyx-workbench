@@ -28,7 +28,7 @@ LDFLAGS := -O2 $(LDFLAGS)
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o) $(CXXSRC:%.cc=$(OBJ_DIR)/%.o)
 
 # Depencies
--include $(OBJS:.o=.d)
+# -include $(OBJS:.o=.d)
 
 # Some convenient rules
 
