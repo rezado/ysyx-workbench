@@ -1,4 +1,4 @@
-SRCS-y += csrc/npc-main.c
+SRCS-y += csrc/npc-main.cpp
 DIRS-y += csrc/cpu csrc/monitor csrc/utils
 DIRS-$(CONFIG_MODE_SYSTEM) += csrc/memory
 DIRS-BLACKLIST-$(CONFIG_TARGET_AM) += csrc/monitor/sdb
