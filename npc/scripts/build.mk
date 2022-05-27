@@ -27,7 +27,6 @@ CFLAGS  := -O2 -MMD -Wall $(INCLUDES) $(CFLAGS)
 LDFLAGS := -O2 $(LDFLAGS)
 
 
-
 # Some convenient rules
 
 .PHONY: app clean

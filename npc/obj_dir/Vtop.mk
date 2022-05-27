@@ -38,7 +38,6 @@ VM_USER_CFLAGS = \
 	-O2 \
 	-MMD \
 	-Wall \
-	-Werror \
 	-I/home/bill/ysyx-workbench/npc/include \
 	-I/home/bill/ysyx-workbench/npc/csrc/engine/interpreter \
 	-I/home/bill/ysyx-workbench/npc/csrc/isa/riscv64/include \
@@ -56,6 +55,7 @@ VM_USER_CFLAGS = \
 	-D__STDC_CONSTANT_MACROS \
 	-D__STDC_FORMAT_MACROS \
 	-D__STDC_LIMIT_MACROS \
+	-fPIE \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
