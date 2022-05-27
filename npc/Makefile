@@ -20,7 +20,7 @@ include $(FILELIST_MK)
 
 # Filter out directories and files in blacklist to obtain the final set of source files
 DIRS-BLACKLIST-y += $(DIRS-BLACKLIST)
-SRCS-BLACKLIST-y += $(SRCS-BLACKLIST) $(shell find $(DIRS-BLACKLIST-y) -name "*.c")
+SRCS-BLACKLIST-y += $(SRCS-BLACKLIST) $(shell find $(DIRS-BLACKLIST-y) -name "*.c"-or -name "*.cpp" -or -name "*.cc")
 SRCS-y += $(shell find $(DIRS-y) -name "*.c" -or -name "*.cpp" -or -name "*.cc")
 CSRCS = $(filter-out $(SRCS-BLACKLIST-y),$(SRCS-y))
 

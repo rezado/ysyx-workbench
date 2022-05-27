@@ -40,14 +40,14 @@ VM_USER_CFLAGS = \
 	-Wall \
 	-Werror \
 	-I/home/bill/ysyx-workbench/npc/include \
-	-I/home/bill/ysyx-workbench/nemu/csrc/engine/interpreter \
-	-I/home/bill/ysyx-workbench/nemu/csrc/isa/riscv64/include \
+	-I/home/bill/ysyx-workbench/npc/csrc/engine/interpreter \
+	-I/home/bill/ysyx-workbench/npc/csrc/isa/riscv64/include \
 	-O2 \
 	-DITRACE_COND=true \
 	-D__GUEST_ISA__=riscv64 \
 	-I/home/bill/ysyx-workbench/npc/include \
-	-I/home/bill/ysyx-workbench/nemu/csrc/engine/interpreter \
-	-I/home/bill/ysyx-workbench/nemu/csrc/isa/riscv64/include \
+	-I/home/bill/ysyx-workbench/npc/csrc/engine/interpreter \
+	-I/home/bill/ysyx-workbench/npc/csrc/isa/riscv64/include \
 	-DTOP_NAME="Vtop" \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
