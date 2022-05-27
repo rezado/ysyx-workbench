@@ -72,8 +72,8 @@ static void exec_once(Decode *s) {
 
 #ifdef CONFIG_ITRACE
   char *p = logbuf;
-  p += snprintf(p, sizeof(logbuf), FMT_WORD ":", pc);
-  int ilen = snpc - pc;
+  p += snprintf(p, sizeof(logbuf), FMT_WORD ":", s->pc);
+  int ilen = s->snpc - s->pc;
   int i;
   uint8_t *inst = (uint8_t *)&instr.val;
   for (i = ilen - 1; i >= 0; i --) {
