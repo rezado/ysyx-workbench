@@ -115,9 +115,9 @@ dut.o: csrc/cpu/difftest/dut.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 ref.o: csrc/cpu/difftest/ref.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-hostcall.o: csrc/engine/interpreter/hostcall.c
+hostcall.o: csrc/engine/interpreter/hostcall.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-init.o: csrc/engine/interpreter/init.c
+init.o: csrc/engine/interpreter/init.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 dut.o: csrc/isa/riscv64/difftest/dut.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<

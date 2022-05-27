@@ -1,7 +1,7 @@
--include $(NEMU_HOME)/../Makefile
-include $(NEMU_HOME)/scripts/build.mk
+-include $(NPC_HOME)/../Makefile
+include $(NPC_HOME)/scripts/build.mk
 
-include $(NEMU_HOME)/tools/difftest.mk
+include $(NPC_HOME)/tools/difftest.mk
 
 compile_git:
 	$(call git_commit, "compile NEMU")
