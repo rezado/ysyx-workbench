@@ -62,9 +62,6 @@ VM_USER_LDLIBS = \
 VM_USER_CLASSES = \
 	dut \
 	ref \
-	map \
-	mmio \
-	port-io \
 	hostcall \
 	init \
 	dut \
@@ -82,7 +79,6 @@ VM_USER_CLASSES = \
 VM_USER_DIR = \
 	csrc \
 	csrc/cpu/difftest \
-	csrc/device/io \
 	csrc/engine/interpreter \
 	csrc/isa/riscv64/difftest \
 	csrc/isa/riscv64/system \
@@ -102,12 +98,6 @@ VPATH += $(VM_USER_DIR)
 dut.o: csrc/cpu/difftest/dut.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 ref.o: csrc/cpu/difftest/ref.c
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-map.o: csrc/device/io/map.c
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-mmio.o: csrc/device/io/mmio.c
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-port-io.o: csrc/device/io/port-io.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 hostcall.o: csrc/engine/interpreter/hostcall.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
