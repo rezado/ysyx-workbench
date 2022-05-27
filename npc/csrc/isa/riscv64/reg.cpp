@@ -1,3 +1,5 @@
+#include <isa.h>
+#include "local-include/reg.h"
 #include <common.h>
 
 const char *regs[] = {
@@ -8,28 +10,27 @@ const char *regs[] = {
 };
 
 // 读取寄存器相关
-uint64_t *cpu_gpr;
 extern "C" void set_gpr_ptr(const svOpenArrayHandle r) {
-  cpu_gpr = (uint64_t *)(((VerilatedDpiOpenVar*)r)->datap());
+  cpu.gpr = (uint64_t *)(((VerilatedDpiOpenVar*)r)->datap());
 }
 
 // 一个输出RTL中通用寄存器的值的示例
 void dump_gpr() {
   int i;
   for (i = 0; i < 32; i++) {
-    printf("gpr[%d] = 0x%lx\n", i, cpu_gpr[i]);
+    printf("gpr[%d] = 0x%lx\n", i, gpr(i));
   }
 }
 
 word_t isa_reg_str2val(const char *s, bool *success) {
   if (strcmp(s, "pc") == 0) {
     *success = true;
-    
+    return cpu.pc;
   }
   for (int i = 0; i < 32; i++) {
     if (strcmp(s, regs[i]) == 0) {
       *success = true;
-      return cpu_gpr[i];
+      return gpr(i);
     }
   }
   *success = false;
