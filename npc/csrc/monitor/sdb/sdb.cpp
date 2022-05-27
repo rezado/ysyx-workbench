@@ -2,7 +2,6 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "memory/paddr.h"
-#include "reg.h"
 #include "sdb.h"
 #include "isa.h"
 
