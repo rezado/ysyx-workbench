@@ -35,7 +35,19 @@ VM_PREFIX = Vtop
 VM_MODPREFIX = Vtop
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
+	-O2 \
+	-MMD \
+	-Wall \
+	-Werror \
 	-I/home/bill/ysyx-workbench/npc/include \
+	-I/home/bill/ysyx-workbench/nemu/csrc/engine/interpreter \
+	-I/home/bill/ysyx-workbench/nemu/csrc/isa/riscv64/include \
+	-O2 \
+	-DITRACE_COND=true \
+	-D__GUEST_ISA__=riscv64 \
+	-I/home/bill/ysyx-workbench/npc/include \
+	-I/home/bill/ysyx-workbench/nemu/csrc/engine/interpreter \
+	-I/home/bill/ysyx-workbench/nemu/csrc/isa/riscv64/include \
 	-DTOP_NAME="Vtop" \
 	-I/usr/lib/llvm-12/include \
 	-std=c++14 \
@@ -48,6 +60,8 @@ VM_USER_CFLAGS = \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
+	-O2 \
+	-O2 \
 	-lreadline \
 	-g \
 	-lLLVM-12 \
