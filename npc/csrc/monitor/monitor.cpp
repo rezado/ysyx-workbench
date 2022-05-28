@@ -52,7 +52,7 @@ static long load_img() {
   fclose(fp);
 
   for (int i = 0; i < size; i++)
-    printf("%x\n", *guest_to_host(RESET_VECTOR + i));
+    printf("%x ", *guest_to_host(RESET_VECTOR + i));
   puts("");
 
   return size;
