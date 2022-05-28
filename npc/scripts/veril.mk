@@ -7,7 +7,7 @@ VERILATOR_SIM_CFLAGS += -Wall --trace --cc --exe --build
 
 BUILD_DIR = ./build
 OBJ_DIR = $(BUILD_DIR)/obj_dir
-BIN = $(BUILD_DIR)/$(TOPNAME)
+BIN = obj_dir/$(TOPNAME)
 
 default: $(BIN)
 
@@ -23,9 +23,6 @@ CFLAGS += $(INCFLAGS) -DTOP_NAME="\"V$(TOPNAME)\""
 # CFLAGS += $(shell llvm-config --cxxflags) -fPIE
 LDFLAGS += -lreadline -g
 LDFLAGS += $(shell llvm-config --libs)
-
-run: $(BIN)
-	@$^
 
 clean:
 	-rm -rf ./obj_dir
