@@ -26,7 +26,7 @@ LDFLAGS += $(shell llvm-config --libs)
 NPCFLAGS := 
 NPC_EXEC := $(BIN) $(ARGS) $(IMG)
 
-run: $(NEMU_EXEC)
+run: $(NPC_EXEC)
 
 clean:
 	-rm -rf ./obj_dir
