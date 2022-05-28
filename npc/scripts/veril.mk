@@ -23,6 +23,10 @@ CFLAGS += $(INCFLAGS) -DTOP_NAME="\"V$(TOPNAME)\""
 # CFLAGS += $(shell llvm-config --cxxflags) -fPIE
 LDFLAGS += -lreadline -g
 LDFLAGS += $(shell llvm-config --libs)
+NPCFLAGS := 
+NPC_EXEC := $(BIN) $(ARGS) $(IMG)
+
+run: $(NEMU_EXEC)
 
 clean:
 	-rm -rf ./obj_dir
