@@ -72,7 +72,7 @@ VM_USER_CLASSES = \
 	ref \
 	hostcall \
 	init \
-	dut \
+	isa_dut \
 	init \
 	inst \
 	logo \
@@ -126,7 +126,7 @@ hostcall.o: csrc/engine/interpreter/hostcall.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 init.o: csrc/engine/interpreter/init.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-dut.o: csrc/isa/riscv64/difftest/dut.cpp
+isa_dut.o: csrc/isa/riscv64/difftest/isa_dut.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 init.o: csrc/isa/riscv64/init.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
