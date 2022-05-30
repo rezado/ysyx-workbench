@@ -60,7 +60,6 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declQuad(c+232,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc pc_Reg dout", false,-1, 63,0);
         tracep->declBit(c+262,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc pc_Reg wen", false,-1);
         tracep->declBit(c+229,"top u_ysyx_22040088_IDU clk", false,-1);
-        tracep->declQuad(c+232,"top u_ysyx_22040088_IDU pc", false,-1, 63,0);
         tracep->declBus(c+231,"top u_ysyx_22040088_IDU inst", false,-1, 31,0);
         tracep->declQuad(c+11,"top u_ysyx_22040088_IDU rf_wdata", false,-1, 63,0);
         tracep->declBus(c+3,"top u_ysyx_22040088_IDU alu_op", false,-1, 10,0);
