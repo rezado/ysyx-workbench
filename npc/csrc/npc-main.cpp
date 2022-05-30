@@ -1,6 +1,6 @@
 #include <common.h> 
 #include <memory/paddr.h>
-#include <cpu.h>
+#include <cpu/cpu.h>
 
 /* 全局变量定义 声明 */
 
@@ -21,7 +21,7 @@ void single_cycle() {
     top->clk = 1; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
 }
 
-void sim_init(char *arg) {
+void sim_init() {
   contextp = new VerilatedContext;
   tfp = new VerilatedVcdC;
   top = new Vtop;
@@ -55,8 +55,7 @@ void sim_exit() {
 }
 
 int main(int argc, char *argv[]) {
-  assert(argv[1]);
-  sim_init(argv[1]);
+  sim_init();
   reset(4);
 
   /* Initialize the monitor. */
@@ -67,7 +66,7 @@ int main(int argc, char *argv[]) {
 #endif
 
   /* Start engine. */
-  engine_start();
+  // engine_start();
 
   sim_exit();
   return 0;

@@ -1,7 +1,7 @@
--include $(NEMU_HOME)/../Makefile
-include $(NEMU_HOME)/scripts/build.mk
+-include $(NPC_HOME)/../Makefile
+include $(NPC_HOME)/scripts/build.mk
 
-include $(NEMU_HOME)/tools/difftest.mk
+include $(NPC_HOME)/tools/difftest.mk
 
 compile_git:
 	$(call git_commit, "compile NEMU")
@@ -15,12 +15,6 @@ override ARGS += $(ARGS_DIFF)
 # Command to execute NEMU
 IMG ?=
 NEMU_EXEC := $(BINARY) $(ARGS) $(IMG)
-
-run-env: $(BINARY) $(DIFF_REF_SO)
-
-run: run-env
-	$(call git_commit, "run NEMU")
-	$(NEMU_EXEC)
 
 gdb: run-env
 	$(call git_commit, "gdb NEMU")

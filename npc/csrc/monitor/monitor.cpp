@@ -7,7 +7,7 @@ void init_mem();
 void init_difftest(char *ref_so_file, long img_size, int port);
 void init_device();
 void init_sdb();
-void init_disasm(const char *triple);
+extern "C" void init_disasm(const char *triple);
 
 static void welcome() {
   Log("Trace: %s", MUXDEF(CONFIG_TRACE, ANSI_FMT("ON", ANSI_FG_GREEN), ANSI_FMT("OFF", ANSI_FG_RED)));
@@ -51,9 +51,9 @@ static long load_img() {
 
   fclose(fp);
 
-  // for (int i = 0; i < size; i++)
-  //   printf("%u ", *guest_to_host(CONFIG_MBASE + i));
-  // puts("");
+  for (int i = 0; i < size; i++)
+    printf("%x ", *guest_to_host(RESET_VECTOR + i));
+  puts("");
 
   return size;
 }

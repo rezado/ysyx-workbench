@@ -72,8 +72,8 @@ static void exec_once(Decode *s) {
 
 #ifdef CONFIG_ITRACE
   char *p = logbuf;
-  p += snprintf(p, sizeof(logbuf), FMT_WORD ":", pc);
-  int ilen = snpc - pc;
+  p += snprintf(p, sizeof(logbuf), FMT_WORD ":", s->pc);
+  int ilen = s->snpc - s->pc;
   int i;
   uint8_t *inst = (uint8_t *)&instr.val;
   for (i = ilen - 1; i >= 0; i --) {
@@ -88,7 +88,7 @@ static void exec_once(Decode *s) {
   // puts(logbuf);
   
   disassemble(p, logbuf + sizeof(logbuf) - p,
-      pc, (uint8_t *)&instr.val, ilen);
+      s->pc, (uint8_t *)&instr.val, ilen);
   
   puts(logbuf);
   // iringbuf
@@ -105,6 +105,7 @@ void execute(uint64_t n) {
     g_nr_guest_inst ++;
     sim_time++;
 	  t++;
+    trace_and_difftest(&s, top->pc);
     if (nemu_state.state != NEMU_RUNNING) break;
     IFDEF(CONFIG_DEVICE, device_update());
   }

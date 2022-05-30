@@ -20,9 +20,9 @@ include $(FILELIST_MK)
 
 # Filter out directories and files in blacklist to obtain the final set of source files
 DIRS-BLACKLIST-y += $(DIRS-BLACKLIST)
-SRCS-BLACKLIST-y += $(SRCS-BLACKLIST) $(shell find $(DIRS-BLACKLIST-y) -name "*.c")
-SRCS-y += $(shell find $(DIRS-y) -name "*.c")
-SRCS = $(filter-out $(SRCS-BLACKLIST-y),$(SRCS-y))
+SRCS-BLACKLIST-y += $(SRCS-BLACKLIST) $(shell find $(DIRS-BLACKLIST-y) -name "*.c"-or -name "*.cpp" -or -name "*.cc")
+SRCS-y += $(shell find $(DIRS-y) -name "*.c" -or -name "*.cpp" -or -name "*.cc")
+CSRCS := $(filter-out $(SRCS-BLACKLIST-y),$(SRCS-y))
 
 # Extract compiler and options from menuconfig
 CC = $(call remove_quote,$(CONFIG_CC))
@@ -43,6 +43,8 @@ LINKAGE += $(ARCHIVES)
 else
 # Include rules to build NEMU
 include $(NPC_HOME)/scripts/native.mk
+
+include $(NPC_HOME)/scripts/build.mk
 
 # Include rules to verilator
 include $(NPC_HOME)/scripts/veril.mk
