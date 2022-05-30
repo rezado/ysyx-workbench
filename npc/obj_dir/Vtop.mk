@@ -4,7 +4,7 @@
 # Execute this makefile from the object directory:
 #    make -f Vtop.mk
 
-default: /home/bill/ysyx-workbench/npc/build/top
+default: Vtop
 
 ### Constants...
 # Perl executable (from $PERL)
@@ -35,23 +35,36 @@ VM_PREFIX = Vtop
 VM_MODPREFIX = Vtop
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
-	-I/home/bill/ysyx-workbench/nvboard/include \
+	-I/home/bill/ysyx-workbench/npc/include \
 	-DTOP_NAME="Vtop" \
+	-I/usr/lib/llvm-12/include \
+	-std=c++14 \
+	-fno-exceptions \
+	-D_GNU_SOURCE \
+	-D__STDC_CONSTANT_MACROS \
+	-D__STDC_FORMAT_MACROS \
+	-D__STDC_LIMIT_MACROS \
+	-fPIE \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
-	/home/bill/ysyx-workbench/nvboard/build/nvboard.a \
-	-lSDL2 \
-	-lSDL2_image \
+	-lreadline \
+	-g \
+	-lLLVM-12 \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
-	auto_bind \
+	cpu_exec \
+	disasm \
+	expr \
+	paddr \
+	reg \
+	sdb \
 	sim_main \
+	watchpoint \
 
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
-	/home/bill/ysyx-workbench/npc/build \
 	/home/bill/ysyx-workbench/npc/csrc \
 
 
@@ -64,13 +77,25 @@ include $(VERILATOR_ROOT)/include/verilated.mk
 ### Executable rules... (from --exe)
 VPATH += $(VM_USER_DIR)
 
-auto_bind.o: /home/bill/ysyx-workbench/npc/build/auto_bind.cpp
+cpu_exec.o: /home/bill/ysyx-workbench/npc/csrc/cpu_exec.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+disasm.o: /home/bill/ysyx-workbench/npc/csrc/disasm.cc
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+expr.o: /home/bill/ysyx-workbench/npc/csrc/expr.c
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+paddr.o: /home/bill/ysyx-workbench/npc/csrc/paddr.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+reg.o: /home/bill/ysyx-workbench/npc/csrc/reg.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+sdb.o: /home/bill/ysyx-workbench/npc/csrc/sdb.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 sim_main.o: /home/bill/ysyx-workbench/npc/csrc/sim_main.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+watchpoint.o: /home/bill/ysyx-workbench/npc/csrc/watchpoint.c
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)
-/home/bill/ysyx-workbench/npc/build/top: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
+Vtop: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
 	$(LINK) $(LDFLAGS) $^ $(LOADLIBES) $(LDLIBS) $(LIBS) $(SC_LIBS) -o $@
 
 
