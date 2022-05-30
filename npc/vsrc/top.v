@@ -16,7 +16,7 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 
 // 控制信号
 wire [10:0] alu_op;
-wire [ 3:0] sel_nextpc;
+wire [ 6:0] sel_nextpc;
 wire [ 1:0] sel_alusrc1;
 wire [ 3:0] sel_alusrc2;
 // 数据

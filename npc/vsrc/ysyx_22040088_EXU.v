@@ -4,7 +4,7 @@ module ysyx_22040088_EXU(
     input [63:0] pc,
     // 控制信号
     input [10:0] alu_op,
-    input [ 3:0] sel_nextpc,
+    input [ 6:0] sel_nextpc,
     input [ 1:0] sel_alusrc1,
     input [ 3:0] sel_alusrc2,
 
@@ -68,7 +68,7 @@ ysyx_22040088_ALU u_ysyx_22040088_ALU(
 );
 
 // PC跳转
-wire [63:0] pcadd, jalpc, jalrpc, beqpc;
+wire [63:0] pcadd, jalpc, jalrpc, beqpc, bnepc, bltpc, bgepc;
 ysyx_22040088_pcbranch u_ysyx_22040088_pcbranch(
     .pc         (pc         ),
     .immI       (immI_sext  ),
@@ -79,7 +79,10 @@ ysyx_22040088_pcbranch u_ysyx_22040088_pcbranch(
     .pcadd      (pcadd      ),
     .jalpc      (jalpc      ),
     .jalrpc     (jalrpc     ),
-    .beqpc      (beqpc      )
+    .beqpc      (beqpc      ),
+    .bnepc      (bnepc      ),
+    .bltpc      (bltpc      ),
+    .bgepc      (bgepc      )
 );
 
 
@@ -88,6 +91,9 @@ ysyx_22040088_gennextpc u_ysyx_22040088_gennextpc(
     .jalpc      (jalpc      ),
     .jalrpc     (jalrpc     ),
     .beqpc      (beqpc      ),
+    .bnepc      (bnepc      ),
+    .bltpc      (bltpc      ),
+    .bgepc      (bgepc      ),
     .sel_nextpc (sel_nextpc ),
     .nextpc     (nextpc     )
 );
