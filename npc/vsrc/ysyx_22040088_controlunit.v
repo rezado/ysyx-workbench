@@ -6,7 +6,7 @@ module ysyx_22040088_controlunit(
     output         rf_we,
     output  [ 1:0] sel_alusrc1,
     output  [ 3:0] sel_alusrc2,
-    output  [ 2:0] sel_nextpc
+    output  [ 3:0] sel_nextpc
 );
 // 指令
 wire inst_addi;
@@ -63,7 +63,8 @@ assign sel_alusrc2 = {inst_jal | inst_jalr,
                       inst_auipc | inst_lui,
                       inst_addi,
                       r_type};
-assign sel_nextpc = {inst_jalr,
+assign sel_nextpc = {inst_beq,
+                     inst_jalr,
                      inst_jal,
                      inst_addi | inst_auipc | inst_lui | inst_sd | r_type};
 
