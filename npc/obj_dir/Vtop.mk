@@ -45,6 +45,7 @@ VM_USER_CFLAGS = \
 	-O2 \
 	-MMD \
 	-Wall \
+	-Werror \
 	-I/home/bill/ysyx-workbench/npc/include \
 	-I/home/bill/ysyx-workbench/npc/csrc/engine/interpreter \
 	-I/home/bill/ysyx-workbench/npc/csrc/isa/riscv64/include \
