@@ -25,6 +25,7 @@ VL_MODULE(Vtop___024root) {
     VL_OUT64(pc,63,0);
 
     // LOCAL SIGNALS
+    CData/*6:0*/ top__DOT__sel_nextpc;
     CData/*1:0*/ top__DOT__sel_alusrc1;
     CData/*3:0*/ top__DOT__sel_alusrc2;
     CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addi;

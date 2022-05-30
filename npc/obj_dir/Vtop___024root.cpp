@@ -221,6 +221,58 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__4(Vtop___024root* vlSelf) {
                                 [(0x1fU & (vlSelf->inst 
                                            >> 0x14U))]) 
                                >> 0x20U)) >> 0x14U));
+    vlSelf->top__DOT__sel_nextpc = ((((IData)((0x5063U 
+                                               == (0x707fU 
+                                                   & vlSelf->inst))) 
+                                      | (IData)((0x7063U 
+                                                 == 
+                                                 (0x707fU 
+                                                  & vlSelf->inst)))) 
+                                     << 6U) | ((((IData)(
+                                                         (0x4063U 
+                                                          == 
+                                                          (0x707fU 
+                                                           & vlSelf->inst))) 
+                                                 | (IData)(
+                                                           (0x5063U 
+                                                            == 
+                                                            (0x707fU 
+                                                             & vlSelf->inst)))) 
+                                                << 5U) 
+                                               | (((IData)(
+                                                           (0x1063U 
+                                                            == 
+                                                            (0x707fU 
+                                                             & vlSelf->inst))) 
+                                                   << 4U) 
+                                                  | (((IData)(
+                                                              (0x63U 
+                                                               == 
+                                                               (0x707fU 
+                                                                & vlSelf->inst))) 
+                                                      << 3U) 
+                                                     | (((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_jalr) 
+                                                         << 2U) 
+                                                        | (((0x6fU 
+                                                             == 
+                                                             (0x7fU 
+                                                              & vlSelf->inst)) 
+                                                            << 1U) 
+                                                           | (((((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addi) 
+                                                                 | (0x17U 
+                                                                    == 
+                                                                    (0x7fU 
+                                                                     & vlSelf->inst))) 
+                                                                | (0x37U 
+                                                                   == 
+                                                                   (0x7fU 
+                                                                    & vlSelf->inst))) 
+                                                               | (IData)(
+                                                                         (0x3023U 
+                                                                          == 
+                                                                          (0x707fU 
+                                                                           & vlSelf->inst)))) 
+                                                              | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__r_type))))))));
     vlSelf->top__DOT__sel_alusrc1 = (((((0x17U == (0x7fU 
                                                    & vlSelf->inst)) 
                                         | (0x6fU == 
@@ -564,60 +616,12 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__4(Vtop___024root* vlSelf) {
                                                              << 0xcU))))));
     vlSelf->top__DOT__nextpc = ((((((((- (QData)((IData)(
                                                          (1U 
-                                                          & (((0x6fU 
-                                                               == 
-                                                               (0x7fU 
-                                                                & vlSelf->inst)) 
-                                                              << 1U) 
-                                                             | (((((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addi) 
-                                                                   | (0x17U 
-                                                                      == 
-                                                                      (0x7fU 
-                                                                       & vlSelf->inst))) 
-                                                                  | (0x37U 
-                                                                     == 
-                                                                     (0x7fU 
-                                                                      & vlSelf->inst))) 
-                                                                 | (IData)(
-                                                                           (0x3023U 
-                                                                            == 
-                                                                            (0x707fU 
-                                                                             & vlSelf->inst)))) 
-                                                                | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__r_type))))))) 
+                                                          & (IData)(vlSelf->top__DOT__sel_nextpc))))) 
                                       & (4ULL + vlSelf->pc)) 
                                      | ((- (QData)((IData)(
                                                            (1U 
-                                                            & ((0x7ffffffcU 
-                                                                & ((IData)(
-                                                                           (0x63U 
-                                                                            == 
-                                                                            (0x707fU 
-                                                                             & vlSelf->inst))) 
-                                                                   << 2U)) 
-                                                               | ((0x7ffffffeU 
-                                                                   & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_jalr) 
-                                                                      << 1U)) 
-                                                                  | ((0x7fffffffU 
-                                                                      & (0x6fU 
-                                                                         == 
-                                                                         (0x7fU 
-                                                                          & vlSelf->inst))) 
-                                                                     | ((((((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addi) 
-                                                                            | (0x17U 
-                                                                               == 
-                                                                               (0x7fU 
-                                                                                & vlSelf->inst))) 
-                                                                           | (0x37U 
-                                                                              == 
-                                                                              (0x7fU 
-                                                                               & vlSelf->inst))) 
-                                                                          | (IData)(
-                                                                                (0x3023U 
-                                                                                == 
-                                                                                (0x707fU 
-                                                                                & vlSelf->inst)))) 
-                                                                         | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__r_type)) 
-                                                                        >> 1U)))))))) 
+                                                            & ((IData)(vlSelf->top__DOT__sel_nextpc) 
+                                                               >> 1U))))) 
                                         & (vlSelf->pc 
                                            + (((- (QData)((IData)(
                                                                   (1U 
@@ -628,146 +632,28 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__4(Vtop___024root* vlSelf) {
                                     | (0xfffffffffffffffeULL 
                                        & ((- (QData)((IData)(
                                                              (1U 
-                                                              & ((0x3ffffffeU 
-                                                                  & ((IData)(
-                                                                             (0x63U 
-                                                                              == 
-                                                                              (0x707fU 
-                                                                               & vlSelf->inst))) 
-                                                                     << 1U)) 
-                                                                 | ((0x3fffffffU 
-                                                                     & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_jalr)) 
-                                                                    | ((0x3fffffffU 
-                                                                        & ((0x6fU 
-                                                                            == 
-                                                                            (0x7fU 
-                                                                             & vlSelf->inst)) 
-                                                                           >> 1U)) 
-                                                                       | ((((((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addi) 
-                                                                              | (0x17U 
-                                                                                == 
-                                                                                (0x7fU 
-                                                                                & vlSelf->inst))) 
-                                                                             | (0x37U 
-                                                                                == 
-                                                                                (0x7fU 
-                                                                                & vlSelf->inst))) 
-                                                                            | (IData)(
-                                                                                (0x3023U 
-                                                                                == 
-                                                                                (0x707fU 
-                                                                                & vlSelf->inst)))) 
-                                                                           | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__r_type)) 
-                                                                          >> 2U)))))))) 
+                                                              & ((IData)(vlSelf->top__DOT__sel_nextpc) 
+                                                                 >> 2U))))) 
                                           & (vlSelf->top__DOT__rf_rdata1 
                                              + vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__immI_sext)))) 
                                    | ((- (QData)((IData)(
                                                          (1U 
-                                                          & ((0x1fffffffU 
-                                                              & (IData)(
-                                                                        (0x63U 
-                                                                         == 
-                                                                         (0x707fU 
-                                                                          & vlSelf->inst)))) 
-                                                             | ((0x1fffffffU 
-                                                                 & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_jalr) 
-                                                                    >> 1U)) 
-                                                                | ((0x1fffffffU 
-                                                                    & ((0x6fU 
-                                                                        == 
-                                                                        (0x7fU 
-                                                                         & vlSelf->inst)) 
-                                                                       >> 2U)) 
-                                                                   | ((((((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addi) 
-                                                                          | (0x17U 
-                                                                             == 
-                                                                             (0x7fU 
-                                                                              & vlSelf->inst))) 
-                                                                         | (0x37U 
-                                                                            == 
-                                                                            (0x7fU 
-                                                                             & vlSelf->inst))) 
-                                                                        | (IData)(
-                                                                                (0x3023U 
-                                                                                == 
-                                                                                (0x707fU 
-                                                                                & vlSelf->inst)))) 
-                                                                       | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__r_type)) 
-                                                                      >> 3U)))))))) 
+                                                          & ((IData)(vlSelf->top__DOT__sel_nextpc) 
+                                                             >> 3U))))) 
                                       & ((0ULL == vlSelf->top__DOT__alu_result)
                                           ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB
                                           : (4ULL + vlSelf->pc)))) 
                                   | ((- (QData)((IData)(
                                                         (1U 
-                                                         & ((0xfffffffU 
-                                                             & ((IData)(
-                                                                        (0x63U 
-                                                                         == 
-                                                                         (0x707fU 
-                                                                          & vlSelf->inst))) 
-                                                                >> 1U)) 
-                                                            | ((0xfffffffU 
-                                                                & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_jalr) 
-                                                                   >> 2U)) 
-                                                               | ((0xfffffffU 
-                                                                   & ((0x6fU 
-                                                                       == 
-                                                                       (0x7fU 
-                                                                        & vlSelf->inst)) 
-                                                                      >> 3U)) 
-                                                                  | ((((((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addi) 
-                                                                         | (0x17U 
-                                                                            == 
-                                                                            (0x7fU 
-                                                                             & vlSelf->inst))) 
-                                                                        | (0x37U 
-                                                                           == 
-                                                                           (0x7fU 
-                                                                            & vlSelf->inst))) 
-                                                                       | (IData)(
-                                                                                (0x3023U 
-                                                                                == 
-                                                                                (0x707fU 
-                                                                                & vlSelf->inst)))) 
-                                                                      | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__r_type)) 
-                                                                     >> 4U)))))))) 
+                                                         & ((IData)(vlSelf->top__DOT__sel_nextpc) 
+                                                            >> 4U))))) 
                                      & ((0ULL == vlSelf->top__DOT__alu_result)
                                          ? (4ULL + vlSelf->pc)
                                          : vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB))) 
                                  | ((- (QData)((IData)(
                                                        (1U 
-                                                        & ((0x7ffffffU 
-                                                            & ((IData)(
-                                                                       (0x63U 
-                                                                        == 
-                                                                        (0x707fU 
-                                                                         & vlSelf->inst))) 
-                                                               >> 2U)) 
-                                                           | ((0x7ffffffU 
-                                                               & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_jalr) 
-                                                                  >> 3U)) 
-                                                              | ((0x7ffffffU 
-                                                                  & ((0x6fU 
-                                                                      == 
-                                                                      (0x7fU 
-                                                                       & vlSelf->inst)) 
-                                                                     >> 4U)) 
-                                                                 | ((((((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addi) 
-                                                                        | (0x17U 
-                                                                           == 
-                                                                           (0x7fU 
-                                                                            & vlSelf->inst))) 
-                                                                       | (0x37U 
-                                                                          == 
-                                                                          (0x7fU 
-                                                                           & vlSelf->inst))) 
-                                                                      | (IData)(
-                                                                                (0x3023U 
-                                                                                == 
-                                                                                (0x707fU 
-                                                                                & vlSelf->inst)))) 
-                                                                     | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__r_type)) 
-                                                                    >> 5U)))))))) 
+                                                        & ((IData)(vlSelf->top__DOT__sel_nextpc) 
+                                                           >> 5U))))) 
                                     & ((1U & (IData)(
                                                      (vlSelf->top__DOT__alu_result 
                                                       >> 0x3fU)))
@@ -775,38 +661,8 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__4(Vtop___024root* vlSelf) {
                                         : (4ULL + vlSelf->pc)))) 
                                 | ((- (QData)((IData)(
                                                       (1U 
-                                                       & ((0x3ffffffU 
-                                                           & ((IData)(
-                                                                      (0x63U 
-                                                                       == 
-                                                                       (0x707fU 
-                                                                        & vlSelf->inst))) 
-                                                              >> 3U)) 
-                                                          | ((0x3ffffffU 
-                                                              & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_jalr) 
-                                                                 >> 4U)) 
-                                                             | ((0x3ffffffU 
-                                                                 & ((0x6fU 
-                                                                     == 
-                                                                     (0x7fU 
-                                                                      & vlSelf->inst)) 
-                                                                    >> 5U)) 
-                                                                | ((((((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addi) 
-                                                                       | (0x17U 
-                                                                          == 
-                                                                          (0x7fU 
-                                                                           & vlSelf->inst))) 
-                                                                      | (0x37U 
-                                                                         == 
-                                                                         (0x7fU 
-                                                                          & vlSelf->inst))) 
-                                                                     | (IData)(
-                                                                               (0x3023U 
-                                                                                == 
-                                                                                (0x707fU 
-                                                                                & vlSelf->inst)))) 
-                                                                    | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__r_type)) 
-                                                                   >> 6U)))))))) 
+                                                       & ((IData)(vlSelf->top__DOT__sel_nextpc) 
+                                                          >> 6U))))) 
                                    & ((1U & (IData)(
                                                     (vlSelf->top__DOT__alu_result 
                                                      >> 0x3fU)))
