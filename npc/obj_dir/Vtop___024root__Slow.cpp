@@ -620,11 +620,11 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->rst = VL_RAND_RESET_I(1);
     vlSelf->inst = VL_RAND_RESET_I(32);
     vlSelf->pc = VL_RAND_RESET_Q(64);
-    vlSelf->top__DOT__nextpc = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__alu_op = VL_RAND_RESET_I(12);
     vlSelf->top__DOT__alu_src1 = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__alu_src2 = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__rf_wdata = VL_RAND_RESET_Q(64);
+    vlSelf->top__DOT__nextpc = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immJ = VL_RAND_RESET_I(21);
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immI_sext = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__sel_alusrc1 = VL_RAND_RESET_I(2);
