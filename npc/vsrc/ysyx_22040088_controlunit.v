@@ -6,7 +6,7 @@ module ysyx_22040088_controlunit(
     output         rf_we,
     output  [ 1:0] sel_alusrc1,
     output  [ 3:0] sel_alusrc2,
-    output  [ 3:0] sel_nextpc
+    output  [ 6:0] sel_nextpc
 );
 // 指令
 wire inst_addi;
@@ -26,6 +26,11 @@ wire inst_sll;
 wire inst_srl;
 wire inst_sra;
 wire inst_beq;
+wire inst_bne;
+wire inst_blt;
+wire inst_bltu;
+wire inst_bge;
+wire inst_bgeu;
 
 // 指令译码
 assign inst_addi = (opcode == 7'b0010011) && (funct3 == 3'b000);
@@ -45,6 +50,11 @@ assign inst_sll = (opcode == 7'b0110011) && (funct3 == 3'b001) && (funct7 == 7'b
 assign inst_srl = (opcode == 7'b0110011) && (funct3 == 3'b101) && (funct7 == 7'b0000000);
 assign inst_sra = (opcode == 7'b0110011) && (funct3 == 3'b101) && (funct7 == 7'b0100000);
 assign inst_beq = (opcode == 7'b1100011) && (funct3 == 3'b000);
+assign inst_bne = (opcode == 7'b1100011) && (funct3 == 3'b001);
+assign inst_blt = (opcode == 7'b1100011) && (funct3 == 3'b100);
+assign inst_bltu = (opcode == 7'b1100011) && (funct3 == 3'b101);
+assign inst_bge = (opcode == 7'b1100011) && (funct3 == 3'b101);
+assign inst_bgeu = (opcode == 7'b1100011) && (funct3 == 3'b111);
 
 
 // 指令类型
@@ -63,7 +73,10 @@ assign sel_alusrc2 = {inst_jal | inst_jalr,
                       inst_auipc | inst_lui,
                       inst_addi,
                       r_type};
-assign sel_nextpc = {inst_beq,
+assign sel_nextpc = {inst_bge | inst_bgeu,
+                     inst_blt | inst_bltu,
+                     inst_bne,
+                     inst_beq,
                      inst_jalr,
                      inst_jal,
                      inst_addi | inst_auipc | inst_lui | inst_sd | r_type};
