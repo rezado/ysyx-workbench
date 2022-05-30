@@ -58,21 +58,25 @@ assign inst_bgeu = (opcode == 7'b1100011) && (funct3 == 3'b111);
 
 
 // 指令类型
-wire r_type;
+wire r_type, b_type;
 assign r_type = inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor
             | inst_sll | inst_srl | inst_sra;
+assign b_type = inst_beq | inst_bne | inst_bge | inst_bgeu | inst_blt | inst_bltu;
 
 // 控制信号生成
 assign alu_op = {inst_lui, inst_sra, inst_srl, inst_sll, inst_xor, inst_or,
-                inst_and, inst_sltu, inst_slt, inst_sub,
+                inst_and,
+                inst_sltu | inst_bltu | inst_bgeu,
+                inst_slt | inst_blt | inst_bge,
+                inst_sub | inst_beq | inst_bne,
                 inst_add | inst_addi | inst_auipc | inst_jal | inst_jalr};
 assign rf_we =  inst_addi | inst_jal | inst_jalr | inst_lui | inst_auipc | r_type;
 assign sel_alusrc1 = {inst_auipc | inst_jal | inst_jalr,
-                      inst_addi | r_type};
+                      inst_addi | r_type | b_type};
 assign sel_alusrc2 = {inst_jal | inst_jalr,
                       inst_auipc | inst_lui,
                       inst_addi,
-                      r_type};
+                      r_type | b_type};
 assign sel_nextpc = {inst_bge | inst_bgeu,
                      inst_blt | inst_bltu,
                      inst_bne,
