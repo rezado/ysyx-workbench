@@ -32,7 +32,6 @@ wire [63:0] alu_result;
 assign rf_wdata = alu_result;
 ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.clk         (clk         ),
-	.pc          (pc          ),
 	.inst        (inst        ),
 	.rf_wdata    (rf_wdata    ),
 	.alu_op      (alu_op      ),
