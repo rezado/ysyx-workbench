@@ -13,9 +13,9 @@ extern "C" {
 
 
     // DPI IMPORTS
-    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:70:30
+    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:69:30
     extern void finish_sim();
-    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:81:30
+    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:80:30
     extern void get_inst(int inst);
 
 #ifdef __cplusplus

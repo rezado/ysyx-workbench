@@ -1,7 +1,6 @@
 module ysyx_22040088_IDU(
     input       clk,
     // input       rst,
-    input [63:0] pc,
     input [31:0] inst,
     input [63:0] rf_wdata,
     // 控制信号
