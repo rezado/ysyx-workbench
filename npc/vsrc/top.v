@@ -27,7 +27,9 @@ wire [20:0] immJ;
 wire [19:0] immU;
 wire [12:0] immB;
 wire [63:0] rf_wdata;
+wire [63:0] alu_result;
 // IDU
+assign rf_wdata = alu_result;
 ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.clk         (clk         ),
 	.pc          (pc          ),
@@ -45,10 +47,7 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.immB        (immB        )
 );
 
-
-
 // EXU
-wire [63:0] alu_result;
 ysyx_22040088_EXU u_ysyx_22040088_EXU(
 	.pc          (pc          ),
 	.alu_op      (alu_op      ),
