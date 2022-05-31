@@ -5,7 +5,6 @@ module top(
 	output	[63:0] pc
 );
 
-wire [63:0] nextpc;
 // IFU
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.clk    (clk    ),
@@ -15,54 +14,33 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 );
 
 // 控制信号
-wire [10:0] alu_op;
-wire [ 6:0] sel_nextpc;
-wire [ 1:0] sel_alusrc1;
-wire [ 3:0] sel_alusrc2;
+wire [11:0] alu_op;
 // 数据
-wire [63:0] rf_rdata1;
-wire [63:0] rf_rdata2;
-wire [11:0] immI;
-wire [20:0] immJ;
-wire [19:0] immU;
-wire [12:0] immB;
+wire [63:0] alu_src1, alu_src2;
 wire [63:0] rf_wdata;
-wire [63:0] alu_result;
+wire [63:0] nextpc;
 // IDU
-assign rf_wdata = alu_result;
 ysyx_22040088_IDU u_ysyx_22040088_IDU(
-	.clk         (clk         ),
-	.inst        (inst        ),
-	.rf_wdata    (rf_wdata    ),
-	.alu_op      (alu_op      ),
-	.sel_nextpc  (sel_nextpc  ),
-	.sel_alusrc1 (sel_alusrc1 ),
-	.sel_alusrc2 (sel_alusrc2 ),
-	.rf_rdata1   (rf_rdata1   ),
-	.rf_rdata2   (rf_rdata2   ),
-	.immI        (immI        ),
-	.immJ        (immJ        ),
-	.immU        (immU        ),
-	.immB        (immB        )
+	.clk      (clk      ),
+	.pc       (pc       ),
+	.inst     (inst     ),
+	.rf_wdata (rf_wdata ),
+	.alu_op   (alu_op   ),
+	.alu_src1 (alu_src1 ),
+	.alu_src2 (alu_src2 ),
+	.nextpc   (nextpc   )
 );
+
 
 // EXU
 ysyx_22040088_EXU u_ysyx_22040088_EXU(
-	.pc          (pc          ),
-	.alu_op      (alu_op      ),
-	.sel_nextpc  (sel_nextpc  ),
-	.sel_alusrc1 (sel_alusrc1 ),
-	.sel_alusrc2 (sel_alusrc2 ),
-	.rf_rdata1   (rf_rdata1   ),
-	.rf_rdata2   (rf_rdata2   ),
-	.immI        (immI        ),
-	.immJ        (immJ        ),
-	.immU        (immU        ),
-	.immB        (immB        ),
-	.alu_result  (alu_result  ),
-	.nextpc      (nextpc      )
+	// .clk        (clk        ),
+	// .rst        (rst        ),
+	.alu_op     (alu_op     ),
+	.alu_src1   (alu_src1   ),
+	.alu_src2   (alu_src2   ),
+	.alu_result (rf_wdata   )
 );
-
 
 // ebreak
 import "DPI-C" function void finish_sim();
