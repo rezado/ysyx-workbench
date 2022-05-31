@@ -6,7 +6,6 @@
 #include <utils.h>
 #include <difftest-def.h>
 
-// 函数指针
 void (*ref_difftest_memcpy)(paddr_t addr, void *buf, size_t n, bool direction) = NULL;
 void (*ref_difftest_regcpy)(void *dut, bool direction) = NULL;
 void (*ref_difftest_exec)(uint64_t n) = NULL;
@@ -48,12 +47,10 @@ void difftest_skip_dut(int nr_ref, int nr_dut) {
 void init_difftest(char *ref_so_file, long img_size, int port) {
   assert(ref_so_file != NULL);
 
-  // 打开传入的动态库文件ref_so_file.
   void *handle;
   handle = dlopen(ref_so_file, RTLD_LAZY);
   assert(handle);
 
-  // 通过动态链接对动态库中的上述API符号进行符号解析和重定位, 返回它们的地址.
   ref_difftest_memcpy = dlsym(handle, "difftest_memcpy");
   assert(ref_difftest_memcpy);
 
@@ -113,7 +110,7 @@ void difftest_step(vaddr_t pc, vaddr_t npc) {
   ref_difftest_exec(1);
   ref_difftest_regcpy(&ref_r, DIFFTEST_TO_DUT);
 
-  checkregs(&ref_r, npc);
+  checkregs(&ref_r, pc);
 }
 #else
 void init_difftest(char *ref_so_file, long img_size, int port) { }
