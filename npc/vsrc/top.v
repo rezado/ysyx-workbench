@@ -6,6 +6,7 @@ module top(
 
 wire [63:0] nextpc;
 wire [31:0] inst;
+wire [63:0] inst_data;
 // IFU
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.clk    (clk    ),
@@ -17,8 +18,9 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 import "DPI-C" function void pmem_read(
   input longint raddr, output longint rdata);
 always @(posedge clk) begin
-	pmem_read(pc, inst);
+	pmem_read(pc, inst_data);
 end
+assign inst = inst_data[31:0];
 
 // 控制信号
 wire [10:0] alu_op;
