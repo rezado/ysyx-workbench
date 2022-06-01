@@ -14,7 +14,7 @@ void init_sdb();
 /* 仿真开始结束相关 */
 
 void single_cycle() {
-    top->clk = 0; top->eval(); puts("1"); contextp->timeInc(1); puts("2"); tfp->dump(contextp->time());
+    top->clk = 0; top->eval(); puts("1"); contextp->timeInc(1); puts("2"); tfp->dump(contextp->time()); puts("3");
     top->clk = 1; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
 }
 
