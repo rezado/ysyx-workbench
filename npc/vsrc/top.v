@@ -1,11 +1,11 @@
 module top(
     input   clk,
     input   rst,
-	input	[31:0] inst,
 	output	[63:0] pc
 );
 
 wire [63:0] nextpc;
+wire [63:0] inst;
 // IFU
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.clk    (clk    ),
@@ -13,6 +13,12 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.nextpc (nextpc ),
 	.pc     (pc     )
 );
+
+import "DPI-C" function void pmem_read(
+  input longint raddr, output longint rdata);
+always @(posedge clk) begin
+	pmem_read(pc, inst);
+end
 
 // 控制信号
 wire [10:0] alu_op;
