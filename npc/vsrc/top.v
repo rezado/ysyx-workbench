@@ -6,6 +6,7 @@ module top(
 
 wire [63:0] nextpc;
 wire [31:0] inst;
+/* verilator lint_off UNUSED */
 wire [63:0] inst_data;
 // IFU
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
