@@ -13,8 +13,8 @@ import "DPI-C" function void pmem_write(
   input longint waddr, input longint wdata, input byte wmask);
 
 wire [63:0] raddr, waddr;
-assign raddr = (ena & ~(|wen)) ? addr : 64'b0;
-assign waddr = (ena & |wen) ? addr : 64'b0;
+assign raddr = (ena & ~(|wen)) ? addr : 64'h80000000;
+assign waddr = (ena & |wen) ? addr : 64'h80000000;
 always @(*) begin
   pmem_read(raddr, rdata);
   pmem_write(waddr, wdata, wen);
