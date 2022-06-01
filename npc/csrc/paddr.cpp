@@ -16,7 +16,6 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   printf("read from %llx\n", raddr);
   *rdata = host_read(guest_to_host(raddr & ~0x7ull), 8);
-  puts("read");
 }
 extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   // 总是往地址为`waddr & ~0x7ull`的8字节按写掩码`wmask`写入`wdata`
