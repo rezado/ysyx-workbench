@@ -5,7 +5,7 @@ module top(
 );
 
 wire [63:0] nextpc;
-wire [63:0] inst;
+wire [31:0] inst;
 // IFU
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.clk    (clk    ),
