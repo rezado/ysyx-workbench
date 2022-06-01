@@ -29,7 +29,17 @@ wire [12:0] immB;
 wire [63:0] rf_wdata;
 wire [63:0] alu_result;
 // IDU
-assign rf_wdata = alu_result;
+wire [1:0] sel_rfres;
+wire [7:0] mem_wen;
+wire mem_ena;
+wire [63:0] mem_rdata;
+ysyx_22040088_genrfwdata u_ysyx_22040088_genrfwdata(
+	.alu_result  (alu_result  ),
+	.mem_rdata   (mem_rdata   ),
+	.sel_rfwdata (sel_rfres   ),
+	.rf_wdata    (rf_wdata    )
+);
+
 ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.clk         (clk         ),
 	.inst        (inst        ),
@@ -43,8 +53,12 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.immI        (immI        ),
 	.immJ        (immJ        ),
 	.immU        (immU        ),
-	.immB        (immB        )
+	.immB        (immB        ),
+	.sel_rfres   (sel_rfres   ),
+	.mem_wen     (mem_wen     ),
+	.mem_ena     (mem_ena     )
 );
+
 
 // EXU
 ysyx_22040088_EXU u_ysyx_22040088_EXU(
@@ -80,6 +94,15 @@ import "DPI-C" function void get_inst(int inst);
 always@(*) begin
 	get_inst(inst);
 end
+
+// memory
+mem u_mem(
+	.ena   (mem_ena   ),
+	.wen   (mem_wen   ),
+	.addr  (alu_result  ),
+	.wdata (rf_rdata2 ),
+	.rdata (mem_rdata )
+);
 
 
 endmodule
