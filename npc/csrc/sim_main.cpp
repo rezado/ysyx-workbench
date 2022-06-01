@@ -15,8 +15,8 @@ void init_sdb();
 
 void single_cycle() {
     top->clk = 0; top->eval(); puts("1"); contextp->timeInc(1); puts("2"); tfp->dump(contextp->time()); puts("3");
-    puts("4");top->clk = 1; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
-    puts("5");
+    puts("4");top->clk = 1; top->eval(); contextp->timeInc(1); puts("5"); tfp->dump(contextp->time());
+    
 }
 
 extern "C" void init_disasm(const char *triple);
