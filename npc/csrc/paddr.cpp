@@ -14,7 +14,7 @@ uint64_t paddr_read(uint64_t addr, int len) {
 
 extern "C" void pmem_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
-  puts("before read");
+  printf("read from %x\n", raddr);
   *rdata = host_read(guest_to_host(raddr & ~0x7ull), 8);
   puts("read");
 }
