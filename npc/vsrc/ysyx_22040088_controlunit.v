@@ -5,7 +5,7 @@ module ysyx_22040088_controlunit(
     output  [10:0] alu_op,
     output         rf_we,
     output  [ 1:0] sel_alusrc1,
-    output  [ 3:0] sel_alusrc2,
+    output  [ 4:0] sel_alusrc2,
     output  [ 6:0] sel_nextpc,
     output  [ 1:0] sel_rfres,
     output         mem_ena,
@@ -81,9 +81,10 @@ assign alu_op = {inst_lui, inst_sra, inst_srl, inst_sll, inst_xor, inst_or,
 assign rf_we =  inst_addi | inst_jal | inst_jalr | inst_lui | inst_auipc | r_type | inst_ld;
 assign sel_alusrc1 = {inst_auipc | inst_jal | inst_jalr,  // pc
                       inst_addi | r_type | b_type | inst_ld | inst_sd};  // rdata1
-assign sel_alusrc2 = {inst_jal | inst_jalr,  // 4
+assign sel_alusrc2 = {inst_sd,  // immS
+                      inst_jal | inst_jalr,  // 4
                       inst_auipc | inst_lui,  // immU
-                      inst_addi | inst_ld | inst_sd, // immI
+                      inst_addi | inst_ld, // immI
                       r_type | b_type};  // rdata2
 assign sel_nextpc = {inst_bge | inst_bgeu,
                      inst_blt | inst_bltu,
