@@ -1,13 +1,14 @@
 module top(
     input   clk,
     input   rst,
+	input   [31:0] inst,
 	output	[63:0] pc
 );
 
 wire [63:0] nextpc;
-reg [31:0] inst;
-/* verilator lint_off UNUSED */
-wire [63:0] inst_data;
+// reg [31:0] inst;
+// /* verilator lint_off UNUSED */
+// wire [63:0] inst_data;
 // IFU
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.clk    (clk    ),
@@ -16,14 +17,14 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.pc     (pc     )
 );
 
-import "DPI-C" function void pmem_read(
-  input longint raddr, output longint rdata);
-always @(*) begin
-	pmem_read(pc, inst_data);
-end
-always @(posedge clk) begin
-	inst <= inst_data[31:0];
-end
+// import "DPI-C" function void pmem_read(
+//   input longint raddr, output longint rdata);
+// always @(*) begin
+// 	pmem_read(pc, inst_data);
+// end
+// always @(posedge clk) begin
+// 	inst <= inst_data[31:0];
+// end
 
 // 控制信号
 wire [10:0] alu_op;
