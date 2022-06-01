@@ -30,7 +30,7 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 wire [10:0] alu_op;
 wire [ 6:0] sel_nextpc;
 wire [ 1:0] sel_alusrc1;
-wire [ 3:0] sel_alusrc2;
+wire [ 4:0] sel_alusrc2;
 // 数据
 wire [63:0] rf_rdata1;
 wire [63:0] rf_rdata2;
@@ -38,6 +38,7 @@ wire [11:0] immI;
 wire [20:0] immJ;
 wire [19:0] immU;
 wire [12:0] immB;
+wire [11:0] immS;
 wire [63:0] rf_wdata;
 wire [63:0] alu_result;
 // IDU
@@ -66,6 +67,7 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.immJ        (immJ        ),
 	.immU        (immU        ),
 	.immB        (immB        ),
+	.immS		 (immS        ),
 	.sel_rfres   (sel_rfres   ),
 	.mem_wen     (mem_wen     ),
 	.mem_ena     (mem_ena     )
@@ -85,6 +87,7 @@ ysyx_22040088_EXU u_ysyx_22040088_EXU(
 	.immJ        (immJ        ),
 	.immU        (immU        ),
 	.immB        (immB        ),
+	.immS		 (immS        ),
 	.alu_result  (alu_result  ),
 	.nextpc      (nextpc      )
 );

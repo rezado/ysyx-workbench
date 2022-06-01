@@ -6,7 +6,7 @@ module ysyx_22040088_EXU(
     input [10:0] alu_op,
     input [ 6:0] sel_nextpc,
     input [ 1:0] sel_alusrc1,
-    input [ 3:0] sel_alusrc2,
+    input [ 4:0] sel_alusrc2,
 
     // 寄存器 立即数
     input [63:0] rf_rdata1,
@@ -15,12 +15,13 @@ module ysyx_22040088_EXU(
     input [20:0] immJ,
     input [19:0] immU,
     input [12:0] immB,
+    input [11:0] immS,
     
     output [63:0] alu_result,
     output [63:0] nextpc
 );
 
-wire [63:0] immI_sext, immJ_sext, immU_sext, immB_sext;
+wire [63:0] immI_sext, immJ_sext, immU_sext, immB_sext, immS_sext;
 // 立即数符号扩展
 ysyx_22040088_signext#(12, 64) u_ysyx_22040088_signext1(
     .in  (immI      ),
@@ -42,6 +43,12 @@ ysyx_22040088_signext#(13, 64) u_ysyx_22040088_signext4(
     .out (immB_sext )
 );
 
+ysyx_22040088_signext#(12, 64) u_ysyx_22040088_signext5(
+    .in  (immS  ),
+    .out (immS_sext )
+);
+
+
 
 // alu源操作数生成逻辑
 wire [63:0] alu_src1, alu_src2;
@@ -56,6 +63,7 @@ ysyx_22040088_genALUsrc2 u_ysyx_22040088_genALUsrc2(
     .rdata2      (rf_rdata2   ),
     .immI        (immI_sext   ),
     .immU        (immU_sext   ),
+    .immS        (immS_sext   ),
     .sel_alusrc2 (sel_alusrc2 ),
     .alu_src2    (alu_src2    )
 );
