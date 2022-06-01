@@ -54,6 +54,7 @@ VL_MODULE(Vtop___024root) {
     CData/*0:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_cin;
     SData/*10:0*/ top__DOT__alu_op;
     SData/*12:0*/ top__DOT__immB;
+    IData/*31:0*/ top__DOT__inst;
     IData/*20:0*/ top__DOT__immJ;
     QData/*63:0*/ top__DOT__nextpc;
     QData/*63:0*/ top__DOT__inst_data;
@@ -82,6 +83,7 @@ VL_MODULE(Vtop___024root) {
     CData/*0:0*/ __Vclklast__TOP__clk;
     VlWide<5>/*131:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_genALUsrc1__DOT____Vcellinp__u_MuxKeyWithDefault__lut;
     VlWide<9>/*271:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_genALUsrc2__DOT____Vcellinp__u_MuxKeyWithDefault__lut;
+    QData/*63:0*/ __Vtask_top__DOT__pmem_read__0__rdata;
     QData/*63:0*/ __Vtask_top__DOT__u_mem__DOT__pmem_read__3__rdata;
     VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
 
