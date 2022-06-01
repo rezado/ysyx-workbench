@@ -56,10 +56,11 @@ extern void sdb_mainloop();
 
 int main(int argc, char *argv[]) {
   assert(argv[1]);
+  puts("1");
   sim_init(argv[1]);
+  puts("1");
 
   reset(4);
-  puts("1");
   sdb_mainloop();
 
   sim_exit();
