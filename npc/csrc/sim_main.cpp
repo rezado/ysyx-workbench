@@ -59,6 +59,7 @@ int main(int argc, char *argv[]) {
   sim_init(argv[1]);
 
   reset(4);
+  puts("1");
 
   sdb_mainloop();
 
