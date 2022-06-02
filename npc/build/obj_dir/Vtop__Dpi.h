@@ -13,9 +13,9 @@ extern "C" {
 
 
     // DPI IMPORTS
-    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:94:30
+    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:97:30
     extern void finish_sim();
-    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:105:30
+    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:108:30
     extern void get_inst(int inst);
     // DPI import at /home/bill/ysyx-workbench/npc/vsrc/mem.v:10:30
     extern void pmem_read(long long raddr, long long* rdata);

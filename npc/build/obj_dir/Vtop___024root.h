@@ -27,6 +27,7 @@ VL_MODULE(Vtop___024root) {
     // LOCAL SIGNALS
     CData/*6:0*/ top__DOT__sel_nextpc;
     CData/*1:0*/ top__DOT__sel_alusrc1;
+    CData/*4:0*/ top__DOT__sel_alusrc2;
     CData/*1:0*/ top__DOT__sel_rfres;
     CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addi;
     CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_jalr;
@@ -54,6 +55,7 @@ VL_MODULE(Vtop___024root) {
     CData/*0:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_cin;
     SData/*10:0*/ top__DOT__alu_op;
     SData/*12:0*/ top__DOT__immB;
+    SData/*11:0*/ top__DOT__immS;
     IData/*20:0*/ top__DOT__immJ;
     QData/*63:0*/ top__DOT__nextpc;
     QData/*63:0*/ top__DOT__rf_rdata1;
@@ -64,7 +66,6 @@ VL_MODULE(Vtop___024root) {
     QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__alu_src1;
     QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__alu_src2;
     QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__lut_out;
-    QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_genALUsrc2__DOT__immS;
     QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__slt_result;
     QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_b;
     QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_result;
