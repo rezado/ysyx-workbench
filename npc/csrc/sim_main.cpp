@@ -37,9 +37,9 @@ void sim_init(char *arg) {
 	int ret = fread(guest_to_host(CONFIG_MBASE), size, 1, fp);
 	assert(ret == 1);
 	fclose(fp);
-	for (int i = 0; i < size; i++)
-		printf("%c ", pmem[i]);
-	printf("\n");
+	// for (int i = 0; i < size; i++)
+	// 	printf("%c ", pmem[i]);
+	// printf("\n");
 
   init_sdb();
 
