@@ -24,7 +24,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   // printf("write:waddr:%llx, wdata:%llx, wmask:%x\n", waddr, wdata, wmask);
   for (int i = 0; i < 8; i++) {
     if (wmask & 1 == 1) {
-      host_write(guest_to_host(waddr & ~0x7ull), 1, wdata);
+      host_write(guest_to_host(waddr), 1, wdata);
     }
     wmask >>= 1;
     waddr += 8;
