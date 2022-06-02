@@ -78,9 +78,7 @@ void cpu_exec(uint64_t n) {
 }
 
 void reset(int n) {
-  puts("rest");
     top->rst = 1;
-    puts("rst2");
     while (n--) single_cycle();
     top->rst = 0;
 }

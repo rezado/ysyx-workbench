@@ -8,7 +8,7 @@ paddr_t host_to_guest(uint8_t *haddr) { return haddr - pmem + CONFIG_MBASE; }
 
 /* 访存相关 */
 uint64_t paddr_read(uint64_t addr, int len) {
-  uint64_t ret = host_read(guest_to_host(addr & ~0x7ull), len);
+  uint64_t ret = host_read(guest_to_host(addr), len);
   return ret;
 } 
 
