@@ -92,7 +92,7 @@ assign sel_nextpc = {inst_bge | inst_bgeu,
                      inst_beq,
                      inst_jalr,
                      inst_jal,
-                     inst_addi | inst_auipc | inst_lui | inst_sd | r_type | inst_ld | inst_sd};
+                     inst_addi | inst_auipc | inst_lui | r_type | mem};
 assign sel_rfres = {inst_ld, ~inst_ld};
 assign mem_ena = mem;
 assign mem_wen = {inst_sd, inst_sd, inst_sd, inst_sd, inst_sd, inst_sd, inst_sd, inst_sd};
