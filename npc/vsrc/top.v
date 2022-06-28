@@ -1,13 +1,12 @@
 module top(
     input   clk,
     input   rst,
-	input   [31:0] inst,
 	output	[63:0] pc
 );
 
 wire [63:0] nextpc;
-// reg [31:0] inst;
-// /* verilator lint_off UNUSED */
+/* verilator lint_off UNUSED */
+reg [63:0] inst;
 // wire [63:0] inst_data;
 // IFU
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
@@ -17,11 +16,11 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.pc     (pc     )
 );
 
-// import "DPI-C" function void pmem_read(
-//   input longint raddr, output longint rdata);
-// always @(*) begin
-// 	pmem_read(pc, inst_data);
-// end
+import "DPI-C" function void pmem_read(
+  input longint raddr, output longint rdata);
+always @(*) begin
+	pmem_read(pc, inst);
+end
 // always @(posedge clk) begin
 // 	inst <= inst_data[31:0];
 // end
@@ -58,7 +57,7 @@ ysyx_22040088_genrfwdata u_ysyx_22040088_genrfwdata(
 
 ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.clk         (clk         ),
-	.inst        (inst        ),
+	.inst        (inst[31:0]  ),
 	.rf_wdata    (rf_wdata    ),
 	.alu_op      (alu_op      ),
 	.sel_nextpc  (sel_nextpc  ),
@@ -100,7 +99,7 @@ ysyx_22040088_EXU u_ysyx_22040088_EXU(
 // ebreak
 import "DPI-C" function void finish_sim();
 wire ebreak;
-assign ebreak = (inst == 32'b000000000001_00000_000_00000_1110011);
+assign ebreak = (inst[31:0] == 32'b000000000001_00000_000_00000_1110011);
 always @(posedge clk) begin
 	if (ebreak) begin
 		finish_sim();
@@ -111,7 +110,7 @@ end
 // inst
 import "DPI-C" function void get_inst(int inst);
 always@(*) begin
-	get_inst(inst);
+	get_inst(inst[31:0]);
 end
 
 // memory
