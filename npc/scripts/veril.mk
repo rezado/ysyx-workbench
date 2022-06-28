@@ -7,7 +7,7 @@ VERILATOR_SIM_CFLAGS += -Wall --trace --cc --exe --build
 
 BUILD_DIR = ./build
 OBJ_DIR = $(BUILD_DIR)/obj_dir
-BIN = obj_dir/V$(TOPNAME)
+BIN = OBJ_DIR/V$(TOPNAME)
 
 default: $(BIN)
 
@@ -26,7 +26,7 @@ LDFLAGS += $(shell llvm-config --libs)
 NPCFLAGS := 
 NPC_EXEC := $(BIN) $(ARGS) $(IMG)
 
-run: $(BIN) $(ARGS) $(IMG)
+run: $(NPC_EXEC)
 
 clean:
 	-rm -rf ./obj_dir
