@@ -83,8 +83,9 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
     __Vdlyvset__top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf__v0 = 0U;
     if (VL_UNLIKELY((0x100073U == (IData)(vlSelf->top__DOT__inst)))) {
         Vtop___024root____Vdpiimwrap_top__DOT__finish_sim_TOP();
-        VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 106, "");
+        VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 107, "");
     }
+    VL_WRITEF("1\n");
     Vtop___024root____Vdpiimwrap_top__DOT__pmem_read_TOP(vlSelf->pc, __Vtask_top__DOT__pmem_read__0__rdata);
     vlSelf->top__DOT__inst = __Vtask_top__DOT__pmem_read__0__rdata;
     if ((((((((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addi) 
