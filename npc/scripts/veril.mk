@@ -26,7 +26,7 @@ LDFLAGS += $(shell llvm-config --libs)
 NPCFLAGS := 
 NPC_EXEC := $(BIN) $(ARGS) $(IMG)
 
-run: $(NPC_EXEC)
+run: $(BIN) $(ARGS) $(IMG)
 
 clean:
 	-rm -rf ./obj_dir
