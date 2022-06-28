@@ -20,7 +20,9 @@ import "DPI-C" function void pmem_read(
   input longint raddr, output longint rdata);
 always @(posedge clk) begin
 	$display("1");
-	pmem_read(pc, inst);
+	if (|pc) begin
+		pmem_read(pc, inst);
+	end
 	$display("2");
 end
 // always @(posedge clk) begin
