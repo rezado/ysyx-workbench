@@ -12,6 +12,7 @@ VerilatedVcdC* tfp = NULL;
 void init_monitor(int, char *[]);
 void am_init_monitor();
 int is_exit_status_bad();
+void sdb_mainloop();
 
 /* 仿真开始结束相关 */
 
