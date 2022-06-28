@@ -13,13 +13,13 @@ extern "C" {
 
 
     // DPI IMPORTS
-    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:97:30
+    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:101:30
     extern void finish_sim();
-    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:108:30
+    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:112:30
     extern void get_inst(int inst);
-    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/mem.v:10:30
+    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/mem.v:11:30
     extern void pmem_read(long long raddr, long long* rdata);
-    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/mem.v:12:30
+    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/mem.v:13:30
     extern void pmem_write(long long waddr, long long wdata, char wmask);
     // DPI import at /home/bill/ysyx-workbench/npc/vsrc/ysyx_22040088_regfile.v:21:30
     extern void set_gpr_ptr(const svOpenArrayHandle a);

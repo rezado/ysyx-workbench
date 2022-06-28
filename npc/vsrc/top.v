@@ -42,16 +42,19 @@ wire [11:0] immS;
 wire [63:0] rf_wdata;
 wire [63:0] alu_result;
 // IDU
-wire [1:0] sel_rfres;
-wire [7:0] mem_wen;
+wire [2:0] sel_rfres;
+wire mem_wen;
 wire mem_ena;
+wire [3:0] mem_mask;
 wire [63:0] mem_rdata;
 ysyx_22040088_genrfwdata u_ysyx_22040088_genrfwdata(
 	.alu_result  (alu_result  ),
 	.mem_rdata   (mem_rdata   ),
 	.sel_rfwdata (sel_rfres   ),
+	.mem_mask    (mem_mask    ),
 	.rf_wdata    (rf_wdata    )
 );
+
 
 ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.clk         (clk         ),
@@ -70,7 +73,8 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.immS		 (immS        ),
 	.sel_rfres   (sel_rfres   ),
 	.mem_wen     (mem_wen     ),
-	.mem_ena     (mem_ena     )
+	.mem_ena     (mem_ena     ),
+	.mem_mask    (mem_mask    )
 );
 
 
@@ -112,11 +116,12 @@ end
 
 // memory
 mem u_mem(
-	.ena   (mem_ena   ),
-	.wen   (mem_wen   ),
-	.addr  (alu_result  ),
-	.wdata (rf_rdata2 ),
-	.rdata (mem_rdata )
+	.ena      (mem_ena    ),
+	.wen      (mem_wen    ),
+	.mem_mask (mem_mask ),
+	.addr     (alu_result     ),
+	.wdata    (rf_rdata2    ),
+	.rdata    (mem_rdata    )
 );
 
 

@@ -17,9 +17,10 @@ module ysyx_22040088_IDU(
     output [19:0] immU,
     output [12:0] immB,
     output [11:0] immS,
-    output [ 1:0] sel_rfres,
-    output [ 7:0] mem_wen,
-    output        mem_ena
+    output [ 2:0] sel_rfres,
+    output        mem_wen,
+    output        mem_ena,
+    output [ 3:0] mem_mask
 );
 
 // 指令分割
@@ -55,8 +56,10 @@ ysyx_22040088_controlunit u_ysyx_22040088_controlunit(
     .sel_nextpc  (sel_nextpc  ),
     .sel_rfres   (sel_rfres   ),
     .mem_ena     (mem_ena     ),
-    .mem_wen     (mem_wen     )
+    .mem_wen     (mem_wen     ),
+    .mem_mask    (mem_mask    )
 );
+
 
 
 /* verilator lint_off UNUSED */
