@@ -2,20 +2,21 @@ module ysyx_22040088_gennextpc(
     input   [63:0] pcadd,
     input   [63:0] jalpc,
     input   [63:0] jalrpc,
-    input   [ 2:0] sel_nextpc,
+    input   [63:0] beqpc,
+    input   [63:0] bnepc,
+    input   [63:0] bltpc, // blt & blu
+    input   [63:0] bgepc,
+    input   [ 6:0] sel_nextpc,
     output  [63:0] nextpc
 );
 
-MuxKeyWithDefault #(3, 3, 64) u_MuxKeyWithDefault(
-    .out         (nextpc         ),
-    .key         (sel_nextpc      ),
-    .default_out (64'b0 ),
-    .lut         ({
-        3'b001, pcadd,
-        3'b010, jalpc,
-        3'b100, jalrpc
-    })
-);
+assign nextpc = ({64{sel_nextpc[0]}} & pcadd)
+              | ({64{sel_nextpc[1]}} & jalpc)
+              | ({64{sel_nextpc[2]}} & jalrpc)
+              | ({64{sel_nextpc[3]}} & beqpc)
+              | ({64{sel_nextpc[4]}} & bnepc)
+              | ({64{sel_nextpc[5]}} & bltpc)
+              | ({64{sel_nextpc[6]}} & bgepc);
 
 
 endmodule
