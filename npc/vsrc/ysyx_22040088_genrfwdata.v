@@ -8,7 +8,7 @@ module ysyx_22040088_genrfwdata(
 
 wire [63:0] mem_zext, mem_sext;
 
-assign mem_zext = mem_mask[0] ? mem_rdata :
+assign mem_sext = mem_mask[0] ? mem_rdata :
                   mem_mask[1] ? {{32{mem_rdata[31]}}, mem_rdata[31:0]} :
                   mem_mask[2] ? {{48{mem_rdata[15]}}, mem_rdata[15:0]} :
                   mem_mask[3] ? {{56{mem_rdata[7]}}, mem_rdata[7:0]} :
