@@ -28,7 +28,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
       host_write(guest_to_host(waddr), 1, wdata);
     }
     wmask >>= 1;
-    waddr += 8;
+    waddr += 1;
     wdata >>= 4;
   }
   
