@@ -18,7 +18,7 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 
 import "DPI-C" function void pmem_read(
   input longint raddr, output longint rdata);
-always @(*) begin
+always @(posedge clk) begin
 	pmem_read(pc, inst);
 end
 // always @(posedge clk) begin
