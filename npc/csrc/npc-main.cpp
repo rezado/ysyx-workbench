@@ -11,8 +11,8 @@ VerilatedVcdC* tfp = NULL;
 /* 函数声明 */
 void init_monitor(int, char *[]);
 void am_init_monitor();
-void engine_start();
 int is_exit_status_bad();
+void sdb_mainloop();
 
 /* 仿真开始结束相关 */
 
@@ -66,7 +66,7 @@ int main(int argc, char *argv[]) {
 #endif
 
   /* Start engine. */
-  // engine_start();
+  sdb_mainloop();
 
   sim_exit();
   return 0;
