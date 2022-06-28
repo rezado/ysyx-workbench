@@ -88,7 +88,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
     if (VL_UNLIKELY((0U != vlSelf->pc))) {
         Vtop___024root____Vdpiimwrap_top__DOT__pmem_read_TOP(vlSelf->pc, __Vtask_top__DOT__pmem_read__0__rdata);
         vlSelf->top__DOT__inst = __Vtask_top__DOT__pmem_read__0__rdata;
-        VL_WRITEF("%10#\n",32,(IData)(vlSelf->top__DOT__inst));
+        VL_WRITEF("%20#\n",64,vlSelf->top__DOT__inst);
     }
     if ((((((((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addi) 
               | (0x6fU == (0x7fU & (IData)(vlSelf->top__DOT__inst)))) 
