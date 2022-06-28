@@ -194,10 +194,56 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__3(Vtop___024root* vlSelf) {
                  & vlSelf->top__DOT__alu_result) | 
                 ((- (QData)((IData)((1U & ((IData)(vlSelf->top__DOT__sel_rfres) 
                                            >> 1U))))) 
-                 & vlSelf->top__DOT__u_ysyx_22040088_genrfwdata__DOT__mem_sext)) 
-               | ((- (QData)((IData)((1U & ((IData)(vlSelf->top__DOT__sel_rfres) 
-                                            >> 2U))))) 
-                  & vlSelf->top__DOT__u_ysyx_22040088_genrfwdata__DOT__mem_zext));
+                 & ((1U & (IData)(vlSelf->top__DOT__mem_mask))
+                     ? vlSelf->top__DOT__mem_rdata : 
+                    ((2U & (IData)(vlSelf->top__DOT__mem_mask))
+                      ? (((QData)((IData)((- (IData)(
+                                                     (1U 
+                                                      & (IData)(
+                                                                (vlSelf->top__DOT__mem_rdata 
+                                                                 >> 0x1fU))))))) 
+                          << 0x20U) | (QData)((IData)(vlSelf->top__DOT__mem_rdata)))
+                      : ((4U & (IData)(vlSelf->top__DOT__mem_mask))
+                          ? (((- (QData)((IData)((1U 
+                                                  & (IData)(
+                                                            (vlSelf->top__DOT__mem_rdata 
+                                                             >> 0xfU)))))) 
+                              << 0x10U) | (QData)((IData)(
+                                                          (0xffffU 
+                                                           & (IData)(vlSelf->top__DOT__mem_rdata)))))
+                          : ((8U & (IData)(vlSelf->top__DOT__mem_mask))
+                              ? (((- (QData)((IData)(
+                                                     (1U 
+                                                      & (IData)(
+                                                                (vlSelf->top__DOT__mem_rdata 
+                                                                 >> 7U)))))) 
+                                  << 8U) | (QData)((IData)(
+                                                           (0xffU 
+                                                            & (IData)(vlSelf->top__DOT__mem_rdata)))))
+                              : 0ULL)))))) | ((- (QData)((IData)(
+                                                                 (1U 
+                                                                  & ((IData)(vlSelf->top__DOT__sel_rfres) 
+                                                                     >> 2U))))) 
+                                              & ((1U 
+                                                  & (IData)(vlSelf->top__DOT__mem_mask))
+                                                  ? vlSelf->top__DOT__mem_rdata
+                                                  : 
+                                                 ((2U 
+                                                   & (IData)(vlSelf->top__DOT__mem_mask))
+                                                   ? (QData)((IData)(vlSelf->top__DOT__mem_rdata))
+                                                   : 
+                                                  ((4U 
+                                                    & (IData)(vlSelf->top__DOT__mem_mask))
+                                                    ? (QData)((IData)(
+                                                                      (0xffffU 
+                                                                       & (IData)(vlSelf->top__DOT__mem_rdata))))
+                                                    : 
+                                                   ((8U 
+                                                     & (IData)(vlSelf->top__DOT__mem_mask))
+                                                     ? (QData)((IData)(
+                                                                       (0xffU 
+                                                                        & (IData)(vlSelf->top__DOT__mem_rdata))))
+                                                     : 0ULL))))));
         __Vdlyvset__top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf__v0 = 1U;
         __Vdlyvdim0__top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf__v0 
             = (0x1fU & (vlSelf->inst >> 7U));
@@ -783,22 +829,6 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__5(Vtop___024root* vlSelf) {
                                                                                 (1U 
                                                                                 & (IData)(vlSelf->top__DOT__u_mem__DOT__mask))))))))))) 
                                       >> (7U & (IData)(vlSelf->top__DOT__alu_result))));
-    vlSelf->top__DOT__u_ysyx_22040088_genrfwdata__DOT__mem_zext 
-        = ((1U & (IData)(vlSelf->top__DOT__mem_mask))
-            ? vlSelf->top__DOT__mem_rdata : ((2U & (IData)(vlSelf->top__DOT__mem_mask))
-                                              ? (QData)((IData)(vlSelf->top__DOT__mem_rdata))
-                                              : ((4U 
-                                                  & (IData)(vlSelf->top__DOT__mem_mask))
-                                                  ? (QData)((IData)(
-                                                                    (0xffffU 
-                                                                     & (IData)(vlSelf->top__DOT__mem_rdata))))
-                                                  : 
-                                                 ((8U 
-                                                   & (IData)(vlSelf->top__DOT__mem_mask))
-                                                   ? (QData)((IData)(
-                                                                     (0xffU 
-                                                                      & (IData)(vlSelf->top__DOT__mem_rdata))))
-                                                   : 0ULL))));
 }
 
 void Vtop___024root___eval(Vtop___024root* vlSelf) {
