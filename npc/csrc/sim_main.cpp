@@ -16,6 +16,7 @@ void init_sdb();
 void single_cycle() {
     top->clk = 0; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
     top->clk = 1; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
+    
 }
 
 extern "C" void init_disasm(const char *triple);
@@ -59,7 +60,6 @@ int main(int argc, char *argv[]) {
   sim_init(argv[1]);
 
   reset(4);
-
   sdb_mainloop();
 
   sim_exit();

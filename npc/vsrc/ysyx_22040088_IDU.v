@@ -7,7 +7,7 @@ module ysyx_22040088_IDU(
     output [10:0] alu_op,
     output [ 6:0] sel_nextpc,
     output [ 1:0] sel_alusrc1,
-    output [ 3:0] sel_alusrc2,
+    output [ 4:0] sel_alusrc2,
     
     // 寄存器 立即数
     output [63:0] rf_rdata1,
@@ -15,7 +15,11 @@ module ysyx_22040088_IDU(
     output [11:0] immI,
     output [20:0] immJ,
     output [19:0] immU,
-    output [12:0] immB
+    output [12:0] immB,
+    output [11:0] immS,
+    output [ 1:0] sel_rfres,
+    output [ 7:0] mem_wen,
+    output        mem_ena
 );
 
 // 指令分割
@@ -36,9 +40,10 @@ assign immI = inst[31:20];
 assign immJ = {inst[31], inst[19:12], inst[20], inst[30:21], 1'b0};
 assign immU = inst[31:12];
 assign immB = {inst[31], inst[7], inst[30:25], inst[11:8], 1'b0};
-
+assign immS = {inst[31:25], inst[11:7]};
 
 wire rf_we;
+
 ysyx_22040088_controlunit u_ysyx_22040088_controlunit(
     .opcode      (opcode      ),
     .funct3      (funct3      ),
@@ -47,8 +52,12 @@ ysyx_22040088_controlunit u_ysyx_22040088_controlunit(
     .rf_we       (rf_we       ),
     .sel_alusrc1 (sel_alusrc1 ),
     .sel_alusrc2 (sel_alusrc2 ),
-    .sel_nextpc  (sel_nextpc  )
+    .sel_nextpc  (sel_nextpc  ),
+    .sel_rfres   (sel_rfres   ),
+    .mem_ena     (mem_ena     ),
+    .mem_wen     (mem_wen     )
 );
+
 
 /* verilator lint_off UNUSED */
 ysyx_22040088_regfile u_ysyx_22040088_regfile(
