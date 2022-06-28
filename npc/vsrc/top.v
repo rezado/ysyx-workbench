@@ -18,11 +18,10 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 
 import "DPI-C" function void pmem_read(
   input longint raddr, output longint rdata);
-always @(*) begin
-	if (|pc)
+always @(posedge clk) begin
+	if (|pc) begin
 		pmem_read(pc, inst);
-	else
-		inst = 64'b0;
+	end
 	$display(inst[31:0]);
 end
 // always @(posedge clk) begin
