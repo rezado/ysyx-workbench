@@ -43,7 +43,7 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
     VlWide<3>/*95:0*/ __Vtemp21;
     VlWide<3>/*95:0*/ __Vtemp22;
     // Body
-    VL_WRITEF("1\n1\n");
+    VL_WRITEF("2\n1\n");
     if (VL_UNLIKELY((0U != vlSelf->pc))) {
         Vtop___024root____Vdpiimwrap_top__DOT__pmem_read_TOP(vlSelf->pc, vlSelf->__Vtask_top__DOT__pmem_read__0__rdata);
         vlSelf->top__DOT__inst_data = vlSelf->__Vtask_top__DOT__pmem_read__0__rdata;
