@@ -180,7 +180,6 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__3(Vtop___024root* vlSelf) {
         Vtop___024root____Vdpiimwrap_top__DOT__finish_sim_TOP();
         VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 126, "");
     }
-    VL_WRITEF("ID:\n%10#\n",32,vlSelf->inst);
     __Vdlyvset__top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf__v0 = 0U;
     vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000ULL
                    : vlSelf->top__DOT__nextpc);
