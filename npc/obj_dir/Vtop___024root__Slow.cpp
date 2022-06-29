@@ -464,7 +464,7 @@ void Vtop___024root___settle__TOP__2(Vtop___024root* vlSelf) {
                                                                  != 
                                                                  (3U 
                                                                   & (IData)(vlSelf->top__DOT__alu_op)))))) 
-                                             & vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_result) 
+                                             & (~ vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_result)) 
                                             | ((- (QData)((IData)(
                                                                   (1U 
                                                                    & ((IData)(vlSelf->top__DOT__alu_op) 
