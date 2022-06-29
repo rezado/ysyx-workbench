@@ -53,9 +53,10 @@ void Vtop___024root___settle__TOP__3(Vtop___024root* vlSelf) {
     VlWide<3>/*95:0*/ __Vtemp44;
     VlWide<3>/*95:0*/ __Vtemp45;
     // Body
-    if ((0U != vlSelf->pc)) {
+    if (VL_UNLIKELY((0U != vlSelf->pc))) {
         Vtop___024root____Vdpiimwrap_top__DOT__pmem_read_TOP(vlSelf->pc, vlSelf->__Vtask_top__DOT__pmem_read__0__rdata);
         vlSelf->top__DOT__inst_data = vlSelf->__Vtask_top__DOT__pmem_read__0__rdata;
+        VL_WRITEF("assign:%20#\n",64,vlSelf->top__DOT__inst_data);
     } else {
         vlSelf->top__DOT__inst_data = 0ULL;
     }
