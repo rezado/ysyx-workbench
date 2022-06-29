@@ -27,6 +27,9 @@ always @(*) begin
 		inst_data = 64'b0;
 	end
 end
+always@(*) begin
+	$display("1");
+end
 always @(posedge clk) begin
 	$display("top:");
 	inst <= inst_data[31:0];
