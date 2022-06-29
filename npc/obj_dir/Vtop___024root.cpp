@@ -159,7 +159,9 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
             = __Vdlyvval__top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf__v0;
     }
     vlSelf->top__DOT__inst = (IData)(vlSelf->top__DOT__inst_data);
-    Vtop___024root____Vdpiimwrap_top__DOT__pmem_read_TOP(vlSelf->pc, vlSelf->__Vtask_top__DOT__pmem_read__0__rdata);
+    Vtop___024root____Vdpiimwrap_top__DOT__pmem_read_TOP(
+                                                         (0x80000000ULL 
+                                                          | vlSelf->pc), vlSelf->__Vtask_top__DOT__pmem_read__0__rdata);
     vlSelf->top__DOT__inst_data = vlSelf->__Vtask_top__DOT__pmem_read__0__rdata;
     Vtop___024root____Vdpiimwrap_top__DOT__get_inst_TOP(vlSelf->top__DOT__inst);
     vlSelf->top__DOT__immJ = ((0x100000U & (vlSelf->top__DOT__inst 

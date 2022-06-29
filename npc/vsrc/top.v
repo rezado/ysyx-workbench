@@ -30,6 +30,7 @@ import "DPI-C" function void pmem_read(
 // end
 
 always @(*) begin
+	$display("read");
 	pmem_read(pc | 64'h80000000, inst_data);
 end
 
