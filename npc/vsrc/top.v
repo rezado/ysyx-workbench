@@ -34,9 +34,11 @@ import "DPI-C" function void pmem_read(
 // end
 
 always @(posedge clk) begin
-	$display("top:");
-	pmem_read(pc, inst);
-	$display(inst);
+	if (|pc) begin
+		$display("top:");
+		pmem_read(pc, inst);
+		$display(inst);
+	end
 end
 // always @(posedge clk) begin
 // 	inst <= inst_data[31:0];
