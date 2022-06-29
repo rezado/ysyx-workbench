@@ -128,7 +128,7 @@ end
 
 // inst
 import "DPI-C" function void get_inst(int inst);
-always@(*) begin
+always@(posedge clk) begin
 	get_inst(inst[31:0]);
 end
 
