@@ -21,6 +21,7 @@ import "DPI-C" function void pmem_read(
 always @(*) begin
 	if(|pc) begin
 		pmem_read(pc, inst_data);
+		$display("assign:", inst_data);
 	end else begin
 		inst_data = 64'b0;
 	end
