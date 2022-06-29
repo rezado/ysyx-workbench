@@ -28,7 +28,7 @@ always @(*) begin
 	end
 end
 always@(*) begin
-	$display("1");
+	$display("2");
 end
 always @(posedge clk) begin
 	$display("top:");
