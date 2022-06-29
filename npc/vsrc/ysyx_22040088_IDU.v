@@ -45,9 +45,12 @@ assign immS = {inst[31:25], inst[11:7]};
 
 wire rf_we;
 
+// Debug
 always@(posedge clk) begin
+    $display("ID:");
     $display(inst);
 end
+
 ysyx_22040088_controlunit u_ysyx_22040088_controlunit(
     .opcode      (opcode      ),
     .funct3      (funct3      ),
