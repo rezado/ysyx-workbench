@@ -7,9 +7,9 @@
 #define Mr vaddr_read
 #define Mw vaddr_write
 
-uint32_t inv = 0;
+int inv = 0;
 
-extern "C" void get_inv(uint32_t inst_inv) {
+extern "C" void get_inv(int inst_inv) {
   inv = inst_inv;
 }
 
