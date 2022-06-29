@@ -31,6 +31,7 @@ VL_MODULE(Vtop___024root) {
     CData/*2:0*/ top__DOT__sel_rfres;
     CData/*0:0*/ top__DOT__mem_ena;
     CData/*3:0*/ top__DOT__mem_mask;
+    CData/*0:0*/ top__DOT__ebreak;
     CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addi;
     CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_jalr;
     CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sd;
