@@ -66,6 +66,7 @@ wire mem_wen;
 wire mem_ena;
 wire [3:0] mem_mask;
 wire [63:0] mem_rdata;
+wire       inst_inv;
 ysyx_22040088_genrfwdata u_ysyx_22040088_genrfwdata(
 	.alu_result  (alu_result  ),
 	.mem_rdata   (mem_rdata   ),
@@ -93,7 +94,8 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.sel_rfres   (sel_rfres   ),
 	.mem_wen     (mem_wen     ),
 	.mem_ena     (mem_ena     ),
-	.mem_mask    (mem_mask    )
+	.mem_mask    (mem_mask    ),
+	.inv         (inst_inv    )
 );
 
 
@@ -119,12 +121,20 @@ ysyx_22040088_EXU u_ysyx_22040088_EXU(
 // ebreak
 import "DPI-C" function void finish_sim();
 wire ebreak;
-assign ebreak = (inst[31:0] == 32'b000000000001_00000_000_00000_1110011);
+
 always @(posedge clk) begin
 	if (ebreak) begin
 		finish_sim();
 		$finish();
 	end
+end
+
+// inv
+wire inv;
+assign inv = inst_inv & ~ebreak;
+import "DPI-C" function void get_inv(int inv);
+always @(*) begin
+    get_inv({{31{inst_inv}}, inst_inv});
 end
 
 // inst

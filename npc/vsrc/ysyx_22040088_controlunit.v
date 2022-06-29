@@ -10,7 +10,8 @@ module ysyx_22040088_controlunit(
     output  [ 2:0] sel_rfres,
     output         mem_ena,
     output         mem_wen,
-    output  [ 3:0] mem_mask
+    output  [ 3:0] mem_mask,
+    output         inv
 );
 // 指令
 wire inst_addi;
@@ -48,8 +49,6 @@ wire inst_lwu;
 wire inst_lhu;
 wire inst_lbu;
 
-wire inst_inv;
-
 // 指令译码
 assign inst_addi = (opcode == 7'b0010011) && (funct3 == 3'b000);
 assign inst_lui = (opcode == 7'b0110111);
@@ -85,12 +84,8 @@ assign inst_sb = (opcode == 7'b0100011) && (funct3 == 3'b000);
 assign inst_lwu = (opcode == 7'b0000011) && (funct3 == 3'b110);
 assign inst_lhu = (opcode == 7'b0000011) && (funct3 == 3'b101);
 assign inst_lbu = (opcode == 7'b0000011) && (funct3 == 3'b100);
-assign inst_inv = ~(inst_addi | inst_lui | inst_auipc | inst_jal | inst_jalr | inst_sd | inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor | inst_sll | inst_srl | inst_sra |
-                   inst_beq | inst_bne | inst_blt | inst_bltu | inst_bge | inst_bgeu | load | store);
-import "DPI-C" function void get_inv(int inv);
-always @(*) begin
-    get_inv({{31{inst_inv}}, inst_inv});
-end
+assign inv = ~(inst_addi | inst_lui | inst_auipc | inst_jal | inst_jalr | inst_sd | inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor | inst_sll | inst_srl | inst_sra |
+               inst_beq | inst_bne | inst_blt | inst_bltu | inst_bge | inst_bgeu | load | store);
 
 
 // 指令类型
