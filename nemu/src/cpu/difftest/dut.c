@@ -79,10 +79,28 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
   ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
 }
 
+const char *regs[] = {
+  "$0", "ra", "sp", "gp", "tp", "t0", "t1", "t2",
+  "s0", "s1", "a0", "a1", "a2", "a3", "a4", "a5",
+  "a6", "a7", "s2", "s3", "s4", "s5", "s6", "s7",
+  "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6"
+};
+
+static void ref_regdisplay(CPU_state *ref) {
+  int i;
+  for(i = 0; i < 32; i++) {
+	  printf("%d %s:0x%016lx\n", i, regs[i], ref->gpr[i]); 
+  }
+}
+
 static void checkregs(CPU_state *ref, vaddr_t pc) {
   if (!isa_difftest_checkregs(ref, pc)) {
     nemu_state.state = NEMU_ABORT;
     nemu_state.halt_pc = pc;
+    Log("Difftest error at PC: %08lx", pc);
+    printf("ref regs\n");
+    ref_regdisplay(ref);
+    printf("dut regs\n");
     isa_reg_display();
   }
 }
