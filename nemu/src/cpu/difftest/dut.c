@@ -97,7 +97,7 @@ static void checkregs(CPU_state *ref, vaddr_t pc) {
   if (!isa_difftest_checkregs(ref, pc)) {
     nemu_state.state = NEMU_ABORT;
     nemu_state.halt_pc = pc;
-    Log("Difftest error at PC: %08lx", pc);
+    Log("Difftest error at PC: 0x%08lx", pc);
     printf("ref regs\n");
     ref_regdisplay(ref);
     printf("dut regs\n");
