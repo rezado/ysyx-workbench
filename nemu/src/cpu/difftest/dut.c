@@ -79,7 +79,7 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
   ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
 }
 
-const char *regs[] = {
+const char *regs1[] = {
   "$0", "ra", "sp", "gp", "tp", "t0", "t1", "t2",
   "s0", "s1", "a0", "a1", "a2", "a3", "a4", "a5",
   "a6", "a7", "s2", "s3", "s4", "s5", "s6", "s7",
@@ -89,7 +89,7 @@ const char *regs[] = {
 static void ref_regdisplay(CPU_state *ref) {
   int i;
   for(i = 0; i < 32; i++) {
-	  printf("%d %s:0x%016lx\n", i, regs[i], ref->gpr[i]); 
+	  printf("%d %s:0x%016lx\n", i, regs1[i], ref->gpr[i]); 
   }
 }
 
