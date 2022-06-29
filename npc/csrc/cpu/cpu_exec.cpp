@@ -172,4 +172,6 @@ void reset(int n) {
 void finish_sim() {
 	printf("simulation finished\n");
 	run_flag = false;
+  bool flag = false;
+  NEMU_TRAP(cpu.pc, isa_reg_str2val("a0", &flag));
 }
