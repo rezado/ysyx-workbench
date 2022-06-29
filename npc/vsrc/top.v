@@ -30,7 +30,7 @@ import "DPI-C" function void pmem_read(
 // end
 
 always @(*) begin
-	pmem_read(pc, inst_data);
+	pmem_read(pc | 64'h80000000, inst_data);
 end
 
 always @(posedge clk) begin
