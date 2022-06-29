@@ -33,7 +33,7 @@ import "DPI-C" function void pmem_read(
 // 	pmem_read(pc, inst_data);
 // end
 
-always @(posedge clk) begin
+always @(negedge clk) begin
 	if (|pc) begin
 		$display("top:");
 		pmem_read(pc, inst);
