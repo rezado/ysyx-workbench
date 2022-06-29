@@ -30,7 +30,7 @@ char logbuf[128];
 // DPI-C得到指令
 extern void get_inst(int inst) {
   instr.val = inst;
-  printf("inst:%x\n", inst);
+  // printf("inst:%x\n", inst);
 }
 
 #ifdef CONFIG_ITRACE
