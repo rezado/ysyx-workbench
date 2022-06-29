@@ -55,7 +55,7 @@ wire 		adder_cout;
 assign adder_a   = alu_src1;
 assign adder_b   = (op_sub | op_slt | op_sltu) ? ~alu_src2 : alu_src2;
 assign adder_cin = (op_sub | op_slt | op_sltu) ?      1'b1 :     1'b0;
-assign {adder_cout, adder_result} = adder_a + adder_b + {{63{1'b0}}, adder_cin};
+assign {adder_cout, adder_result} = adder_a - adder_b + {{63{1'b0}}, adder_cin};
 
 assign add_sub_result = adder_result;
 
