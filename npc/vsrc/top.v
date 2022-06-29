@@ -134,7 +134,7 @@ wire inv;
 assign inv = inst_inv & ~ebreak;
 import "DPI-C" function void get_inv(int inv);
 always @(*) begin
-    get_inv({{31{inst_inv}}, inst_inv});
+    get_inv({{31{inv}}, inv});
 end
 
 // inst
