@@ -85,9 +85,9 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
         Vtop___024root____Vdpiimwrap_top__DOT__finish_sim_TOP();
         VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 111, "");
     }
-    VL_WRITEF("%10#\n",32,(IData)(vlSelf->top__DOT__inst));
+    VL_WRITEF("ID:\n%10#\n",32,(IData)(vlSelf->top__DOT__inst));
     if (VL_UNLIKELY((0U != vlSelf->pc))) {
-        VL_WRITEF("%10#\n",32,(IData)(vlSelf->top__DOT__inst));
+        VL_WRITEF("top:\n");
         Vtop___024root____Vdpiimwrap_top__DOT__pmem_read_TOP(vlSelf->pc, __Vtask_top__DOT__pmem_read__0__rdata);
         vlSelf->top__DOT__inst = __Vtask_top__DOT__pmem_read__0__rdata;
         VL_WRITEF("%10#\n",32,(IData)(vlSelf->top__DOT__inst));
