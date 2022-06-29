@@ -30,6 +30,7 @@ char logbuf[128];
 // DPI-C得到指令
 extern void get_inst(int inst) {
   instr.val = inst;
+  // printf("inst:%x\n", inst);
 }
 
 #ifdef CONFIG_ITRACE
@@ -171,4 +172,6 @@ void reset(int n) {
 void finish_sim() {
 	printf("simulation finished\n");
 	run_flag = false;
+  bool flag = false;
+  NEMUTRAP(cpu.pc, isa_reg_str2val("a0", &flag));
 }

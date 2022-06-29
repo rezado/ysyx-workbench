@@ -8,6 +8,7 @@ module ysyx_22040088_IDU(
     output [ 6:0] sel_nextpc,
     output [ 1:0] sel_alusrc1,
     output [ 4:0] sel_alusrc2,
+    output        inv,
     
     // 寄存器 立即数
     output [63:0] rf_rdata1,
@@ -45,6 +46,12 @@ assign immS = {inst[31:25], inst[11:7]};
 
 wire rf_we;
 
+// Debug
+// always@(posedge clk) begin
+//     $display("ID:");
+//     $display(inst);
+// end
+
 ysyx_22040088_controlunit u_ysyx_22040088_controlunit(
     .opcode      (opcode      ),
     .funct3      (funct3      ),
@@ -57,7 +64,8 @@ ysyx_22040088_controlunit u_ysyx_22040088_controlunit(
     .sel_rfres   (sel_rfres   ),
     .mem_ena     (mem_ena     ),
     .mem_wen     (mem_wen     ),
-    .mem_mask    (mem_mask    )
+    .mem_mask    (mem_mask    ),
+    .inv         (inv         )
 );
 
 

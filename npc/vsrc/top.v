@@ -1,14 +1,14 @@
-module top(
+;module top(
     input   clk,
     input   rst,
-	input   [31:0] inst,
+	input [31:0] inst,
 	output	[63:0] pc
 );
 
 wire [63:0] nextpc;
-// reg [31:0] inst;
-// /* verilator lint_off UNUSED */
-// wire [63:0] inst_data;
+/* verilator lint_off UNUSED */
+// reg [63:0] inst_data;
+// reg [63:0] inst;
 // IFU
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.clk    (clk    ),
@@ -19,8 +19,27 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 
 // import "DPI-C" function void pmem_read(
 //   input longint raddr, output longint rdata);
+
+// always @(*) begin
+// 	$display("1");
+// 	if(|pc) begin
+// 		pmem_read(pc, inst_data);
+// 		$display("assign:", inst_data);
+// 	end else begin
+// 		inst_data = 64'b0;
+// 	end
+// end
+
 // always @(*) begin
 // 	pmem_read(pc, inst_data);
+// end
+
+// always @(negedge clk) begin
+// 	if (|pc) begin
+// 		$display("top:");
+// 		pmem_read(pc, inst);
+// 		$display(inst);
+// 	end
 // end
 // always @(posedge clk) begin
 // 	inst <= inst_data[31:0];
@@ -47,6 +66,7 @@ wire mem_wen;
 wire mem_ena;
 wire [3:0] mem_mask;
 wire [63:0] mem_rdata;
+wire       inst_inv;
 ysyx_22040088_genrfwdata u_ysyx_22040088_genrfwdata(
 	.alu_result  (alu_result  ),
 	.mem_rdata   (mem_rdata   ),
@@ -58,7 +78,7 @@ ysyx_22040088_genrfwdata u_ysyx_22040088_genrfwdata(
 
 ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.clk         (clk         ),
-	.inst        (inst        ),
+	.inst        (inst[31:0]  ),
 	.rf_wdata    (rf_wdata    ),
 	.alu_op      (alu_op      ),
 	.sel_nextpc  (sel_nextpc  ),
@@ -74,7 +94,8 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.sel_rfres   (sel_rfres   ),
 	.mem_wen     (mem_wen     ),
 	.mem_ena     (mem_ena     ),
-	.mem_mask    (mem_mask    )
+	.mem_mask    (mem_mask    ),
+	.inv         (inst_inv    )
 );
 
 
@@ -100,7 +121,7 @@ ysyx_22040088_EXU u_ysyx_22040088_EXU(
 // ebreak
 import "DPI-C" function void finish_sim();
 wire ebreak;
-assign ebreak = (inst == 32'b000000000001_00000_000_00000_1110011);
+assign ebreak = (inst[31:0] == 32'b000000000001_00000_000_00000_1110011);
 always @(posedge clk) begin
 	if (ebreak) begin
 		finish_sim();
@@ -108,10 +129,18 @@ always @(posedge clk) begin
 	end
 end
 
+// inv
+wire inv;
+assign inv = inst_inv & ~ebreak;
+import "DPI-C" function void get_inv(int inv);
+always @(*) begin
+    get_inv({{31{inv}}, inv});
+end
+
 // inst
 import "DPI-C" function void get_inst(int inst);
 always@(*) begin
-	get_inst(inst);
+	get_inst(inst[31:0]);
 end
 
 // memory
