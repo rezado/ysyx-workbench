@@ -23,7 +23,7 @@ CFLAGS += $(INCFLAGS) -DTOP_NAME="\"V$(TOPNAME)\""
 # CFLAGS += $(shell llvm-config --cxxflags) -fPIE
 LDFLAGS += -lreadline -g
 LDFLAGS += $(shell llvm-config --libs)
-LDFLAGS += -rdynamic -shared -fPIC
+LDFLAGS += -rdynamic
 NPCFLAGS := 
 NPC_EXEC := $(BIN) $(ARGS) $(IMG)
 
