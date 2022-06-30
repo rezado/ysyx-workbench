@@ -65,6 +65,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
     #ifdef CONFIG_MTRACE
       printf("Write Memory at 0x%016llx  data:  0x%016llx\n", waddr, wdata);
     #endif
+    return;
   }
   out_of_bound((paddr_t)waddr);
 }
