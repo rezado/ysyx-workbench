@@ -94,7 +94,8 @@ assign inst_sltiu = (opcode == 7'b0010011) && (funct3 == 3'b011);
 
 // TODO:每次添加指令这里都要修改
 assign inv = ~(inst_addi | inst_lui | inst_auipc | inst_jal | inst_jalr | inst_sd | inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor | inst_sll | inst_srl | inst_sra |
-               inst_beq | inst_bne | inst_blt | inst_bltu | inst_bge | inst_bgeu | load | store | inst_add | inst_sltiu);
+               inst_beq | inst_bne | inst_blt | inst_bltu | inst_bge | inst_bgeu | load | store | inst_add |
+               inst_addw | inst_sltiu);
 
 // 指令类型
 wire r_type, b_type;
