@@ -12,7 +12,7 @@ paddr_t host_to_guest(uint8_t *haddr);
 
 static inline bool in_pmem(paddr_t addr) {
   printf("check:%x\n", addr);
-  return (addr >= 0x80000000) && (addr < (paddr_t)CONFIG_MBASE + CONFIG_MSIZE);
+  return (addr >= CONFIG_MBASE) && (addr < (paddr_t)CONFIG_MBASE + CONFIG_MSIZE);
 }
 
 word_t paddr_read(paddr_t addr, int len);
