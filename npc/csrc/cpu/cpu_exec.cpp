@@ -123,6 +123,7 @@ static void statistic() {
 
 void assert_fail_msg() {
   dump_gpr();
+  prbuf();
   statistic();
 }
 
