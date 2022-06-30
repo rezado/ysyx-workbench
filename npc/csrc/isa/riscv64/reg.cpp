@@ -9,9 +9,16 @@ const char *regs[] = {
   "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6"
 };
 
+uint64_t *cpu_gpr = NULL;
+void gprcpy() {
+  for (int i = 0; i < 32; i++) {
+    cpu.gpr[i] = cpu_gpr[i];
+  }
+}
 // 读取寄存器相关
 extern "C" void set_gpr_ptr(const svOpenArrayHandle r) {
-  cpu.gpr = (uint64_t *)(((VerilatedDpiOpenVar*)r)->datap());
+  cpu_gpr = (uint64_t *)(((VerilatedDpiOpenVar*)r)->datap());
+  gprcpy();
 }
 
 // 一个输出RTL中通用寄存器的值的示例
