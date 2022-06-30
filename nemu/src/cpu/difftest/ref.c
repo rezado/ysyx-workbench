@@ -40,7 +40,7 @@ void difftest_regcpy(void *dut, bool direction) {
   } else {
     puts("DIFFTEST_TO_DUT");
     for (int i = 0; i < 32; i++) {
-      printf("%lx", cpu.gpr[i]);
+      printf("%lx\n", cpu.gpr[i]);
     }
     diff_get_regs(dut);
   }
