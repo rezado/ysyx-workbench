@@ -101,7 +101,7 @@ static void exec_once(Decode *s) {
 void execute(uint64_t n) {
   uint64_t t = 0;
   Decode s;
-  while (t < n && sim_time < MAX_SIM_TIME && run_flag) {
+  while (t < n && run_flag) {
     exec_once(&s);
     g_nr_guest_inst ++;
     sim_time++;
