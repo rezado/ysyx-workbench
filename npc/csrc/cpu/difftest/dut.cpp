@@ -89,6 +89,7 @@ static void checkregs(CPU_state *ref, vaddr_t pc) {
 }
 
 void difftest_step(vaddr_t pc, vaddr_t npc) {
+  puts("1");
   CPU_state ref_r;
   
   // 动态分配内存
