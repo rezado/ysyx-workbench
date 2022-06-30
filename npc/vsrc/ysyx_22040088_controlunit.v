@@ -91,7 +91,9 @@ assign inv = ~(inst_addi | inst_lui | inst_auipc | inst_jal | inst_jalr | inst_s
                inst_beq | inst_bne | inst_blt | inst_bltu | inst_bge | inst_bgeu | load | store);
 
 assign inst_addw = (opcode == 7'b0111011) && (funct3 == 3'b000) && (funct7 == 7'b0000000);
-
+always@(*) begin
+    $display(inst_addw);
+end
 
 // 指令类型
 wire r_type, b_type;
