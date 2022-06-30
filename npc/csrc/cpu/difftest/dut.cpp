@@ -54,7 +54,7 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
   assert(handle);
 
   // 通过动态链接对动态库中的上述API符号进行符号解析和重定位, 返回它们的地址.
-  ref_difftest_memcpy = dlsym(handle, "difftest_memcpy");
+  ref_difftest_memcpy = (void(*)(paddr_t, void*, size_t, bool))dlsym(handle, "difftest_memcpy");
   assert(ref_difftest_memcpy);
 
   ref_difftest_regcpy = dlsym(handle, "difftest_regcpy");
