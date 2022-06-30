@@ -21,6 +21,7 @@ VSRCS = $(shell find $(abspath ./vsrc) -name "*.v")
 INCFLAGS = $(addprefix -I, $(INC_PATH))
 CFLAGS += $(INCFLAGS) -DTOP_NAME="\"V$(TOPNAME)\""
 # CFLAGS += $(shell llvm-config --cxxflags) -fPIE
+CFLAGS += -Werror
 LDFLAGS += -lreadline -g -ldl
 LDFLAGS += $(shell llvm-config --libs)
 LDFLAGS += -rdynamic
