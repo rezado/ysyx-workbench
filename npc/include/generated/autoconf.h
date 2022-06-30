@@ -5,7 +5,7 @@
  *
  */
 #define CONFIG_ISA_riscv64 1
-#define CONFIG_DIFFTEST_REF_NAME "interpreter"
+#define CONFIG_DIFFTEST_REF_NAME "nemu-interpreter"
 #define CONFIG_ENGINE "interpreter"
 #define CONFIG_WATCHPOINT 1
 #define CONFIG_PC_RESET_OFFSET 0x0
