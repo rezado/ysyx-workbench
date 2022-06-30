@@ -4,7 +4,7 @@
 #include <memory/paddr.h>
 
 typedef struct diff_context_t {
-  word_t *gpr;
+  word_t gpr[32];
   word_t pc;
 }diff_context_t;
 
