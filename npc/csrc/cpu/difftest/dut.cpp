@@ -117,6 +117,8 @@ void difftest_step(vaddr_t pc, vaddr_t npc) {
 
   ref_difftest_regcpy(&ref_r, DIFFTEST_TO_DUT);
 
+  puts("ref_difftest_regcpy");
+
   checkregs(&ref_r, npc);
   puts("difftest_end");
 }
