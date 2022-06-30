@@ -91,6 +91,8 @@ static void checkregs(CPU_state *ref, vaddr_t pc) {
 void difftest_step(vaddr_t pc, vaddr_t npc) {
   CPU_state ref_r;
   
+  // 动态分配内存
+  ref_r.gpr = (word_t*)malloc(32 * sizeof(word_t));
   puts("difftest_step");
   if (skip_dut_nr_inst > 0) {
     ref_difftest_regcpy(&ref_r, DIFFTEST_TO_DUT);
@@ -118,8 +120,7 @@ void difftest_step(vaddr_t pc, vaddr_t npc) {
 
   ref_difftest_regcpy(&ref_r, DIFFTEST_TO_DUT);
 
-  for (int i = 0; i < 32; i++) {
-    puts("1");
+  for (int i = 0; i < 32; i++){
     printf("%lx\n", ref_r.gpr[i]);
     printf("1");
   }
@@ -127,6 +128,7 @@ void difftest_step(vaddr_t pc, vaddr_t npc) {
 
   checkregs(&ref_r, npc);
   puts("difftest_end");
+  free(ref_r.gpr);
 }
 #else
 void init_difftest(char *ref_so_file, long img_size, int port) { }
