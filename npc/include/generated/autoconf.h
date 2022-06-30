@@ -5,7 +5,7 @@
  *
  */
 #define CONFIG_ISA_riscv64 1
-#define CONFIG_DIFFTEST_REF_NAME "none"
+#define CONFIG_DIFFTEST_REF_NAME "interpreter"
 #define CONFIG_ENGINE "interpreter"
 #define CONFIG_WATCHPOINT 1
 #define CONFIG_PC_RESET_OFFSET 0x0
@@ -25,7 +25,7 @@
 #define CONFIG_CC_GPP 1
 #define CONFIG_ITRACE_COND "true"
 #define CONFIG_CC "g++"
-#define CONFIG_DIFFTEST_REF_PATH "none"
+#define CONFIG_DIFFTEST_REF_PATH "tools/nemu-diff"
 #define CONFIG_TRACE_START 0
 #define CONFIG_TRACE 1
 #define CONFIG_ISA "riscv64"
