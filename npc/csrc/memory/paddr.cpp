@@ -16,10 +16,13 @@ paddr_t host_to_guest(uint8_t *haddr) { return haddr - pmem + CONFIG_MBASE; }
 extern "C" void pmem_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   // printf("read %llx from %llx\n", *rdata, raddr);
-  *rdata = host_read(guest_to_host(raddr & ~0x7ull), 8);
-  #ifdef CONFIG_MTRACE
-    printf("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
-  #endif
+  if (likely(in_pmem(addr))) {
+    *rdata = host_read(guest_to_host(raddr & ~0x7ull), 8);
+    #ifdef CONFIG_MTRACE
+      printf("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
+    #endif
+  }
+  out_of_bound((paddr_t)raddr);
 }
 
 extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
