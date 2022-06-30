@@ -18,7 +18,7 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   // printf("read %llx from %llx\n", *rdata, raddr);
   *rdata = host_read(guest_to_host(raddr & ~0x7ull), 8);
   #ifdef CONFIG_MTRACE
-    Log("Read Memory at 0x%016llx   data: 0x%016llx ", raddr, *rdata);
+    printf("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
   #endif
 }
 
@@ -37,7 +37,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
     wdata >>= 4;
   }
   #ifdef CONFIG_MTRACE
-    Log("Write Memory at 0x%016llx  data:  0x%016llx ", waddr, wdata);
+    printf("Write Memory at 0x%016llx  data:  0x%016llx\n", waddr, wdata);
   #endif
 }
 
