@@ -61,6 +61,7 @@ void diff_step(uint64_t n) {
 }
 
 void difftest_exec(uint64_t n) {
+  printf("NEMU pc before exec:%lx\n", cpu.pc);
   diff_step(n);
 }
 
