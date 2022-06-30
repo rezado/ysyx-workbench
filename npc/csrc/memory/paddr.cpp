@@ -42,6 +42,7 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
     #ifdef CONFIG_MTRACE
       printf("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
     #endif
+    return;
   }
   out_of_bound((paddr_t)raddr);
 }
