@@ -12,6 +12,7 @@ const char *regs[] = {
 uint64_t *cpu_gpr = NULL;
 void gprcpy() {
   for (int i = 0; i < 32; i++) {
+    printf("%llx\n", cpu_gpr[i]);
     cpu.gpr[i] = cpu_gpr[i];
   }
 }
