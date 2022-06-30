@@ -87,13 +87,12 @@ assign inst_sb = (opcode == 7'b0100011) && (funct3 == 3'b000);
 assign inst_lwu = (opcode == 7'b0000011) && (funct3 == 3'b110);
 assign inst_lhu = (opcode == 7'b0000011) && (funct3 == 3'b101);
 assign inst_lbu = (opcode == 7'b0000011) && (funct3 == 3'b100);
-assign inv = ~(inst_addi | inst_lui | inst_auipc | inst_jal | inst_jalr | inst_sd | inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor | inst_sll | inst_srl | inst_sra |
-               inst_beq | inst_bne | inst_blt | inst_bltu | inst_bge | inst_bgeu | load | store);
 
 assign inst_addw = (opcode == 7'b0111011) && (funct3 == 3'b000) && (funct7 == 7'b0000000);
-always@(*) begin
-    $display(inst_addw);
-end
+
+// TODO:每次添加指令这里都要修改
+assign inv = ~(inst_addi | inst_lui | inst_auipc | inst_jal | inst_jalr | inst_sd | inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor | inst_sll | inst_srl | inst_sra |
+               inst_beq | inst_bne | inst_blt | inst_bltu | inst_bge | inst_bgeu | load | store | inst_addw);
 
 // 指令类型
 wire r_type, b_type;
