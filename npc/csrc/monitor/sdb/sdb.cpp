@@ -99,9 +99,9 @@ static int cmd_x(char *args) {
       printf("Wrong!Please input addr");
     }
     else {
-      // paddr = strtoull(arg, NULL, 16);
-      bool flag = false;
-      paddr = expr(args, &flag);
+      paddr = strtoull(arg, NULL, 16);
+      // bool flag = false;
+      // paddr = expr(args, &flag);
       printf("addr:%lx length:%x\n", paddr, num);
       if (paddr == 0) {
         return 0;
