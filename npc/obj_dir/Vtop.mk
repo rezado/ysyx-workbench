@@ -58,7 +58,6 @@ VM_USER_CFLAGS = \
 	-I/home/bill/ysyx-workbench/npc/csrc/engine/interpreter \
 	-I/home/bill/ysyx-workbench/npc/csrc/isa/riscv64/include \
 	-DTOP_NAME="Vtop" \
-	-Werror \
 	-I/usr/lib/llvm-12/include \
 	-std=c++14 \
 	-fno-exceptions \
