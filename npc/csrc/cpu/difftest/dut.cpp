@@ -96,6 +96,7 @@ void difftest_step(vaddr_t pc, vaddr_t npc) {
   // 动态分配内存
   // ref_r.gpr = (word_t*)malloc(32 * sizeof(word_t));
   puts("difftest_step");
+  printf("%d %d\n", skip_dut_nr_inst, is_skip_ref);
   if (skip_dut_nr_inst > 0) {
     ref_difftest_regcpy(&ref_r, DIFFTEST_TO_DUT);
     if (ref_r.pc == npc) {
