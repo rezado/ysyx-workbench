@@ -37,7 +37,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
     wdata >>= 4;
   }
   #ifdef CONFIG_MTRACE
-    Log("Write Memory at 0x%016llx  data:  0x%016llx ", waddr, wdata);
+    Log("1");
   #endif
 }
 
