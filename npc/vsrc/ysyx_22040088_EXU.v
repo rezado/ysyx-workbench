@@ -34,10 +34,7 @@ ysyx_22040088_signext#(21, 64) u_ysyx_22040088_signext2(
     .out (immJ_sext )
 );
 
-ysyx_22040088_signext#(20, 64) u_ysyx_22040088_signext3(
-    .in  (immU  ),
-    .out (immU_sext )
-);
+assign immU_sext = {{32{immU[19]}}, immU, 12'b0};
 
 ysyx_22040088_signext#(13, 64) u_ysyx_22040088_signext4(
     .in  (immB  ),
