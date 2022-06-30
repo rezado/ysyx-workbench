@@ -39,9 +39,9 @@ void difftest_regcpy(void *dut, bool direction) {
     diff_set_regs(dut);
   } else {
     puts("DIFFTEST_TO_DUT");
-    for (int i = 0; i < 32; i++) {
-      printf("%lx\n", cpu.gpr[i]);
-    }
+    // for (int i = 0; i < 32; i++) {
+    //   printf("%lx\n", cpu.gpr[i]);
+    // }
     diff_context_t* p = (diff_context_t*)dut;
     for (int i = 0; i < 32; i++) {
       cpu.gpr[i] = p->gpr[i];
