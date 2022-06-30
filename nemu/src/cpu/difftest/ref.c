@@ -13,6 +13,7 @@ void diff_set_regs(void *dut) {
 
 void diff_get_regs(void* dut) {
   CPU_state* p = (CPU_state*)dut;
+  puts("intoi");
   for (int i = 0; i < 32; i++) {
     printf("%lx", cpu.gpr[i]);
     p->gpr[i] = cpu.gpr[i];
