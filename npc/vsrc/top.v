@@ -67,6 +67,7 @@ wire mem_ena;
 wire [3:0] mem_mask;
 wire [63:0] mem_rdata;
 wire       inst_inv;
+wire [ 1:0] sel_alures;
 ysyx_22040088_genrfwdata u_ysyx_22040088_genrfwdata(
 	.alu_result  (alu_result  ),
 	.mem_rdata   (mem_rdata   ),
@@ -95,7 +96,8 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.mem_wen     (mem_wen     ),
 	.mem_ena     (mem_ena     ),
 	.mem_mask    (mem_mask    ),
-	.inv         (inst_inv    )
+	.inv         (inst_inv    ),
+	.sel_alures  (sel_alures  )
 );
 
 
@@ -106,6 +108,7 @@ ysyx_22040088_EXU u_ysyx_22040088_EXU(
 	.sel_nextpc  (sel_nextpc  ),
 	.sel_alusrc1 (sel_alusrc1 ),
 	.sel_alusrc2 (sel_alusrc2 ),
+	.sel_alures  (sel_alures  ),
 	.rf_rdata1   (rf_rdata1   ),
 	.rf_rdata2   (rf_rdata2   ),
 	.immI        (immI        ),

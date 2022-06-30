@@ -8,7 +8,12 @@ module ysyx_22040088_IDU(
     output [ 6:0] sel_nextpc,
     output [ 1:0] sel_alusrc1,
     output [ 4:0] sel_alusrc2,
+    output [ 2:0] sel_rfres,
+    output        mem_wen,
+    output        mem_ena,
+    output [ 3:0] mem_mask,
     output        inv,
+    output [ 1:0] sel_alures,
     
     // 寄存器 立即数
     output [63:0] rf_rdata1,
@@ -17,11 +22,7 @@ module ysyx_22040088_IDU(
     output [20:0] immJ,
     output [19:0] immU,
     output [12:0] immB,
-    output [11:0] immS,
-    output [ 2:0] sel_rfres,
-    output        mem_wen,
-    output        mem_ena,
-    output [ 3:0] mem_mask
+    output [11:0] immS
 );
 
 // 指令分割
@@ -65,12 +66,12 @@ ysyx_22040088_controlunit u_ysyx_22040088_controlunit(
     .mem_ena     (mem_ena     ),
     .mem_wen     (mem_wen     ),
     .mem_mask    (mem_mask    ),
-    .inv         (inv         )
+    .inv         (inv         ),
+    .sel_alures  (sel_alures  )
 );
 
 
 
-/* verilator lint_off UNUSED */
 ysyx_22040088_regfile u_ysyx_22040088_regfile(
     .clk    (clk    ),
     .wdata  (rf_wdata  ),

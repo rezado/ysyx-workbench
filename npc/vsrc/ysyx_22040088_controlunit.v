@@ -11,7 +11,8 @@ module ysyx_22040088_controlunit(
     output         mem_ena,
     output         mem_wen,
     output  [ 3:0] mem_mask,
-    output         inv
+    output         inv,
+    output  [ 1:0] sel_alures
 );
 // 指令
 wire inst_addi;
@@ -48,6 +49,8 @@ wire inst_sb;
 wire inst_lwu;
 wire inst_lhu;
 wire inst_lbu;
+
+wire inst_addw;
 
 // 指令译码
 assign inst_addi = (opcode == 7'b0010011) && (funct3 == 3'b000);
@@ -87,11 +90,13 @@ assign inst_lbu = (opcode == 7'b0000011) && (funct3 == 3'b100);
 assign inv = ~(inst_addi | inst_lui | inst_auipc | inst_jal | inst_jalr | inst_sd | inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor | inst_sll | inst_srl | inst_sra |
                inst_beq | inst_bne | inst_blt | inst_bltu | inst_bge | inst_bgeu | load | store);
 
+assign inst_addw = (opcode == 7'b0111011) && (funct3 == 3'b000) && (funct7 == 7'b0000000);
+
 
 // 指令类型
 wire r_type, b_type;
 assign r_type = inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor
-            | inst_sll | inst_srl | inst_sra;
+            | inst_sll | inst_srl | inst_sra | inst_addw;
 assign b_type = inst_beq | inst_bne | inst_bge | inst_bgeu | inst_blt | inst_bltu;
 
 wire load, store;
@@ -104,7 +109,7 @@ assign alu_op = {inst_lui, inst_sra, inst_srl, inst_sll, inst_xor, inst_or,
                 inst_sltu | inst_bltu | inst_bgeu,
                 inst_slt | inst_blt | inst_bge,
                 inst_sub | inst_beq | inst_bne,
-                inst_add | inst_addi | inst_auipc | inst_jal | inst_jalr | load | store};
+                inst_add | inst_addi | inst_auipc | inst_jal | inst_jalr | load | store | inst_addw};
 assign rf_we =  inst_addi | inst_jal | inst_jalr | inst_lui | inst_auipc | r_type | inst_ld;
 assign sel_alusrc1 = {inst_auipc | inst_jal | inst_jalr,  // pc
                       inst_addi | r_type | b_type | load | store};  // rdata1
@@ -130,5 +135,7 @@ assign mem_mask = inst_ld | inst_sd ? 4'b0001 :
                   inst_lh | inst_sh ? 4'b0100 :
                   inst_lb | inst_sb ? 4'b1000 :
                                       4'b0000;
+
+assign sel_alures = {inst_addw, ~inst_addw};
 
 endmodule
