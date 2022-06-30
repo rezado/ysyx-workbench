@@ -52,18 +52,21 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   // `wmask`中每比特表示`wdata`中1个字节的掩码,
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
   // printf("write:waddr:%llx, wdata:%llx, wmask:%x\n", waddr, wdata, wmask);
-  waddr = waddr & ~0x7ull;
-  for (int i = 0; i < 8; i++) {
-    if (wmask & 1 == 1) {
-      host_write(guest_to_host(waddr), 1, wdata);
+  if (likely(in_pmem((paddr_t)waddr))) {
+    waddr = waddr & ~0x7ull;
+    for (int i = 0; i < 8; i++) {
+      if (wmask & 1 == 1) {
+        host_write(guest_to_host(waddr), 1, wdata);
+      }
+      wmask >>= 1;
+      waddr += 1;
+      wdata >>= 4;
     }
-    wmask >>= 1;
-    waddr += 1;
-    wdata >>= 4;
+    #ifdef CONFIG_MTRACE
+      printf("Write Memory at 0x%016llx  data:  0x%016llx\n", waddr, wdata);
+    #endif
   }
-  #ifdef CONFIG_MTRACE
-    printf("Write Memory at 0x%016llx  data:  0x%016llx\n", waddr, wdata);
-  #endif
+  out_of_bound((paddr_t)waddr);
 }
 
 word_t paddr_read(paddr_t addr, int len) {
