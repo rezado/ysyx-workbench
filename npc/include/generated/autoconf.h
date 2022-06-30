@@ -26,6 +26,7 @@
 #define CONFIG_ITRACE_COND "true"
 #define CONFIG_CC "g++"
 #define CONFIG_DIFFTEST_REF_PATH "tools/nemu-diff"
+#define CONFIG_CC_DEBUG 1
 #define CONFIG_TRACE_START 0
 #define CONFIG_TRACE 1
 #define CONFIG_ISA "riscv64"
