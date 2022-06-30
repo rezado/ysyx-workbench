@@ -14,6 +14,7 @@ void diff_set_regs(void *dut) {
 void diff_get_regs(void* dut) {
   CPU_state* p = (CPU_state*)dut;
   for (int i = 0; i < 32; i++) {
+    printf("%lx", cpu.gpr[i]);
     p->gpr[i] = cpu.gpr[i];
   }
   p->pc = cpu.pc;
@@ -31,6 +32,7 @@ void difftest_regcpy(void *dut, bool direction) {
   if (direction == DIFFTEST_TO_REF) {
     diff_set_regs(dut);
   } else {
+    puts("DIFFTEST_TO_DUT");
     diff_get_regs(dut);
   }
 }
