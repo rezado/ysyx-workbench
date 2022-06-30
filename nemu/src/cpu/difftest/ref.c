@@ -20,7 +20,7 @@ void diff_get_regs(void* dut) {
   diff_context_t* p = (diff_context_t*)dut;
   puts("intoi");
   for (int i = 0; i < 32; i++) {
-    printf("%lx", cpu.gpr[i];
+    printf("%lx", cpu.gpr[i]);
     p->gpr[i] = cpu.gpr[i];
   }
   p->pc = cpu.pc;
@@ -45,7 +45,7 @@ void difftest_regcpy(void *dut, bool direction) {
 
 void diff_step(uint64_t n) {
   cpu_exec(n);
-  printf("nemu exec:%d insts\n", n);
+  printf("nemu exec:%ld insts\n", n);
 }
 
 void difftest_exec(uint64_t n) {
