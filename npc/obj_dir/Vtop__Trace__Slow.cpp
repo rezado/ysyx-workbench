@@ -674,7 +674,7 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->fullQData(oldp+214,(((((((((- (QData)((IData)(
                                                               (1U 
                                                                & (IData)(vlSelf->top__DOT__sel_nextpc))))) 
-                                           & (8ULL 
+                                           & (4ULL 
                                               + vlSelf->pc)) 
                                           | ((- (QData)((IData)(
                                                                 (1U 
@@ -702,7 +702,7 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
                                            & ((0ULL 
                                                == vlSelf->top__DOT__alu_result)
                                                ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB
-                                               : (8ULL 
+                                               : (4ULL 
                                                   + vlSelf->pc)))) 
                                        | ((- (QData)((IData)(
                                                              (1U 
@@ -710,7 +710,7 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
                                                                  >> 4U))))) 
                                           & ((0ULL 
                                               == vlSelf->top__DOT__alu_result)
-                                              ? (8ULL 
+                                              ? (4ULL 
                                                  + vlSelf->pc)
                                               : vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB))) 
                                       | ((- (QData)((IData)(
@@ -721,7 +721,7 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
                                                           (vlSelf->top__DOT__alu_result 
                                                            >> 0x3fU)))
                                              ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB
-                                             : (8ULL 
+                                             : (4ULL 
                                                 + vlSelf->pc)))) 
                                      | ((- (QData)((IData)(
                                                            (1U 
@@ -730,7 +730,7 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
                                         & ((1U & (IData)(
                                                          (vlSelf->top__DOT__alu_result 
                                                           >> 0x3fU)))
-                                            ? (8ULL 
+                                            ? (4ULL 
                                                + vlSelf->pc)
                                             : vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB)))),64);
         tracep->fullSData(oldp+216,((vlSelf->inst >> 0x14U)),12);
@@ -853,7 +853,7 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
                                       << 0x20U) | (QData)((IData)(
                                                                   (0xfffff000U 
                                                                    & vlSelf->inst))))),64);
-        tracep->fullQData(oldp+233,((8ULL + vlSelf->pc)),64);
+        tracep->fullQData(oldp+233,((4ULL + vlSelf->pc)),64);
         tracep->fullQData(oldp+235,((vlSelf->pc + (
                                                    ((- (QData)((IData)(
                                                                        (1U 
@@ -863,19 +863,19 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
                                                    | (QData)((IData)(vlSelf->top__DOT__immJ))))),64);
         tracep->fullQData(oldp+237,(((0ULL == vlSelf->top__DOT__alu_result)
                                       ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB
-                                      : (8ULL + vlSelf->pc))),64);
+                                      : (4ULL + vlSelf->pc))),64);
         tracep->fullQData(oldp+239,(((0ULL == vlSelf->top__DOT__alu_result)
-                                      ? (8ULL + vlSelf->pc)
+                                      ? (4ULL + vlSelf->pc)
                                       : vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB)),64);
         tracep->fullQData(oldp+241,(((1U & (IData)(
                                                    (vlSelf->top__DOT__alu_result 
                                                     >> 0x3fU)))
                                       ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB
-                                      : (8ULL + vlSelf->pc))),64);
+                                      : (4ULL + vlSelf->pc))),64);
         tracep->fullQData(oldp+243,(((1U & (IData)(
                                                    (vlSelf->top__DOT__alu_result 
                                                     >> 0x3fU)))
-                                      ? (8ULL + vlSelf->pc)
+                                      ? (4ULL + vlSelf->pc)
                                       : vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB)),64);
         tracep->fullIData(oldp+245,(0x40U),32);
         tracep->fullQData(oldp+246,(0x80000000ULL),64);

@@ -1,9 +1,9 @@
 #include <utils.h>
 
-NEMUState nemu_state = { .state = NEMU_STOP };
+NEMUState npc_state = { .state = NEMU_STOP };
 
 int is_exit_status_bad() {
-  int good = (nemu_state.state == NEMU_END && nemu_state.halt_ret == 0) ||
-    (nemu_state.state == NEMU_QUIT) || (nemu_state.state == NEMU_STOP && nemu_state.halt_ret == 0 && nemu_state.halt_pc == 0 );
+  int good = (npc_state.state == NEMU_END && npc_state.halt_ret == 0) ||
+    (npc_state.state == NEMU_QUIT) || (npc_state.state == NEMU_STOP && npc_state.halt_ret == 0 && npc_state.halt_pc == 0 );
   return !good;
 }
