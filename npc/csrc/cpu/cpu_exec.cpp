@@ -124,9 +124,11 @@ static void statistic() {
   else Log("Finish running in less than 1 us and can not calculate the simulation frequency");
 }
 
+void sim_exit()
 void assert_fail_msg() {
   dump_gpr();
   statistic();
+  sim_exit();
 }
 
 void cpu_exec(uint64_t n) {
