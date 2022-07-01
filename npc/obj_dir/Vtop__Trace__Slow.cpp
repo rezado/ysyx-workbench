@@ -302,7 +302,6 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declQuad(c+244,"top u_ysyx_22040088_EXU u_ysyx_22040088_gennextpc bgepc", false,-1, 63,0);
         tracep->declBus(c+2,"top u_ysyx_22040088_EXU u_ysyx_22040088_gennextpc sel_nextpc", false,-1, 6,0);
         tracep->declQuad(c+215,"top u_ysyx_22040088_EXU u_ysyx_22040088_gennextpc nextpc", false,-1, 63,0);
-        tracep->declBit(c+210,"top u_mem clk", false,-1);
         tracep->declBit(c+18,"top u_mem ena", false,-1);
         tracep->declBit(c+17,"top u_mem wen", false,-1);
         tracep->declBus(c+19,"top u_mem mem_mask", false,-1, 3,0);
