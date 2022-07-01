@@ -52,8 +52,8 @@ assign mask = (mem_mask[0] == 1'b1) ? 8'b11111111:
                                   8'b00000000 :
                                   8'b00000000;
 
-// wire [5:0] offset;
-// assign offset = {idx, 3'b0};
+wire [5:0] offset;
+assign offset = {idx, 3'b0};
 
 wire [63:0] tmpdata;
 always @(*) begin
