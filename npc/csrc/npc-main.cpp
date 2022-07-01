@@ -13,13 +13,11 @@ void init_monitor(int, char *[]);
 void am_init_monitor();
 int is_exit_status_bad();
 void sdb_mainloop();
-void get_inst();
 
 /* 仿真开始结束相关 */
 
-void single_cycle(Decode *s) {
+void single_cycle() {
     top->clk = 0; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
-    get_inst(s);
     top->clk = 1; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
 }
 
