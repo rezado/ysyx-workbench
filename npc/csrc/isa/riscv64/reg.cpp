@@ -14,6 +14,7 @@ void gprcpy() {
   for (int i = 0; i < 32; i++) {
     CPU.gpr[i] = cpu_gpr[i];
   }
+  CPU.gpr[0] = 0;
 }
 // 读取寄存器相关
 extern "C" void set_gpr_ptr(const svOpenArrayHandle r) {
