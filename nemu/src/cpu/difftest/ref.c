@@ -14,14 +14,11 @@ void diff_set_regs(void *dut) {
     cpu.gpr[i] = p->gpr[i];
   }
   cpu.pc = p->pc;
-  printf("cpu.pc:%lx\n", cpu.pc);
 }
 
 void diff_get_regs(void* dut) {
   diff_context_t* p = (diff_context_t*)dut;
-  puts("intoi");
   for (int i = 0; i < 32; i++) {
-    printf("%lx", cpu.gpr[i]);
     p->gpr[i] = cpu.gpr[i];
   }
   p->pc = cpu.pc;
@@ -39,29 +36,15 @@ void difftest_regcpy(void *dut, bool direction) {
   if (direction == DIFFTEST_TO_REF) {
     diff_set_regs(dut);
   } else {
-    puts("DIFFTEST_TO_DUT");
-    for (int i = 0; i < 32; i++) {
-      printf("1%lx\n", cpu.gpr[i]);
-    }
-    diff_context_t* p = (diff_context_t*)dut;
-    puts("intoi");
-    for (int i = 0; i < 32; i++) {
-      printf("cpu:%lx\n", cpu.gpr[i]);
-      p->gpr[i] = cpu.gpr[i];
-      printf("p:%lx\n", p->gpr[i]);
-    }
-    p->pc = cpu.pc;
-    // diff_get_regs(dut);
+    diff_get_regs(dut);
   }
 }
 
 void diff_step(uint64_t n) {
   cpu_exec(n);
-  printf("nemu exec:%ld insts\n", n);
 }
 
 void difftest_exec(uint64_t n) {
-  printf("NEMU pc before exec:%lx\n", cpu.pc);
   diff_step(n);
 }
 
