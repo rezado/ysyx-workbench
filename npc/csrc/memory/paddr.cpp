@@ -70,6 +70,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
     #endif
     return;
   }
+  sim_exit();
   out_of_bound((paddr_t)waddr);
 }
 
