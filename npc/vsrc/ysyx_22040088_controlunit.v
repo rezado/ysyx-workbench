@@ -141,9 +141,9 @@ assign sel_rfres = {inst_lwu | inst_lhu | inst_lbu
 assign mem_ena = load | store;
 assign mem_wen = store;
 assign mem_mask = inst_ld | inst_sd ? 4'b0001 :
-                  inst_lw | inst_sw ? 4'b0010 :
-                  inst_lh | inst_sh ? 4'b0100 :
-                  inst_lb | inst_sb ? 4'b1000 :
+                  inst_lw | inst_sw | inst_lwu ? 4'b0010 :
+                  inst_lh | inst_sh | inst_lhu ? 4'b0100 :
+                  inst_lb | inst_sb | inst_lbu ? 4'b1000 :
                                       4'b0000;
 
 assign sel_alures = {inst_addw | inst_addiw, ~(inst_addw | inst_addiw)};

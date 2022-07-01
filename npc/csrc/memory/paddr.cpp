@@ -34,8 +34,6 @@ void init_mem() {
       (paddr_t)CONFIG_MBASE, (paddr_t)CONFIG_MBASE + CONFIG_MSIZE);
 }
 
-void sim_exit();
-
 extern "C" void pmem_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   // printf("read %llx from %llx\n", *rdata, raddr);
@@ -46,7 +44,6 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
     #endif
     return;
   }
-  sim_exit();
   out_of_bound((paddr_t)raddr);
 }
 
@@ -70,7 +67,6 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
     #endif
     return;
   }
-  sim_exit();
   out_of_bound((paddr_t)waddr);
 }
 
