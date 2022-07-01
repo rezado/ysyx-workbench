@@ -849,53 +849,54 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__5(Vtop___024root* vlSelf) {
                                                                       ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
                                                                        & (- (IData)((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__store)))));
     vlSelf->top__DOT__mem_rdata = (vlSelf->top__DOT__u_mem__DOT__tmpdata 
-                                   & ((((QData)((IData)(
-                                                        (((- (IData)(
-                                                                     (1U 
-                                                                      & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
-                                                                         >> 7U)))) 
-                                                          << 0x18U) 
-                                                         | ((0xff0000U 
-                                                             & ((- (IData)(
-                                                                           (1U 
-                                                                            & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
-                                                                               >> 6U)))) 
-                                                                << 0x10U)) 
-                                                            | ((0xff00U 
-                                                                & ((- (IData)(
-                                                                              (1U 
-                                                                               & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
+                                   & ((0x7fffffff80000000ULL 
+                                       & ((QData)((IData)(
+                                                          (((- (IData)(
+                                                                       (1U 
+                                                                        & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
+                                                                           >> 7U)))) 
+                                                            << 0x18U) 
+                                                           | ((0xff0000U 
+                                                               & ((- (IData)(
+                                                                             (1U 
+                                                                              & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
+                                                                                >> 6U)))) 
+                                                                  << 0x10U)) 
+                                                              | ((0xff00U 
+                                                                  & ((- (IData)(
+                                                                                (1U 
+                                                                                & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
                                                                                 >> 5U)))) 
-                                                                   << 8U)) 
-                                                               | (0xffU 
-                                                                  & (- (IData)(
-                                                                               (1U 
+                                                                     << 8U)) 
+                                                                 | (0xffU 
+                                                                    & (- (IData)(
+                                                                                (1U 
                                                                                 & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
                                                                                 >> 4U)))))))))) 
-                                        << 0x20U) | (QData)((IData)(
-                                                                    (((- (IData)(
-                                                                                (1U 
-                                                                                & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
-                                                                                >> 3U)))) 
-                                                                      << 0x18U) 
-                                                                     | ((0xff0000U 
-                                                                         & ((- (IData)(
-                                                                                (1U 
-                                                                                & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
+                                          << 0x1fU)) 
+                                      | ((QData)((IData)(
+                                                         (((- (IData)(
+                                                                      (1U 
+                                                                       & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
+                                                                          >> 3U)))) 
+                                                           << 0x18U) 
+                                                          | ((0xff0000U 
+                                                              & ((- (IData)(
+                                                                            (1U 
+                                                                             & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
                                                                                 >> 2U)))) 
-                                                                            << 0x10U)) 
-                                                                        | ((0xff00U 
-                                                                            & ((- (IData)(
-                                                                                (1U 
+                                                                 << 0x10U)) 
+                                                             | ((0xff00U 
+                                                                 & ((- (IData)(
+                                                                               (1U 
                                                                                 & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
                                                                                 >> 1U)))) 
-                                                                               << 8U)) 
-                                                                           | (0xffU 
-                                                                              & (- (IData)(
+                                                                    << 8U)) 
+                                                                | (0xffU 
+                                                                   & (- (IData)(
                                                                                 (1U 
-                                                                                & (IData)(vlSelf->top__DOT__u_mem__DOT__mask))))))))))) 
-                                      >> (0x38U & ((IData)(vlSelf->top__DOT__alu_result) 
-                                                   << 3U))));
+                                                                                & (IData)(vlSelf->top__DOT__u_mem__DOT__mask)))))))))) 
+                                         >> 1U)));
 }
 
 void Vtop___024root___eval(Vtop___024root* vlSelf) {
