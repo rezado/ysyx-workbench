@@ -7,7 +7,7 @@
 
 #define MAX_INST_TO_PRINT 10
 
-CPU_state cpu = {};
+CPU_state CPU = {};
 uint64_t g_nr_guest_inst = 0;
 static uint64_t g_timer = 0; // unit: us
 static bool g_print_step = false;
@@ -69,7 +69,7 @@ static void exec_once(Decode *s) {
 
   // single_cycle();
   isa_exec_once(s);
-  cpu.pc = s->dnpc;
+  CPU.pc = s->dnpc;
 
 #ifdef CONFIG_ITRACE
   char *p = logbuf;
@@ -106,7 +106,7 @@ void execute(uint64_t n) {
     g_nr_guest_inst ++;
     sim_time++;
 	  t++;
-    trace_and_difftest(&s, cpu.pc);
+    trace_and_difftest(&s, CPU.pc);
     if (nemu_state.state != NEMU_RUNNING) break;
     IFDEF(CONFIG_DEVICE, device_update());
   }
@@ -174,5 +174,5 @@ void finish_sim() {
 	printf("simulation finished\n");
 	run_flag = false;
   bool flag = false;
-  NEMUTRAP(cpu.pc, isa_reg_str2val("a0", &flag));
+  NEMUTRAP(CPU.pc, isa_reg_str2val("a0", &flag));
 }

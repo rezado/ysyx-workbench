@@ -361,7 +361,7 @@ void Vtop___024root__traceChgSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep) 
         tracep->chgQData(oldp+213,(((((((((- (QData)((IData)(
                                                              (1U 
                                                               & (IData)(vlSelf->top__DOT__sel_nextpc))))) 
-                                          & (4ULL + vlSelf->pc)) 
+                                          & (8ULL + vlSelf->pc)) 
                                          | ((- (QData)((IData)(
                                                                (1U 
                                                                 & ((IData)(vlSelf->top__DOT__sel_nextpc) 
@@ -388,14 +388,14 @@ void Vtop___024root__traceChgSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep) 
                                           & ((0ULL 
                                               == vlSelf->top__DOT__alu_result)
                                               ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB
-                                              : (4ULL 
+                                              : (8ULL 
                                                  + vlSelf->pc)))) 
                                       | ((- (QData)((IData)(
                                                             (1U 
                                                              & ((IData)(vlSelf->top__DOT__sel_nextpc) 
                                                                 >> 4U))))) 
                                          & ((0ULL == vlSelf->top__DOT__alu_result)
-                                             ? (4ULL 
+                                             ? (8ULL 
                                                 + vlSelf->pc)
                                              : vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB))) 
                                      | ((- (QData)((IData)(
@@ -406,7 +406,7 @@ void Vtop___024root__traceChgSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep) 
                                                          (vlSelf->top__DOT__alu_result 
                                                           >> 0x3fU)))
                                             ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB
-                                            : (4ULL 
+                                            : (8ULL 
                                                + vlSelf->pc)))) 
                                     | ((- (QData)((IData)(
                                                           (1U 
@@ -415,7 +415,7 @@ void Vtop___024root__traceChgSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep) 
                                        & ((1U & (IData)(
                                                         (vlSelf->top__DOT__alu_result 
                                                          >> 0x3fU)))
-                                           ? (4ULL 
+                                           ? (8ULL 
                                               + vlSelf->pc)
                                            : vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB)))),64);
         tracep->chgSData(oldp+215,((vlSelf->inst >> 0x14U)),12);
@@ -534,7 +534,7 @@ void Vtop___024root__traceChgSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep) 
                                      << 0x20U) | (QData)((IData)(
                                                                  (0xfffff000U 
                                                                   & vlSelf->inst))))),64);
-        tracep->chgQData(oldp+232,((4ULL + vlSelf->pc)),64);
+        tracep->chgQData(oldp+232,((8ULL + vlSelf->pc)),64);
         tracep->chgQData(oldp+234,((vlSelf->pc + ((
                                                    (- (QData)((IData)(
                                                                       (1U 
@@ -544,17 +544,17 @@ void Vtop___024root__traceChgSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep) 
                                                   | (QData)((IData)(vlSelf->top__DOT__immJ))))),64);
         tracep->chgQData(oldp+236,(((0ULL == vlSelf->top__DOT__alu_result)
                                      ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB
-                                     : (4ULL + vlSelf->pc))),64);
+                                     : (8ULL + vlSelf->pc))),64);
         tracep->chgQData(oldp+238,(((0ULL == vlSelf->top__DOT__alu_result)
-                                     ? (4ULL + vlSelf->pc)
+                                     ? (8ULL + vlSelf->pc)
                                      : vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB)),64);
         tracep->chgQData(oldp+240,(((1U & (IData)((vlSelf->top__DOT__alu_result 
                                                    >> 0x3fU)))
                                      ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB
-                                     : (4ULL + vlSelf->pc))),64);
+                                     : (8ULL + vlSelf->pc))),64);
         tracep->chgQData(oldp+242,(((1U & (IData)((vlSelf->top__DOT__alu_result 
                                                    >> 0x3fU)))
-                                     ? (4ULL + vlSelf->pc)
+                                     ? (8ULL + vlSelf->pc)
                                      : vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB)),64);
     }
 }

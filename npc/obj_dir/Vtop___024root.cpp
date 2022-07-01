@@ -688,7 +688,7 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__5(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__nextpc = ((((((((- (QData)((IData)(
                                                          (1U 
                                                           & (IData)(vlSelf->top__DOT__sel_nextpc))))) 
-                                      & (4ULL + vlSelf->pc)) 
+                                      & (8ULL + vlSelf->pc)) 
                                      | ((- (QData)((IData)(
                                                            (1U 
                                                             & ((IData)(vlSelf->top__DOT__sel_nextpc) 
@@ -713,13 +713,13 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__5(Vtop___024root* vlSelf) {
                                                              >> 3U))))) 
                                       & ((0ULL == vlSelf->top__DOT__alu_result)
                                           ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB
-                                          : (4ULL + vlSelf->pc)))) 
+                                          : (8ULL + vlSelf->pc)))) 
                                   | ((- (QData)((IData)(
                                                         (1U 
                                                          & ((IData)(vlSelf->top__DOT__sel_nextpc) 
                                                             >> 4U))))) 
                                      & ((0ULL == vlSelf->top__DOT__alu_result)
-                                         ? (4ULL + vlSelf->pc)
+                                         ? (8ULL + vlSelf->pc)
                                          : vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB))) 
                                  | ((- (QData)((IData)(
                                                        (1U 
@@ -729,7 +729,7 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__5(Vtop___024root* vlSelf) {
                                                      (vlSelf->top__DOT__alu_result 
                                                       >> 0x3fU)))
                                         ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB
-                                        : (4ULL + vlSelf->pc)))) 
+                                        : (8ULL + vlSelf->pc)))) 
                                 | ((- (QData)((IData)(
                                                       (1U 
                                                        & ((IData)(vlSelf->top__DOT__sel_nextpc) 
@@ -737,7 +737,7 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__5(Vtop___024root* vlSelf) {
                                    & ((1U & (IData)(
                                                     (vlSelf->top__DOT__alu_result 
                                                      >> 0x3fU)))
-                                       ? (4ULL + vlSelf->pc)
+                                       ? (8ULL + vlSelf->pc)
                                        : vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB)));
     vlSelf->top__DOT__u_mem__DOT__mask = ((1U & (IData)(vlSelf->top__DOT__mem_mask))
                                            ? 0xffU : 

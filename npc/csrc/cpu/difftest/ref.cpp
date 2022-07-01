@@ -6,9 +6,9 @@
 void diff_set_regs(void *dut) {
   CPU_state* p = (CPU_state*)dut;
   for (int i = 0; i < 32; i++) {
-    cpu.gpr[i] = p->gpr[i];
+    CPU.gpr[i] = p->gpr[i];
   }
-  cpu.pc = p->pc;
+  CPU.pc = p->pc;
 }
 
 void diff_get_regs(void* dut) {
