@@ -53,7 +53,7 @@ assign mask = (mem_mask[0] == 1'b1) ? 8'b11111111:
                                   8'b00000000;
 
 wire [63:0] tmpdata;
-always @(posedge clk) begin
+always @(*) begin
   pmem_read(raddr, tmpdata);
   pmem_write(waddr, wdata, mask & {8{wen}});
 end
