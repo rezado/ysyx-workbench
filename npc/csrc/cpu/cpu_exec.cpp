@@ -21,6 +21,8 @@ bool scan_wp();
 #endif
 void single_cycle();
 
+void gprcpy();
+
 /* itrace */
 union{
   uint32_t val; 
@@ -69,6 +71,7 @@ static void exec_once(Decode *s) {
 
   // single_cycle();
   isa_exec_once(s);
+  gprcpy();
   CPU.pc = s->dnpc;
 
 #ifdef CONFIG_ITRACE
