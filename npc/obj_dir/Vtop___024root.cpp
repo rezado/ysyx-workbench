@@ -894,7 +894,8 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__5(Vtop___024root* vlSelf) {
                                                                               & (- (IData)(
                                                                                 (1U 
                                                                                 & (IData)(vlSelf->top__DOT__u_mem__DOT__mask))))))))))) 
-                                      >> (7U & (IData)(vlSelf->top__DOT__alu_result))));
+                                      >> (7U & ((IData)(vlSelf->top__DOT__alu_result) 
+                                                << 2U))));
 }
 
 void Vtop___024root___eval(Vtop___024root* vlSelf) {
