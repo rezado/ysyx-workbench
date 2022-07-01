@@ -9,9 +9,9 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
     if (ref_r->gpr[i] != gpr(i)) {
       Log("Difftest error at PC: 0x%08lx", pc);
       Log("reg:%s ref:%lx dut:%lx", regs[i], ref_r->gpr[i], gpr(i));
-      printf("\tref\t\tdut\n");
+      printf("\tref\t\t\tdut\n");
       for (int i = 0; i < 32; i++) {
-        printf("%-4s%016lx%016lx\n", regs[i], ref_r->gpr[i], gpr(i));
+        printf("%-4s%016lx\t%016lx\n", regs[i], ref_r->gpr[i], gpr(i));
       }
       return false;
     }
