@@ -555,10 +555,10 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__5(Vtop___024root* vlSelf) {
                                                  & vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__immI_sext)) 
              | ((- (QData)((IData)((1U & ((IData)(vlSelf->top__DOT__sel_alusrc2) 
                                           >> 2U))))) 
-                & (((- (QData)((IData)((vlSelf->inst 
-                                        >> 0x1fU)))) 
-                    << 0x14U) | (QData)((IData)((vlSelf->inst 
-                                                 >> 0xcU)))))) 
+                & (((QData)((IData)((- (IData)((vlSelf->inst 
+                                                >> 0x1fU))))) 
+                    << 0x20U) | (QData)((IData)((0xfffff000U 
+                                                 & vlSelf->inst)))))) 
             | (4ULL & (- (QData)((IData)((1U & ((IData)(vlSelf->top__DOT__sel_alusrc2) 
                                                 >> 3U))))))) 
            | ((- (QData)((IData)((1U & ((IData)(vlSelf->top__DOT__sel_alusrc2) 
