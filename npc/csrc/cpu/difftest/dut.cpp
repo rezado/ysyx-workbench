@@ -85,7 +85,6 @@ static void checkregs(CPU_state *ref, vaddr_t pc) {
   if (!isa_difftest_checkregs(ref, pc)) {
     npc_state.state = NEMU_ABORT;
     npc_state.halt_pc = pc;
-    dump_gpr();
   }
 }
 
