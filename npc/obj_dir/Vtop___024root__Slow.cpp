@@ -548,7 +548,7 @@ void Vtop___024root___settle__TOP__2(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__nextpc = ((((((((- (QData)((IData)(
                                                          (1U 
                                                           & (IData)(vlSelf->top__DOT__sel_nextpc))))) 
-                                      & (8ULL + vlSelf->pc)) 
+                                      & (4ULL + vlSelf->pc)) 
                                      | ((- (QData)((IData)(
                                                            (1U 
                                                             & ((IData)(vlSelf->top__DOT__sel_nextpc) 
@@ -573,13 +573,13 @@ void Vtop___024root___settle__TOP__2(Vtop___024root* vlSelf) {
                                                              >> 3U))))) 
                                       & ((0ULL == vlSelf->top__DOT__alu_result)
                                           ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB
-                                          : (8ULL + vlSelf->pc)))) 
+                                          : (4ULL + vlSelf->pc)))) 
                                   | ((- (QData)((IData)(
                                                         (1U 
                                                          & ((IData)(vlSelf->top__DOT__sel_nextpc) 
                                                             >> 4U))))) 
                                      & ((0ULL == vlSelf->top__DOT__alu_result)
-                                         ? (8ULL + vlSelf->pc)
+                                         ? (4ULL + vlSelf->pc)
                                          : vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB))) 
                                  | ((- (QData)((IData)(
                                                        (1U 
@@ -589,7 +589,7 @@ void Vtop___024root___settle__TOP__2(Vtop___024root* vlSelf) {
                                                      (vlSelf->top__DOT__alu_result 
                                                       >> 0x3fU)))
                                         ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB
-                                        : (8ULL + vlSelf->pc)))) 
+                                        : (4ULL + vlSelf->pc)))) 
                                 | ((- (QData)((IData)(
                                                       (1U 
                                                        & ((IData)(vlSelf->top__DOT__sel_nextpc) 
@@ -597,7 +597,7 @@ void Vtop___024root___settle__TOP__2(Vtop___024root* vlSelf) {
                                    & ((1U & (IData)(
                                                     (vlSelf->top__DOT__alu_result 
                                                      >> 0x3fU)))
-                                       ? (8ULL + vlSelf->pc)
+                                       ? (4ULL + vlSelf->pc)
                                        : vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB)));
     vlSelf->top__DOT__u_mem__DOT__mask = ((1U & (IData)(vlSelf->top__DOT__mem_mask))
                                            ? 0xffU : 

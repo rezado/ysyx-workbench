@@ -14,7 +14,7 @@ extern char isa_logo[];
 void init_isa();
 
 // reg
-extern CPU_state cpu;
+extern CPU_state CPU;
 void dump_gpr();
 word_t isa_reg_str2val(const char *name, bool *success);
 
