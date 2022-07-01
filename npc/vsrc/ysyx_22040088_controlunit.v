@@ -146,6 +146,7 @@ assign mem_mask = inst_ld | inst_sd ? 4'b0001 :
                   inst_lb | inst_sb | inst_lbu ? 4'b1000 :
                                       4'b0000;
 
-assign sel_alures = {inst_addw | inst_addiw, ~(inst_addw | inst_addiw)};
+assign sel_alures = {inst_addw | inst_addiw | inst_lbu | inst_lhu | inst_lwu
+                    , ~(inst_addw | inst_addiw | inst_lbu | inst_lhu | inst_lwu)};
 
 endmodule
