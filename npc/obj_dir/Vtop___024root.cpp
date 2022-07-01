@@ -189,6 +189,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__3(Vtop___024root* vlSelf) {
         Vtop___024root____Vdpiimwrap_top__DOT__finish_sim_TOP();
         VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 131, "");
     }
+    VL_WRITEF("%20#\n",64,vlSelf->top__DOT__mem_rdata);
     Vtop___024root____Vdpiimwrap_top__DOT__u_mem__DOT__pmem_read_TOP(
                                                                      (((IData)(vlSelf->top__DOT__mem_ena) 
                                                                        & (~ (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__store)))
