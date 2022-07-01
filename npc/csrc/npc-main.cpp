@@ -48,7 +48,7 @@ void sim_init() {
 }
 
 void sim_exit() {
-    single_cycle();
+    // single_cycle();
     tfp->close();
     delete contextp;
     delete tfp;
