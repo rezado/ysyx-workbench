@@ -2,6 +2,7 @@
 #include <memory/paddr.h>
 #include <device/mmio.h>
 #include <isa.h>
+#include <utils.h>
 
 #if   defined(CONFIG_PMEM_MALLOC)
 static uint8_t *pmem = NULL;
@@ -11,34 +12,6 @@ static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
 
 uint8_t* guest_to_host(paddr_t paddr) { return pmem + paddr - CONFIG_MBASE; }
 paddr_t host_to_guest(uint8_t *haddr) { return haddr - pmem + CONFIG_MBASE; }
-
-extern "C" void pmem_read(long long raddr, long long *rdata) {
-  // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
-  // printf("read %llx from %llx\n", *rdata, raddr);
-  *rdata = host_read(guest_to_host(raddr & ~0x7ull), 8);
-  #ifdef CONFIG_MTRACE
-    Log("Read Memory at " FMT_PADDR "  data:" FMT_WORD, addr, ret);
-  #endif
-}
-
-extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
-  // 总是往地址为`waddr & ~0x7ull`的8字节按写掩码`wmask`写入`wdata`
-  // `wmask`中每比特表示`wdata`中1个字节的掩码,
-  // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
-  // printf("write:waddr:%llx, wdata:%llx, wmask:%x\n", waddr, wdata, wmask);
-  waddr = waddr & ~0x7ull;
-  for (int i = 0; i < 8; i++) {
-    if (wmask & 1 == 1) {
-      host_write(guest_to_host(waddr), 1, wdata);
-    }
-    wmask >>= 1;
-    waddr += 1;
-    wdata >>= 4;
-  }
-  #ifdef CONFIG_MTRACE
-    Log("Write Memory at " FMT_PADDR "  data:" FMT_WORD, addr, data);
-  #endif
-}
 
 static void out_of_bound(paddr_t addr) {
   panic("address = " FMT_PADDR " is out of bound of pmem [" FMT_PADDR ", " FMT_PADDR ") at pc = " FMT_WORD,
@@ -59,6 +32,42 @@ void init_mem() {
 #endif
   Log("physical memory area [" FMT_PADDR ", " FMT_PADDR "]",
       (paddr_t)CONFIG_MBASE, (paddr_t)CONFIG_MBASE + CONFIG_MSIZE);
+}
+
+extern "C" void pmem_read(long long raddr, long long *rdata) {
+  // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
+  // printf("read %llx from %llx\n", *rdata, raddr);
+  if (likely(in_pmem((paddr_t)raddr))) {
+    *rdata = host_read(guest_to_host(raddr & ~0x7ull), 8);
+    #ifdef CONFIG_MTRACE
+      printf("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
+    #endif
+    return;
+  }
+  out_of_bound((paddr_t)raddr);
+}
+
+extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
+  // 总是往地址为`waddr & ~0x7ull`的8字节按写掩码`wmask`写入`wdata`
+  // `wmask`中每比特表示`wdata`中1个字节的掩码,
+  // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
+  // printf("write:waddr:%llx, wdata:%llx, wmask:%x\n", waddr, wdata, wmask);
+  if (likely(in_pmem((paddr_t)waddr))) {
+    waddr = waddr & ~0x7ull;
+    for (int i = 0; i < 8; i++) {
+      if (wmask & 1 == 1) {
+        host_write(guest_to_host(waddr), 1, wdata);
+      }
+      wmask >>= 1;
+      waddr += 1;
+      wdata >>= 4;
+    }
+    #ifdef CONFIG_MTRACE
+      printf("Write Memory at 0x%016llx  data:  0x%016llx\n", waddr, wdata);
+    #endif
+    return;
+  }
+  out_of_bound((paddr_t)waddr);
 }
 
 word_t paddr_read(paddr_t addr, int len) {

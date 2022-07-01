@@ -54,19 +54,19 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
   assert(handle);
 
   // 通过动态链接对动态库中的上述API符号进行符号解析和重定位, 返回它们的地址.
-  ref_difftest_memcpy = dlsym(handle, "difftest_memcpy");
+  ref_difftest_memcpy = (void (*)(paddr_t, void*, size_t, bool))dlsym(handle, "difftest_memcpy");
   assert(ref_difftest_memcpy);
 
-  ref_difftest_regcpy = dlsym(handle, "difftest_regcpy");
+  ref_difftest_regcpy = (void (*)(void*, bool))dlsym(handle, "difftest_regcpy");
   assert(ref_difftest_regcpy);
 
-  ref_difftest_exec = dlsym(handle, "difftest_exec");
+  ref_difftest_exec = (void (*)(uint64_t))dlsym(handle, "difftest_exec");
   assert(ref_difftest_exec);
 
-  ref_difftest_raise_intr = dlsym(handle, "difftest_raise_intr");
+  ref_difftest_raise_intr = (void (*)(uint64_t))dlsym(handle, "difftest_raise_intr");
   assert(ref_difftest_raise_intr);
 
-  void (*ref_difftest_init)(int) = dlsym(handle, "difftest_init");
+  void (*ref_difftest_init)(int) = (void (*)(int))dlsym(handle, "difftest_init");
   assert(ref_difftest_init);
 
   Log("Differential testing: %s", ANSI_FMT("ON", ANSI_FG_GREEN));
@@ -76,20 +76,25 @@ void init_difftest(char *ref_so_file, long img_size, int port) {
 
   ref_difftest_init(port);
   ref_difftest_memcpy(RESET_VECTOR, guest_to_host(RESET_VECTOR), img_size, DIFFTEST_TO_REF);
+  printf("%lx\n", cpu.pc);
   ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
+  printf("init finish\n");
 }
 
 static void checkregs(CPU_state *ref, vaddr_t pc) {
   if (!isa_difftest_checkregs(ref, pc)) {
+    puts("into checkregs");
     nemu_state.state = NEMU_ABORT;
     nemu_state.halt_pc = pc;
-    isa_reg_display();
+    dump_gpr();
   }
 }
 
 void difftest_step(vaddr_t pc, vaddr_t npc) {
   CPU_state ref_r;
-
+  
+  puts("difftest_step");
+  printf("%d %d\n", skip_dut_nr_inst, is_skip_ref);
   if (skip_dut_nr_inst > 0) {
     ref_difftest_regcpy(&ref_r, DIFFTEST_TO_DUT);
     if (ref_r.pc == npc) {
@@ -111,9 +116,16 @@ void difftest_step(vaddr_t pc, vaddr_t npc) {
   }
 
   ref_difftest_exec(1);
+
+  puts("ref_difftest_exec");
+
   ref_difftest_regcpy(&ref_r, DIFFTEST_TO_DUT);
 
+  puts("ref_difftest_regcpy");
+  printf("%lx\n", ref_r.pc);
+
   checkregs(&ref_r, npc);
+  puts("difftest_end");
 }
 #else
 void init_difftest(char *ref_so_file, long img_size, int port) { }

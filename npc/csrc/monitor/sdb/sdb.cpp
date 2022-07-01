@@ -100,6 +100,8 @@ static int cmd_x(char *args) {
     }
     else {
       paddr = strtoull(arg, NULL, 16);
+      // bool flag = false;
+      // paddr = expr(args, &flag);
       printf("addr:%lx length:%x\n", paddr, num);
       if (paddr == 0) {
         return 0;

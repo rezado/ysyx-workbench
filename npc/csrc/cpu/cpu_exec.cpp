@@ -101,12 +101,12 @@ static void exec_once(Decode *s) {
 void execute(uint64_t n) {
   uint64_t t = 0;
   Decode s;
-  while (t < n && sim_time < MAX_SIM_TIME && run_flag) {
+  while (t < n && run_flag) {
     exec_once(&s);
     g_nr_guest_inst ++;
     sim_time++;
 	  t++;
-    trace_and_difftest(&s, top->pc);
+    trace_and_difftest(&s, cpu.pc);
     if (nemu_state.state != NEMU_RUNNING) break;
     IFDEF(CONFIG_DEVICE, device_update());
   }
@@ -123,6 +123,7 @@ static void statistic() {
 
 void assert_fail_msg() {
   dump_gpr();
+  prbuf();
   statistic();
 }
 

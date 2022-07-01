@@ -23,7 +23,7 @@ assign pcB = pc + immB;
 
 assign pcadd = pc + 4;
 assign jalpc = pc + immJ;
-assign jalrpc = (rdata1 + immI) & ~1;
+assign jalrpc = (rdata1 + immI) & ~64'b1;
 assign beqpc = zero ? pcB : pcadd;
 assign bnepc = zero ? pcadd : pcB;
 assign bltpc = neg ? pcB : pcadd;

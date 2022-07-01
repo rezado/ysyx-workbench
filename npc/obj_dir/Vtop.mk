@@ -49,6 +49,8 @@ VM_USER_CFLAGS = \
 	-I/home/bill/ysyx-workbench/npc/csrc/engine/interpreter \
 	-I/home/bill/ysyx-workbench/npc/csrc/isa/riscv64/include \
 	-O2 \
+	-Og \
+	-ggdb3 \
 	-DITRACE_COND=true \
 	-D__GUEST_ISA__=riscv64 \
 	-I/home/bill/ysyx-workbench/npc/include \
@@ -70,9 +72,13 @@ VM_USER_LDLIBS = \
 	-O2 \
 	-O2 \
 	-O2 \
+	-Og \
+	-ggdb3 \
 	-lreadline \
 	-g \
+	-ldl \
 	-lLLVM-12 \
+	-rdynamic \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
