@@ -3,8 +3,13 @@
 #include <difftest-def.h>
 #include <memory/paddr.h>
 
+typedef struct diff_context_t {
+  word_t gpr[32];
+  word_t pc;
+}diff_context_t;
+
 void diff_set_regs(void *dut) {
-  CPU_state* p = (CPU_state*)dut;
+  diff_context_t* p = (diff_context_t*)dut;
   for (int i = 0; i < 32; i++) {
     cpu.gpr[i] = p->gpr[i];
   }
@@ -12,7 +17,7 @@ void diff_set_regs(void *dut) {
 }
 
 void diff_get_regs(void* dut) {
-  CPU_state* p = (CPU_state*)dut;
+  diff_context_t* p = (diff_context_t*)dut;
   for (int i = 0; i < 32; i++) {
     p->gpr[i] = cpu.gpr[i];
   }
