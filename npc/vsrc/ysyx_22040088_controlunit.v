@@ -118,7 +118,7 @@ assign alu_op = {inst_lui, inst_sra, inst_srl, inst_sll, inst_xor, inst_or,
                 inst_slt | inst_blt | inst_bge | inst_sltiu,
                 inst_sub | inst_beq | inst_bne,
                 inst_add | inst_addi | inst_auipc | inst_jal | inst_jalr | load | store | inst_addw | inst_addiw};
-assign rf_we =  inst_addi | inst_jal | inst_jalr | inst_lui | inst_auipc | r_type | inst_ld | inst_sltiu | inst_andi | inst_addiw;
+assign rf_we =  inst_addi | inst_jal | inst_jalr | inst_lui | inst_auipc | r_type | load | inst_sltiu | inst_andi | inst_addiw;
 assign sel_alusrc1 = {inst_auipc | inst_jal | inst_jalr,  // pc
                       inst_addi | r_type | b_type | load | store | inst_andi | inst_addiw};  // rdata1
 assign sel_alusrc2 = {store,  // immS

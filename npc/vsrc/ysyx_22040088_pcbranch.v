@@ -16,7 +16,7 @@ module ysyx_22040088_pcbranch(
 
 wire zero, neg;
 assign zero = (alu_result == 64'b0);
-assign neg = alu_result[63];
+assign neg = alu_result[0];
 
 wire [63:0] pcB;
 assign pcB = pc + immB;
