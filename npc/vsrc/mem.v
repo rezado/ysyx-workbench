@@ -1,5 +1,4 @@
 module mem(
-    input         clk,
     input         ena,
     input         wen,
     input [ 3:0]  mem_mask,

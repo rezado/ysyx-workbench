@@ -148,7 +148,6 @@ end
 
 // memory
 mem u_mem(
-	.clk      (clk        ),
 	.ena      (mem_ena    ),
 	.wen      (mem_wen    ),
 	.mem_mask (mem_mask ),
