@@ -849,53 +849,54 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__5(Vtop___024root* vlSelf) {
                                                                       ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
                                                                        & (- (IData)((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__store)))));
     vlSelf->top__DOT__mem_rdata = (vlSelf->top__DOT__u_mem__DOT__tmpdata 
-                                   & ((0xffffffffULL 
-                                       & (QData)((IData)(
-                                                         (((- (IData)(
-                                                                      (1U 
-                                                                       & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
-                                                                          >> 7U)))) 
-                                                           << 0x18U) 
-                                                          | ((0xff0000U 
-                                                              & ((- (IData)(
-                                                                            (1U 
-                                                                             & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
+                                   & ((0x1fffffffeULL 
+                                       & ((QData)((IData)(
+                                                          (((- (IData)(
+                                                                       (1U 
+                                                                        & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
+                                                                           >> 7U)))) 
+                                                            << 0x18U) 
+                                                           | ((0xff0000U 
+                                                               & ((- (IData)(
+                                                                             (1U 
+                                                                              & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
                                                                                 >> 6U)))) 
-                                                                 << 0x10U)) 
-                                                             | ((0xff00U 
-                                                                 & ((- (IData)(
-                                                                               (1U 
+                                                                  << 0x10U)) 
+                                                              | ((0xff00U 
+                                                                  & ((- (IData)(
+                                                                                (1U 
                                                                                 & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
                                                                                 >> 5U)))) 
-                                                                    << 8U)) 
-                                                                | (0xffU 
-                                                                   & (- (IData)(
+                                                                     << 8U)) 
+                                                                 | (0xffU 
+                                                                    & (- (IData)(
                                                                                 (1U 
                                                                                 & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
-                                                                                >> 4U))))))))))) 
-                                      | ((QData)((IData)(
-                                                         (((- (IData)(
-                                                                      (1U 
-                                                                       & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
-                                                                          >> 3U)))) 
-                                                           << 0x18U) 
-                                                          | ((0xff0000U 
-                                                              & ((- (IData)(
-                                                                            (1U 
-                                                                             & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
-                                                                                >> 2U)))) 
-                                                                 << 0x10U)) 
-                                                             | ((0xff00U 
-                                                                 & ((- (IData)(
-                                                                               (1U 
-                                                                                & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
+                                                                                >> 4U)))))))))) 
+                                          << 1U)) | 
+                                      ((QData)((IData)(
+                                                       (((- (IData)(
+                                                                    (1U 
+                                                                     & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
+                                                                        >> 3U)))) 
+                                                         << 0x18U) 
+                                                        | ((0xff0000U 
+                                                            & ((- (IData)(
+                                                                          (1U 
+                                                                           & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
+                                                                              >> 2U)))) 
+                                                               << 0x10U)) 
+                                                           | ((0xff00U 
+                                                               & ((- (IData)(
+                                                                             (1U 
+                                                                              & ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
                                                                                 >> 1U)))) 
-                                                                    << 8U)) 
-                                                                | (0xffU 
-                                                                   & (- (IData)(
-                                                                                (1U 
-                                                                                & (IData)(vlSelf->top__DOT__u_mem__DOT__mask)))))))))) 
-                                         >> 0x20U)));
+                                                                  << 8U)) 
+                                                              | (0xffU 
+                                                                 & (- (IData)(
+                                                                              (1U 
+                                                                               & (IData)(vlSelf->top__DOT__u_mem__DOT__mask)))))))))) 
+                                       >> 0x1fU)));
 }
 
 void Vtop___024root___eval(Vtop___024root* vlSelf) {
