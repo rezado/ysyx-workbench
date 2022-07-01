@@ -28,9 +28,6 @@ LDFLAGS += -rdynamic
 NPCFLAGS := 
 NPC_EXEC := $(BIN) $(ARGS) $(IMG)
 
-run:
-	$(NPC_EXEC)
-
 clean:
 	-rm -rf ./obj_dir
 
@@ -42,6 +39,13 @@ sim:
 	@echo "Write this Makefile by your self."
 	$(VERILATOR) $(VERILATOR_SIM_CFLAGS) --top-module $(TOPNAME) $(VSRCS) $(CSRCS) $(CXXSRC) $(addprefix -LDFLAGS , $(LDFLAGS)) \
 		$(addprefix -CFLAGS , $(CFLAGS)) $(addprefix -CFLAGS , $(CXXFLAGS))
+
+run:
+	$(NPC_EXEC)
+
+gdb:
+	$(call git_commit, "gdb NPC")
+	gdb -s $(BINARY) --args $(NPC_EXEC)
 
 include ../Makefile
 .PHONY: clean run
