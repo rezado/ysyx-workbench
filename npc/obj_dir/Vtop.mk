@@ -84,7 +84,6 @@ VM_USER_LDLIBS = \
 VM_USER_CLASSES = \
 	cpu_exec \
 	dut \
-	ref \
 	hostcall \
 	init \
 	isa_dut \
@@ -134,8 +133,6 @@ VPATH += $(VM_USER_DIR)
 cpu_exec.o: csrc/cpu/cpu_exec.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 dut.o: csrc/cpu/difftest/dut.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-ref.o: csrc/cpu/difftest/ref.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 hostcall.o: csrc/engine/interpreter/hostcall.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
