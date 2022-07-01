@@ -17,9 +17,9 @@ void get_inst();
 
 /* 仿真开始结束相关 */
 
-void single_cycle() {
+void single_cycle(Decode *s) {
     top->clk = 0; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
-    get_inst();
+    get_inst(s);
     top->clk = 1; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
 }
 

@@ -13,13 +13,13 @@ extern "C" void get_inv(int inst_inv) {
   inv = inst_inv;
 }
 
-void get_inst() {
+void get_inst(Decode *s) {
   s->isa.inst.val = inst_fetch(&s->snpc, 4);
   top->inst = s->isa.inst.val;
 }
 
 int isa_exec_once(Decode *s) {
-  single_cycle();
+  single_cycle(s);
   s->dnpc = top->pc;
 
   if (inv != 0) {
