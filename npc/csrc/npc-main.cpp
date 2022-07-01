@@ -13,11 +13,13 @@ void init_monitor(int, char *[]);
 void am_init_monitor();
 int is_exit_status_bad();
 void sdb_mainloop();
+void get_inst();
 
 /* 仿真开始结束相关 */
 
 void single_cycle() {
     top->clk = 0; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
+    get_inst();
     top->clk = 1; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
 }
 
@@ -27,7 +29,7 @@ void sim_init() {
   top = new Vtop;
   contextp->traceEverOn(true);
   top->trace(tfp, 0);
-  tfp->open("dump.vcd");
+  tfp->cd ("dump.vcd");
 
 	// printf("image form:%s\n", arg);
 	// FILE *fp = fopen(arg, "rb");
