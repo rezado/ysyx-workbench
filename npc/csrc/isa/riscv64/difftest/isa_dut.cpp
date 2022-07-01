@@ -7,7 +7,7 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
   int i;
   for (i = 0; i < 32; i++) {
     if (ref_r->gpr[i] != gpr(i)) {
-      Log("Difftest error at PC:" FMT_PADDR, pc);
+      Log("Difftest error at PC:" FMT_WORD , pc);
       Log("reg:%s ref:" FMT_WORD "dut:" FMT_WORD, regs[i], ref_r->gpr[i], gpr(i));
       printf("\tref\t\t\tdut\n");
       for (int i = 0; i < 32; i++) {
