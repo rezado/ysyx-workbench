@@ -21,7 +21,7 @@ assign neg = alu_result[63];
 wire [63:0] pcB;
 assign pcB = pc + immB;
 
-assign pcadd = pc + 4;
+assign pcadd = pc + 8;
 assign jalpc = pc + immJ;
 assign jalrpc = (rdata1 + immI) & ~64'b1;
 assign beqpc = zero ? pcB : pcadd;
