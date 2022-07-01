@@ -27,7 +27,7 @@ void sim_init() {
   top = new Vtop;
   contextp->traceEverOn(true);
   top->trace(tfp, 0);
-  tfp->cd ("dump.vcd");
+  tfp->open("dump.vcd");
 
 	// printf("image form:%s\n", arg);
 	// FILE *fp = fopen(arg, "rb");
