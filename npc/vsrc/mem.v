@@ -63,4 +63,8 @@ assign rdata = tmpdata & {{8{mask[7]}}, {8{mask[6]}}, {8{mask[5]}}, {8{mask[4]}}
                           {8{mask[3]}}, {8{mask[2]}}, {8{mask[1]}}, {8{mask[0]}}}
                        >> idx;
 
+always @(posedge clk) begin
+  $display(rdata);
+end
+
 endmodule
