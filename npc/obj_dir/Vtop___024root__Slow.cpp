@@ -753,8 +753,8 @@ void Vtop___024root___settle__TOP__2(Vtop___024root* vlSelf) {
                                                                               & (- (IData)(
                                                                                 (1U 
                                                                                 & (IData)(vlSelf->top__DOT__u_mem__DOT__mask))))))))))) 
-                                      >> (7U & ((IData)(vlSelf->top__DOT__alu_result) 
-                                                << 2U))));
+                                      >> (0x38U & ((IData)(vlSelf->top__DOT__alu_result) 
+                                                   << 3U))));
 }
 
 void Vtop___024root____Vdpiimwrap_top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__set_gpr_ptr__Vdpioc2_TOP(const VlUnpacked<QData/*63:0*/, 32> &a);
