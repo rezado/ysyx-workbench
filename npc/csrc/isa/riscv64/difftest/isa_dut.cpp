@@ -1,13 +1,14 @@
 #include <isa.h>
 #include <cpu/difftest.h>
 #include "../local-include/reg.h"
+extern const char *regs;
 
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
   int i;
   for (i = 0; i < 32; i++) {
     if (ref_r->gpr[i] != gpr(i)) {
       Log("Difftest error at PC: 0x%08lx", pc);
-      Log("reg:%s ref:%lx dut:%lx", regs1[i], ref_r->gpr[i], gpr(i));
+      Log("reg:%s ref:%lx dut:%lx", regs[i], ref_r->gpr[i], gpr(i));
       return false;
     }
   }
