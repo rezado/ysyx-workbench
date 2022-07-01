@@ -52,8 +52,8 @@ assign mask = (mem_mask[0] == 1'b1) ? 8'b11111111:
                                   8'b00000000 :
                                   8'b00000000;
 
-wire [5:0] offset;
-assign offset = {idx, 3'b0};
+// wire [5:0] offset;
+// assign offset = {idx, 3'b0};
 
 wire [63:0] tmpdata;
 always @(*) begin
@@ -64,7 +64,7 @@ end
 // 截取需要部分并右移
 assign rdata = tmpdata & {{8{mask[7]}}, {8{mask[6]}}, {8{mask[5]}}, {8{mask[4]}},
                           {8{mask[3]}}, {8{mask[2]}}, {8{mask[1]}}, {8{mask[0]}}}
-                       >> offset;
+                       >> 1;
 
 always @(posedge clk) begin
   $display(rdata);
