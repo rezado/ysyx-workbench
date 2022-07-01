@@ -1,7 +1,7 @@
 #include <isa.h>
 #include <cpu/difftest.h>
 #include "../local-include/reg.h"
-extern const char *regs;
+extern const char *regs[];
 
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
   int i;
