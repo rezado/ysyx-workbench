@@ -58,8 +58,8 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_WATCHPOINT
   // scan watchpoints
   bool flag = scan_wp();
-  if (!flag && nemu_state.state == NEMU_RUNNING) {
-    nemu_state.state = NEMU_STOP;
+  if (!flag && npc_state.state == NEMU_RUNNING) {
+    npc_state.state = NEMU_STOP;
   }
 #endif
 }
@@ -110,7 +110,7 @@ void execute(uint64_t n) {
     sim_time++;
 	  t++;
     trace_and_difftest(&s, CPU.pc);
-    if (nemu_state.state != NEMU_RUNNING) break;
+    if (npc_state.state != NEMU_RUNNING) break;
     IFDEF(CONFIG_DEVICE, device_update());
   }
 }
@@ -133,11 +133,11 @@ void assert_fail_msg() {
 void cpu_exec(uint64_t n) {
   g_print_step = (n < MAX_INST_TO_PRINT);
   // TODO:npc_state相关操作
-  switch (nemu_state.state) {
+  switch (npc_state.state) {
     case NEMU_END: case NEMU_ABORT:
       printf("Program execution has ended. To restart the program, exit NEMU and run again.\n");
       return;
-    default: nemu_state.state = NEMU_RUNNING;
+    default: npc_state.state = NEMU_RUNNING;
   }
 
   uint64_t timer_start = get_time();
@@ -148,18 +148,18 @@ void cpu_exec(uint64_t n) {
   g_timer += timer_end - timer_start;
 
 
-  switch (nemu_state.state) {
-    case NEMU_RUNNING: nemu_state.state = NEMU_STOP; break;
+  switch (npc_state.state) {
+    case NEMU_RUNNING: npc_state.state = NEMU_STOP; break;
 
     case NEMU_END: case NEMU_ABORT:
       Log("nemu: %s at pc = " FMT_WORD,
-          (nemu_state.state == NEMU_ABORT ? ANSI_FMT("ABORT", ANSI_FG_RED) :
-           (nemu_state.halt_ret == 0 ? ANSI_FMT("HIT GOOD TRAP", ANSI_FG_GREEN) :
+          (npc_state.state == NEMU_ABORT ? ANSI_FMT("ABORT", ANSI_FG_RED) :
+           (npc_state.halt_ret == 0 ? ANSI_FMT("HIT GOOD TRAP", ANSI_FG_GREEN) :
             ANSI_FMT("HIT BAD TRAP", ANSI_FG_RED))),
-          nemu_state.halt_pc);
+          npc_state.halt_pc);
       #ifdef CONFIG_ITRACE
       // output iringbuf
-      if (nemu_state.state == NEMU_ABORT || nemu_state.halt_ret != 0)
+      if (npc_state.state == NEMU_ABORT || npc_state.halt_ret != 0)
         prbuf();
       #endif
       // fall through
@@ -177,5 +177,5 @@ void finish_sim() {
 	printf("simulation finished\n");
 	run_flag = false;
   bool flag = false;
-  NEMUTRAP(CPU.pc, isa_reg_str2val("a0", &flag));
+  NPCTRAP(CPU.pc, isa_reg_str2val("a0", &flag));
 }
