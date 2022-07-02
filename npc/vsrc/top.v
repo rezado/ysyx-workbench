@@ -16,14 +16,19 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 import "DPI-C" function void pmem_read(
   input longint raddr, output longint rdata);
 /* verilator lint_off UNUSED */
-wire [63:0] inst;
+wire [63:0] inst_data;
+wire [31:0] inst;
 always @(posedge clk) begin
 	if (~rst) begin
-		pmem_read(pc, inst);
+		pmem_read(pc, inst_data);
 		$display("read at ", pc, "inst: ", inst);
 	end
 		
 end
+
+assign inst = (pc[2:0] == 3'b000) ? inst_data[31:0] :
+			  (pc[2:0] == 3'b100) ? inst_data[63:32] :
+			  						32'b0;
 
 // always @(*) begin
 // 	$display("1");
