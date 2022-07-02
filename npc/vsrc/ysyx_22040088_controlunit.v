@@ -2,10 +2,10 @@ module ysyx_22040088_controlunit(
     input   [ 6:0] opcode,
     input   [ 2:0] funct3,
     input   [ 6:0] funct7,
-    output  [12:0] alu_op,
+    output  [13:0] alu_op,
     output         rf_we,
-    output  [ 1:0] sel_alusrc1,
-    output  [ 4:0] sel_alusrc2,
+    output  [ 2:0] sel_alusrc1,
+    output  [ 6:0] sel_alusrc2,
     output  [ 6:0] sel_nextpc,
     output  [ 2:0] sel_rfres,
     output         mem_ena,
@@ -60,6 +60,10 @@ wire inst_srli;
 
 wire inst_mulw;
 wire inst_divw;
+wire inst_remw;
+wire inst_subw;
+wire inst_sllw;
+wire inst_xori;
 
 // 指令译码
 assign inst_addi = (opcode == 7'b0010011) && (funct3 == 3'b000);
@@ -106,16 +110,22 @@ assign inst_slli = (opcode == 7'b0010011) && (funct3 == 3'b001) && (funct7[6:1] 
 assign inst_srli = (opcode == 7'b0010011) && (funct3 == 3'b101) && (funct7[6:1] == 6'b000000);
 assign inst_mulw = (opcode == 7'b0111011) && (funct3 == 3'b000) && (funct7 == 7'b0000001);
 assign inst_divw = (opcode == 7'b0111011) && (funct3 == 3'b100) && (funct7 == 7'b0000001);
+assign inst_remw = (opcode == 7'b0111011) && (funct3 == 3'b110) && (funct7 == 7'b0000001);
+assign inst_subw = (opcode == 7'b0111011) && (funct3 == 3'b000) && (funct7 == 7'b0100000);
+assign inst_sllw = (opcode == 7'b0111011) && (funct3 == 3'b001) && (funct7 == 7'b0000000);
+assign inst_xori = (opcode == 7'b0010011) && (funct3 == 3'b100);
 
 // TODO:每次添加指令这里都要修改
 assign inv = ~(inst_addi | inst_lui | inst_auipc | inst_jal | inst_jalr | inst_sd | inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor | inst_sll | inst_srl | inst_sra |
                inst_beq | inst_bne | inst_blt | inst_bltu | inst_bge | inst_bgeu | load | store | inst_add |
-               inst_addw | inst_sltiu | inst_andi |inst_addiw | inst_srai | inst_slli | inst_srli | inst_mulw | inst_divw);
+               inst_addw | inst_sltiu | inst_andi |inst_addiw | inst_srai | inst_slli | inst_srli | inst_mulw |
+               inst_divw | inst_remw | inst_subw | inst_sllw | inst_xori);
 
 // 指令类型
 wire r_type, b_type;
+// divw remw sllw因源操作数特殊性不加入r_type
 assign r_type = inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor
-            | inst_sll | inst_srl | inst_sra | inst_addw | inst_mulw | inst_divw;
+            | inst_sll | inst_srl | inst_sra | inst_addw | inst_mulw | inst_subw;
 assign b_type = inst_beq | inst_bne | inst_bge | inst_bgeu | inst_blt | inst_bltu;
 
 wire load, store;
@@ -123,31 +133,38 @@ assign load = inst_ld | inst_lw | inst_lh | inst_lb | inst_lwu | inst_lhu | inst
 assign store = inst_sd | inst_sw | inst_sh | inst_sb;
 
 wire word;
-assign word = inst_addw | inst_addiw | inst_lbu | inst_lhu | inst_lwu | inst_mulw | inst_divw;
+assign word = inst_addw | inst_addiw | inst_lbu | inst_lhu | inst_lwu | inst_mulw | inst_divw | inst_remw | inst_subw;
 
 // 控制信号生成
-assign alu_op = {inst_divw,
+assign alu_op = {inst_remw,
+                inst_divw,
                 inst_mulw,
                 inst_lui,
                 inst_sra | inst_srai,
                 inst_srl | inst_srli,
-                inst_sll | inst_slli,
-                inst_xor,
+                inst_sll | inst_slli | inst_sllw,
+                inst_xor | inst_xori,
                 inst_or,
                 inst_and | inst_andi,
-                inst_sltu | inst_bltu | inst_bgeu,
-                inst_slt | inst_blt | inst_bge | inst_sltiu,
-                inst_sub | inst_beq | inst_bne,
+                inst_sltu | inst_bltu | inst_bgeu | inst_sltiu,
+                inst_slt | inst_blt | inst_bge,
+                inst_sub | inst_beq | inst_bne | inst_subw,
                 inst_add | inst_addi | inst_auipc | inst_jal | inst_jalr | load | store | inst_addw | inst_addiw};
 assign rf_we =  inst_addi | inst_jal | inst_jalr | inst_lui | inst_auipc |
-                r_type | load | inst_sltiu | inst_andi | inst_addiw | inst_srai | inst_slli | inst_srli;
-assign sel_alusrc1 = {inst_auipc | inst_jal | inst_jalr,  // pc
+                r_type | load | inst_sltiu | inst_andi | inst_addiw |
+                inst_srai | inst_slli | inst_srli | inst_divw | inst_remw | inst_sllw;
+assign sel_alusrc1 = {inst_divw | inst_remw, //zext(rdata1[31:0])
+                      inst_auipc | inst_jal | inst_jalr,  // pc
                       inst_addi | r_type | b_type | load | store |
-                      inst_andi | inst_addiw | inst_srai | inst_slli | inst_srli};  // rdata1
-assign sel_alusrc2 = {store,  // immS
+                      inst_andi | inst_addiw | inst_srai | inst_slli |
+                      inst_srli | inst_sltiu | inst_sllw | inst_xori};  // rdata1
+assign sel_alusrc2 = {inst_sllw, //zext(rdata2[4:0])
+                      inst_divw | inst_remw,
+                      store,  // immS
                       inst_jal | inst_jalr,  // 4
                       inst_auipc | inst_lui,  // immU
-                      inst_addi | load | inst_sltiu | inst_andi | inst_addiw | inst_srai | inst_slli | inst_srli, // immI
+                      inst_addi | load | inst_sltiu | inst_andi | inst_addiw | inst_srai |
+                      inst_slli | inst_srli | inst_xori, // immI
                       r_type | b_type};  // rdata2
 assign sel_nextpc = {inst_bge | inst_bgeu,
                      inst_blt | inst_bltu,
@@ -156,7 +173,8 @@ assign sel_nextpc = {inst_bge | inst_bgeu,
                      inst_jalr,
                      inst_jal,
                      inst_addi | inst_auipc | inst_lui | r_type | load | store |
-                     inst_sltiu | inst_andi | inst_addiw | inst_srai | inst_slli | inst_srli};
+                     inst_sltiu | inst_andi | inst_addiw | inst_srai | inst_slli | inst_srli |
+                     inst_divw | inst_remw | inst_sllw | inst_xori};
 assign sel_rfres = {inst_lwu | inst_lhu | inst_lbu
                     , inst_ld | inst_lw | inst_lh | inst_lb
                     , ~load};

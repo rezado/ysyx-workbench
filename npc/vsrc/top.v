@@ -46,10 +46,10 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 // end
 
 // 控制信号
-wire [12:0] alu_op;
+wire [13:0] alu_op;
 wire [ 6:0] sel_nextpc;
-wire [ 1:0] sel_alusrc1;
-wire [ 4:0] sel_alusrc2;
+wire [ 2:0] sel_alusrc1;
+wire [ 6:0] sel_alusrc2;
 // 数据
 wire [63:0] rf_rdata1;
 wire [63:0] rf_rdata2;
