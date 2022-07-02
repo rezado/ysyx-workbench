@@ -30,6 +30,7 @@ void reset(int n) {
     top->rst = 1;
     while (n--) rst_cycle();
     top->rst = 0;
+    top->clk = 0; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
 }
 
 void sim_init() {
