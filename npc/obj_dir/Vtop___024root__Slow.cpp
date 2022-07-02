@@ -1187,7 +1187,7 @@ void Vtop___024root___settle__TOP__2(Vtop___024root* vlSelf) {
               [6U]));
     vlSelf->top__DOT__nextpc = ((IData)(vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__hit)
                                  ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__lut_out
-                                 : 0x80000000ULL);
+                                 : 0ULL);
 }
 
 void Vtop___024root____Vdpiimwrap_top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__set_gpr_ptr__Vdpioc2_TOP(const VlUnpacked<QData/*63:0*/, 32> &a);
