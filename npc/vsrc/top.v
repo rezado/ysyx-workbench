@@ -4,13 +4,13 @@
 	output	[63:0] pc
 );
 
-wire [63:0] nextpc;
+wire [63:0] oldpc;
 // IFU
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.clk    (clk    ),
 	.rst    (rst    ),
-	.nextpc (nextpc ),
-	.pc     (pc     )
+	.nextpc (pc ),
+	.pc     (oldpc  )
 );
 
 import "DPI-C" function void pmem_read(
@@ -23,7 +23,6 @@ always @(posedge clk) begin
 		pmem_read(pc, inst_data);
 		$display("read at ", pc, "inst: ", inst);
 	end
-		
 end
 
 assign inst = (pc[2:0] == 3'b000) ? inst_data[31:0] :
@@ -127,7 +126,7 @@ ysyx_22040088_EXU u_ysyx_22040088_EXU(
 	.immB        (immB        ),
 	.immS		 (immS        ),
 	.alu_result  (alu_result  ),
-	.nextpc      (nextpc      )
+	.nextpc      (pc          )
 );
 
 
