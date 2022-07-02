@@ -29,7 +29,7 @@ VL_MODULE(Vtop___024root) {
     struct {
         CData/*6:0*/ top__DOT__sel_nextpc;
         CData/*2:0*/ top__DOT__sel_alusrc1;
-        CData/*5:0*/ top__DOT__sel_alusrc2;
+        CData/*6:0*/ top__DOT__sel_alusrc2;
         CData/*2:0*/ top__DOT__sel_rfres;
         CData/*0:0*/ top__DOT__mem_ena;
         CData/*3:0*/ top__DOT__mem_mask;
