@@ -5,7 +5,7 @@ module ysyx_22040088_controlunit(
     output  [13:0] alu_op,
     output         rf_we,
     output  [ 2:0] sel_alusrc1,
-    output  [ 5:0] sel_alusrc2,
+    output  [ 6:0] sel_alusrc2,
     output  [ 6:0] sel_nextpc,
     output  [ 2:0] sel_rfres,
     output         mem_ena,
@@ -62,6 +62,7 @@ wire inst_mulw;
 wire inst_divw;
 wire inst_remw;
 wire inst_subw;
+wire inst_sllw;
 
 // 指令译码
 assign inst_addi = (opcode == 7'b0010011) && (funct3 == 3'b000);
@@ -110,6 +111,7 @@ assign inst_mulw = (opcode == 7'b0111011) && (funct3 == 3'b000) && (funct7 == 7'
 assign inst_divw = (opcode == 7'b0111011) && (funct3 == 3'b100) && (funct7 == 7'b0000001);
 assign inst_remw = (opcode == 7'b0111011) && (funct3 == 3'b110) && (funct7 == 7'b0000001);
 assign inst_subw = (opcode == 7'b0111011) && (funct3 == 3'b000) && (funct7 == 7'b0100000);
+assign inst_sllw = (opcode == 7'b0111011) && (funct3 == 3'b001) && (funct7 == 7'b0000000);
 
 // TODO:每次添加指令这里都要修改
 assign inv = ~(inst_addi | inst_lui | inst_auipc | inst_jal | inst_jalr | inst_sd | inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor | inst_sll | inst_srl | inst_sra |
@@ -154,7 +156,8 @@ assign sel_alusrc1 = {inst_divw | inst_remw, //zext(rdata1[])
                       inst_addi | r_type | b_type | load | store |
                       inst_andi | inst_addiw | inst_srai | inst_slli |
                       inst_srli | inst_sltiu};  // rdata1
-assign sel_alusrc2 = {inst_divw | inst_remw,
+assign sel_alusrc2 = {inst_sllw,
+                      inst_divw | inst_remw,
                       store,  // immS
                       inst_jal | inst_jalr,  // 4
                       inst_auipc | inst_lui,  // immU

@@ -7,7 +7,7 @@ module ysyx_22040088_IDU(
     output [13:0] alu_op,
     output [ 6:0] sel_nextpc,
     output [ 2:0] sel_alusrc1,
-    output [ 5:0] sel_alusrc2,
+    output [ 6:0] sel_alusrc2,
     output [ 2:0] sel_rfres,
     output        mem_wen,
     output        mem_ena,
