@@ -21,7 +21,6 @@ VL_MODULE(Vtop___024root) {
     // PORTS
     VL_IN8(clk,0,0);
     VL_IN8(rst,0,0);
-    VL_IN(inst,31,0);
     VL_OUT64(pc,63,0);
 
     // LOCAL SIGNALS
@@ -89,10 +88,11 @@ VL_MODULE(Vtop___024root) {
         SData/*11:0*/ top__DOT__immS;
         IData/*20:0*/ top__DOT__immJ;
         QData/*63:0*/ top__DOT__nextpc;
+        QData/*63:0*/ top__DOT__inst;
         QData/*63:0*/ top__DOT__rf_rdata1;
-        QData/*63:0*/ top__DOT__rf_rdata2;
     };
     struct {
+        QData/*63:0*/ top__DOT__rf_rdata2;
         QData/*63:0*/ top__DOT__alu_result;
         QData/*63:0*/ top__DOT__mem_rdata;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__immI_sext;
@@ -114,8 +114,8 @@ VL_MODULE(Vtop___024root) {
     // LOCAL VARIABLES
     CData/*0:0*/ __Vclklast__TOP__clk;
     VlWide<7>/*200:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_genALUsrc1__DOT____Vcellinp__u_MuxKeyWithDefault__lut;
-    QData/*63:0*/ __Vtask_top__DOT__u_mem__DOT__pmem_read__4__rdata;
-    VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
+    QData/*63:0*/ __Vtask_top__DOT__u_mem__DOT__pmem_read__5__rdata;
+    VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
 
     // INTERNAL VARIABLES
     Vtop__Syms* vlSymsp;  // Symbol table
