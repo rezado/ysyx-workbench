@@ -98,7 +98,7 @@ assign inst_sltiu = (opcode == 7'b0010011) && (funct3 == 3'b011);
 assign inst_andi = (opcode == 7'b0010011) && (funct3 == 3'b111);
 assign inst_addiw = (opcode == 7'b0011011) && (funct3 == 3'b000);
 assign inst_srai = (opcode == 7'b0010011) && (funct3 == 3'b101) && (funct7 == 7'b0100000);
-assign inst_slli = (opcode == 7'b0010011) && (funct3 == 3'b001) && (funct7 == 7'b0000000);
+assign inst_slli = (opcode == 7'b0010011) && (funct3 == 3'b001) && (funct7[6:1] == 6'b000000);
 
 // TODO:每次添加指令这里都要修改
 assign inv = ~(inst_addi | inst_lui | inst_auipc | inst_jal | inst_jalr | inst_sd | inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor | inst_sll | inst_srl | inst_sra |
