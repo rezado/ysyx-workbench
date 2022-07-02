@@ -21,7 +21,7 @@ VL_MODULE(Vtop___024root) {
     // PORTS
     VL_IN8(clk,0,0);
     VL_IN8(rst,0,0);
-    VL_OUT64(npc,63,0);
+    VL_OUT64(pc,63,0);
 
     // LOCAL SIGNALS
     // Anonymous structures to workaround compiler member-count bugs
@@ -89,7 +89,7 @@ VL_MODULE(Vtop___024root) {
         SData/*11:0*/ top__DOT__immS;
         IData/*31:0*/ top__DOT__inst;
         IData/*20:0*/ top__DOT__immJ;
-        QData/*63:0*/ top__DOT__pc;
+        QData/*63:0*/ top__DOT__npc;
     };
     struct {
         QData/*63:0*/ top__DOT__inst_data;
