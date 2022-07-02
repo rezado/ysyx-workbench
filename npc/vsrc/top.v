@@ -1,10 +1,14 @@
 ;module top(
     input   clk,
     input   rst,
+	input [31:0] inst,
 	output	[63:0] pc
 );
 
 wire [63:0] nextpc;
+/* verilator lint_off UNUSED */
+// reg [63:0] inst_data;
+// reg [63:0] inst;
 // IFU
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.clk    (clk    ),
@@ -13,14 +17,8 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.pc     (pc     )
 );
 
-import "DPI-C" function void pmem_read(
-  input longint raddr, output longint rdata);
-/* verilator lint_off UNUSED */
-wire [63:0] inst;
-always @(posedge clk) begin
-	if (~rst)
-		pmem_read(pc, inst);
-end
+// import "DPI-C" function void pmem_read(
+//   input longint raddr, output longint rdata);
 
 // always @(*) begin
 // 	$display("1");

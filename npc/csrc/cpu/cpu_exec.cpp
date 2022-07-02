@@ -71,7 +71,7 @@ static void exec_once(Decode *s) {
 
   // single_cycle();
   isa_exec_once(s);
-  gprcpy();  // 通过DPI-C更新寄存器状态
+  gprcpy();
   CPU.pc = s->dnpc;
 
 #ifdef CONFIG_ITRACE
