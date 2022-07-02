@@ -1,16 +1,16 @@
 ;module top(
     input   clk,
     input   rst,
-	output reg	[63:0] pc
+	output	[63:0] nextpc
 );
 
-reg [63:0] oldpc;
+reg [63:0] pc;
 // IFU
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.clk    (clk    ),
 	.rst    (rst    ),
-	.nextpc (pc ),
-	.pc     (oldpc  )
+	.nextpc (nextpc ),
+	.pc     (pc     )
 );
 
 import "DPI-C" function void pmem_read(
@@ -20,7 +20,7 @@ wire [63:0] inst_data;
 wire [31:0] inst;
 always @(posedge clk) begin
 	if (~rst) begin
-		pmem_read(pc, inst_data);
+		pmem_read(nextpc, inst_data);
 		$display("read at ", pc, "inst: ", inst);
 	end
 end
@@ -112,7 +112,7 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 
 // EXU
 ysyx_22040088_EXU u_ysyx_22040088_EXU(
-	.pc          (oldpc       ),
+	.pc          (pc          ),
 	.alu_op      (alu_op      ),
 	.sel_nextpc  (sel_nextpc  ),
 	.sel_alusrc1 (sel_alusrc1 ),
@@ -126,7 +126,7 @@ ysyx_22040088_EXU u_ysyx_22040088_EXU(
 	.immB        (immB        ),
 	.immS		 (immS        ),
 	.alu_result  (alu_result  ),
-	.nextpc      (pc          )
+	.nextpc      (nextpc      )
 );
 
 
