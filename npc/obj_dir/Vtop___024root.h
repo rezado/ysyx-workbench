@@ -33,7 +33,6 @@ VL_MODULE(Vtop___024root) {
         CData/*0:0*/ top__DOT__mem_ena;
         CData/*3:0*/ top__DOT__mem_mask;
         CData/*1:0*/ top__DOT__sel_alures;
-        CData/*0:0*/ top__DOT__oldpc;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addi;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_jalr;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sd;
@@ -90,9 +89,9 @@ VL_MODULE(Vtop___024root) {
         SData/*11:0*/ top__DOT__immS;
         IData/*31:0*/ top__DOT__inst;
         IData/*20:0*/ top__DOT__immJ;
+        QData/*63:0*/ top__DOT__pc;
     };
     struct {
-        QData/*63:0*/ top__DOT__pc;
         QData/*63:0*/ top__DOT__inst_data;
         QData/*63:0*/ top__DOT__rf_rdata1;
         QData/*63:0*/ top__DOT__rf_rdata2;

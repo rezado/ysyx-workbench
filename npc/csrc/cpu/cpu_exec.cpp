@@ -66,8 +66,8 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 
 extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
 static void exec_once(Decode *s) {
-  s->pc = top->pc;
-  s->snpc = top->pc;
+  s->pc = top->nextpc;
+  s->snpc = top->nextpc;
 
   // single_cycle();
   isa_exec_once(s);

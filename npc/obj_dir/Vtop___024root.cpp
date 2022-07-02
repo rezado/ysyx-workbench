@@ -329,10 +329,11 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
                                    [(0x1fU & (vlSelf->top__DOT__inst 
                                               >> 0xfU))]);
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB 
-        = ((QData)((IData)(vlSelf->top__DOT__oldpc)) 
-           + (((- (QData)((IData)((1U & ((IData)(vlSelf->top__DOT__immB) 
-                                         >> 0xcU))))) 
-               << 0xdU) | (QData)((IData)(vlSelf->top__DOT__immB))));
+        = (vlSelf->top__DOT__pc + (((- (QData)((IData)(
+                                                       (1U 
+                                                        & ((IData)(vlSelf->top__DOT__immB) 
+                                                           >> 0xcU))))) 
+                                    << 0xdU) | (QData)((IData)(vlSelf->top__DOT__immB))));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__b_type 
         = ((((((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_beq) 
                | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_bne)) 
@@ -397,15 +398,14 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
         = (IData)(((QData)((IData)(vlSelf->top__DOT__rf_rdata1)) 
                    >> 0x20U));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_genALUsrc1__DOT____Vcellinp__u_MuxKeyWithDefault__lut[2U] 
-        = (4U | ((IData)((QData)((IData)(vlSelf->top__DOT__oldpc))) 
-                 << 3U));
+        = (4U | ((IData)(vlSelf->top__DOT__pc) << 3U));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_genALUsrc1__DOT____Vcellinp__u_MuxKeyWithDefault__lut[3U] 
-        = (((IData)((QData)((IData)(vlSelf->top__DOT__oldpc))) 
-            >> 0x1dU) | ((IData)(((QData)((IData)(vlSelf->top__DOT__oldpc)) 
-                                  >> 0x20U)) << 3U));
+        = (((IData)(vlSelf->top__DOT__pc) >> 0x1dU) 
+           | ((IData)((vlSelf->top__DOT__pc >> 0x20U)) 
+              << 3U));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_genALUsrc1__DOT____Vcellinp__u_MuxKeyWithDefault__lut[4U] 
         = (0x10U | (((IData)(vlSelf->top__DOT__rf_rdata1) 
-                     << 6U) | ((IData)(((QData)((IData)(vlSelf->top__DOT__oldpc)) 
+                     << 6U) | ((IData)((vlSelf->top__DOT__pc 
                                         >> 0x20U)) 
                                >> 0x1dU)));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_genALUsrc1__DOT____Vcellinp__u_MuxKeyWithDefault__lut[5U] 
@@ -941,62 +941,62 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
                                                     : 0U))));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT____Vcellinp__u_MuxKeyWithDefault__lut[0U] 
         = (IData)(((1U & (IData)(vlSelf->top__DOT__alu_result))
-                    ? (4ULL + (QData)((IData)(vlSelf->top__DOT__oldpc)))
+                    ? (4ULL + vlSelf->top__DOT__pc)
                     : vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT____Vcellinp__u_MuxKeyWithDefault__lut[1U] 
         = (IData)((((1U & (IData)(vlSelf->top__DOT__alu_result))
-                     ? (4ULL + (QData)((IData)(vlSelf->top__DOT__oldpc)))
+                     ? (4ULL + vlSelf->top__DOT__pc)
                      : vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB) 
                    >> 0x20U));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT____Vcellinp__u_MuxKeyWithDefault__lut[2U] 
         = (0x40U | ((IData)(((1U & (IData)(vlSelf->top__DOT__alu_result))
                               ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB
-                              : (4ULL + (QData)((IData)(vlSelf->top__DOT__oldpc))))) 
+                              : (4ULL + vlSelf->top__DOT__pc))) 
                     << 7U));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT____Vcellinp__u_MuxKeyWithDefault__lut[3U] 
         = (((IData)(((1U & (IData)(vlSelf->top__DOT__alu_result))
                       ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB
-                      : (4ULL + (QData)((IData)(vlSelf->top__DOT__oldpc))))) 
+                      : (4ULL + vlSelf->top__DOT__pc))) 
             >> 0x19U) | ((IData)((((1U & (IData)(vlSelf->top__DOT__alu_result))
                                     ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB
-                                    : (4ULL + (QData)((IData)(vlSelf->top__DOT__oldpc)))) 
+                                    : (4ULL + vlSelf->top__DOT__pc)) 
                                   >> 0x20U)) << 7U));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT____Vcellinp__u_MuxKeyWithDefault__lut[4U] 
         = (0x1000U | (((IData)(((0ULL == vlSelf->top__DOT__alu_result)
-                                 ? (4ULL + (QData)((IData)(vlSelf->top__DOT__oldpc)))
+                                 ? (4ULL + vlSelf->top__DOT__pc)
                                  : vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB)) 
                        << 0xeU) | ((IData)((((1U & (IData)(vlSelf->top__DOT__alu_result))
                                               ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB
                                               : (4ULL 
-                                                 + (QData)((IData)(vlSelf->top__DOT__oldpc)))) 
+                                                 + vlSelf->top__DOT__pc)) 
                                             >> 0x20U)) 
                                    >> 0x19U)));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT____Vcellinp__u_MuxKeyWithDefault__lut[5U] 
         = (((IData)(((0ULL == vlSelf->top__DOT__alu_result)
-                      ? (4ULL + (QData)((IData)(vlSelf->top__DOT__oldpc)))
+                      ? (4ULL + vlSelf->top__DOT__pc)
                       : vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB)) 
             >> 0x12U) | ((IData)((((0ULL == vlSelf->top__DOT__alu_result)
-                                    ? (4ULL + (QData)((IData)(vlSelf->top__DOT__oldpc)))
+                                    ? (4ULL + vlSelf->top__DOT__pc)
                                     : vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB) 
                                   >> 0x20U)) << 0xeU));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT____Vcellinp__u_MuxKeyWithDefault__lut[6U] 
         = (0x40000U | (((IData)(((0ULL == vlSelf->top__DOT__alu_result)
                                   ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB
-                                  : (4ULL + (QData)((IData)(vlSelf->top__DOT__oldpc))))) 
+                                  : (4ULL + vlSelf->top__DOT__pc))) 
                         << 0x15U) | ((IData)((((0ULL 
                                                 == vlSelf->top__DOT__alu_result)
                                                 ? (4ULL 
-                                                   + (QData)((IData)(vlSelf->top__DOT__oldpc)))
+                                                   + vlSelf->top__DOT__pc)
                                                 : vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB) 
                                               >> 0x20U)) 
                                      >> 0x12U)));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT____Vcellinp__u_MuxKeyWithDefault__lut[7U] 
         = (((IData)(((0ULL == vlSelf->top__DOT__alu_result)
                       ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB
-                      : (4ULL + (QData)((IData)(vlSelf->top__DOT__oldpc))))) 
+                      : (4ULL + vlSelf->top__DOT__pc))) 
             >> 0xbU) | ((IData)((((0ULL == vlSelf->top__DOT__alu_result)
                                    ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB
-                                   : (4ULL + (QData)((IData)(vlSelf->top__DOT__oldpc)))) 
+                                   : (4ULL + vlSelf->top__DOT__pc)) 
                                  >> 0x20U)) << 0x15U));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT____Vcellinp__u_MuxKeyWithDefault__lut[8U] 
         = (0x1000000U | (((IData)((0xfffffffffffffffeULL 
@@ -1007,7 +1007,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
                                                   ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_pcbranch__DOT__pcB
                                                   : 
                                                  (4ULL 
-                                                  + (QData)((IData)(vlSelf->top__DOT__oldpc)))) 
+                                                  + vlSelf->top__DOT__pc)) 
                                                 >> 0x20U)) 
                                        >> 0xbU)));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT____Vcellinp__u_MuxKeyWithDefault__lut[9U] 
@@ -1023,17 +1023,21 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
                                        + vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__immI_sext)) 
                                    >> 0x20U)) >> 4U));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT____Vcellinp__u_MuxKeyWithDefault__lut[0xbU] 
-        = ((IData)(((QData)((IData)(vlSelf->top__DOT__oldpc)) 
-                    + (((- (QData)((IData)((1U & (vlSelf->top__DOT__immJ 
-                                                  >> 0x14U))))) 
-                        << 0x15U) | (QData)((IData)(vlSelf->top__DOT__immJ))))) 
+        = ((IData)((vlSelf->top__DOT__pc + (((- (QData)((IData)(
+                                                                (1U 
+                                                                 & (vlSelf->top__DOT__immJ 
+                                                                    >> 0x14U))))) 
+                                             << 0x15U) 
+                                            | (QData)((IData)(vlSelf->top__DOT__immJ))))) 
            << 3U);
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT____Vcellinp__u_MuxKeyWithDefault__lut[0xcU] 
-        = (((IData)(((QData)((IData)(vlSelf->top__DOT__oldpc)) 
-                     + (((- (QData)((IData)((1U & (vlSelf->top__DOT__immJ 
-                                                   >> 0x14U))))) 
-                         << 0x15U) | (QData)((IData)(vlSelf->top__DOT__immJ))))) 
-            >> 0x1dU) | ((IData)((((QData)((IData)(vlSelf->top__DOT__oldpc)) 
+        = (((IData)((vlSelf->top__DOT__pc + (((- (QData)((IData)(
+                                                                 (1U 
+                                                                  & (vlSelf->top__DOT__immJ 
+                                                                     >> 0x14U))))) 
+                                              << 0x15U) 
+                                             | (QData)((IData)(vlSelf->top__DOT__immJ))))) 
+            >> 0x1dU) | ((IData)(((vlSelf->top__DOT__pc 
                                    + (((- (QData)((IData)(
                                                           (1U 
                                                            & (vlSelf->top__DOT__immJ 
@@ -1041,8 +1045,8 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
                                        << 0x15U) | (QData)((IData)(vlSelf->top__DOT__immJ)))) 
                                   >> 0x20U)) << 3U));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT____Vcellinp__u_MuxKeyWithDefault__lut[0xdU] 
-        = (0x10U | (((IData)((4ULL + (QData)((IData)(vlSelf->top__DOT__oldpc)))) 
-                     << 0xaU) | ((IData)((((QData)((IData)(vlSelf->top__DOT__oldpc)) 
+        = (0x10U | (((IData)((4ULL + vlSelf->top__DOT__pc)) 
+                     << 0xaU) | ((IData)(((vlSelf->top__DOT__pc 
                                            + (((- (QData)((IData)(
                                                                   (1U 
                                                                    & (vlSelf->top__DOT__immJ 
@@ -1052,11 +1056,11 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
                                           >> 0x20U)) 
                                  >> 0x1dU)));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT____Vcellinp__u_MuxKeyWithDefault__lut[0xeU] 
-        = (((IData)((4ULL + (QData)((IData)(vlSelf->top__DOT__oldpc)))) 
-            >> 0x16U) | ((IData)(((4ULL + (QData)((IData)(vlSelf->top__DOT__oldpc))) 
+        = (((IData)((4ULL + vlSelf->top__DOT__pc)) 
+            >> 0x16U) | ((IData)(((4ULL + vlSelf->top__DOT__pc) 
                                   >> 0x20U)) << 0xaU));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT____Vcellinp__u_MuxKeyWithDefault__lut[0xfU] 
-        = (0x400U | ((IData)(((4ULL + (QData)((IData)(vlSelf->top__DOT__oldpc))) 
+        = (0x400U | ((IData)(((4ULL + vlSelf->top__DOT__pc) 
                               >> 0x20U)) >> 0x16U));
     Vtop___024root____Vdpiimwrap_top__DOT__pmem_read_TOP(
                                                          (((IData)(vlSelf->top__DOT__mem_ena) 
