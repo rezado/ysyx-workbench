@@ -78,7 +78,7 @@ assign inst_sra = (opcode == 7'b0110011) && (funct3 == 3'b101) && (funct7 == 7'b
 assign inst_beq = (opcode == 7'b1100011) && (funct3 == 3'b000);
 assign inst_bne = (opcode == 7'b1100011) && (funct3 == 3'b001);
 assign inst_blt = (opcode == 7'b1100011) && (funct3 == 3'b100);
-assign inst_bltu = (opcode == 7'b1100011) && (funct3 == 3'b101);
+assign inst_bltu = (opcode == 7'b1100011) && (funct3 == 3'b110);
 assign inst_bge = (opcode == 7'b1100011) && (funct3 == 3'b101);
 assign inst_bgeu = (opcode == 7'b1100011) && (funct3 == 3'b111);
 assign inst_ld = (opcode == 7'b0000011) && (funct3 == 3'b011);
