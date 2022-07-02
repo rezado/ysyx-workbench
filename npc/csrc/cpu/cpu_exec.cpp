@@ -168,12 +168,6 @@ void cpu_exec(uint64_t n) {
   }
 }
 
-void reset(int n) {
-    top->rst = 1;
-    while (n--) single_cycle();
-    top->rst = 0;
-}
-
 void finish_sim() {
 	printf("simulation finished\n");
 	run_flag = false;
