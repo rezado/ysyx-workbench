@@ -123,7 +123,7 @@ assign inv = ~(inst_addi | inst_lui | inst_auipc | inst_jal | inst_jalr | inst_s
 
 // 指令类型
 wire r_type, b_type;
-// divw remw因源操作数特殊性不加入r_type
+// divw remw sllw因源操作数特殊性不加入r_type
 assign r_type = inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor
             | inst_sll | inst_srl | inst_sra | inst_addw | inst_mulw | inst_subw;
 assign b_type = inst_beq | inst_bne | inst_bge | inst_bgeu | inst_blt | inst_bltu;
