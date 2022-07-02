@@ -17,8 +17,8 @@ void sdb_mainloop();
 /* 仿真开始结束相关 */
 
 void single_cycle() {
-    top->clk = 0; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
     top->clk = 1; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
+    top->clk = 0; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
 }
 
 void sim_init() {
