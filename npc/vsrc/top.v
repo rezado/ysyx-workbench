@@ -1,7 +1,7 @@
 ;module top(
     input   clk,
     input   rst,
-	output	[63:0] pc
+	output reg	[63:0] pc
 );
 
 reg [63:0] oldpc;
