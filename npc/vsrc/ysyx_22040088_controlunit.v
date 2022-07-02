@@ -2,7 +2,7 @@ module ysyx_22040088_controlunit(
     input   [ 6:0] opcode,
     input   [ 2:0] funct3,
     input   [ 6:0] funct7,
-    output  [10:0] alu_op,
+    output  [12:0] alu_op,
     output         rf_we,
     output  [ 1:0] sel_alusrc1,
     output  [ 4:0] sel_alusrc2,
@@ -58,6 +58,9 @@ wire inst_srai;
 wire inst_slli;
 wire inst_srli;
 
+wire inst_mulw;
+wire inst_divw;
+
 // 指令译码
 assign inst_addi = (opcode == 7'b0010011) && (funct3 == 3'b000);
 assign inst_lui = (opcode == 7'b0110111);
@@ -101,24 +104,36 @@ assign inst_addiw = (opcode == 7'b0011011) && (funct3 == 3'b000);
 assign inst_srai = (opcode == 7'b0010011) && (funct3 == 3'b101) && (funct7 == 7'b0100000);
 assign inst_slli = (opcode == 7'b0010011) && (funct3 == 3'b001) && (funct7[6:1] == 6'b000000);
 assign inst_srli = (opcode == 7'b0010011) && (funct3 == 3'b101) && (funct7[6:1] == 6'b000000);
+assign inst_mulw = (opcode == 7'b0111011) && (funct3 == 3'b000) && (funct7 == 7'b0000001);
+assign inst_divw = (opcode == 7'b0111011) && (funct3 == 3'b100) && (funct7 == 7'b0000001);
 
 // TODO:每次添加指令这里都要修改
 assign inv = ~(inst_addi | inst_lui | inst_auipc | inst_jal | inst_jalr | inst_sd | inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor | inst_sll | inst_srl | inst_sra |
                inst_beq | inst_bne | inst_blt | inst_bltu | inst_bge | inst_bgeu | load | store | inst_add |
-               inst_addw | inst_sltiu | inst_andi |inst_addiw | inst_srai | inst_slli | inst_srli);
+               inst_addw | inst_sltiu | inst_andi |inst_addiw | inst_srai | inst_slli | inst_srli | inst_mulw | inst_divw);
 
 // 指令类型
 wire r_type, b_type;
 assign r_type = inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor
-            | inst_sll | inst_srl | inst_sra | inst_addw;
+            | inst_sll | inst_srl | inst_sra | inst_addw | inst_mulw | inst_divw;
 assign b_type = inst_beq | inst_bne | inst_bge | inst_bgeu | inst_blt | inst_bltu;
 
 wire load, store;
 assign load = inst_ld | inst_lw | inst_lh | inst_lb | inst_lwu | inst_lhu | inst_lbu;
 assign store = inst_sd | inst_sw | inst_sh | inst_sb;
 
+wire word;
+assign word = inst_addw | inst_addiw | inst_lbu | inst_lhu | inst_lwu | inst_mulw | inst_divw;
+
 // 控制信号生成
-assign alu_op = {inst_lui, inst_sra | inst_srai, inst_srl | inst_srli, inst_sll | inst_slli, inst_xor, inst_or,
+assign alu_op = {inst_divw,
+                inst_mulw,
+                inst_lui,
+                inst_sra | inst_srai,
+                inst_srl | inst_srli,
+                inst_sll | inst_slli,
+                inst_xor,
+                inst_or,
                 inst_and | inst_andi,
                 inst_sltu | inst_bltu | inst_bgeu,
                 inst_slt | inst_blt | inst_bge | inst_sltiu,
@@ -153,7 +168,7 @@ assign mem_mask = inst_ld | inst_sd ? 4'b0001 :
                   inst_lb | inst_sb | inst_lbu ? 4'b1000 :
                                       4'b0000;
 
-assign sel_alures = {inst_addw | inst_addiw | inst_lbu | inst_lhu | inst_lwu
-                    , ~(inst_addw | inst_addiw | inst_lbu | inst_lhu | inst_lwu)};
+assign sel_alures = {word
+                    , ~word};
 
 endmodule
