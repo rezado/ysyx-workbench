@@ -373,7 +373,7 @@ word_t eval(word_t p, word_t q, bool *legal)
       case TK_REG:
     {
       if (strcmp(tokens[p].str, "$pc") == 0)
-        return top->npc;
+        return top->pc;
       bool success = false;
       word_t tmp = isa_reg_str2val(tokens[p].str + 1, &success);
       if (!success)

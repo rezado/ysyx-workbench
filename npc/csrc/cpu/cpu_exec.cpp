@@ -22,6 +22,7 @@ bool scan_wp();
 void single_cycle();
 
 void gprcpy();
+bool first_exec = true;
 
 /* itrace */
 union{
@@ -54,7 +55,9 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   if (ITRACE_COND) { log_write("%s\n", _this->logbuf); }
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
-  IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
+  // DIFFTEST比DUT晚一个周期更新
+  if (first_exec) first_exec = false;
+  else IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
 #ifdef CONFIG_WATCHPOINT
   // scan watchpoints
   bool flag = scan_wp();
@@ -66,8 +69,8 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 
 extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
 static void exec_once(Decode *s) {
-  s->pc = top->npc;
-  s->snpc = top->npc;
+  s->pc = top->pc;
+  s->snpc = top->pc;
 
   // single_cycle();
   isa_exec_once(s);

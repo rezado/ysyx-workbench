@@ -1,10 +1,10 @@
 ;module top(
     input   clk,
     input   rst,
-	output	[63:0] npc
+	output	[63:0] pc
 );
 
-reg [63:0] pc;
+wire [63:0] npc;
 // IFU
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.clk    (clk    ),
@@ -20,8 +20,8 @@ wire [63:0] inst_data;
 wire [31:0] inst;
 always @(posedge clk) begin
 	if (~rst) begin
-		pmem_read(npc, inst_data);
-		$display("read at ", npc, "inst: ", inst);
+		pmem_read(pc, inst_data);
+		$display("read at ", pc, "inst: ", inst);
 	end
 end
 
