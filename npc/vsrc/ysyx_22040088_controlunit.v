@@ -61,6 +61,7 @@ wire inst_srli;
 wire inst_mulw;
 wire inst_divw;
 wire inst_remw;
+wire inst_subw;
 
 // 指令译码
 assign inst_addi = (opcode == 7'b0010011) && (funct3 == 3'b000);
@@ -108,17 +109,19 @@ assign inst_srli = (opcode == 7'b0010011) && (funct3 == 3'b101) && (funct7[6:1] 
 assign inst_mulw = (opcode == 7'b0111011) && (funct3 == 3'b000) && (funct7 == 7'b0000001);
 assign inst_divw = (opcode == 7'b0111011) && (funct3 == 3'b100) && (funct7 == 7'b0000001);
 assign inst_remw = (opcode == 7'b0111011) && (funct3 == 3'b110) && (funct7 == 7'b0000001);
+assign inst_subw = (opcode == 7'b0111011) && (funct3 == 3'b000) && (funct7 == 7'b0100000);
 
 // TODO:每次添加指令这里都要修改
 assign inv = ~(inst_addi | inst_lui | inst_auipc | inst_jal | inst_jalr | inst_sd | inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor | inst_sll | inst_srl | inst_sra |
                inst_beq | inst_bne | inst_blt | inst_bltu | inst_bge | inst_bgeu | load | store | inst_add |
                inst_addw | inst_sltiu | inst_andi |inst_addiw | inst_srai | inst_slli | inst_srli | inst_mulw |
-               inst_divw | inst_remw);
+               inst_divw | inst_remw | inst_subw);
 
 // 指令类型
 wire r_type, b_type;
+// divw remw因源操作数特殊性不加入r_type
 assign r_type = inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor
-            | inst_sll | inst_srl | inst_sra | inst_addw | inst_mulw;
+            | inst_sll | inst_srl | inst_sra | inst_addw | inst_mulw | inst_subw;
 assign b_type = inst_beq | inst_bne | inst_bge | inst_bgeu | inst_blt | inst_bltu;
 
 wire load, store;
@@ -126,7 +129,7 @@ assign load = inst_ld | inst_lw | inst_lh | inst_lb | inst_lwu | inst_lhu | inst
 assign store = inst_sd | inst_sw | inst_sh | inst_sb;
 
 wire word;
-assign word = inst_addw | inst_addiw | inst_lbu | inst_lhu | inst_lwu | inst_mulw | inst_divw;
+assign word = inst_addw | inst_addiw | inst_lbu | inst_lhu | inst_lwu | inst_mulw | inst_divw | inst_remw | inst_subw;
 
 // 控制信号生成
 assign alu_op = {inst_remw,
@@ -141,7 +144,7 @@ assign alu_op = {inst_remw,
                 inst_and | inst_andi,
                 inst_sltu | inst_bltu | inst_bgeu | inst_sltiu,
                 inst_slt | inst_blt | inst_bge,
-                inst_sub | inst_beq | inst_bne,
+                inst_sub | inst_beq | inst_bne | inst_subw,
                 inst_add | inst_addi | inst_auipc | inst_jal | inst_jalr | load | store | inst_addw | inst_addiw};
 assign rf_we =  inst_addi | inst_jal | inst_jalr | inst_lui | inst_auipc |
                 r_type | load | inst_sltiu | inst_andi | inst_addiw |
