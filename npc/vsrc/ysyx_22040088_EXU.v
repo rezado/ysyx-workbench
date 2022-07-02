@@ -3,7 +3,7 @@ module ysyx_22040088_EXU(
     // input       rst,
     input [63:0] pc,
     // 控制信号
-    input [12:0] alu_op,
+    input [13:0] alu_op,
     input [ 6:0] sel_nextpc,
     input [ 2:0] sel_alusrc1,
     input [ 5:0] sel_alusrc2,
