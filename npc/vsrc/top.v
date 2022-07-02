@@ -112,7 +112,7 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 
 // EXU
 ysyx_22040088_EXU u_ysyx_22040088_EXU(
-	.pc          (pc          ),
+	.pc          (oldpc       ),
 	.alu_op      (alu_op      ),
 	.sel_nextpc  (sel_nextpc  ),
 	.sel_alusrc1 (sel_alusrc1 ),
