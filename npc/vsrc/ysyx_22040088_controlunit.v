@@ -139,8 +139,8 @@ assign alu_op = {inst_remw,
                 inst_xor,
                 inst_or,
                 inst_and | inst_andi,
-                inst_sltu | inst_bltu | inst_bgeu,
-                inst_slt | inst_blt | inst_bge | inst_sltiu,
+                inst_sltu | inst_bltu | inst_bgeu | inst_sltiu,
+                inst_slt | inst_blt | inst_bge,
                 inst_sub | inst_beq | inst_bne,
                 inst_add | inst_addi | inst_auipc | inst_jal | inst_jalr | load | store | inst_addw | inst_addiw};
 assign rf_we =  inst_addi | inst_jal | inst_jalr | inst_lui | inst_auipc |
@@ -149,7 +149,8 @@ assign rf_we =  inst_addi | inst_jal | inst_jalr | inst_lui | inst_auipc |
 assign sel_alusrc1 = {inst_divw | inst_remw, //zext(rdata1[])
                       inst_auipc | inst_jal | inst_jalr,  // pc
                       inst_addi | r_type | b_type | load | store |
-                      inst_andi | inst_addiw | inst_srai | inst_slli | inst_srli};  // rdata1
+                      inst_andi | inst_addiw | inst_srai | inst_slli |
+                      inst_srli | inst_sltiu};  // rdata1
 assign sel_alusrc2 = {inst_divw | inst_remw,
                       store,  // immS
                       inst_jal | inst_jalr,  // 4
