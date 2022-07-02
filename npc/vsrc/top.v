@@ -1,7 +1,7 @@
 ;module top(
     input   clk,
     input   rst,
-	output	[63:0] nextpc
+	output	[63:0] npc
 );
 
 reg [63:0] pc;
@@ -9,7 +9,7 @@ reg [63:0] pc;
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.clk    (clk    ),
 	.rst    (rst    ),
-	.nextpc (nextpc ),
+	.nextpc (npc ),
 	.pc     (pc  )
 );
 
@@ -20,8 +20,8 @@ wire [63:0] inst_data;
 wire [31:0] inst;
 always @(posedge clk) begin
 	if (~rst) begin
-		pmem_read(nextpc, inst_data);
-		$display("read at ", nextpc, "inst: ", inst);
+		pmem_read(npc, inst_data);
+		$display("read at ", npc, "inst: ", inst);
 	end
 end
 
@@ -126,7 +126,7 @@ ysyx_22040088_EXU u_ysyx_22040088_EXU(
 	.immB        (immB        ),
 	.immS		 (immS        ),
 	.alu_result  (alu_result  ),
-	.nextpc      (nextpc      )
+	.nextpc      (npc      )
 );
 
 
