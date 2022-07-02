@@ -15,7 +15,6 @@ extern "C" void get_inv(int inst_inv) {
 
 int isa_exec_once(Decode *s) {
   s->isa.inst.val = inst_fetch(&s->snpc, 4);
-  top->inst = s->isa.inst.val;
   single_cycle();
   s->dnpc = top->pc;
 
