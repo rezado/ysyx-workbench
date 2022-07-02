@@ -4,7 +4,7 @@
 	output	[63:0] pc
 );
 
-wire [63:0] oldpc;
+reg [63:0] oldpc;
 // IFU
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.clk    (clk    ),
