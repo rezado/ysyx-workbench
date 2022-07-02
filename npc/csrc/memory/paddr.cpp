@@ -57,10 +57,10 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
     for (int i = 0; i < 8; i++) {
       if (wmask & 1 == 1) {
         host_write(guest_to_host(waddr), 1, wdata);
+        wdata >>= 8;
       }
       wmask >>= 1;
       waddr += 1;
-      wdata >>= 8;
     }
     #ifdef CONFIG_MTRACE
       printf("Write Memory at 0x%016llx  data:  0x%016llx\n", waddr, wdata);
