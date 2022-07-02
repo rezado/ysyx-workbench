@@ -18,8 +18,11 @@ import "DPI-C" function void pmem_read(
 /* verilator lint_off UNUSED */
 wire [63:0] inst;
 always @(posedge clk) begin
-	if (~rst)
+	if (~rst) begin
 		pmem_read(pc, inst);
+		$display("read at ", pc, "inst: ", inst);
+	end
+		
 end
 
 // always @(*) begin

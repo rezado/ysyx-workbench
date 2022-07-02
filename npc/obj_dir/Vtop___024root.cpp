@@ -1324,7 +1324,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
               [6U]));
     vlSelf->top__DOT__nextpc = ((IData)(vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__hit)
                                  ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__lut_out
-                                 : 0ULL);
+                                 : 0x80000000ULL);
 }
 
 void Vtop___024root___eval(Vtop___024root* vlSelf) {
