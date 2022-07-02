@@ -4,8 +4,8 @@ module ysyx_22040088_controlunit(
     input   [ 6:0] funct7,
     output  [12:0] alu_op,
     output         rf_we,
-    output  [ 1:0] sel_alusrc1,
-    output  [ 4:0] sel_alusrc2,
+    output  [ 2:0] sel_alusrc1,
+    output  [ 5:0] sel_alusrc2,
     output  [ 6:0] sel_nextpc,
     output  [ 2:0] sel_rfres,
     output         mem_ena,
@@ -115,7 +115,7 @@ assign inv = ~(inst_addi | inst_lui | inst_auipc | inst_jal | inst_jalr | inst_s
 // 指令类型
 wire r_type, b_type;
 assign r_type = inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor
-            | inst_sll | inst_srl | inst_sra | inst_addw | inst_mulw | inst_divw;
+            | inst_sll | inst_srl | inst_sra | inst_addw | inst_mulw;
 assign b_type = inst_beq | inst_bne | inst_bge | inst_bgeu | inst_blt | inst_bltu;
 
 wire load, store;
@@ -140,11 +140,13 @@ assign alu_op = {inst_divw,
                 inst_sub | inst_beq | inst_bne,
                 inst_add | inst_addi | inst_auipc | inst_jal | inst_jalr | load | store | inst_addw | inst_addiw};
 assign rf_we =  inst_addi | inst_jal | inst_jalr | inst_lui | inst_auipc |
-                r_type | load | inst_sltiu | inst_andi | inst_addiw | inst_srai | inst_slli | inst_srli;
-assign sel_alusrc1 = {inst_auipc | inst_jal | inst_jalr,  // pc
+                r_type | load | inst_sltiu | inst_andi | inst_addiw | inst_srai | inst_slli | inst_srli | inst_divw;
+assign sel_alusrc1 = {inst_divw, //zext(rdata1[])
+                      inst_auipc | inst_jal | inst_jalr,  // pc
                       inst_addi | r_type | b_type | load | store |
                       inst_andi | inst_addiw | inst_srai | inst_slli | inst_srli};  // rdata1
-assign sel_alusrc2 = {store,  // immS
+assign sel_alusrc2 = {inst_divw,
+                      store,  // immS
                       inst_jal | inst_jalr,  // 4
                       inst_auipc | inst_lui,  // immU
                       inst_addi | load | inst_sltiu | inst_andi | inst_addiw | inst_srai | inst_slli | inst_srli, // immI
@@ -156,7 +158,7 @@ assign sel_nextpc = {inst_bge | inst_bgeu,
                      inst_jalr,
                      inst_jal,
                      inst_addi | inst_auipc | inst_lui | r_type | load | store |
-                     inst_sltiu | inst_andi | inst_addiw | inst_srai | inst_slli | inst_srli};
+                     inst_sltiu | inst_andi | inst_addiw | inst_srai | inst_slli | inst_srli | inst_divw};
 assign sel_rfres = {inst_lwu | inst_lhu | inst_lbu
                     , inst_ld | inst_lw | inst_lh | inst_lb
                     , ~load};

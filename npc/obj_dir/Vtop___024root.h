@@ -80,6 +80,7 @@ VL_MODULE(Vtop___024root) {
         CData/*0:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__hit;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_cin;
         CData/*7:0*/ top__DOT__u_mem__DOT__mask;
+        SData/*12:0*/ top__DOT__alu_op;
         SData/*12:0*/ top__DOT__immB;
         SData/*11:0*/ top__DOT__immS;
         IData/*20:0*/ top__DOT__immJ;
@@ -90,9 +91,9 @@ VL_MODULE(Vtop___024root) {
         QData/*63:0*/ top__DOT__mem_rdata;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__immI_sext;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__alu_src1;
-        QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__alu_src2;
     };
     struct {
+        QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__alu_src2;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__alu_res;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__lut_out;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__slt_result;
@@ -108,7 +109,6 @@ VL_MODULE(Vtop___024root) {
 
     // LOCAL VARIABLES
     CData/*0:0*/ __Vclklast__TOP__clk;
-    SData/*12:0*/ top__DOT____Vcellout__u_ysyx_22040088_IDU__alu_op;
     VlWide<5>/*131:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_genALUsrc1__DOT____Vcellinp__u_MuxKeyWithDefault__lut;
     QData/*63:0*/ __Vtask_top__DOT__u_mem__DOT__pmem_read__4__rdata;
     VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;

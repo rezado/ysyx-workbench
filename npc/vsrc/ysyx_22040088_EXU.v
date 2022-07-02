@@ -5,8 +5,8 @@ module ysyx_22040088_EXU(
     // 控制信号
     input [12:0] alu_op,
     input [ 6:0] sel_nextpc,
-    input [ 1:0] sel_alusrc1,
-    input [ 4:0] sel_alusrc2,
+    input [ 2:0] sel_alusrc1,
+    input [ 5:0] sel_alusrc2,
     input [ 1:0] sel_alures,
 
     // 寄存器 立即数
