@@ -146,7 +146,7 @@ void Vtop___024root___settle__TOP__2(Vtop___024root* vlSelf) {
            & (0x20U == (vlSelf->inst >> 0x19U)));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_slli 
         = ((IData)((0x1013U == (0x707fU & vlSelf->inst))) 
-           & (0U == (vlSelf->inst >> 0x19U)));
+           & (0U == (vlSelf->inst >> 0x1aU)));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addiw 
         = (IData)((0x1bU == (0x707fU & vlSelf->inst)));
     vlSelf->top__DOT__rf_rdata2 = ((0U == (0x1fU & 
