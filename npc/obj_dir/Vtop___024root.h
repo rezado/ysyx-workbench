@@ -27,6 +27,7 @@ VL_MODULE(Vtop___024root) {
     // Anonymous structures to workaround compiler member-count bugs
     struct {
         CData/*6:0*/ top__DOT__sel_nextpc;
+        CData/*3:0*/ top__DOT__sel_alusrc1;
         CData/*6:0*/ top__DOT__sel_alusrc2;
         CData/*2:0*/ top__DOT__sel_rfres;
         CData/*0:0*/ top__DOT__mem_ena;
@@ -89,9 +90,9 @@ VL_MODULE(Vtop___024root) {
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__word;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__hit;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_cin;
-        CData/*0:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__hit;
     };
     struct {
+        CData/*0:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__hit;
         CData/*7:0*/ top__DOT__u_mem__DOT__mask;
         SData/*13:0*/ top__DOT__alu_op;
         SData/*12:0*/ top__DOT__immB;

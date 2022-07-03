@@ -79,6 +79,7 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__inst = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__alu_op = VL_RAND_RESET_I(14);
     vlSelf->top__DOT__sel_nextpc = VL_RAND_RESET_I(7);
+    vlSelf->top__DOT__sel_alusrc1 = VL_RAND_RESET_I(4);
     vlSelf->top__DOT__sel_alusrc2 = VL_RAND_RESET_I(7);
     vlSelf->top__DOT__rf_rdata1 = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__rf_rdata2 = VL_RAND_RESET_Q(64);

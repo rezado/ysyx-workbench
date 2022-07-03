@@ -92,12 +92,10 @@ static void exec_once(Decode *s) {
   space_len = space_len * 3 + 1;
   memset(p, ' ', space_len);
   p += space_len;
-  // puts(logbuf);
   
   disassemble(p, logbuf + sizeof(logbuf) - p,
       s->pc, (uint8_t *)&instr.val, ilen);
   
-  puts(logbuf);
   // iringbuf
   strcpy(rbuf[rptr], logbuf);
   rptr = (rptr + 1) % 20;
