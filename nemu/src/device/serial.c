@@ -16,7 +16,8 @@ static void serial_putc(char ch) {
 static void serial_io_handler(uint32_t offset, int len, bool is_write) {
   assert(len == 1);
   switch (offset) {
-    /* We bind the serial port with the host stderr in NEMU. */
+    /* We bind the serial port with the host stderr in NEMU.
+       每当CPU往数据寄存器中写入数据时, 串口会将数据传送到主机的标准错误流进行输出. */
     case CH_OFFSET:
       if (is_write) serial_putc(serial_base[0]);
       else panic("do not support read");
@@ -32,5 +33,5 @@ void init_serial() {
 #else
   add_mmio_map("serial", CONFIG_SERIAL_MMIO, serial_base, 8, serial_io_handler);
 #endif
-
+  // CONFIG_SERIAL_MMIO代表起始地址
 }
