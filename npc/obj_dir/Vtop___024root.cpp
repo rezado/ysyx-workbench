@@ -81,6 +81,12 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
     // Variables
     CData/*4:0*/ __Vdlyvdim0__top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf__v0;
     CData/*0:0*/ __Vdlyvset__top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf__v0;
+    VlWide<3>/*95:0*/ __Vtemp25;
+    VlWide<3>/*95:0*/ __Vtemp27;
+    VlWide<3>/*95:0*/ __Vtemp28;
+    VlWide<3>/*95:0*/ __Vtemp29;
+    VlWide<3>/*95:0*/ __Vtemp30;
+    VlWide<3>/*95:0*/ __Vtemp31;
     QData/*63:0*/ __Vtask_top__DOT__pmem_read__0__rdata;
     QData/*63:0*/ __Vdlyvval__top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf__v0;
     // Body
@@ -90,13 +96,11 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
         VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 140, "");
     }
     if (VL_UNLIKELY((1U & (~ (IData)(vlSelf->rst))))) {
-        Vtop___024root____Vdpiimwrap_top__DOT__pmem_read_TOP(vlSelf->top__DOT__npc, __Vtask_top__DOT__pmem_read__0__rdata);
+        Vtop___024root____Vdpiimwrap_top__DOT__pmem_read_TOP(vlSelf->pc, __Vtask_top__DOT__pmem_read__0__rdata);
         vlSelf->top__DOT__inst_data = __Vtask_top__DOT__pmem_read__0__rdata;
-        VL_WRITEF("read at %20#inst: %20#\n",64,vlSelf->top__DOT__npc,
+        VL_WRITEF("read at %20#inst: %20#\n",64,vlSelf->pc,
                   64,vlSelf->top__DOT__inst_data);
     }
-    vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000ULL
-                   : vlSelf->top__DOT__npc);
     if (((((((((((((((((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addi) 
                        | (0x6fU == (0x7fU & vlSelf->top__DOT__inst))) 
                       | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_jalr)) 
@@ -176,23 +180,11 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf[__Vdlyvdim0__top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf__v0] 
             = __Vdlyvval__top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf__v0;
     }
-}
-
-VL_INLINE_OPT void Vtop___024root___settle__TOP__2(Vtop___024root* vlSelf) {
-    if (false && vlSelf) {}  // Prevent unused
-    Vtop__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___settle__TOP__2\n"); );
-    // Variables
-    VlWide<3>/*95:0*/ __Vtemp25;
-    VlWide<3>/*95:0*/ __Vtemp27;
-    VlWide<3>/*95:0*/ __Vtemp28;
-    VlWide<3>/*95:0*/ __Vtemp29;
-    VlWide<3>/*95:0*/ __Vtemp30;
-    VlWide<3>/*95:0*/ __Vtemp31;
-    // Body
-    vlSelf->top__DOT__inst = ((0U == (7U & (IData)(vlSelf->top__DOT__npc)))
+    vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000ULL
+                   : vlSelf->top__DOT__npc);
+    vlSelf->top__DOT__inst = ((0U == (7U & (IData)(vlSelf->pc)))
                                ? (IData)(vlSelf->top__DOT__inst_data)
-                               : ((4U == (7U & (IData)(vlSelf->top__DOT__npc)))
+                               : ((4U == (7U & (IData)(vlSelf->pc)))
                                    ? (IData)((vlSelf->top__DOT__inst_data 
                                               >> 0x20U))
                                    : 0U));
@@ -1342,8 +1334,6 @@ void Vtop___024root___eval(Vtop___024root* vlSelf) {
         Vtop___024root___sequent__TOP__1(vlSelf);
         vlSelf->__Vm_traceActivity[1U] = 1U;
     }
-    Vtop___024root___settle__TOP__2(vlSelf);
-    vlSelf->__Vm_traceActivity[2U] = 1U;
     // Final
     vlSelf->__Vclklast__TOP__clk = vlSelf->clk;
 }
@@ -1365,10 +1355,6 @@ VL_INLINE_OPT QData Vtop___024root___change_request_1(Vtop___024root* vlSelf) {
     // Body
     // Change detection
     QData __req = false;  // Logically a bool
-    __req |= ((vlSelf->top__DOT__npc ^ vlSelf->__Vchglast__TOP__top__DOT__npc));
-    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__npc ^ vlSelf->__Vchglast__TOP__top__DOT__npc))) VL_DBG_MSGF("        CHANGE: /home/bill/ysyx-workbench/npc/vsrc/top.v:7: top.npc\n"); );
-    // Final
-    vlSelf->__Vchglast__TOP__top__DOT__npc = vlSelf->top__DOT__npc;
     return __req;
 }
 
