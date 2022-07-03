@@ -4,7 +4,7 @@ module ysyx_22040088_controlunit(
     input   [ 6:0] funct7,
     output  [13:0] alu_op,
     output         rf_we,
-    output  [ 2:0] sel_alusrc1,
+    output  [ 3:0] sel_alusrc1,
     output  [ 6:0] sel_alusrc2,
     output  [ 6:0] sel_nextpc,
     output  [ 2:0] sel_rfres,
@@ -174,7 +174,8 @@ assign rf_we =  inst_addi | inst_jal | inst_jalr | inst_lui | inst_auipc |
                 inst_srai | inst_slli | inst_srli | inst_divw | inst_remw |
                 inst_sllw | inst_xori | inst_srliw | inst_slliw | inst_sraiw |
                 inst_sraw | inst_srlw;
-assign sel_alusrc1 = {inst_divw | inst_remw | inst_srliw | inst_sraiw | inst_sraw | inst_srlw, //zext(rdata1[31:0])
+assign sel_alusrc1 = {inst_sraw | inst_sraiw, // sext(rdata[31:0])
+                      inst_divw | inst_remw | inst_srliw | inst_srlw, //zext(rdata1[31:0])
                       inst_auipc | inst_jal | inst_jalr,  // pc
                       inst_addi | r_type | b_type | load | store |
                       inst_andi | inst_addiw | inst_srai | inst_slli |
