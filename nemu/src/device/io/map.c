@@ -6,7 +6,8 @@
 #define IO_SPACE_MAX (2 * 1024 * 1024)
 
 static uint8_t *io_space = NULL;
-static uint8_t *p_space = NULL;
+static uint8_t *p_space = NULL; // page space
+
 
 uint8_t* new_space(int size) {
   uint8_t *p = p_space;
@@ -31,12 +32,13 @@ static void invoke_callback(io_callback_t c, paddr_t offset, int len, bool is_wr
   if (c != NULL) { c(offset, len, is_write); }
 }
 
+// IO空间分配
 void init_map() {
   io_space = malloc(IO_SPACE_MAX);
   assert(io_space);
   p_space = io_space;
 }
-
+// 将地址addr映射到map所指示的目标空间并进行访问
 word_t map_read(paddr_t addr, int len, IOMap *map) {
   assert(len >= 1 && len <= 8);
   check_bound(map, addr);

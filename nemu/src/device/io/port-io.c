@@ -8,7 +8,7 @@ static int nr_map = 0;
 
 /* device interface */
 void add_pio_map(const char *name, ioaddr_t addr, void *space, uint32_t len, io_callback_t callback) {
-  assert(nr_map < NR_MAP);
+  assert(nr_map < NR_MAP);  // 设备数量小于NR_MAP
   assert(addr + len <= PORT_IO_SPACE_MAX);
   maps[nr_map] = (IOMap){ .name = name, .low = addr, .high = addr + len - 1,
     .space = space, .callback = callback };
