@@ -21,7 +21,7 @@ wire [31:0] inst;
 always @(posedge clk) begin
 	if (~rst) begin
 		pmem_read(pc, inst_data);
-		$display("read at ", pc, "inst: ", inst);
+		$display("read at ", pc, "inst: ", inst_data);
 	end
 end
 
