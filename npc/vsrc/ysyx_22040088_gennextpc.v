@@ -13,7 +13,7 @@ module ysyx_22040088_gennextpc(
 MuxKeyWithDefault #(7, 7, 64) u_MuxKeyWithDefault(
     .out         (nextpc      ),
     .key         (sel_nextpc  ),
-    .default_out (pcadd       ),
+    .default_out (64'h80000000),
     .lut         ({
         7'b0000001, pcadd,
         7'b0000010, jalpc,

@@ -182,9 +182,9 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
     }
     vlSelf->pc = ((IData)(vlSelf->rst) ? 0x80000000ULL
                    : vlSelf->top__DOT__npc);
-    vlSelf->top__DOT__inst = ((0U == (7U & (IData)(vlSelf->pc)))
+    vlSelf->top__DOT__inst = ((4U == (7U & (IData)(vlSelf->pc)))
                                ? (IData)(vlSelf->top__DOT__inst_data)
-                               : ((4U == (7U & (IData)(vlSelf->pc)))
+                               : ((0U == (7U & (IData)(vlSelf->pc)))
                                    ? (IData)((vlSelf->top__DOT__inst_data 
                                               >> 0x20U))
                                    : 0U));

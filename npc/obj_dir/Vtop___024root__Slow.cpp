@@ -54,9 +54,9 @@ void Vtop___024root___settle__TOP__3(Vtop___024root* vlSelf) {
     VlWide<3>/*95:0*/ __Vtemp122;
     VlWide<3>/*95:0*/ __Vtemp123;
     // Body
-    vlSelf->top__DOT__inst = ((0U == (7U & (IData)(vlSelf->pc)))
+    vlSelf->top__DOT__inst = ((4U == (7U & (IData)(vlSelf->pc)))
                                ? (IData)(vlSelf->top__DOT__inst_data)
-                               : ((4U == (7U & (IData)(vlSelf->pc)))
+                               : ((0U == (7U & (IData)(vlSelf->pc)))
                                    ? (IData)((vlSelf->top__DOT__inst_data 
                                               >> 0x20U))
                                    : 0U));
