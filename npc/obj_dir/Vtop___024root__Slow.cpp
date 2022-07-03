@@ -1194,7 +1194,7 @@ void Vtop___024root___settle__TOP__3(Vtop___024root* vlSelf) {
               [6U]));
     vlSelf->top__DOT__npc = ((IData)(vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__hit)
                               ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__lut_out
-                              : 0x80000000ULL);
+                              : (4ULL + vlSelf->pc));
 }
 
 void Vtop___024root___eval_initial(Vtop___024root* vlSelf) {
