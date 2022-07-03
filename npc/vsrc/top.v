@@ -20,13 +20,13 @@ wire [63:0] inst_data;
 wire [31:0] inst;
 always @(posedge clk) begin
 	if (~rst) begin
-		pmem_read(pc, inst_data);
-		$display("read at ", pc, "inst: ", inst_data);
+		pmem_read(npc, inst_data);
+		$display("read at ", npc, "inst: ", inst_data);
 	end
 end
 
-assign inst = (pc[2:0] == 3'b000) ? inst_data[31:0] :
-			  (pc[2:0] == 3'b100) ? inst_data[63:32] :
+assign inst = (npc[2:0] == 3'b000) ? inst_data[31:0] :
+			  (npc[2:0] == 3'b100) ? inst_data[63:32] :
 			  						32'b0;
 
 // always @(*) begin
