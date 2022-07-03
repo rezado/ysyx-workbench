@@ -867,8 +867,7 @@ VL_INLINE_OPT void Vtop___024root___settle__TOP__3(Vtop___024root* vlSelf) {
                                                  & (IData)(
                                                            (vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__alu_src2 
                                                             >> 0x13U))))))) 
-                     << 0x20U) | (QData)((IData)(((IData)(vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__alu_src2) 
-                                                  << 0xcU)))))) 
+                     << 0x20U) | (QData)((IData)(vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__alu_src2))))) 
              | ((- (QData)((IData)((1U & ((IData)(vlSelf->top__DOT__alu_op) 
                                           >> 0xbU))))) 
                 & (vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__alu_src1 

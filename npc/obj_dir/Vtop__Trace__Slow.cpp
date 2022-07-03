@@ -831,9 +831,7 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
                                                                   & (IData)(
                                                                             (vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__alu_src2 
                                                                              >> 0x13U))))))) 
-                                      << 0x20U) | (QData)((IData)(
-                                                                  ((IData)(vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__alu_src2) 
-                                                                   << 0xcU))))),64);
+                                      << 0x20U) | (QData)((IData)(vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__alu_src2)))),64);
         tracep->fullQData(oldp+244,((vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__alu_src1 
                                      * vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__alu_src2)),64);
         tracep->fullQData(oldp+246,(VL_DIV_QQQ(64, vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__alu_src1, vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__alu_src2)),64);
