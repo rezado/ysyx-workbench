@@ -4,47 +4,35 @@
 	output	[63:0] pc
 );
 
-wire [63:0] nextpc;
+wire [63:0] npc;
+wire [63:0] pc_out;
 // IFU
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.clk    (clk    ),
 	.rst    (rst    ),
-	.nextpc (nextpc ),
-	.pc     (pc     )
+	.nextpc (npc    ),
+	.pc     (pc_out )
 );
+assign pc = rst ? 64'h80000000 : pc_out;
 
 import "DPI-C" function void pmem_read(
   input longint raddr, output longint rdata);
-/* verilator lint_off UNUSED */
-wire [63:0] inst;
-always @(posedge clk) begin
-	if (~rst)
-		pmem_read(pc, inst);
+wire [63:0] inst_data;
+wire [31:0] inst;
+
+always @(*) begin
+	pmem_read(pc, inst_data);
 end
 
-// always @(*) begin
-// 	$display("1");
-// 	if(|pc) begin
-// 		pmem_read(pc, inst_data);
-// 		$display("assign:", inst_data);
-// 	end else begin
-// 		inst_data = 64'b0;
-// 	end
-// end
+assign inst = (pc[2:0] == 3'b000) ? inst_data[31:0] :
+			  (pc[2:0] == 3'b100) ? inst_data[63:32] :
+			  						32'b0;
 
-// always @(*) begin
-// 	pmem_read(pc, inst_data);
-// end
-
-// always @(negedge clk) begin
-// 	if (|pc) begin
-// 		$display("top:");
-// 		pmem_read(pc, inst);
-// 		$display(inst);
-// 	end
-// end
 // always @(posedge clk) begin
-// 	inst <= inst_data[31:0];
+// 	if (~rst) begin
+// 		pmem_read(pc, inst_data);
+// 		$display("read at ", pc, "inst: ", inst_data);
+// 	end
 // end
 
 // 控制信号
@@ -119,7 +107,7 @@ ysyx_22040088_EXU u_ysyx_22040088_EXU(
 	.immB        (immB        ),
 	.immS		 (immS        ),
 	.alu_result  (alu_result  ),
-	.nextpc      (nextpc      )
+	.nextpc      (npc      )
 );
 
 

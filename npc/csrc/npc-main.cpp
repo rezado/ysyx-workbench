@@ -17,8 +17,20 @@ void sdb_mainloop();
 /* 仿真开始结束相关 */
 
 void single_cycle() {
+    top->clk = 1; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
+    top->clk = 0; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
+}
+
+void rst_cycle() {
     top->clk = 0; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
     top->clk = 1; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
+}
+
+void reset(int n) {
+    top->rst = 1;
+    while (n--) rst_cycle();
+    top->rst = 0;
+    top->clk = 0; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
 }
 
 void sim_init() {
@@ -48,7 +60,7 @@ void sim_init() {
 }
 
 void sim_exit() {
-    // single_cycle();
+    single_cycle();
     tfp->close();
     delete contextp;
     delete tfp;
