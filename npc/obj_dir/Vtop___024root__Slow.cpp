@@ -54,9 +54,9 @@ void Vtop___024root___settle__TOP__3(Vtop___024root* vlSelf) {
     VlWide<3>/*95:0*/ __Vtemp122;
     VlWide<3>/*95:0*/ __Vtemp123;
     // Body
-    vlSelf->top__DOT__inst = ((4U == (7U & (IData)(vlSelf->pc)))
+    vlSelf->top__DOT__inst = ((0U == (7U & (IData)(vlSelf->pc)))
                                ? (IData)(vlSelf->top__DOT__inst_data)
-                               : ((0U == (7U & (IData)(vlSelf->pc)))
+                               : ((4U == (7U & (IData)(vlSelf->pc)))
                                    ? (IData)((vlSelf->top__DOT__inst_data 
                                               >> 0x20U))
                                    : 0U));
@@ -1194,7 +1194,7 @@ void Vtop___024root___settle__TOP__3(Vtop___024root* vlSelf) {
               [6U]));
     vlSelf->top__DOT__npc = ((IData)(vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__hit)
                               ? vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__lut_out
-                              : (4ULL + vlSelf->pc));
+                              : 0x80000000ULL);
 }
 
 void Vtop___024root___eval_initial(Vtop___024root* vlSelf) {
