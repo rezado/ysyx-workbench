@@ -75,6 +75,9 @@ VL_MODULE(Vtop___024root) {
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_subw;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sllw;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_xori;
+        CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_slliw;
+        CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sraiw;
+        CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_srliw;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__r_type;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__b_type;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__load;
@@ -87,11 +90,11 @@ VL_MODULE(Vtop___024root) {
         SData/*13:0*/ top__DOT__alu_op;
         SData/*12:0*/ top__DOT__immB;
         SData/*11:0*/ top__DOT__immS;
+    };
+    struct {
         IData/*31:0*/ top__DOT__inst;
         IData/*20:0*/ top__DOT__immJ;
         QData/*63:0*/ top__DOT__npc;
-    };
-    struct {
         QData/*63:0*/ top__DOT__pc_out;
         QData/*63:0*/ top__DOT__inst_data;
         QData/*63:0*/ top__DOT__rf_rdata1;

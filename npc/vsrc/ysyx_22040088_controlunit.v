@@ -167,13 +167,13 @@ assign sel_alusrc1 = {inst_divw | inst_remw, //zext(rdata1[31:0])
                       inst_andi | inst_addiw | inst_srai | inst_slli |
                       inst_srli | inst_sltiu | inst_sllw | inst_xori |
                       inst_slliw | inst_srliw | inst_sraiw};  // rdata1
-assign sel_alusrc2 = {inst_sllw | inst_slliw | inst_srliw | inst_sraiw, //zext(rdata2[4:0])
+assign sel_alusrc2 = {inst_sllw, //zext(rdata2[4:0])
                       inst_divw | inst_remw,
                       store,  // immS
                       inst_jal | inst_jalr,  // 4
                       inst_auipc | inst_lui,  // immU
                       inst_addi | load | inst_sltiu | inst_andi | inst_addiw | inst_srai |
-                      inst_slli | inst_srli | inst_xori, // immI
+                      inst_slli | inst_srli | inst_xori | inst_slliw | inst_srliw | inst_sraiw, // immI
                       r_type | b_type};  // rdata2
 assign sel_nextpc = {inst_bge | inst_bgeu,
                      inst_blt | inst_bltu,
