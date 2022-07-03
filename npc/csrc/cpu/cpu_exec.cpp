@@ -76,7 +76,6 @@ static void exec_once(Decode *s) {
   isa_exec_once(s);
   gprcpy();  // 通过DPI-C更新寄存器状态
   CPU.pc = s->dnpc;
-  s->pc = s->dnpc;
 
 #ifdef CONFIG_ITRACE
   char *p = logbuf;
