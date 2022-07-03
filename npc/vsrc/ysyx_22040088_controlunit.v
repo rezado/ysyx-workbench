@@ -140,7 +140,7 @@ assign load = inst_ld | inst_lw | inst_lh | inst_lb | inst_lwu | inst_lhu | inst
 assign store = inst_sd | inst_sw | inst_sh | inst_sb;
 
 wire word;
-assign word = inst_addw | inst_addiw | inst_lbu | inst_lhu | inst_lwu | inst_mulw | inst_divw | inst_remw | inst_subw inst_slliw | inst_srliw | inst_sraiw;
+assign word = inst_addw | inst_addiw | inst_lbu | inst_lhu | inst_lwu | inst_mulw | inst_divw | inst_remw | inst_subw | inst_slliw | inst_srliw | inst_sraiw;
 
 // 控制信号生成
 assign alu_op = {inst_remw,
