@@ -11,7 +11,6 @@ static void putchar(char ch, char *str, int to_string) {
 }
 
 static int print(const char *fmt, va_list *ap, char *str, int to_string) {
-  panic("print");
   size_t i;
   size_t len = strlen(fmt);
   int flag = 0, argDec;
@@ -64,8 +63,9 @@ static int print(const char *fmt, va_list *ap, char *str, int to_string) {
       }
     }
   }
-    if(to_string) *str++ = 0;
-    return chnum;
+  panic("print");
+  if(to_string) *str++ = 0;
+  return chnum;
 }
 
 
