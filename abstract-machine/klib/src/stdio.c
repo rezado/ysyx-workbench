@@ -72,7 +72,7 @@ int printf(const char *fmt, ...) {
   va_list ap;
   va_start(ap, fmt);
   int chnum = 0;
-  chnum = print(fmt, &ap, NULL, false);
+  chnum = print(fmt, &ap, NULL, 0);
   va_end(ap);
   return chnum;
 }
@@ -85,7 +85,7 @@ int sprintf(char *out, const char *fmt, ...) {
   va_list ap;
   va_start(ap, fmt);
   int chnum = 0;
-  chnum = print(fmt, &ap, out, true);
+  chnum = print(fmt, &ap, out, 1);
   va_end(ap);
   return chnum;
 }
