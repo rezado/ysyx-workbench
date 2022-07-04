@@ -63,7 +63,6 @@ static int print(const char *fmt, va_list *ap, char *str, int to_string) {
       }
     }
   }
-  panic("print");
   if(to_string) *str++ = 0;
   return chnum;
 }
@@ -88,6 +87,7 @@ int sprintf(char *out, const char *fmt, ...) {
   int chnum = 0;
   chnum = print(fmt, &ap, out, true);
   va_end(ap);
+  panic("print");
   return chnum;
 }
 
