@@ -6,7 +6,7 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 static void putchar(char ch, char *str, int to_string) {
-  if (to_string) *str++ = ch;
+  if (to_string) *str = ch;
   else putch(ch);
 }
 
@@ -24,6 +24,7 @@ static int print(const char *fmt, va_list *ap, char *str, int to_string) {
     }
     else if (!flag) {
       putchar(fmt[i], str, to_string);
+      str++;
       chnum++;
     }
     else {
@@ -34,10 +35,12 @@ static int print(const char *fmt, va_list *ap, char *str, int to_string) {
         if (argDec < 0) {
           argDec = -argDec;
           putchar('-', str, to_string);
+          str++;
           chnum++;
         }
         else if (argDec == 0) {
           putchar('0', str, to_string);
+          str++;
           chnum++;
         }
 
@@ -50,6 +53,7 @@ static int print(const char *fmt, va_list *ap, char *str, int to_string) {
         
         while (cnt > 0) {
           putchar(num[--cnt], str, to_string);
+          str++;
           chnum++;
         }
       }
@@ -57,6 +61,7 @@ static int print(const char *fmt, va_list *ap, char *str, int to_string) {
         argStr = va_arg(*ap, char*);
         while (*argStr != '\0') {
           putchar(*argStr, str, to_string);
+          str++;
           argStr++;
           chnum++;
         }
