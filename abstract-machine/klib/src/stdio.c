@@ -47,7 +47,7 @@ static int print(const char *fmt, va_list *ap, char *str, int to_string) {
         t = argDec;
         cnt = 0;
         while (t) {
-          num[cnt++] = argDec % 10 + '0';
+          num[cnt++] = t % 10 + '0';
           t = t / 10;
         }
         
