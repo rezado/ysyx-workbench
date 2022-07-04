@@ -11,7 +11,7 @@ static void putchar(char ch, char *str, int to_string) {
 }
 
 static int print(const char *fmt, va_list *ap, char *str, int to_string) {
-  printf("print\n");
+  panic("print");
   size_t i;
   size_t len = strlen(fmt);
   int flag = 0, argDec;
