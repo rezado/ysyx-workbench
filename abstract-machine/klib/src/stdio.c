@@ -87,7 +87,6 @@ int sprintf(char *out, const char *fmt, ...) {
   int chnum = 0;
   chnum = print(fmt, &ap, out, true);
   va_end(ap);
-  panic("print");
   return chnum;
 }
 
