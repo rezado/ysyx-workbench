@@ -13,7 +13,7 @@ static void rtc_io_handler(uint32_t offset, int len, bool is_write) {
     // 提前准备数据 以供map_read读取
     rtc_port_base[0] = (uint32_t)us;
     rtc_port_base[1] = us >> 32;
-    printf("%u %u\n", rtc_port_base[0], rtc_port_base[1]);
+    printf("%x %x\n", rtc_port_base[0], rtc_port_base[1]);
   }
 }
 
