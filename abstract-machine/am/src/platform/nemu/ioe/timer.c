@@ -6,12 +6,12 @@ void __am_timer_init() {
 }
 
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
-  printf("__am_timer_uptime\n");
+  // printf("__am_timer_uptime\n");
   inl(RTC_ADDR+4);
   uint64_t us;
   us = inl(RTC_ADDR);
   uptime->us = us - uptime->us;
-  printf("us:%d\n", uptime->us);
+  // printf("us:%d\n", uptime->us);
   
   // uptime->us = paddr_read(RTC_ADDR, 4);
 }
