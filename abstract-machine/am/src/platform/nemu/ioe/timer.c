@@ -5,8 +5,8 @@ void __am_timer_init() {
 }
 
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
-  panic("rad timer");
   uptime->us = inl(RTC_ADDR);
+  outl(SERIAL_PORT, uptime->us);
 }
 
 void __am_timer_rtc(AM_TIMER_RTC_T *rtc) {
