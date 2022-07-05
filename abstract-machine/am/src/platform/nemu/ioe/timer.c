@@ -1,12 +1,15 @@
 #include <am.h>
 #include <nemu.h>
+#include <stdio.h>
 
 void __am_timer_init() {
 }
-word_t paddr_read(paddr_t addr, int len);
+
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
-  // uptime->us = inl(RTC_ADDR) - uptime->us;
-  uptime->us = paddr_read(RTC_ADDR, 4);
+  printf("__am_timer_uptime\n");
+  uptime->us = inl(RTC_ADDR) - uptime->us;
+  
+  // uptime->us = paddr_read(RTC_ADDR, 4);
 }
 
 void __am_timer_rtc(AM_TIMER_RTC_T *rtc) {
