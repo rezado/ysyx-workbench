@@ -8,6 +8,7 @@ static void rtc_io_handler(uint32_t offset, int len, bool is_write) {
   assert(offset == 0 || offset == 4);  // 只能读取两个数据
   printf("rtc_io_handler\n");
   if (!is_write && offset == 4) {
+    printf("in if\n");
     uint64_t us = get_time();
     // 提前准备数据 以供map_read读取
     rtc_port_base[0] = (uint32_t)us;
