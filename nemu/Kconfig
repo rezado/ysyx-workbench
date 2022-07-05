@@ -150,6 +150,9 @@ config MTRACE
   bool "Enable memory tracer"
   default n
 
+config DTRACE
+  bool "Enable device trace"
+  default n
 
 config DIFFTEST
   depends on TARGET_NATIVE_ELF
