@@ -6,7 +6,7 @@ static uint32_t *rtc_port_base = NULL;
 
 static void rtc_io_handler(uint32_t offset, int len, bool is_write) {
   assert(offset == 0 || offset == 4);  // 只能读取两个数据
-  // printf("rtc_io_handler\n");
+  printf("rtc_io_handler\n");
   if (!is_write && offset == 4) {
     // printf("in if\n");
     uint64_t us = get_time();
