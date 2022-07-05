@@ -10,8 +10,7 @@ void __am_input_keybrd(AM_INPUT_KEYBRD_T *kbd) {
     kbd->keycode = code & ~KEYDOWN_MASK;
   }
   else {
-    panic("1");
     kbd->keydown = 0;
-    kbd->keycode = AM_KEY_NONE;
+    kbd->keycode = code;
   }
 }
