@@ -4,6 +4,7 @@
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 static unsigned long int next = 1;
+
 static void *addr = NULL;
 
 int rand(void) {
@@ -35,8 +36,6 @@ void *malloc(size_t size) {
   // Therefore do not call panic() here, else it will yield a dead recursion:
   //   panic() -> putchar() -> (glibc) -> malloc() -> panic()
 
-
-#if !(defined(__ISA_NATIVE__) && defined(__NATIVE_USE_KLIB__))
   if (!addr) addr = heap.start;
   void *pri = addr;
   addr = pri + size;
@@ -50,8 +49,6 @@ void *malloc(size_t size) {
     addr = addr + ((addr - heap.start + 8) / 8 * 8);
     return pri;
   }
-#endif
-  return NULL;
 }
 
 void free(void *ptr) {
