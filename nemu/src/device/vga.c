@@ -41,7 +41,6 @@ static void init_screen() {
 }
 
 static inline void update_screen() {
-  printf("AM_UPDATE\n");
   SDL_UpdateTexture(texture, NULL, vmem, SCREEN_W * sizeof(uint32_t));
   SDL_RenderClear(renderer);
   SDL_RenderCopy(renderer, texture, NULL, NULL);
@@ -51,7 +50,6 @@ static inline void update_screen() {
 static void init_screen() {}
 
 static inline void update_screen() {
-  // printf("AM_UPDATE\n");
   io_write(AM_GPU_FBDRAW, 0, 0, vmem, screen_width(), screen_height(), true);
 }
 #endif
