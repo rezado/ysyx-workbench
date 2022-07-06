@@ -10,10 +10,10 @@ void __am_gpu_init() {
 void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
   *cfg = (AM_GPU_CONFIG_T) {
     .present = true, .has_accel = false,
-    .width = inl(VGACTL_ADDR + 4), .height = inl(VGACTL_ADDR),
+    .width = inl(VGACTL_ADDR) >> 16, .height = inl(VGACTL_ADDR),
     .vmemsz = cfg->width * cfg->height
   };
-  printf("am:width%d height%d", cfg->width, cfg->height);
+  printf("am:width%d height%d\n", cfg->width, cfg->height);
 }
 
 void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
