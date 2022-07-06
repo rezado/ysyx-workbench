@@ -13,7 +13,7 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
     .width = inl(VGACTL_ADDR) >> 16, .height = inl(VGACTL_ADDR) & 0x0000ffff,
     .vmemsz = cfg->width * cfg->height
   };
-  printf("am:width%d height%dvmemsz%d\n", cfg->width, cfg->height, cfg->vmemsz);
+  // printf("am:width%d height%dvmemsz%d\n", cfg->width, cfg->height, cfg->vmemsz);
 }
 
 void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
