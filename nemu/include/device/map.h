@@ -6,13 +6,14 @@
 typedef void(*io_callback_t)(uint32_t, int, bool);
 uint8_t* new_space(int size);
 
+// 映射的结构体类型
 typedef struct {
   const char *name;
   // we treat ioaddr_t as paddr_t here
-  paddr_t low;
-  paddr_t high;
-  void *space;
-  io_callback_t callback;
+  paddr_t low; // 映射起始地址
+  paddr_t high; // 映射结束地址
+  void *space; // 映射的目标空间
+  io_callback_t callback; // 回调函数 用于对设备和目标空间的状态进行更新
 } IOMap;
 
 static inline bool map_inside(IOMap *map, paddr_t addr) {
@@ -23,7 +24,8 @@ static inline int find_mapid_by_addr(IOMap *maps, int size, paddr_t addr) {
   int i;
   for (i = 0; i < size; i ++) {
     if (map_inside(maps + i, addr)) {
-      difftest_skip_ref();
+      // 由于NEMU中设备的行为是我们自定义的, 与REF中的标准设备的行为不完全一样
+      difftest_skip_ref();  // 跳过ref的difftest一条指令
       return i;
     }
   }

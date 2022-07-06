@@ -19,8 +19,10 @@ void send_key(uint8_t, bool);
 void vga_update_screen();
 
 void device_update() {
+  // 静态局部变量只初始化一次
   static uint64_t last = 0;
   uint64_t now = get_time();
+  // 检查距离上次设备更新是否已经超过一定时间
   if (now - last < 1000000 / TIMER_HZ) {
     return;
   }
@@ -70,5 +72,5 @@ void init_device() {
   IFDEF(CONFIG_HAS_DISK, init_disk());
   IFDEF(CONFIG_HAS_SDCARD, init_sdcard());
 
-  IFNDEF(CONFIG_TARGET_AM, init_alarm());
+  IFNDEF(CONFIG_TARGET_AM, init_alarm()); // PA4
 }
