@@ -34,9 +34,9 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   int width = inl(VGACTL_ADDR) >> 16;
   int col = ctl->h, row = ctl->w;
   int offset = 0;
-  for (int y = ctl->x; y < ctl->x + row; y++) {
-    for (int x = ctl->y; x < ctl->y + col; x++) {
-      offset = x * width + y;
+  for (int x = ctl->x; x < ctl->x + row; x++) {
+    for (int y = ctl->y; y < ctl->y + col; y++) {
+      offset = y * width + x;
       outl(FB_ADDR + offset, *(uint32_t*)(ctl->pixels++));
     }
   }
