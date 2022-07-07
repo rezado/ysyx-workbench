@@ -36,6 +36,7 @@ void *malloc(size_t size) {
   // Therefore do not call panic() here, else it will yield a dead recursion:
   //   panic() -> putchar() -> (glibc) -> malloc() -> panic()
 
+  printf("malloc\n");
   if (!addr) addr = heap.start;
   void *pri = addr;
   addr = pri + size;
