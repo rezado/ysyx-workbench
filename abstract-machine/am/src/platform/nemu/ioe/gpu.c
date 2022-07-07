@@ -21,13 +21,24 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   }
   int width = inl(VGACTL_ADDR) >> 16;
   uintptr_t addr = FB_ADDR + ctl->x * width + ctl->y;
-  for (int x = ctl->x; x < ctl->x + ctl->w; x++) {
-    for (int y = ctl->y; y < ctl->y + ctl->h; y++) {
-      outl(addr++, *(uint32_t*)ctl->pixels++);
-      // printf("write addr:%x %d\n", addr, *(uint32_t*)ctl->pixels);
+  int col = ctl->h;
+  int row = ctl->w;
+  uint32_t *p = (uint32_t*)ctl->pixels;
+  for (int i = 0; i < row; i++) {
+    for (int j = 0; j < col; j++) {
+      outl(addr++, *p++);
     }
-    addr = addr + width - ctl->w;
+    addr = addr + width - row;
   }
+
+  // for (int x = ctl->x; x < ctl->x + ctl->w; x++) {
+  //   for (int y = ctl->y; y < ctl->y + ctl->h; y++) {
+  //     outl(addr++, *(uint32_t*)ctl->pixels);
+  //     ctl->pixels 
+  //     // printf("write addr:%x %d\n", addr, *(uint32_t*)ctl->pixels);
+  //   }
+  //   addr = addr + width - ctl->w;
+  // }
 }
 
 void __am_gpu_status(AM_GPU_STATUS_T *status) {
