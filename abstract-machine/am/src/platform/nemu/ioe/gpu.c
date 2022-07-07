@@ -37,7 +37,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   for (int x = ctl->x; x < ctl->x + row; x++) {
     for (int y = ctl->y; y < ctl->y + col; y++) {
       offset = x * width + y;
-      outl(FB_ADDR + offset, *(uint32_t*)(ctl->pixels + offset));
+      outl(FB_ADDR + offset, *(uint32_t*)(ctl->pixels++));
     }
   }
 }
