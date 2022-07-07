@@ -29,7 +29,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   for (int i = 0; i < row; i++) {
     for (int j = 0; j < col; j++) {
       addr = FB_ADDR + (y + i) * width + (x + j);
-      printf("addr:%u\n", addr);
+      printf("addr:%d\n", addr);
       outl(addr, *p++);
     }
   }
