@@ -30,15 +30,6 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
     }
     addr = addr + width - row;
   }
-
-  // for (int x = ctl->x; x < ctl->x + ctl->w; x++) {
-  //   for (int y = ctl->y; y < ctl->y + ctl->h; y++) {
-  //     outl(addr++, *(uint32_t*)ctl->pixels);
-  //     ctl->pixels 
-  //     // printf("write addr:%x %d\n", addr, *(uint32_t*)ctl->pixels);
-  //   }
-  //   addr = addr + width - ctl->w;
-  // }
 }
 
 void __am_gpu_status(AM_GPU_STATUS_T *status) {
