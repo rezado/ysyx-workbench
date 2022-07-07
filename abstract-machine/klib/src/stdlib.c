@@ -36,21 +36,22 @@ void *malloc(size_t size) {
   // Therefore do not call panic() here, else it will yield a dead recursion:
   //   panic() -> putchar() -> (glibc) -> malloc() -> panic()
 
-  printf("malloc\n");
-  if (!addr) addr = heap.start;
-  void *pri = addr;
-  addr = pri + size;
-  if (size == 0)
+  #if !(defined(__ISA_NATIVE__) && defined(__NATIVE_USE_KLIB__))
+    if (!addr) addr = heap.start;
+    void *pri = addr;
+    addr = pri + size;
+    if (size == 0)
+      return NULL;
+    else if (addr > heap.end) {
+      addr = pri;
+      return NULL;
+    }
+    else {
+      addr = addr + ((addr - heap.start + 8) / 8 * 8);
+      return pri;
+    }
+  #endif
     return NULL;
-  else if (addr > heap.end) {
-    addr = pri;
-    return NULL;
-  }
-  else {
-    addr = addr + ((addr - heap.start + 8) / 8 * 8);
-    printf("11%x\n", addr);
-    return pri;
-  }
 }
 
 void free(void *ptr) {
