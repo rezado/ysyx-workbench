@@ -21,7 +21,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
     outl(SYNC_ADDR, 1);
   }
   int width = inl(VGACTL_ADDR) >> 16;
-  uintptr_t addr = FB_ADDR + ctl->y * width + ctl->x; 
+  uintptr_t addr = FB_ADDR + ctl->x * width + ctl->y; 
   int col = ctl->h;
   int row = ctl->w;
   uint32_t *p = (uint32_t*)ctl->pixels;
