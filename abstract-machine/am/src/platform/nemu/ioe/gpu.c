@@ -20,26 +20,27 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   if (ctl->sync) {
     outl(SYNC_ADDR, 1);
   }
-  // int width = inl(VGACTL_ADDR) >> 16;
-  // uintptr_t addr = FB_ADDR + ctl->x * width + ctl->y; 
-  // int col = ctl->h;
-  // int row = ctl->w;
-  // uint32_t *p = (uint32_t*)ctl->pixels;
-  // for (int i = 0; i < row; i++) {
-  //   for (int j = 0; j < col; j++) {
-  //     outl(addr++, *p++);
-  //   }
-  //   addr = addr + width - row; 
-  // }
   int width = inl(VGACTL_ADDR) >> 16;
-  int col = ctl->h, row = ctl->w;
-  int offset = 0;
-  for (int x = ctl->x; x < ctl->x + row; x++) {
-    for (int y = ctl->y; y < ctl->y + col; y++) {
-      offset = y * width + x;
-      outl(FB_ADDR + offset, *(uint32_t*)(ctl->pixels++));
+  uintptr_t addr = FB_ADDR + ctl->y * width + ctl->x; 
+  int col = ctl->h;
+  int row = ctl->w;
+  uint32_t *p = (uint32_t*)ctl->pixels;
+  for (int i = 0; i < row; i++) {
+    for (int j = 0; j < col; j++) {
+      outl(addr++, *p++);
     }
   }
+  //   addr = addr + width - row; 
+  // }
+  // int width = inl(VGACTL_ADDR) >> 16;
+  // int col = ctl->h, row = ctl->w;
+  // int offset = 0;
+  // for (int x = ctl->x; x < ctl->x + row; x++) {
+  //   for (int y = ctl->y; y < ctl->y + col; y++) {
+  //     offset = y * width + x;
+  //     outl(FB_ADDR + offset, *(uint32_t*)(ctl->pixels++));
+  //   }
+  // }
 }
 
 void __am_gpu_status(AM_GPU_STATUS_T *status) {
