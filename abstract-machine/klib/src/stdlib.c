@@ -48,7 +48,7 @@ void *malloc(size_t size) {
   }
   else {
     addr = addr + ((addr - heap.start + 8) / 8 * 8);
-    printf("%x\n", addr);
+    printf("11%x\n", addr);
     return pri;
   }
 }
