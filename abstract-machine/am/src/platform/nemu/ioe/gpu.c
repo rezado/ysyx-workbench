@@ -28,7 +28,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
     for (int j = 0; j < col; j++) {
       outl(addr++, *p++);
     }
-    addr = addr + width - row;
+    addr = addr + width - row - 1;
   }
 }
 
