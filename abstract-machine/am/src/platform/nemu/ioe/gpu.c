@@ -21,7 +21,7 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
     outl(SYNC_ADDR, 1);
   }
   int width = inl(VGACTL_ADDR) >> 16;
-  uintptr_t addr = FB_ADDR + ctl->x * width + ctl->y; 
+  uintptr_t addr = FB_ADDR + ctl->y * width + ctl->x; 
   int col = ctl->h;
   int row = ctl->w;
   uint32_t *p = (uint32_t*)ctl->pixels;
@@ -29,9 +29,8 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
     for (int j = 0; j < col; j++) {
       outl(addr++, *p++);
     }
+    addr = addr + width - row; 
   }
-  //   addr = addr + width - row; 
-  // }
   // int width = inl(VGACTL_ADDR) >> 16;
   // int col = ctl->h, row = ctl->w;
   // int offset = 0;
