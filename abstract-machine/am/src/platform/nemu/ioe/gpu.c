@@ -22,12 +22,11 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   }
   int width = inl(VGACTL_ADDR) >> 16;
   uintptr_t addr = FB_ADDR; 
-  int col = ctl->h;
-  int row = ctl->w;
+  int w = ctl->w, h = ctl->h;
   int x = ctl->x, y = ctl->y;
   uint32_t *p = (uint32_t*)ctl->pixels;
-  for (int i = 0; i < row; i++) {
-    for (int j = 0; j < col; j++) {
+  for (int i = 0; i < h; i++) {
+    for (int j = 0; j < w; j++) {
       addr = FB_ADDR + (y + i) * width + (x + j);
       // printf("addr:%d\n", addr);
       outl(addr, *p++);
