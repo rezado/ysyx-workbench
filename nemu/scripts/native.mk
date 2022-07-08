@@ -16,6 +16,7 @@ override ARGS += $(ARGS_DIFF)
 IMG ?=
 NEMU_EXEC := $(BINARY) $(ARGS) $(IMG)
 
+# 编译difftest环境
 run-env: $(BINARY) $(DIFF_REF_SO)
 
 run: run-env

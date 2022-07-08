@@ -15,6 +15,12 @@
 #define putstr(s) \
   ({ for (const char *p = s; *p; p++) putch(*p); })
 
+/*
+io_read(UART_CONFIG)
+UART_CONFIG_T __io_param;
+ioe_read(UART_CONFIG, &__io_param);
+__io_param;
+*/
 #define io_read(reg) \
   ({ reg##_T __io_param; \
     ioe_read(reg, &__io_param); \

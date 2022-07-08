@@ -67,6 +67,7 @@ void vga_update_screen() {
 
 static void vgactl_io_handler(uint32_t offset, int len, bool is_write) {
   assert(offset ==0 || offset == 4);
+  // 如果是读取vgactl_port_base[0] 不更新 因为默认窗口大小不会改变
   if (is_write && offset == 4) {
     vga_update_screen();
   }
@@ -75,14 +76,14 @@ static void vgactl_io_handler(uint32_t offset, int len, bool is_write) {
 void init_vga() {
   vgactl_port_base = (uint32_t *)new_space(8);
   vgactl_port_base[0] = (screen_width() << 16) | screen_height();
-  printf("nemu: width%d height%d\n", screen_width(), screen_height());
+  // printf("nemu: width%d height%d\n", screen_width(), screen_height());
 #ifdef CONFIG_HAS_PORT_IO
   add_pio_map ("vgactl", CONFIG_VGA_CTL_PORT, vgactl_port_base, 8, NULL);
 #else
   add_mmio_map("vgactl", CONFIG_VGA_CTL_MMIO, vgactl_port_base, 8, vgactl_io_handler);
 #endif
 
-  vmem = new_space(screen_size());
+  vmem = new_space(screen_size());  // 为显存分配内存空间
   add_mmio_map("vmem", CONFIG_FB_ADDR, vmem, screen_size(), NULL);
   IFDEF(CONFIG_VGA_SHOW_SCREEN, init_screen());
   IFDEF(CONFIG_VGA_SHOW_SCREEN, memset(vmem, 0, screen_size()));
