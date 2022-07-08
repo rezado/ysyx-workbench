@@ -1,8 +1,8 @@
 #include <utils.h>
-#include <cpu/ifetch.h>
+// #include <cpu/ifetch.h>
 #include <isa.h>
 #include <cpu/difftest.h>
-
+uint32_t inst_fetch(vaddr_t *pc, int len);
 void set_nemu_state(int state, vaddr_t pc, int halt_ret) {
   difftest_skip_ref();
   nemu_state.state = state;
