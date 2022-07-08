@@ -2,8 +2,7 @@
 #include <cpu/cpu.h>
 #include <cpu/ifetch.h>
 #include <cpu/decode.h>
-uint32_t inst_fetch(vaddr_t *pc, int len);
-#include <memory/vaddr.h>
+
 #define R(i) gpr(i)
 #define Mr vaddr_read
 #define Mw vaddr_write
