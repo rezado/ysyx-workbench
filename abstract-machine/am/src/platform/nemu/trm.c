@@ -1,8 +1,8 @@
 #include <am.h>
 #include <nemu.h>
 
-extern char _heap_start;
-int main(const char *args);
+extern char _heap_start;  // 堆的开始
+int main(const char *args);  // main函数 对应测试程序
 
 Area heap = RANGE(&_heap_start, PMEM_END);
 #ifndef MAINARGS

@@ -4,9 +4,16 @@
 // **MAY SUBJECT TO CHANGE IN THE FUTURE**
 // 设备的抽象寄存器reg
 
+
 #define AM_DEVREG(id, reg, perm, ...) \
   enum { AM_##reg = (id) }; \
   typedef struct { __VA_ARGS__; } AM_##reg##_T;
+
+/*
+  宏定义举例
+  enum { AM_UART_CONFIG = (1)};
+  typedef struct {bool present;} AM_UART_CONFIG_T;
+*/
 
 AM_DEVREG( 1, UART_CONFIG,  RD, bool present);
 AM_DEVREG( 2, UART_TX,      WR, char data);
