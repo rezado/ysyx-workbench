@@ -82,6 +82,7 @@ void parse_elf(char *elf_file) {
             strcpy(functab[n].name, &strtab[symtab[i].st_name]);
             functab[n].start = symtab[i].st_value;
             functab[n].end = symtab[i].st_value + symtab[i].st_size;
+            n++;
         }
     }
     functab[n].start = 0;  // 标记最后一个函数
