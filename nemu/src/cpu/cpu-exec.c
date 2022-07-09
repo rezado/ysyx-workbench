@@ -46,7 +46,29 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
 
   // ftrace
-  
+  // 识别jal和jalr指令
+  char oldf[100], newf[100];
+  int depth = 0;
+  // 调用
+  if (strstr(_this->logbuf, "jal") ||strstr(_this->logbuf, "jalr")) {
+    get_funcname(oldf, _this->pc);
+    get_funcname(newf, dnpc);
+    if (strcmp(oldf, newf) != 0) {
+      printf("0x%08lx:", _this->pc);
+      for (int i = 0; i < depth; i++)
+        printf("\t");
+      printf("call [%s@0x%08lx]\n", newf, dnpc);
+      depth++;
+    }
+  }
+  else if (strstr(_this->logbuf, "ret")) {
+    get_funcname(oldf, _this->pc);
+    get_funcname(newf, dnpc);
+    printf("0x%08lx:", _this->pc);
+    for (int i = 0; i < depth; i++)
+      printf("\t");
+    printf("ret [%s]\n", oldf);
+  }
   
 #ifdef CONFIG_WATCHPOINT
   // scan watchpoints
