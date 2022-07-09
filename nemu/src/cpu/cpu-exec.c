@@ -35,8 +35,6 @@ static void prbuf() {
 }
 #endif
 
-// ELF
-extern void get_funcname(char *name, uint64_t addr);
 
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
@@ -46,10 +44,10 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
 
   // ftrace
-  // 识别jal和jalr指令
+#ifdef CONFIG_FTRACE
+  extern void get_funcname(char *name, uint64_t addr);
   char oldf[100], newf[100];
   static int depth = 0;
-  // 调用
   if (strstr(_this->logbuf, "jal") ||strstr(_this->logbuf, "jalr")) {
     get_funcname(oldf, _this->pc);
     get_funcname(newf, dnpc);
@@ -70,6 +68,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
       printf(" ");
     printf("ret [%s]\n", oldf);
   }
+#endif
   
 #ifdef CONFIG_WATCHPOINT
   // scan watchpoints

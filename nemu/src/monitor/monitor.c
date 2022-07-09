@@ -30,7 +30,9 @@ static char *img_file = NULL;
 static char *elf_file = NULL;
 static int difftest_port = 1234;
 
+#ifdef CONFIG_FTRACE
 void parse_elf(char *elf_file);
+#endif
 
 static long load_img() {
   if (img_file == NULL) {
@@ -116,7 +118,7 @@ void init_monitor(int argc, char *argv[]) {
   long img_size = load_img();
 
   /* Load the elf file to array. */
-  parse_elf(elf_file);
+  IFDEF(CONFIG_FTRACE, parse_elf(elf_file));
 
 
   /* Initialize differential testing. */
