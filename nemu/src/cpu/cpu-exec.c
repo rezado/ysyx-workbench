@@ -56,7 +56,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
     if (strcmp(oldf, newf) != 0) {
       printf("0x%08lx:", _this->pc);
       for (int i = 0; i < depth; i++)
-        printf("\t");
+        printf(" ");
       printf("call [%s@0x%08lx]\n", newf, dnpc);
       depth++;
     }
