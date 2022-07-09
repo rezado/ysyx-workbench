@@ -62,13 +62,13 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
     }
   }
   else if (strstr(_this->logbuf, "ret")) {
+    depth--;
     get_funcname(oldf, _this->pc);
     get_funcname(newf, dnpc);
     printf("0x%08lx:", _this->pc);
     for (int i = 0; i < depth; i++)
       printf(" ");
     printf("ret [%s]\n", oldf);
-    depth--;
   }
   
 #ifdef CONFIG_WATCHPOINT
