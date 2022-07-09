@@ -79,6 +79,7 @@ void parse_elf(char *elf_file) {
     int n = 0;
     for (int i = 0; i < symnum; i++) {
         if (symtab[i].st_info == STT_FUNC) {
+            puts("1");
             strcpy(functab[n].name, &strtab[symtab[i].st_name]);
             functab[n].start = symtab[i].st_value;
             functab[n].end = symtab[i].st_value + symtab[i].st_size;
