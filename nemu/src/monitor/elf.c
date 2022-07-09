@@ -42,7 +42,7 @@ void parse_elf(char *elf_file) {
     // 读取section header string table
     fseek(fp, Shdr[Ehdr->e_shstrndx].sh_offset, SEEK_SET);
     ret = fread(shstrtab, Shdr[Ehdr->e_shstrndx].sh_size, 1, fp);
-    assert(ret == shnum);
+    assert(ret == 1);
 
     // 读取symtab和strtab的表项
     //Elf64_Shdr *strptr = NULL, *symptr = NULL;
