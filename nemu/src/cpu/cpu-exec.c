@@ -48,7 +48,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   // ftrace
   // 识别jal和jalr指令
   char oldf[100], newf[100];
-  int depth = 0;
+  static int depth = 0;
   // 调用
   if (strstr(_this->logbuf, "jal") ||strstr(_this->logbuf, "jalr")) {
     get_funcname(oldf, _this->pc);
