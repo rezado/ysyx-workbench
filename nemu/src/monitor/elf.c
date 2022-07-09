@@ -86,6 +86,9 @@ void parse_elf(char *elf_file) {
     }
     functab[n].start = 0;  // 标记最后一个函数
     nr_func = n;
+    for (int i = 0; i < n; i++) {
+        printf("func:%s start:0x%08lx end:0x%08lx\n", functab[i].name, functab[i].start, functab[i].end);
+    }
     
     // 释放空间
     free(Ehdr);
