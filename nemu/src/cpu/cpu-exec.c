@@ -35,12 +35,41 @@ static void prbuf() {
 }
 #endif
 
+
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
   if (ITRACE_COND) { log_write("%s\n", _this->logbuf); }
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
+
+  // ftrace
+#ifdef CONFIG_FTRACE
+  extern void get_funcname(char *name, uint64_t addr);
+  char oldf[100], newf[100];
+  static int depth = 0;
+  if (strstr(_this->logbuf, "jal") ||strstr(_this->logbuf, "jalr")) {
+    get_funcname(oldf, _this->pc);
+    get_funcname(newf, dnpc);
+    if (strcmp(oldf, newf) != 0) {
+      printf("0x%08lx:", _this->pc);
+      for (int i = 0; i < depth; i++)
+        printf(" ");
+      printf("call [%s@0x%08lx]\n", newf, dnpc);
+      depth++;
+    }
+  }
+  else if (strstr(_this->logbuf, "ret")) {
+    depth--;
+    get_funcname(oldf, _this->pc);
+    get_funcname(newf, dnpc);
+    printf("0x%08lx:", _this->pc);
+    for (int i = 0; i < depth; i++)
+      printf(" ");
+    printf("ret [%s]\n", oldf);
+  }
+#endif
+  
 #ifdef CONFIG_WATCHPOINT
   // scan watchpoints
   bool flag = scan_wp();
