@@ -1,7 +1,7 @@
 #include <common.h>
 #include <elf.h>
 
-char symtab[10000];
+Elf64_Sym symtab[10000];
 char strtab[10000];
 char shstrtab[1000];
 
@@ -45,17 +45,24 @@ void parse_elf(char *elf_file) {
     assert(ret == 1);
 
     // 读取symtab和strtab的表项
-    //Elf64_Shdr *strptr = NULL, *symptr = NULL;
+    Elf64_Shdr *strptr = NULL, *symptr = NULL;
     for (int i = 0; i < shnum; i++) {
         printf("%s\n", &shstrtab[Shdr[i].sh_name]);
-        // if (Shdr[i].sh_type == SHT_STRTAB) {
-        //     strptr = &Shdr[i];
-        // }
-        // if (Shdr[i].sh_type == SHT_SYMTAB) {
-        //     if ()
-        //     symptr = &Shdr[i];
-        // }
+        if (strcmp(&shstrtab[Shdr[i].sh_name], ".strtab") == 0) {
+            strptr = &Shdr[i];
+        }
+        if (strcmp(&shstrtab[Shdr[i].sh_name], ".symtab") == 0) {
+            symptr = &Shdr[i];
+        }
     }
+
+    // 复制到相应数组里
+    fseek(fp, strptr->sh_offset, SEEK_SET);
+    ret = fread(strtab, strptr->sh_size, 1, fp);
+    assert(ret == 1);
+    fseek(fp, symptr->sh_offset, SEEK_SET);
+    ret = fread(symtab, sizeof(Elf64_Sym), symptr->sh_size / sizeof(Elf64_Sym), fp);
+    assert(ret == symptr->sh_size / sizeof(Elf64_Sym));
 
     fclose(fp);
 }
