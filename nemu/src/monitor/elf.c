@@ -78,10 +78,10 @@ void parse_elf(char *elf_file) {
     functab = (Func*)malloc(sizeof(Func) * symnum);
     int n = 0;
     for (int i = 0; i < symnum; i++) {
-        printf("%s ", &strtab[symtab[i].st_name]);
-        printf("%d\n", ELF64_ST_TYPE(symtab[i].st_info));
+        // printf("%s ", &strtab[symtab[i].st_name]);
+        // printf("%d\n", ELF64_ST_TYPE(symtab[i].st_info));
+        // 这里识别类型要用到宏
         if (ELF64_ST_TYPE(symtab[i].st_info) == STT_FUNC) {
-            puts("1");
             strcpy(functab[n].name, &strtab[symtab[i].st_name]);
             functab[n].start = symtab[i].st_value;
             functab[n].end = symtab[i].st_value + symtab[i].st_size;
