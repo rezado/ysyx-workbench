@@ -78,6 +78,7 @@ void parse_elf(char *elf_file) {
     functab = (Func*)malloc(sizeof(Func) * symnum);
     int n = 0;
     for (int i = 0; i < symnum; i++) {
+        printf("%s ", &strtab[symtab[i].st_name]);
         printf("%d\n", symtab[i].st_info);
         if (symtab[i].st_info == STT_FUNC) {
             puts("1");
