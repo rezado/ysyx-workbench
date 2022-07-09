@@ -1,8 +1,6 @@
 #include <isa.h>
 #include <memory/paddr.h>
 
-#include "elf.h"
-
 void init_rand();
 void init_log(const char *log_file);
 void init_mem();
@@ -32,7 +30,9 @@ static char *img_file = NULL;
 static char *elf_file = NULL;
 static int difftest_port = 1234;
 
-extern char elf[];
+extern char symtab[1000];
+extern char strtab[1000];
+void parse_elf(char *elf_file);
 
 static long load_img() {
   if (img_file == NULL) {

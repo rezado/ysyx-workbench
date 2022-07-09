@@ -1,8 +1,9 @@
 #include <common.h>
-#include "elf.h"
+#include <elf.h>
 
-char symtab[1000];
-char strtab[1000];
+char symtab[10000];
+char strtab[10000];
+char shstrtab[1000];
 
 void parse_elf(char *elf_file) {
     if (elf_file == NULL) {
@@ -38,9 +39,22 @@ void parse_elf(char *elf_file) {
     ret = fread(Shdr, sizeof(Elf64_Shdr), shnum, fp);
     assert(ret == shnum);
 
-    // 读取symtab
+    // 读取section header string table
+    fseek(fp, Shdr[Ehdr->e_shstrndx].sh_offset, SEEK_SET);
+    ret = fread(shstrtab, Shdr[Ehdr->e_shstrndx].sh_size, 1, fp);
+    assert(ret == shnum);
+
+    // 读取symtab和strtab的表项
+    //Elf64_Shdr *strptr = NULL, *symptr = NULL;
     for (int i = 0; i < shnum; i++) {
-        printf("%d\n", Shdr[i].sh_name);
+        printf("%s\n", &shstrtab[Shdr[i].sh_name]);
+        // if (Shdr[i].sh_type == SHT_STRTAB) {
+        //     strptr = &Shdr[i];
+        // }
+        // if (Shdr[i].sh_type == SHT_SYMTAB) {
+        //     if ()
+        //     symptr = &Shdr[i];
+        // }
     }
 
     fclose(fp);
