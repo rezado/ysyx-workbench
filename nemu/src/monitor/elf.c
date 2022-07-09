@@ -25,7 +25,7 @@ void parse_elf(char *elf_file) {
     ret = fread(Ehdr, sizeof(Elf64_Ehdr), 1, fp);
     assert(ret == 1);
     for (int i = 0; i < EI_NIDENT; i++) {
-        printf("%d ", Ehdr->e_ident[i]);
+        printf("%x ", Ehdr->e_ident[i]);
     }
     puts("");
     
