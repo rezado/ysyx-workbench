@@ -1,6 +1,8 @@
 #include <isa.h>
 #include <memory/paddr.h>
 
+#include "elf.h"
+
 void init_rand();
 void init_log(const char *log_file);
 void init_mem();
@@ -29,7 +31,8 @@ static char *diff_so_file = NULL;
 static char *img_file = NULL;
 static char *elf_file = NULL;
 static int difftest_port = 1234;
-char elf[100000];
+
+extern char elf[];
 
 static long load_img() {
   if (img_file == NULL) {
@@ -55,28 +58,6 @@ static long load_img() {
   //   printf("%u ", *guest_to_host(CONFIG_MBASE + i));
   // puts("");
 
-  return size;
-}
-
-static long load_elf() {
-  if (elf_file == NULL) {
-    Log("No elf is given.");
-    return 0;
-  }
-
-  FILE *fp = fopen(elf_file, "rb");
-  Assert(fp, "Can not open '%s'", elf_file);
-
-  fseek(fp, 0, SEEK_END);
-  long size = ftell(fp);
-
-  Log("The elf is %s, size = %ld", elf_file, size);
-
-  fseek(fp, 0, SEEK_SET);
-  int ret = fread(elf, size, 1, fp);
-  assert(ret == 1);
-  
-  fclose(fp);
   return size;
 }
 
@@ -137,7 +118,8 @@ void init_monitor(int argc, char *argv[]) {
   long img_size = load_img();
 
   /* Load the elf file to array. */
-  load_elf();
+  parse_elf(elf_file);
+
 
   /* Initialize differential testing. */
   init_difftest(diff_so_file, img_size, difftest_port);
