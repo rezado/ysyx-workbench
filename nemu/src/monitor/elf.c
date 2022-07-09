@@ -4,6 +4,13 @@
 Elf64_Sym symtab[10000];
 char strtab[10000];
 char shstrtab[1000];
+typedef struct Func{
+    char name[100];
+    uint64_t start, end;
+}Func;
+
+Func *functab = NULL;
+int nr_func = 0;
 
 void parse_elf(char *elf_file) {
     if (elf_file == NULL) {
@@ -61,8 +68,36 @@ void parse_elf(char *elf_file) {
     ret = fread(strtab, strptr->sh_size, 1, fp);
     assert(ret == 1);
     fseek(fp, symptr->sh_offset, SEEK_SET);
-    ret = fread(symtab, sizeof(Elf64_Sym), symptr->sh_size / sizeof(Elf64_Sym), fp);
-    assert(ret == symptr->sh_size / sizeof(Elf64_Sym));
+    int symnum = symptr->sh_size / sizeof(Elf64_Sym);
+    ret = fread(symtab, sizeof(Elf64_Sym), symnum, fp);
+    assert(ret == symnum);
 
     fclose(fp);
+
+    // 抽取函数信息
+    functab = (Func*)malloc(sizeof(Func) * symnum);
+    int n = 0;
+    for (int i = 0; i < symnum; i++) {
+        if (symtab[i].st_info == STT_FUNC) {
+            strcpy(functab[n].name, &strtab[symtab[i].st_name]);
+            functab[n].start = symtab[i].st_value;
+            functab[n].end = symtab[i].st_value + symtab[i].st_size;
+        }
+    }
+    functab[n].start = 0;  // 标记最后一个函数
+    nr_func = n;
+    
+    // 释放空间
+    free(Ehdr);
+    free(Shdr);
+}
+
+void get_funcname(char *name, uint64_t addr) {
+    for (int i = 0; i < nr_func; i++) {
+        if (addr >= functab[i].start && addr < functab[i].end) {
+            strcpy(name, functab[i].name);
+            return;
+        }
+    }
+    name[0] = '\0';
 }
