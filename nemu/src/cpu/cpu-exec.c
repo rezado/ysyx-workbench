@@ -68,6 +68,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
     for (int i = 0; i < depth; i++)
       printf(" ");
     printf("ret [%s]\n", oldf);
+    depth--;
   }
   
 #ifdef CONFIG_WATCHPOINT
