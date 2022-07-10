@@ -17,6 +17,7 @@ static int print(const char *fmt, va_list *ap, char *str, int to_string) {
   char op;
   char *argStr = NULL;
   char num[50];
+  char argChar;
   int t, cnt, chnum = 0;  // 临时变量
   for (i = 0; i < len; i++) {
     if (fmt[i] == '%') {
@@ -65,6 +66,12 @@ static int print(const char *fmt, va_list *ap, char *str, int to_string) {
           argStr++;
           chnum++;
         }
+      }
+      else if (op == 'c') {
+        argChar = va_arg(*ap, int);
+        putchar(argChar, str, to_string);
+        str++;
+        chnum++;
       }
     }
   }
