@@ -112,7 +112,7 @@ int sprintf(char *out, const char *fmt, ...) {
   va_start(ap, fmt);
   chnum = 0;
   print(fmt, &ap, &out, 1);
-  printf("%s\n", out);
+  // printf("%s\n", out);
   va_end(ap);
   return chnum;
 }
