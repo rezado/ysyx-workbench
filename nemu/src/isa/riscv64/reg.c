@@ -11,6 +11,7 @@ const char *regs[] = {
 // print all regs
 void isa_reg_display() {
   int i;
+  printf("pc: 0x%016lx\n", cpu.pc);
   for(i = 0; i < 32; i++) {
 	  printf("%d %s:0x%016lx\n", i, regs[i], gpr(i)); 
   }
