@@ -8,10 +8,10 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
   /* TODO: Trigger an interrupt/exception with ``NO''.
    * Then return the address of the interrupt/exception vector.
    */
-  // csr(MEPC) = epc;  // 設定爲ecall指令本身PC
-  // csr(MCAUSE) = mc[NO];
+  cpu.csr[MEPC] = epc;  // 設定爲ecall指令本身PC
+  cpu.csr[MCAUSE] = mc[NO];
 
-  return csr(MTVEC);
+  return cpu.csr[MTVEC];
 }
 
 word_t isa_query_intr() {
