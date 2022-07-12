@@ -15,13 +15,14 @@ Context* __am_irq_handle(Context *c) {
 
     c = user_handler(ev, c);
     assert(c != NULL);
-    printf("regs\n");
-    for (int i = 0; i < 31; i++) 
-      printf("0x%x\n", c->gpr[i]);
-    printf("mcause:0x%x\n", c->mcause);
-    printf("mstatus:0x%x\n", c->mstatus);
-    printf("mepc:0x%x\n", c->mepc);
   }
+
+  printf("regs\n");
+  for (int i = 0; i < 31; i++) 
+    printf("0x%x\n", c->gpr[i]);
+  printf("mcause:0x%x\n", c->mcause);
+  printf("mstatus:0x%x\n", c->mstatus);
+  printf("mepc:0x%x\n", c->mepc);
 
   return c;
 }
