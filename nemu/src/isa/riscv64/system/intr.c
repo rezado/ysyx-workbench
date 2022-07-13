@@ -16,7 +16,7 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
   cpu.csr[MCAUSE] = mc[NO];
 
 #ifdef CONFIG_ETRACE
-  Log("ETACE: oldPC " FMT_WORD "  newPC " FMT_WORD "\nmcause: %s", epc, cpu.csr[MTVEC], mcause[NO]);
+  Log("ETACE: oldPC " FMT_WORD "  newPC " FMT_WORD "  mcause: %s", epc, cpu.csr[MTVEC], mcause[NO]);
 #endif
 
   return cpu.csr[MTVEC];
