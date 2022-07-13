@@ -18,6 +18,7 @@ typedef struct {
 } Area;
 
 // Arch-dependent processor context
+// 上下文 架构有关 避免直接引用
 typedef struct Context Context;
 
 // An event of type @event, caused by @cause of pointer @ref
@@ -26,9 +27,9 @@ typedef struct {
     EVENT_NULL = 0,
     EVENT_YIELD, EVENT_SYSCALL, EVENT_PAGEFAULT, EVENT_ERROR,
     EVENT_IRQ_TIMER, EVENT_IRQ_IODEV,
-  } event;
-  uintptr_t cause, ref;
-  const char *msg;
+  } event;  // 事件编号
+  uintptr_t cause, ref;  // 描述事件的补充信息
+  const char *msg;  // 事件信息字符串
 } Event;
 
 // A protected address space with user memory @area
