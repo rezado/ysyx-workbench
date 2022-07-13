@@ -85,7 +85,7 @@ static int decode_exec(Decode *s) {
   INSTPAT("0000000 ????? ????? 011 ????? 01100 11", sltu   , R, R(dest) = src1 < src2 ? 1 : 0);
   INSTPAT("0000000 ????? ????? 110 ????? 01100 11", or     , R, R(dest) = src1 | src2);
   INSTPAT("??????? ????? ????? 000 ????? 01000 11", sb     , S, Mw(src1 + dest, 1, BITS(src2, 7, 0)));
-
+// word_t MIE = BITS(cpu.csr[MSTATUS], 8, 8); if (MIE == 1) cpu.csr[MSTATUS] |= 0x10000000; else cpu.csr[MSTATUS] &= ~0x10000000; cpu.csr[MSTATUS] |= 0x8
   // bubble-sort
   INSTPAT("000000? ????? ????? 101 ????? 00100 11", srli   , I, R(dest) = src1 >> src2);
   INSTPAT("??????? ????? ????? 101 ????? 11000 11", bge    , B, if ((int64_t)src1 >= (int64_t)src2) s->dnpc = s->pc + dest);
@@ -128,7 +128,7 @@ static int decode_exec(Decode *s) {
   INSTPAT("??????? ????? ????? 001 ????? 11100 11", cssrw  , I, word_t t = csr(src2); csr(src2) = src1; R(dest) = t);
   
   INSTPAT("0000000 00000 00000 000 00000 11100 11", ecall  , N, s->dnpc = isa_raise_intr(ECALL, s->pc));
-  INSTPAT("0011000 00010 00000 000 00000 11100 11", mret   , N, s->dnpc = cpu.csr[MEPC]);
+  INSTPAT("0011000 00010 00000 000 00000 11100 11", mret   , N, s->dnpc = cpu.csr[MEPC]; word_t MIE = BITS(cpu.csr[MSTATUS], 8, 8); if (MIE == 1) cpu.csr[MSTATUS] |= 0x10000000; else cpu.csr[MSTATUS] &= ~0x10000000; cpu.csr[MSTATUS] |= 0x8);
   INSTPAT("0000000 00001 00000 000 00000 11100 11", ebreak , N, NEMUTRAP(s->pc, R(10))); // R(10) is $a0
   INSTPAT("??????? ????? ????? ??? ????? ????? ??", inv    , N, INV(s->pc));
   INSTPAT_END();
