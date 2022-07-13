@@ -128,7 +128,7 @@ static int decode_exec(Decode *s) {
   INSTPAT("??????? ????? ????? 001 ????? 11100 11", cssrw  , I, word_t t = csr(src2); csr(src2) = src1; R(dest) = t);
   
   INSTPAT("0000000 00000 00000 000 00000 11100 11", ecall  , N, s->dnpc = isa_raise_intr(ECALL, s->pc));
-  INSTPAT("0011000 00010 00000 000 00000 11100 11", mret   , N, s->dnpc = cpu.csr[MEPC]; word_t MIE = BITS(cpu.csr[MSTATUS], 8, 8); if (MIE == 1) cpu.csr[MSTATUS] |= 0x10000000; else cpu.csr[MSTATUS] &= ~0x10000000; cpu.csr[MSTATUS] |= 0x8);
+  INSTPAT("0011000 00010 00000 000 00000 11100 11", mret   , N, s->dnpc = cpu.csr[MEPC]; word_t MIE = BITS(cpu.csr[MSTATUS], 8, 8); if (MIE == 1) cpu.csr[MSTATUS] |= 0x10000000; else cpu.csr[MSTATUS] &= ~0x10000000; cpu.csr[MSTATUS] &= ~0x8);
   INSTPAT("0000000 00001 00000 000 00000 11100 11", ebreak , N, NEMUTRAP(s->pc, R(10))); // R(10) is $a0
   INSTPAT("??????? ????? ????? ??? ????? ????? ??", inv    , N, INV(s->pc));
   INSTPAT_END();
