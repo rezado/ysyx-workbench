@@ -21,6 +21,9 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   ret = ramdisk_read(Ehdr, 0, sizeof(Elf_Ehdr));
   assert(ret);
 
+  // 检查魔数
+  assert(*(uint32_t*)Ehdr->e_ident == 0x7f454c46);
+
   // 读取program header table
   Elf_Phdr *Phdrs = NULL;
   Phdrs = (Elf_Phdr*)malloc(sizeof(Elf_Phdr) * Ehdr->e_phnum);
