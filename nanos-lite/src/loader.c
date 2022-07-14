@@ -22,6 +22,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   assert(ret);
 
   // 检查魔数
+  printf("%p\n", *(uint32_t*)Ehdr->e_ident);
   assert(*(uint32_t*)Ehdr->e_ident == 0x7f454c46);
 
   // 读取program header table
