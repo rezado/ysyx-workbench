@@ -9,6 +9,18 @@
 # define Elf_Phdr Elf32_Phdr
 #endif
 
+#if defined(__ISA_AM_NATIVE__)
+# define EXPECT_TYPE EM_X86_64
+#elif defined(__ISA_X86__)
+# define EXPECT_TYPE EM_X86_64
+#elif defined(__ISA_MIPS32__)
+# define EXPECT_TYPE EM_MIPS
+#elif defined(__ISA_RISCV32__) || defined(__ISA_RISCV64__)
+# define EXPECT_TYPE EM_RISCV
+#else
+# error Unsupported ISA
+#endif
+
 size_t ramdisk_read(void *buf, size_t offset, size_t len);
 size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 
@@ -23,6 +35,8 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
 
   // 检查魔数
   assert(*(uint32_t*)Ehdr->e_ident == 0x464c457f);
+  // 检查架构
+  assert(Ehdr->e_machine == EXPECT_TYPE);
 
   // 读取program header table
   Elf_Phdr *Phdrs = NULL;
