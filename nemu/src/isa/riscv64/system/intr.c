@@ -10,7 +10,7 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
    */
   cpu.csr[MEPC] = epc;  // 設定爲ecall指令本身PC
   cpu.csr[MCAUSE] = NO;
-  assert(NO == 0);
+  // assert(NO == 0);
 
 #ifdef CONFIG_ETRACE
   Log("ETACE: oldPC " FMT_WORD "  newPC " FMT_WORD "  mcause: %s", epc, cpu.csr[MTVEC], mcause[NO]);
