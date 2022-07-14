@@ -18,7 +18,7 @@
 #elif defined(__ISA_RISCV32__) || defined(__ISA_RISCV64__)
 # define EXPECT_TYPE EM_RISCV
 #else
-# error Unsupported ISA
+assert(0);
 #endif
 
 size_t ramdisk_read(void *buf, size_t offset, size_t len);
