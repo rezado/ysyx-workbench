@@ -1,9 +1,5 @@
 #include <isa.h>
 
-static const char *mcause[] = {
-  "Ecall from M-mode"
-};
-
 word_t isa_raise_intr(word_t NO, vaddr_t epc) {
   /* TODO: Trigger an interrupt/exception with ``NO''.
    * Then return the address of the interrupt/exception vector.
@@ -13,7 +9,7 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
   // assert(NO == 0);
 
 #ifdef CONFIG_ETRACE
-  Log("ETACE: oldPC " FMT_WORD "  newPC " FMT_WORD "  mcause: %s", epc, cpu.csr[MTVEC], mcause[NO]);
+  Log("ETACE: oldPC " FMT_WORD "  newPC " FMT_WORD "  mcause: %ld", epc, cpu.csr[MTVEC], NO);
 #endif
 
   return cpu.csr[MTVEC];
