@@ -28,14 +28,14 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   assert(ret);
 
   // 遍历program headers
-  for (uint32_t i = 0; i < Ehdr->e_phnum; i++) {
-    if (Phdrs[i].p_type == PT_LOAD) {
-      ret = ramdisk_read((void*)Phdrs[i].p_vaddr, Phdrs[i].p_offset, Phdrs[i].p_filesz);
-      assert(ret);
-      // memcpy(&ramdisk_start + vaddr, &ramdisk_start + p_offset, filesiz)
-      memset((void*)(Phdrs[i].p_vaddr + Phdrs[i].p_filesz), 0, Phdrs[i].p_memsz - Phdrs[i].p_filesz);
-    }
-  }
+  // for (uint32_t i = 0; i < Ehdr->e_phnum; i++) {
+  //   if (Phdrs[i].p_type == PT_LOAD) {
+  //     ret = ramdisk_read((void*)Phdrs[i].p_vaddr, Phdrs[i].p_offset, Phdrs[i].p_filesz);
+  //     assert(ret);
+  //     // memcpy(&ramdisk_start + vaddr, &ramdisk_start + p_offset, filesiz)
+  //     memset((void*)(Phdrs[i].p_vaddr + Phdrs[i].p_filesz), 0, Phdrs[i].p_memsz - Phdrs[i].p_filesz);
+  //   }
+  // }
 
   uintptr_t proc = Ehdr->e_entry;
   printf("0x%x\n", proc);
