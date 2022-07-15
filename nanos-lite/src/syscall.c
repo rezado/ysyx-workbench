@@ -26,10 +26,10 @@ void do_syscall(Context *c) {
       Log("Syscall: exit(%x)", a[0]);
       break;
     case SYS_write:
-      Log("Syswrite: write(%d, %s, %d) = %d", a[0], a[1], a[2], c->GPRx);
+      Log("Syswrite: write(%x, %s, %x) = %x", a[0], a[1], a[2], c->GPRx);
       if (a[1] == 1 || a[1] == 2) {
         for (int i = 0; i < a[3]; i++)
-          putch(*(char*)(a[1] + i));
+          putch(*(char*)(a[2] + i));
         c->GPRx = a[3];
       }
       else {
