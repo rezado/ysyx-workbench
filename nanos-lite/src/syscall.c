@@ -29,12 +29,12 @@ void do_syscall(Context *c) {
       if (a[1] == 1 || a[1] == 2) {
         for (int i = 0; i < a[3]; i++)
           putch(*(char*)(a[2] + i));
-        c->GPRx = a[3] + 1;
+        c->GPRx = a[3];
       }
       else {
         c->GPRx = -1;
       }
-      // Log("Syswrite: write(%x, %x, %x) = %x", a[0], a[1], a[2], c->GPRx);
+      Log("Syswrite: write(%x, %x, %x) = %x", a[0], a[1], a[2], c->GPRx);
       break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
