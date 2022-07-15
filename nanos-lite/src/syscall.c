@@ -13,6 +13,7 @@ void do_syscall(Context *c) {
   a[1] = c->GPR2;
   a[2] = c->GPR3;
   a[3] = c->GPR4;
+  printf("a0:%x a1:%x a2:%x a3:%x\n", a[0], a[1], a[2], a[3]);
 
 
   switch (a[0]) {
