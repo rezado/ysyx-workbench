@@ -18,7 +18,7 @@ void halt(int code) {
   nemu_trap(code);
 
   // should not reach here
-  while (1);
+  panic("halt should not reach here");
 }
 
 void _trm_init() {
