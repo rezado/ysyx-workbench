@@ -29,7 +29,7 @@ void do_syscall(Context *c) {
       if (a[1] == 1 || a[1] == 2) {
         for (int i = 0; i < a[3]; i++)
           putch(*(char*)(a[2] + i));
-        c->GPRx = 0;
+        c->GPRx = a[3];
       }
       else {
         c->GPRx = -1;
