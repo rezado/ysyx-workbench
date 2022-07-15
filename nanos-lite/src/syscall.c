@@ -1,5 +1,6 @@
 #include <common.h>
 #include "syscall.h"
+// #define ETRACE
 const char *syscname[] = {
   "SYS_exit", "SYS_yield", "SYS_open", "SYS_read", "SYS_write", "SYS_kill",
   "SYS_getpid", "SYS_close", "SYS_lseek", "SYS_brk", "SYS_fstat", "SYS_time",
@@ -19,11 +20,15 @@ void do_syscall(Context *c) {
   switch (a[0]) {
     case SYS_yield: 
       yield();
+      #ifdef ETRACE
       Log("Syscall: yield()\n");
+      #endif
       break;
     case SYS_exit:
       halt(a[0]);
+      #ifdef ETRACE
       Log("Syscall: exit(%x)", a[0]);
+      #endif
       break;
     case SYS_write:
       if (a[1] == 1 || a[1] == 2) {
@@ -34,7 +39,9 @@ void do_syscall(Context *c) {
       else {
         c->GPRx = -1;
       }
+      #ifdef ETRACE
       Log("Syswrite: write(%x, %x, %x) = %x", a[1], a[2], a[3], c->GPRx);
+      #endif
       break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
