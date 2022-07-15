@@ -51,7 +51,6 @@ intptr_t _syscall_(intptr_t type, intptr_t a0, intptr_t a1, intptr_t a2) {
     =表示write only r表示可以用任何寄存器存放操作数
     前面ret是输出寄存器，后面的一串都是输入寄存器
   */
- assert(0);
   asm volatile (SYSCALL : "=r" (ret) : "r"(_gpr1), "r"(_gpr2), "r"(_gpr3), "r"(_gpr4));
   return ret;
 }
@@ -68,7 +67,7 @@ int _open(const char *path, int flags, mode_t mode) {
 
 int _write(int fd, void *buf, size_t count) {
   int ret = _syscall_(SYS_write, fd, (intptr_t)buf, count);
-  
+  assert(ret != 0);
   return ret;
 }
 
