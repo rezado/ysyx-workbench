@@ -16,8 +16,25 @@ void do_syscall(Context *c) {
 
 
   switch (a[0]) {
-    case SYS_yield: Log("Syscall: yield()\n"); yield(); break;
-    case SYS_exit: Log("Syscall: exit(%x)", a[0]); halt(a[0]); break;
+    case SYS_yield: 
+      yield();
+      Log("Syscall: yield()\n");
+      break;
+    case SYS_exit:
+      halt(a[0]);
+      Log("Syscall: exit(%x)", a[0]);
+      break;
+    case SYS_write:
+      if (a[1] == 1 || a[1] == 2) {
+        for (int i = 0; i < a[3]; i++)
+          putch(*(char*)(a[1] + i));
+        c->GPRx = a[3];
+      }
+      else {
+        c->GPRx = -1;
+      }
+      Log("Syswrite: write(%d, %s, %d) = %d", a[0], a[1], a[2], c->GPRx);
+      break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 }
