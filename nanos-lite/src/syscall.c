@@ -1,6 +1,8 @@
 #include <common.h>
 #include "syscall.h"
-// #define ETRACE
+
+#define ETRACE
+
 const char *syscname[] = {
   "SYS_exit", "SYS_yield", "SYS_open", "SYS_read", "SYS_write", "SYS_kill",
   "SYS_getpid", "SYS_close", "SYS_lseek", "SYS_brk", "SYS_fstat", "SYS_time",
