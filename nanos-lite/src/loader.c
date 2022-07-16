@@ -45,11 +45,11 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   // 设定返回值
   uintptr_t proc = Ehdr->e_entry;
 
-  // // 读取program header table
-  // Elf_Phdr *Phdrs = NULL;
-  // Phdrs = (Elf_Phdr*)malloc(sizeof(Elf_Phdr) * Ehdr->e_phnum);
-  // ret = ramdisk_read(Phdrs, Ehdr->e_phoff, sizeof(Elf_Phdr) * Ehdr->e_phnum);
-  // assert(ret);
+  // 读取program header table
+  Elf_Phdr *Phdrs = NULL;
+  Phdrs = (Elf_Phdr*)malloc(sizeof(Elf_Phdr) * Ehdr->e_phnum);
+  ret = ramdisk_read(Phdrs, Ehdr->e_phoff, sizeof(Elf_Phdr) * Ehdr->e_phnum);
+  assert(ret);
 
   // // 遍历program headers
   // for (uint32_t i = 0; i < Ehdr->e_phnum; i++) {
