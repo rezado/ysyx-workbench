@@ -40,9 +40,14 @@ void do_syscall(Context *c) {
         c->GPRx = -1;
       }
       #ifdef ETRACE
-      Log("Syswrite: write(%x, %x, %x) = %x", a[1], a[2], a[3], c->GPRx);
+      Log("Syscall: write(%x, %x, %x) = %x", a[1], a[2], a[3], c->GPRx);
       #endif
       break;
+    case SYS_brk:
+      c->GPRx = 0;
+      #ifdef ETRACE
+        Log("Syscall: brk(%x) = %x", a[1], c->GPRx);
+      #endif
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 }

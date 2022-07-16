@@ -40,6 +40,8 @@
 #error _syscall_ is not implemented
 #endif
 
+extern char end;  // bbs结尾位置
+
 intptr_t _syscall_(intptr_t type, intptr_t a0, intptr_t a1, intptr_t a2) {
   register intptr_t _gpr1 asm (GPR1) = type;  // a7
   register intptr_t _gpr2 asm (GPR2) = a0;    // a0
@@ -72,7 +74,17 @@ int _write(int fd, void *buf, size_t count) {
 }
 
 void *_sbrk(intptr_t increment) {
-  return (void *)-1;
+  static intptr_t pbrk = 0;
+  // program break一开始位置位于_end
+  if (pbrk == 0) pbrk = (intptr_t)&end;
+  intptr_t newpbrk = pbrk + increment;
+  int ret = _syscall_(SYS_brk, newpbrk, 0, 0);
+  if (ret == 0) {
+    intptr_t oldpbrk = pbrk;
+    pbrk = newpbrk;
+    return (void*)oldpbrk;
+  }
+  else return (void *)-1;
 }
 
 int _read(int fd, void *buf, size_t count) {
