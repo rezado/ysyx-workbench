@@ -48,6 +48,7 @@ void do_syscall(Context *c) {
       #ifdef ETRACE
         Log("Syscall: brk(%x) = %x", a[1], c->GPRx);
       #endif
+      break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
 }
