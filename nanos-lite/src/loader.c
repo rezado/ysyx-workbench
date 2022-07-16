@@ -39,7 +39,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   ret = fs_read(fd, Ehdr, sizeof(Elf_Ehdr));
   assert(ret);
   // 检查魔数
-  assert(*(uint32_t*)Ehdr->e_ident == 0x464c457f);
+  assert(*(uint32_t*)Ehdr->e_ident == 0x464c447f);
   // 检查架构
   assert(Ehdr->e_machine == EXPECT_TYPE);
   // 设定返回值
