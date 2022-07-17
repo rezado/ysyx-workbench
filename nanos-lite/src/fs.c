@@ -114,7 +114,6 @@ size_t fs_lseek(int fd, size_t offset, int whence) {
   if (fd == 0 || fd == 1 || fd == 2) {
     return 0; //忽略stdin stdout stderr
   }
-  printf("original offset:%x\n", pf->open_offset);
   switch (whence) {
     case SEEK_SET:
       pf->open_offset = offset;
@@ -128,6 +127,5 @@ size_t fs_lseek(int fd, size_t offset, int whence) {
     default:
       return -1;
   }
-  printf("seek offset:%x\n", pf->open_offset);
   return pf->open_offset;
 }
