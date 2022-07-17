@@ -48,7 +48,8 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   // 读取program header table
   Elf_Phdr *Phdrs = NULL;
   Phdrs = (Elf_Phdr*)malloc(sizeof(Elf_Phdr) * Ehdr->e_phnum);
-  ret = ramdisk_read(Phdrs, Ehdr->e_phoff, sizeof(Elf_Phdr) * Ehdr->e_phnum);
+  fs_lseek(fd, Ehdr->e_phoff, SEEK_SET);
+  ret = fs_read(fd, Phdrs, sizeof(Elf_Phdr) * Ehdr->e_phnum);
   assert(ret);
 
   // // 遍历program headers
@@ -61,7 +62,7 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   // }
 
   free(Ehdr);
-  // free(Phdrs);
+  free(Phdrs);
 
   return proc;
 }

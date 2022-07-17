@@ -81,3 +81,53 @@ size_t fs_read(int fd, void *buf, size_t len) {
 int fs_close(int fd) {
   return 0; 
 }
+
+size_t fs_write(int fd, const void *buf, size_t len) {
+  Finfo *pf = &file_table[fd];
+  if (fd == 0 || fd == 1 || fd == 2) {
+    for (size_t i = 0; i < len; i++)
+      putch(*((char*)buf + i));
+    return len;
+  }
+  if (pf->open_offset == pf->size) {
+    return 0;
+  }
+  size_t write_end = pf->open_offset + len;
+  int ret = 0;
+  int length = 0;
+  if (write_end > pf->size) {
+    length = pf->size - pf->open_offset;
+    ret = ramdisk_write(buf, pf->disk_offset + pf->open_offset, length);
+    assert(ret);
+    pf->open_offset = pf->size;
+    return length;
+  }
+  else {
+    ret = ramdisk_write(buf, pf->disk_offset + pf->open_offset, len);
+    assert(ret);
+    return len;
+  }
+}
+
+size_t fs_lseek(int fd, size_t offset, int whence) {
+  Finfo *pf = &file_table[fd];
+  if (fd == 0 || fd == 1 || fd == 2) {
+    return 0; //忽略stdin stdout stderr
+  }
+  printf("original offset:%x\n", pf->open_offset);
+  switch (whence) {
+    case SEEK_SET:
+      pf->open_offset = offset;
+      break;
+    case SEEK_CUR:
+      pf->open_offset += offset;
+      break;
+    case SEEK_END:
+      pf->open_offset = pf->size + offset;
+      break;
+    default:
+      return -1;
+  }
+  printf("seek offset:%x\n", pf->open_offset);
+  return pf->open_offset;
+}
