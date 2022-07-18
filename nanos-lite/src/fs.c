@@ -74,6 +74,7 @@ size_t fs_read(int fd, void *buf, size_t len) {
   else {
     ret = ramdisk_read(buf, pf->disk_offset + pf->open_offset, len);
     assert(ret);
+    pf->open_offset += len;
     return len;
   }
 }
@@ -105,6 +106,7 @@ size_t fs_write(int fd, const void *buf, size_t len) {
   else {
     ret = ramdisk_write(buf, pf->disk_offset + pf->open_offset, len);
     assert(ret);
+    pf->open_offset += len;
     return len;
   }
 }
