@@ -42,25 +42,25 @@ void do_syscall(Context *c) {
       printf("read:%d\n", a[1]);
       c->GPRx = fs_read(a[1], (void*)a[2], a[3]);
       #ifdef ETRACE
-        Log("Syscall: read(%s, %x, %ld) = %ld", (char*)a[1], a[2], a[3], c->GPRx);
+        Log("Syscall: read(%d, %x, %ld) = %ld", a[1], a[2], a[3], c->GPRx);
       #endif
       break;
     case SYS_write:
       c->GPRx = fs_write(a[1], (void*)a[2], a[3]);
       #ifdef ETRACE
-        if (a[1] > 2) Log("Syscall: wirte(%s, %x, %ld) = %ld", (char*)a[1], a[2], a[3], c->GPRx);
+        if (a[1] > 2) Log("Syscall: wirte(%d, %x, %ld) = %ld", a[1], a[2], a[3], c->GPRx);
       #endif
       break;
     case SYS_close:
       c->GPRx = fs_close(a[1]);
       #ifdef ETRACE
-        Log("Syscall: close(%s) = %x", (char*)a[1], c->GPRx);
+        Log("Syscall: close(%d) = %x", a[1], c->GPRx);
       #endif
       break;
     case SYS_lseek:
       c->GPRx = fs_lseek(a[1], a[2], a[3]);
       #ifdef ETRACE
-        Log("Syscall: lseek(%s, %ld, %d) = %ld", (char*)a[1], a[2], a[3], c->GPRx);
+        Log("Syscall: lseek(%d, %ld, %d) = %ld", a[1], a[2], a[3], c->GPRx);
       #endif
       break;
     default: panic("Unhandled syscall ID = %d", a[0]);
