@@ -48,20 +48,22 @@ static uintptr_t loader(PCB *pcb, const char *filename) {
   // 读取program header table
   Elf_Phdr *Phdrs = NULL;
   Phdrs = (Elf_Phdr*)malloc(sizeof(Elf_Phdr) * Ehdr->e_phnum);
-  ret = ramdisk_read(Phdrs, Ehdr->e_phoff, sizeof(Elf_Phdr) * Ehdr->e_phnum);
+  fs_lseek(fd, Ehdr->e_phoff, SEEK_SET);
+  ret = fs_read(fd, Phdrs, sizeof(Elf_Phdr) * Ehdr->e_phnum);
   assert(ret);
 
-  // // 遍历program headers
-  // for (uint32_t i = 0; i < Ehdr->e_phnum; i++) {
-  //   if (Phdrs[i].p_type == PT_LOAD) {
-  //     ret = ramdisk_read((void*)Phdrs[i].p_vaddr, Phdrs[i].p_offset, Phdrs[i].p_filesz);
-  //     assert(ret);
-  //     memset((void*)(Phdrs[i].p_vaddr + Phdrs[i].p_filesz), 0, Phdrs[i].p_memsz - Phdrs[i].p_filesz);
-  //   }
-  // }
+  // 遍历program headers
+  for (uint32_t i = 0; i < Ehdr->e_phnum; i++) {
+    if (Phdrs[i].p_type == PT_LOAD) {
+      fs_lseek(fd, Phdrs[i].p_offset, SEEK_SET);
+      ret = fs_read(fd, (void*)Phdrs[i].p_vaddr, Phdrs[i].p_filesz);
+      assert(ret);
+      memset((void*)(Phdrs[i].p_vaddr + Phdrs[i].p_filesz), 0, Phdrs[i].p_memsz - Phdrs[i].p_filesz);
+    }
+  }
 
   free(Ehdr);
-  // free(Phdrs);
+  free(Phdrs);
 
   return proc;
 }
