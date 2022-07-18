@@ -124,3 +124,18 @@ size_t fs_lseek(int fd, size_t offset, int whence) {
   }
   return pf->open_offset;
 }
+
+char *getfilename(int fd) {
+  if (fd == FD_STDIN) {
+    return "STDIN";
+  }
+  else if (fd == FD_STDOUT) {
+    return "STDOUT";
+  }
+  else if (fd == FD_STDERR) {
+    return "STDERR";
+  }
+  else {
+    return file_table[fd].name;
+  }
+}

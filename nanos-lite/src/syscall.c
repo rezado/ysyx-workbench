@@ -41,25 +41,25 @@ void do_syscall(Context *c) {
     case SYS_read:
       c->GPRx = fs_read(a[1], (void*)a[2], a[3]);
       #ifdef ETRACE
-        Log("Syscall: read(%d, %x, %d) = %d", a[1], a[2], a[3], c->GPRx);
+        Log("Syscall: read(%s, %x, %d) = %d", getfilename(a[1]), a[2], a[3], c->GPRx);
       #endif
       break;
     case SYS_write:
       c->GPRx = fs_write(a[1], (void*)a[2], a[3]);
       #ifdef ETRACE
-        if (a[1] > 2) Log("Syscall: wirte(%d, %x, %d) = %d", a[1], a[2], a[3], c->GPRx);
+        if (a[1] > 2) Log("Syscall: wirte(%s, %x, %d) = %d", getfilename(a[1]), a[2], a[3], c->GPRx);
       #endif
       break;
     case SYS_close:
       c->GPRx = fs_close(a[1]);
       #ifdef ETRACE
-        Log("Syscall: close(%d) = %x", a[1], c->GPRx);
+        Log("Syscall: close(%s) = %x", getfilename(a[1]), c->GPRx);
       #endif
       break;
     case SYS_lseek:
       c->GPRx = fs_lseek(a[1], a[2], a[3]);
       #ifdef ETRACE
-        Log("Syscall: lseek(%d, %d, %d) = %d", a[1], a[2], a[3], c->GPRx);
+        Log("Syscall: lseek(%s, %d, %d) = %d", getfilename(a[1]), a[2], a[3], c->GPRx);
       #endif
       break;
     default: panic("Unhandled syscall ID = %d", a[0]);
