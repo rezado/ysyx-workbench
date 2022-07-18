@@ -62,6 +62,7 @@ size_t fs_read(int fd, void *buf, size_t len) {
   size_t read_end = pf->open_offset + len;
   int ret = 0;
   int length = 0;
+  printf("read file %d from %x to %x\n", fd, pf->open_offset, read_end);
   if (read_end > pf->size) {
     // 越界
     length = pf->size - pf->open_offset;
