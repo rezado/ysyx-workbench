@@ -2,7 +2,7 @@
 #include "syscall.h"
 #include <fs.h>
 
-#define ETRACE
+// #define ETRACE
 
 struct timeval {
     long      tv_sec;     /* seconds */
