@@ -58,6 +58,7 @@ size_t fs_read(int fd, void *buf, size_t len) {
   Finfo *pf = &file_table[fd];
   if (pf->size == 0) {
     // 表示是个字符流设备 没有offset的概念
+    printf("read:%s\n", pf->name);
     return pf->read(buf, 0, len);
   }
 
