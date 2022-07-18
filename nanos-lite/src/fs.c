@@ -54,20 +54,22 @@ int fs_open(const char *pathname, int flags, int mode) {
 
 size_t fs_read(int fd, void *buf, size_t len) {
   Finfo *pf = &file_table[fd];
-  if (pf->size != 0 && pf->open_offset >= pf->size) {
-    return 0; // 到结尾了 不读取 还要忽略size=0的情况 代表字符流
+  if (pf->size == 0) {
+    // 表示是个字符流设备 没有offset的概念
+    return pf->read(buf, 0, len);
+  }
+
+  if (pf->open_offset >= pf->size) {
+    return 0; // 到结尾了 不读取
   }
   size_t read_end = pf->open_offset + len;
   int length = 0;
   if (pf->size != 0 && read_end > pf->size) {
     // 越界
     length = pf->size - pf->open_offset;
-    if (pf->read)
-      return pf->read(buf, pf->disk_offset + pf->open_offset, length);
-    else {
-      ramdisk_read(buf, pf->disk_offset + pf->open_offset, length);
-      pf->open_offset = pf->size;
-    }
+    if (pf->read) pf->read(buf, pf->disk_offset + pf->open_offset, length);
+    else ramdisk_read(buf, pf->disk_offset + pf->open_offset, length);
+    pf->open_offset = pf->size;
     return length;
   }
   else {
@@ -84,11 +86,10 @@ int fs_close(int fd) {
 
 size_t fs_write(int fd, const void *buf, size_t len) {
   Finfo *pf = &file_table[fd];
-  if (fd == FD_STDIN || fd == FD_STDOUT || fd == FD_STDERR) {
-    for (size_t i = 0; i < len; i++)
-      putch(*((char*)buf + i));
-    return len;
+  if (pf->size == 0) {
+    return pf->write(buf, 0, len);
   }
+
   if (pf->open_offset >= pf->size) {
     return 0;
   }
@@ -102,7 +103,8 @@ size_t fs_write(int fd, const void *buf, size_t len) {
     return length;
   }
   else {
-    ramdisk_write(buf, pf->disk_offset + pf->open_offset, len);
+    if (pf->write) pf->write(buf, pf->disk_offset + pf->open_offset, len);
+    else ramdisk_write(buf, pf->disk_offset + pf->open_offset, len);
     pf->open_offset += len;
     return len;
   }
