@@ -23,7 +23,20 @@ size_t serial_write(const void *buf, size_t offset, size_t len) {
 }
 
 size_t events_read(void *buf, size_t offset, size_t len) {
-  return 0;
+  bool keydown;
+  int keycode;
+  int ret = 0;
+  keydown = io_read(AM_INPUT_KEYBRD).keydown;
+  keycode = io_read(AM_INPUT_KEYBRD).keycode;
+  // 无有效按键
+  if (keycode > 255)
+    return 0;
+
+  if (keydown == true) sprintf((char*)buf, "%s", "kd ");
+  else sprintf((char*)buf, "%s", "ku ");
+  ret = sprintf((char*)buf, "%s", keyname[keycode]) + 3;
+  
+  return ret;
 }
 
 size_t dispinfo_read(void *buf, size_t offset, size_t len) {
