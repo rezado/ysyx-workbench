@@ -48,28 +48,31 @@ int fs_open(const char *pathname, int flags, int mode) {
       return i;
     }
   }
+  assert(0);  // sfs没有找到文件属于异常情况
   return -1;
 }
 
 size_t fs_read(int fd, void *buf, size_t len) {
   Finfo *pf = &file_table[fd];
-  if (fd == FD_STDIN || fd == FD_STDOUT || fd == FD_STDERR) {
-    return 0; //忽略对stdin stdout stderr的读操作
-  }
-  if (pf->open_offset >= pf->size) {
-    return 0; // 到结尾了 不读取
+  if (pf->size != 0 && pf->open_offset >= pf->size) {
+    return 0; // 到结尾了 不读取 还要忽略size=0的情况 代表字符流
   }
   size_t read_end = pf->open_offset + len;
   int length = 0;
-  if (read_end > pf->size) {
+  if (pf->size != 0 && read_end > pf->size) {
     // 越界
     length = pf->size - pf->open_offset;
-    ramdisk_read(buf, pf->disk_offset + pf->open_offset, length);
-    pf->open_offset = pf->size;
+    if (pf->read)
+      return pf->read(buf, pf->disk_offset + pf->open_offset, length);
+    else {
+      ramdisk_read(buf, pf->disk_offset + pf->open_offset, length);
+      pf->open_offset = pf->size;
+    }
     return length;
   }
   else {
-    ramdisk_read(buf, pf->disk_offset + pf->open_offset, len);
+    if (pf->read) return pf->read(buf, pf->disk_offset + pf->open_offset, len);
+    else ramdisk_read(buf, pf->disk_offset + pf->open_offset, len);
     pf->open_offset += len;
     return len;
   }
@@ -93,7 +96,8 @@ size_t fs_write(int fd, const void *buf, size_t len) {
   int length = 0;
   if (write_end > pf->size) {
     length = pf->size - pf->open_offset;
-    ramdisk_write(buf, pf->disk_offset + pf->open_offset, length);
+    if (pf->write) pf->write(buf, pf->disk_offset + pf->open_offset, length);
+    else ramdisk_write(buf, pf->disk_offset + pf->open_offset, length);
     pf->open_offset = pf->size;
     return length;
   }
