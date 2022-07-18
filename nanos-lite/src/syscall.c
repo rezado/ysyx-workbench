@@ -39,7 +39,6 @@ void do_syscall(Context *c) {
       #endif
       break;
     case SYS_read:
-      printf("read:%d\n", a[1]);
       c->GPRx = fs_read(a[1], (void*)a[2], a[3]);
       #ifdef ETRACE
         Log("Syscall: read(%d, %x, %d) = %d", a[1], a[2], a[3], c->GPRx);
