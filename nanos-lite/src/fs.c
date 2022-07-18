@@ -52,6 +52,7 @@ int fs_open(const char *pathname, int flags, int mode) {
       return i;
     }
   }
+  printf("should not\n");
   assert(0);  // sfs没有找到文件属于异常情况
   return -1;
 }
