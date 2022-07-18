@@ -1,5 +1,6 @@
 #include <common.h>
 #include "syscall.h"
+#include <fs.h>
 
 #define ETRACE
 
@@ -25,23 +26,39 @@ void do_syscall(Context *c) {
       Log("Syscall: exit(%x)", a[0]);
       #endif
       break;
-    case SYS_write:
-      if (a[1] == 1 || a[1] == 2) {
-        for (int i = 0; i < a[3]; i++)
-          putch(*(char*)(a[2] + i));
-        c->GPRx = a[3];
-      }
-      else {
-        c->GPRx = -1;
-      }
-      #ifdef ETRACE
-      Log("Syscall: write(%x, %x, %x) = %x", a[1], a[2], a[3], c->GPRx);
-      #endif
-      break;
     case SYS_brk:
       c->GPRx = 0;
       #ifdef ETRACE
         Log("Syscall: brk(%x) = %x", a[1], c->GPRx);
+      #endif
+      break;
+    case SYS_open:
+      c->GPRx = fs_open((char*)a[1], a[2], a[3]);
+      #ifdef ETRACE
+        Log("Syscall: open(%x, %x, %x) = %x", a[1], a[2], a[3], c->GPRx);
+      #endif
+    case SYS_read:
+      c->GPRx = fs_read(a[1], (void*)a[2], a[3]);
+      #ifdef ETRACE
+        Log("Syscall: read(%x, %x, %x) = %x", a[1], a[2], a[3], c->GPRx);
+      #endif
+      break;
+    case SYS_write:
+      c->GPRx = fs_write(a[1], (void*)a[2], a[3]);
+      #ifdef ETRACE
+        Log("Syscall: wirte(%x, %x, %x) = %x", a[1], a[2], a[3], c->GPRx);
+      #endif
+      break;
+    case SYS_close:
+      c->GPRx = fs_close(a[1]);
+      #ifdef ETRACE
+        Log("Syscall: close(%x) = %x", a[1], c->GPRx);
+      #endif
+      break;
+    case SYS_lseek:
+      c->GPRx = fs_lseek(a[1], a[2], a[3]);
+      #ifdef ETRACE
+        Log("Syscall: lseek(%x) = %x", a[1], c->GPRx);
       #endif
       break;
     default: panic("Unhandled syscall ID = %d", a[0]);
