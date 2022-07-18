@@ -2,7 +2,7 @@
 #include "syscall.h"
 #include <fs.h>
 
-// #define ETRACE
+#define ETRACE
 
 struct timeval {
     long      tv_sec;     /* seconds */
@@ -22,6 +22,7 @@ int _gettime(struct timeval *tv, struct timezone *tz) {
 
 void do_syscall(Context *c) {
   uintptr_t a[4];
+
   a[0] = c->GPR1;
   a[1] = c->GPR2;
   a[2] = c->GPR3;
