@@ -60,20 +60,17 @@ size_t fs_read(int fd, void *buf, size_t len) {
     return 0; // 到结尾了 不读取
   }
   size_t read_end = pf->open_offset + len;
-  int ret = 0;
   int length = 0;
   printf("read file %d from %x to %x\n", fd, pf->open_offset, read_end);
   if (read_end > pf->size) {
     // 越界
     length = pf->size - pf->open_offset;
-    ret = ramdisk_read(buf, pf->disk_offset + pf->open_offset, length);
-    assert(ret);
+    ramdisk_read(buf, pf->disk_offset + pf->open_offset, length);
     pf->open_offset = pf->size;
     return length;
   }
   else {
-    ret = ramdisk_read(buf, pf->disk_offset + pf->open_offset, len);
-    assert(ret);
+    ramdisk_read(buf, pf->disk_offset + pf->open_offset, len);
     pf->open_offset += len;
     return len;
   }
@@ -94,18 +91,15 @@ size_t fs_write(int fd, const void *buf, size_t len) {
     return 0;
   }
   size_t write_end = pf->open_offset + len;
-  int ret = 0;
   int length = 0;
   if (write_end > pf->size) {
     length = pf->size - pf->open_offset;
-    ret = ramdisk_write(buf, pf->disk_offset + pf->open_offset, length);
-    assert(ret);
+    ramdisk_write(buf, pf->disk_offset + pf->open_offset, length);
     pf->open_offset = pf->size;
     return length;
   }
   else {
-    ret = ramdisk_write(buf, pf->disk_offset + pf->open_offset, len);
-    assert(ret);
+    ramdisk_write(buf, pf->disk_offset + pf->open_offset, len);
     pf->open_offset += len;
     return len;
   }
