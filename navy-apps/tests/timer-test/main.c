@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <assert.h>
-#include "NDL.h"
+#include <NDL.h>
 
 int main() {
+    NDL_Init(0);
     int usec = 0, ret;
     while (1) {
         ret = NDL_GetTicks();
