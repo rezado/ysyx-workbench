@@ -8,10 +8,10 @@ int main() {
     while (1) {
         ret = gettimeofday(&tv, NULL);
         assert(ret == -1);
-        if (tv.tv_usec - usec == 500000) {
-            printf("0.5秒过去了 有没有好好做PA呢\n");
-            usec = tv.tv_sec;
-        }
+        // if (tv.tv_usec - usec == 500000) {
+        //     printf("0.5秒过去了 有没有好好做PA呢\n");
+        //     usec = tv.tv_sec;
+        // }
     }
 
     return 0;
