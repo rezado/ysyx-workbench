@@ -11,6 +11,7 @@ int main() {
         printf("%ld\n", tv.tv_usec - usec);
         if (tv.tv_usec - usec == 500000) {
             printf("0.5秒过去了 有没有好好做PA呢\n");
+            assert(0);
             usec = tv.tv_sec;
         }
     }
