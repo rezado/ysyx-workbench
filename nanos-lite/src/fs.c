@@ -49,10 +49,10 @@ int fs_open(const char *pathname, int flags, int mode) {
   for (int i = 0; i < file_num; i++) {
     if (strcmp(pathname, file_table[i].name) == 0) {
       file_table[i].open_offset = 0;
+      printf("%d\n", i);
       return i;
     }
   }
-  printf("should not\n");
   assert(0);  // sfs没有找到文件属于异常情况
   return -1;
 }
