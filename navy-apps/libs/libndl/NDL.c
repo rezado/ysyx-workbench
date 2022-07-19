@@ -21,7 +21,6 @@ int NDL_PollEvent(char *buf, int len) {
   int fd = open("/dev/events", 0, 0);
   assert(fd != -1);
   int ret = read(fd, buf, len);
-  // strcpy(buf, "123123");
   return ret;
 }
 
@@ -43,6 +42,11 @@ void NDL_OpenCanvas(int *w, int *h) {
     }
     close(fbctl);
   }
+  if (*w == 0 && *h == 0) {
+    *w = screen_w; *h = screen_h;
+  }
+  *w = *w > screen_w ? screen_w : *w;
+  *h = *h > screen_h ? screen_h : *h;
 }
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
@@ -66,6 +70,14 @@ int NDL_Init(uint32_t flags) {
   if (getenv("NWM_APP")) {
     evtdev = 3;
   }
+
+  // 读屏幕大小
+  int fd = open("/proc/dispinfo", 0, 0);
+  assert(fd != -1);
+  char buf[64];
+  int ret = read(fd, buf, 64);
+  sscanf(buf, "%d %d", &screen_w, &screen_h);
+
   return 0;
 }
 
