@@ -42,6 +42,7 @@ void NDL_OpenCanvas(int *w, int *h) {
     }
     close(fbctl);
   }
+  printf("w:%d h:%d\n", *w, *h);
   if (*w == 0 && *h == 0) {
     *w = screen_w; *h = screen_h;
   }
