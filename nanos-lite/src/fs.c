@@ -53,7 +53,7 @@ void init_fs() {
   int size = screen_w * screen_h * 4;
   printf("w:%d h:%d\n", screen_w, screen_h);
   file_table[FD_FB].size = size;
-  printf("size:%ld\n", file_table[FD_FB].size = size);
+  printf("size:%d\n", (int)file_table[FD_FB].size);
 }
 
 int fs_open(const char *pathname, int flags, int mode) {
