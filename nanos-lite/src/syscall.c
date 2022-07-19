@@ -2,16 +2,32 @@
 #include "syscall.h"
 #include <fs.h>
 
-#define ETRACE
+// #define ETRACE
+
+struct timeval {
+    long      tv_sec;     /* seconds */
+    long      tv_usec;    /* microseconds */
+};
+
+struct timezone {
+    int tz_minuteswest;     /* minutes west of Greenwich */
+    int tz_dsttime;         /* type of DST correction */
+};
+
+int _gettime(struct timeval *tv, struct timezone *tz) {
+  tv->tv_usec = io_read(AM_TIMER_UPTIME).us;
+  tv->tv_sec = tv->tv_usec / 1000000;
+  return 0;
+}
 
 void do_syscall(Context *c) {
   uintptr_t a[4];
+
   a[0] = c->GPR1;
   a[1] = c->GPR2;
   a[2] = c->GPR3;
   a[3] = c->GPR4;
   // printf("a0:%x a1:%x a2:%x a3:%x\n", a[0], a[1], a[2], a[3]);
-
 
   switch (a[0]) {
     case SYS_yield: 
@@ -60,6 +76,12 @@ void do_syscall(Context *c) {
       c->GPRx = fs_lseek(a[1], a[2], a[3]);
       #ifdef ETRACE
         Log("Syscall: lseek(%s, %d, %d) = %d", getfilename(a[1]), a[2], a[3], c->GPRx);
+      #endif
+      break;
+    case SYS_gettimeofday:
+      c->GPRx = _gettime((struct timeval*)a[1], (struct timezone *)a[2]);
+      #ifdef ETRACE
+        Log("Syscall: gettimeofday(%x, %x) = %d", a[1], a[2], c->GPRx);
       #endif
       break;
     default: panic("Unhandled syscall ID = %d", a[0]);

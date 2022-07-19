@@ -1,4 +1,5 @@
 #include <fs.h>
+#include <stdio.h>
 
 typedef size_t (*ReadFn) (void *buf, size_t offset, size_t len);
 typedef size_t (*WriteFn) (const void *buf, size_t offset, size_t len);
@@ -12,7 +13,7 @@ typedef struct {
   size_t open_offset;   // 打开文件的偏移量
 } Finfo;
 
-enum {FD_STDIN, FD_STDOUT, FD_STDERR, FD_FB};
+enum {FD_STDIN, FD_STDOUT, FD_STDERR, FD_EVENT, FD_FB};
 
 size_t invalid_read(void *buf, size_t offset, size_t len) {
   panic("should not reach here");
@@ -24,11 +25,15 @@ size_t invalid_write(const void *buf, size_t offset, size_t len) {
   return 0;
 }
 
+size_t serial_write(const void *buf, size_t offset, size_t len);
+size_t events_read(void *buf, size_t offset, size_t len);
+
 /* This is the information about all files in disk. */
 static Finfo file_table[] __attribute__((used)) = {
   [FD_STDIN]  = {"stdin", 0, 0, invalid_read, invalid_write},
-  [FD_STDOUT] = {"stdout", 0, 0, invalid_read, invalid_write},
-  [FD_STDERR] = {"stderr", 0, 0, invalid_read, invalid_write},
+  [FD_STDOUT] = {"stdout", 0, 0, invalid_read, serial_write},
+  [FD_STDERR] = {"stderr", 0, 0, invalid_read, serial_write},
+  [FD_EVENT]  = {"/dev/events", 0, 0, events_read, invalid_write},
 #include "files.h"
 };
 
@@ -41,35 +46,41 @@ void init_fs() {
 
 int fs_open(const char *pathname, int flags, int mode) {
   int file_num = sizeof(file_table) / sizeof(Finfo);
-  printf("pathname:%s\n", pathname);
+  // printf("pathname:%s\n", pathname);
   for (int i = 0; i < file_num; i++) {
     if (strcmp(pathname, file_table[i].name) == 0) {
       file_table[i].open_offset = 0;
       return i;
     }
   }
+  assert(0);  // sfs没有找到文件属于异常情况
   return -1;
 }
 
 size_t fs_read(int fd, void *buf, size_t len) {
   Finfo *pf = &file_table[fd];
-  if (fd == FD_STDIN || fd == FD_STDOUT || fd == FD_STDERR) {
-    return 0; //忽略对stdin stdout stderr的读操作
+  if (pf->size == 0) {
+    // 表示是个字符流设备 没有offset的概念
+    // printf("read:%s\n", pf->name);
+    return pf->read(buf, 0, len);
   }
+
   if (pf->open_offset >= pf->size) {
     return 0; // 到结尾了 不读取
   }
   size_t read_end = pf->open_offset + len;
   int length = 0;
-  if (read_end > pf->size) {
+  if (pf->size != 0 && read_end > pf->size) {
     // 越界
     length = pf->size - pf->open_offset;
-    ramdisk_read(buf, pf->disk_offset + pf->open_offset, length);
+    if (pf->read) pf->read(buf, pf->disk_offset + pf->open_offset, length);
+    else ramdisk_read(buf, pf->disk_offset + pf->open_offset, length);
     pf->open_offset = pf->size;
     return length;
   }
   else {
-    ramdisk_read(buf, pf->disk_offset + pf->open_offset, len);
+    if (pf->read) return pf->read(buf, pf->disk_offset + pf->open_offset, len);
+    else ramdisk_read(buf, pf->disk_offset + pf->open_offset, len);
     pf->open_offset += len;
     return len;
   }
@@ -81,11 +92,10 @@ int fs_close(int fd) {
 
 size_t fs_write(int fd, const void *buf, size_t len) {
   Finfo *pf = &file_table[fd];
-  if (fd == FD_STDIN || fd == FD_STDOUT || fd == FD_STDERR) {
-    for (size_t i = 0; i < len; i++)
-      putch(*((char*)buf + i));
-    return len;
+  if (pf->size == 0) {
+    return pf->write(buf, 0, len);
   }
+
   if (pf->open_offset >= pf->size) {
     return 0;
   }
@@ -93,12 +103,14 @@ size_t fs_write(int fd, const void *buf, size_t len) {
   int length = 0;
   if (write_end > pf->size) {
     length = pf->size - pf->open_offset;
-    ramdisk_write(buf, pf->disk_offset + pf->open_offset, length);
+    if (pf->write) pf->write(buf, pf->disk_offset + pf->open_offset, length);
+    else ramdisk_write(buf, pf->disk_offset + pf->open_offset, length);
     pf->open_offset = pf->size;
     return length;
   }
   else {
-    ramdisk_write(buf, pf->disk_offset + pf->open_offset, len);
+    if (pf->write) pf->write(buf, pf->disk_offset + pf->open_offset, len);
+    else ramdisk_write(buf, pf->disk_offset + pf->open_offset, len);
     pf->open_offset += len;
     return len;
   }
