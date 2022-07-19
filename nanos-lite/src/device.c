@@ -31,9 +31,9 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   
   printf("keydown:%d keycode:%d\n", ev.keydown, ev.keycode);
 
-  if (ev.keydown == 1) sprintf((char*)buf, "%s", "kd ");
+  if (ev.keydown) sprintf((char*)buf, "%s", "kd ");
   else sprintf((char*)buf, "%s", "ku ");
-  ret = sprintf((char*)buf, "%s", keyname[ev.keycode]) + 3;
+  ret = sprintf((char*)(buf + 3), "%s", keyname[ev.keycode]) + 3;
   
   return ret;
 }
