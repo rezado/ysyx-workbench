@@ -11,6 +11,7 @@ static int evtdev = -1;
 static int fbdev = -1;
 static int screen_w = 0, screen_h = 0;
 static int x0 = 0, y0 = 0;  // 画布左上角的坐标
+static int can_w = 0, can_h = 0;  // 画布长宽
 
 uint32_t NDL_GetTicks() {
   struct timeval tv;
@@ -52,6 +53,7 @@ void NDL_OpenCanvas(int *w, int *h) {
   // 画布居中
   x0 = (screen_w - *w) / 2;
   y0 = (screen_h - *h) / 2;
+  can_w = *w; can_h = *h;
 }
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
@@ -65,6 +67,8 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
 
   uint32_t *p = pixels;
   int x1, y1, offset;
+  if (w > can_w - x) w = can_w - x;
+  if (h > can_h - y) h = can_h - y;
   for (int i = 0; i < h; i++) {
     y1 = y0 + y + i;
     x1 = x0 + x;
