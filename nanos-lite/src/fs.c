@@ -13,7 +13,7 @@ typedef struct {
   size_t open_offset;   // 打开文件的偏移量
 } Finfo;
 
-enum {FD_STDIN, FD_STDOUT, FD_STDERR, FD_EVENT, FD_FB};
+enum {FD_STDIN, FD_STDOUT, FD_STDERR, FD_EVENT, FD_DISPINFO, FD_FB};
 
 size_t invalid_read(void *buf, size_t offset, size_t len) {
   panic("should not reach here");
@@ -27,6 +27,8 @@ size_t invalid_write(const void *buf, size_t offset, size_t len) {
 
 size_t serial_write(const void *buf, size_t offset, size_t len);
 size_t events_read(void *buf, size_t offset, size_t len);
+size_t dispinfo_read(void *buf, size_t offset, size_t len);
+size_t fb_write(const void *buf, size_t offset, size_t len);
 
 /* This is the information about all files in disk. */
 static Finfo file_table[] __attribute__((used)) = {
@@ -34,14 +36,24 @@ static Finfo file_table[] __attribute__((used)) = {
   [FD_STDOUT] = {"stdout", 0, 0, invalid_read, serial_write},
   [FD_STDERR] = {"stderr", 0, 0, invalid_read, serial_write},
   [FD_EVENT]  = {"/dev/events", 0, 0, events_read, invalid_write},
+  [FD_DISPINFO] = {"/proc/dispinfo", 0, 0, dispinfo_read, invalid_write},
+  [FD_FB] = {"/dev/fb", 0, 0, invalid_read, fb_write},
 #include "files.h"
 };
 
 extern size_t ramdisk_write(const void *buf, size_t offset, size_t len);
 extern size_t ramdisk_read(void *buf, size_t offset, size_t len);
 
+int screen_w, screen_h;
+
 void init_fs() {
   // TODO: initialize the size of /dev/fb
+  AM_GPU_CONFIG_T ev = io_read(AM_GPU_CONFIG);
+  screen_w = ev.width; screen_h = ev.height;
+  int size = screen_w * screen_h * 4;
+  printf("w:%d h:%d\n", screen_w, screen_h);
+  file_table[FD_FB].size = size;
+  printf("size:%d\n", (int)file_table[FD_FB].size);
 }
 
 int fs_open(const char *pathname, int flags, int mode) {
@@ -118,8 +130,8 @@ size_t fs_write(int fd, const void *buf, size_t len) {
 
 size_t fs_lseek(int fd, size_t offset, int whence) {
   Finfo *pf = &file_table[fd];
-  if (fd == FD_STDIN || fd == FD_STDOUT || fd == FD_STDERR) {
-    return 0; //忽略stdin stdout stderr
+  if (pf->size == 0) {
+    return 0; //忽略字符设备
   }
   switch (whence) {
     case SEEK_SET:

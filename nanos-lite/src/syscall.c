@@ -2,7 +2,7 @@
 #include "syscall.h"
 #include <fs.h>
 
-// #define ETRACE
+#define ETRACE
 
 struct timeval {
     long      tv_sec;     /* seconds */
@@ -63,7 +63,7 @@ void do_syscall(Context *c) {
     case SYS_write:
       c->GPRx = fs_write(a[1], (void*)a[2], a[3]);
       #ifdef ETRACE
-        if (a[1] > 2) Log("Syscall: wirte(%s, %x, %d) = %d", getfilename(a[1]), a[2], a[3], c->GPRx);
+        if (a[1] > 2) Log("Syscall: write(%s, %x, %d) = %d", getfilename(a[1]), a[2], a[3], c->GPRx);
       #endif
       break;
     case SYS_close:
