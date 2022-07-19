@@ -27,7 +27,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   int ret = 0;
   printf("keydown:%d keycode:%d\n", ev.keydown, ev.keycode);
   // 无有效按键
-  if (ev.keycode > 255)
+  if (ev.keycode == AM_KEY_NONE || ev.keycode > 255)
     return 0;
 
   if (ev.keydown == true) sprintf((char*)buf, "%s", "kd ");
