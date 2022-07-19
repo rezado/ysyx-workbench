@@ -21,6 +21,7 @@ int NDL_PollEvent(char *buf, int len) {
   int fd = open("/dev/events", 0, 0);
   assert(fd != -1);
   int ret = read(fd, buf, len);
+  strcpy(buf, "123123");
   return ret;
 }
 
