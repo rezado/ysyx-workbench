@@ -49,6 +49,9 @@ void NDL_OpenCanvas(int *w, int *h) {
   }
   *w = *w > screen_w ? screen_w : *w;
   *h = *h > screen_h ? screen_h : *h;
+  // 画布居中
+  x0 = (screen_w - *w) / 2;
+  y0 = (screen_h - *h) / 2;
 }
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
