@@ -28,6 +28,7 @@ size_t events_read(void *buf, size_t offset, size_t len) {
   int ret = 0;
   keydown = io_read(AM_INPUT_KEYBRD).keydown;
   keycode = io_read(AM_INPUT_KEYBRD).keycode;
+  printf("keydown:%d keycode:%d\n", keydown, keycode);
   // 无有效按键
   if (keycode > 255)
     return 0;
