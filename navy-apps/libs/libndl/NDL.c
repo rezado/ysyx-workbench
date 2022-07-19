@@ -77,7 +77,7 @@ int NDL_Init(uint32_t flags) {
   char buf[64];
   int ret = read(fd, buf, 64);
   printf("%s\n", buf);
-  sscanf(buf, "%d %d", &screen_w, &screen_h);
+  sscanf(buf, "WIDTH: %d\nHEIGHT: %d\n", &screen_w, &screen_h);
 
   return 0;
 }
