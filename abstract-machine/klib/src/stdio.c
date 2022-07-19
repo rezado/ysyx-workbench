@@ -5,9 +5,11 @@
 
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
-static int chnum = 0;
+static size_t chnum = 0;
+static size_t maxnum = 0;
 
 static void putchar(char ch, char **str, int to_string) {
+  if (chnum >= maxnum) return;
   if (to_string) {**str = ch; (*str)++;}
   else putch(ch);
   chnum++;
@@ -49,7 +51,7 @@ static void printi(int64_t i, int base, int sign, char **str, int to_string) {
   }
 }
 
-static void print(const char *fmt, va_list *ap, char **str, int to_string) {
+static void print(const char *fmt, va_list ap, char **str, int to_string) {
   size_t i;
   size_t len = strlen(fmt);
   int flag = 0, argDec;
@@ -70,21 +72,21 @@ static void print(const char *fmt, va_list *ap, char **str, int to_string) {
       op = fmt[i];
       switch(op) {
         case 'd':
-          argDec = va_arg(*ap, int);
+          argDec = va_arg(ap, int);
           printi(argDec, 10, 1, str, to_string);
           break;
         case 's':
-          argStr = va_arg(*ap, char*);
+          argStr = va_arg(ap, char*);
           while (*argStr != '\0') {
             putchar(*argStr++, str, to_string);
           }
           break;
         case 'c': 
-          argChar = va_arg(*ap, int);
+          argChar = va_arg(ap, int);
           putchar(argChar, str, to_string);
           break;
         case 'p': case 'x':
-          argHex = va_arg(*ap, uint64_t);
+          argHex = va_arg(ap, uint64_t);
           printi(argHex, 16, 0, str, to_string);
           break;
         default: break;
@@ -98,31 +100,50 @@ static void print(const char *fmt, va_list *ap, char **str, int to_string) {
 }
 
 
+int vprintf(const char *format, va_list ap) {
+  chnum = 0; maxnum = 0;
+  print(format, ap, NULL, 0);
+  return chnum;
+}
+
 int printf(const char *fmt, ...) {
   va_list ap;
   va_start(ap, fmt);
-  chnum = 0;
-  print(fmt, &ap, NULL, 0);
+  int ret = vprintf(fmt, ap);
   va_end(ap);
+  return ret;
+}
+
+int vsprintf(char *str, const char *format, va_list ap) {
+  chnum = 0; maxnum = 0;
+  print(format, ap, &str, 1);
   return chnum;
 }
 
 int sprintf(char *out, const char *fmt, ...) {
   va_list ap;
   va_start(ap, fmt);
-  chnum = 0;
-  print(fmt, &ap, &out, 1);
-  // printf("%s\n", out);
+  int ret = vsprintf(out, fmt, ap);
   va_end(ap);
-  return chnum;
+  return ret;
 }
 
 int snprintf(char *out, size_t n, const char *fmt, ...) {
-  panic("Not implemented");
+  va_list ap;
+  va_start(ap, fmt);
+  int ret = vsnprintf(out, n, fmt, ap);
+  va_end(ap);
+  maxnum = 0;
+  return ret;
 }
 
 int vsnprintf(char *out, size_t n, const char *fmt, va_list ap) {
-  panic("Not implemented");
+  chnum = 0; maxnum = n;
+  print(fmt, ap, &out, 1);
+  if (chnum == maxnum) {
+    return chnum + 1;
+  }
+  else return chnum;
 }
 
 #endif
