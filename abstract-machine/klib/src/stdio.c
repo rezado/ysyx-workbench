@@ -9,7 +9,7 @@ static size_t chnum = 0;
 static size_t maxnum = 0;
 
 static void putchar(char ch, char **str, int to_string) {
-  if (chnum >= maxnum) return;
+  if (maxnum != 0 && chnum >= maxnum) return;
   if (to_string) {**str = ch; (*str)++;}
   else putch(ch);
   chnum++;
