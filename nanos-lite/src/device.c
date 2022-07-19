@@ -15,6 +15,8 @@ static const char *keyname[256] __attribute__((used)) = {
   AM_KEYS(NAME)
 };
 
+extern int screen_w, screen_h;
+
 size_t serial_write(const void *buf, size_t offset, size_t len) {
   for (size_t i = 0; i < len; i++) {
     putch(*((char*)buf + i));
@@ -39,7 +41,11 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 }
 
 size_t fb_write(const void *buf, size_t offset, size_t len) {
-  return 0;
+  int x = offset % screen_w, y = offset / screen_w;
+  int num = len / 4;  // 一个像素4个字节
+  int w = num % screen_w, h = num / screen_w;
+  io_write(AM_GPU_FBDRAW, x, y, (void*)buf, w, h, 1);
+  return len;
 }
 
 void init_device() {

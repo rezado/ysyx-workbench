@@ -10,6 +10,7 @@
 static int evtdev = -1;
 static int fbdev = -1;
 static int screen_w = 0, screen_h = 0;
+static int x0 = 0, y0 = 0;  // 画布左上角的坐标
 
 uint32_t NDL_GetTicks() {
   struct timeval tv;
@@ -51,6 +52,22 @@ void NDL_OpenCanvas(int *w, int *h) {
 }
 
 void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
+  int fd = open("/dev/fb", 0, 0);
+  assert(fd == -1);
+  if (x0 == 0 && y0 == 0 && x == 0 && y == 0 && w == screen_w && h == screen_h) {
+    // 全屏幕绘图
+    write(fd, pixels, w * h * 4);
+  }
+
+  uint32_t *p = pixels;
+  int x1, y1, offset;
+  for (int i = 0; i < h; i++) {
+    y1 = y0 + y * i;
+    x1 = x;
+    offset = y1 * w + x1;
+    lseek(fd, offset, SEEK_SET);
+    write(fd, p + i * w, w);
+  }
 }
 
 void NDL_OpenAudio(int freq, int channels, int samples) {
