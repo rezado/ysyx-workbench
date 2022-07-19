@@ -43,7 +43,7 @@ size_t dispinfo_read(void *buf, size_t offset, size_t len) {
 size_t fb_write(const void *buf, size_t offset, size_t len) {
   int x = offset % screen_w, y = offset / screen_w;
   int w = len % screen_w, h = 1;
-  printf("write at x:%d y:%d w:%d h:%d\n", x, y, w, h);
+  printf("fb_write at x:%d y:%d w:%d h:%d\n", x, y, w, h);
   io_write(AM_GPU_FBDRAW, x, y, (void*)buf, w, h, 1);
   return len;
 }
