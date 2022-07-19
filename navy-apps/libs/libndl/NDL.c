@@ -42,7 +42,7 @@ void NDL_OpenCanvas(int *w, int *h) {
     }
     close(fbctl);
   }
-  printf("w:%d h:%d\n", *w, *h);
+  // printf("w:%d h:%d\n", *w, *h);
   if (*w == 0 && *h == 0) {
     *w = screen_w; *h = screen_h;
   }
@@ -77,9 +77,7 @@ int NDL_Init(uint32_t flags) {
   assert(fd != -1);
   char buf[64];
   int ret = read(fd, buf, 64);
-  printf("%s\n", buf);
   sscanf(buf, "WIDTH: %d\nHEIGHT: %d\n", &screen_w, &screen_h);
-  printf("%d %d\n", screen_w, screen_h);
 
   return 0;
 }
