@@ -76,7 +76,7 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
     x1 = x0 + x;
     offset = y1 * screen_w + x1;
     printf("write at x:%d y:%d offset:%d w:%d\n", x1, y1, offset, w);
-    lseek(fd, offset, SEEK_SET);
+    lseek(fd, offset * 4, SEEK_SET);
     write(fd, p + i * width, w * 4);
   }
 }
