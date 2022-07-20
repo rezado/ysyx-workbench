@@ -125,8 +125,8 @@ static void open_display() {
   fb = (uint32_t *)mmap(NULL, FB_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fb_memfd, 0);
   assert(fb != (void *)-1);
   memset(fb, 0, FB_SIZE);
-  printf("disp_w:%d disp_h:%d\n", disp_w, disp_h);
-  printf("fbsize:%ld\n", FB_SIZE);
+  // printf("disp_w:%d disp_h:%d\n", disp_w, disp_h);
+  // printf("fbsize:%ld\n", FB_SIZE);
   lseek(fb_memfd, 0, SEEK_SET);
 }
 
