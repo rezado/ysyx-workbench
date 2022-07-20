@@ -77,6 +77,7 @@ VM_USER_LDLIBS = \
 	-lreadline \
 	-g \
 	-ldl \
+	-lLLVM-12 \
 	-rdynamic \
 
 # User .cpp files (from .cpp's on Verilator command line)
