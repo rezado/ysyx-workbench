@@ -15,8 +15,9 @@ struct timezone {
 };
 
 int _gettime(struct timeval *tv, struct timezone *tz) {
-  tv->tv_usec = io_read(AM_TIMER_UPTIME).us;
-  tv->tv_sec = tv->tv_usec / 1000000;
+  uint64_t us = io_read(AM_TIMER_UPTIME).us;
+  tv->tv_usec = us % 1000000;
+  tv->tv_sec = us / 1000000;
   return 0;
 }
 
