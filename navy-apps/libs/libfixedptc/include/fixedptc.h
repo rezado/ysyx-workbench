@@ -160,7 +160,7 @@ static inline fixedpt fixedpt_floor(fixedpt A) {
 static inline fixedpt fixedpt_ceil(fixedpt A) {
 	if (fixedpt_fracpart(A) == 0) return A;
 	else if (A > 0) return fixedpt_floor(A + FIXEDPT_ONE);
-	else return -fixedpt_floor(A);
+	else return -fixedpt_floor(-A);
 }
 
 /*
