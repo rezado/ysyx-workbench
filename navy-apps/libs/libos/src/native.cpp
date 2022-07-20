@@ -118,13 +118,15 @@ static void open_display() {
   SDL_AddTimer(1000 / FPS, timer_handler, NULL);
   texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, disp_w, disp_h);
 
-  fb_memfd = memfd_create("fb", 0);
+  fb_memfd = memfd_create("fb", 0);  // 创建一个虚拟的文件 存放在内存中
   assert(fb_memfd != -1);
-  int ret = ftruncate(fb_memfd, FB_SIZE);
+  int ret = ftruncate(fb_memfd, FB_SIZE);  // 调整文件的大小为FB_SIZE
   assert(ret == 0);
   fb = (uint32_t *)mmap(NULL, FB_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fb_memfd, 0);
   assert(fb != (void *)-1);
   memset(fb, 0, FB_SIZE);
+  printf("disp_w:%d disp_h:%d\n", disp_w, disp_h);
+  printf("fbsize:%ld\n", FB_SIZE);
   lseek(fb_memfd, 0, SEEK_SET);
 }
 
