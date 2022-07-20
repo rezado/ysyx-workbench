@@ -9,7 +9,7 @@ int main(void) {
     printf("floor -1.2:%d\n", fixedpt_toint(fixedpt_floor(d)));
     printf("ceil 1.2:%d\n", fixedpt_toint(fixedpt_ceil(a)));
     printf("ceil -1.2:%d\n", fixedpt_toint(fixedpt_ceil(d)));
-    int i = 0;
+    int i = 1;
     printf("ceil %d:%d\n", i, fixedpt_toint(fixedpt_ceil(fixedpt_fromint(i))));
     int c = 0;
     if (b > fixedpt_rconst(7.9)) {
