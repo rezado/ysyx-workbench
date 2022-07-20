@@ -153,8 +153,8 @@ static inline fixedpt fixedpt_abs(fixedpt A) {
 static inline fixedpt fixedpt_floor(fixedpt A) {
 	// If x is integral, +0, -0, NaN, or an infinity, x itself is returned.
 	if (fixedpt_fracpart(A) == 0) return A;
-	else if (A > 0) return A & FIXEDPT_FMASK;
-	else return -(-A + FIXEDPT_ONE);
+	else if (A > 0) return A & ~FIXEDPT_FMASK;
+	else return -((-A + FIXEDPT_ONE) & ~FIXEDPT_FMASK);
 }
 
 static inline fixedpt fixedpt_ceil(fixedpt A) {
