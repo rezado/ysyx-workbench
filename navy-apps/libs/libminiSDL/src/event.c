@@ -13,6 +13,12 @@ int SDL_PushEvent(SDL_Event *ev) {
 }
 
 int SDL_PollEvent(SDL_Event *ev) {
+  char buf[64];
+  int ret = NDL_PollEvent(buf, sizeof(buf));
+  if (ret == 0) return 0;
+  char str1[64], str2[64];
+  sscanf(buf, "%s %s\n", str1, str2);
+  
   return 0;
 }
 
