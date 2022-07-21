@@ -16,7 +16,7 @@ static int can_w = 0, can_h = 0;  // 画布长宽
 uint32_t NDL_GetTicks() {
   struct timeval tv;
   gettimeofday(&tv, NULL);
-  return tv.tv_usec;
+  return tv.tv_sec * 1000 + tv.tv_usec / 1000;
 }
 
 int NDL_PollEvent(char *buf, int len) {
