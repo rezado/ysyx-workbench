@@ -63,16 +63,17 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
     // 全屏幕绘图
     printf("into full screen\n");
     write(fd, pixels, w * h * 4);
+    return;
   }
 
   uint32_t *p = pixels;
   int x1, y1, offset;
   int width = w, height = h;
+  x1 = x0 + x;
   if (w > can_w - x) w = can_w - x;
   if (h > can_h - y) h = can_h - y;
   for (int i = 0; i < h; i++) {
     y1 = y0 + y + i;
-    x1 = x0 + x;
     offset = y1 * screen_w + x1;
     // printf("write at x:%d y:%d offset:%d w:%d\n", x1, y1, offset, w);
     lseek(fd, offset * 4, SEEK_SET);
