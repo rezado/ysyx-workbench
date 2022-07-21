@@ -47,9 +47,9 @@ size_t fb_write(const void *buf, size_t offset, size_t len) {
   int h = num / screen_w;
   if (w == 0) w = screen_w;
   if (h == 0) h = 1;
-  printf("fb_write at x:%d y:%d w:%d h:%d\n", x, y, w, h);
-  io_write(AM_GPU_FBDRAW, x, y, (void*)buf, w, h, 0);
-  io_write(AM_GPU_FBDRAW, 0, 0, NULL, 0, 0, 1);
+  // printf("fb_write at x:%d y:%d w:%d h:%d\n", x, y, w, h);
+  io_write(AM_GPU_FBDRAW, x, y, (void*)buf, w, h, 0);  // 先写入
+  io_write(AM_GPU_FBDRAW, 0, 0, NULL, 0, 0, 1);  // 再更新
   return len;
 }
 
