@@ -7,9 +7,56 @@
 void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_Rect *dstrect) {
   assert(dst && src);
   assert(dst->format->BitsPerPixel == src->format->BitsPerPixel);
+  int sx, sy, dx, dy, w, h;
+  if (!srcrect) {
+    sx = sy = 0;
+    w = src->w; h = src->h;
+  }
+  else {
+    sx = srcrect->x; sy = srcrect->y;
+    w = srcrect->w; h = srcrect->h;
+  }
+  if (!dstrect) {
+    dx = 0; dy = 0;
+  }
+  else {
+    dx = dstrect->x; dy = dstrect->y; 
+  }
+
+  uint8_t *sp = src->pixels;
+  uint8_t *dp = dst->pixels;
+  size_t soff, doff;
+  for (int i = 0; i < h; i++) {
+    soff = (sy + i) * src->pitch + 4 * sx;
+    doff = (dy + i) * dst->pitch + 4 * dx;
+    memcpy(dp + doff, sp + soff, w * src->format->BytesPerPixel);
+  }
 }
 
 void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
+  int x, y, w, h;
+  if (!dstrect) {
+    x = y = 0;
+    w = dst->w; h = dst->h;
+  }
+  else {
+    x = dstrect->x; y = dstrect->y;
+    w = dstrect->w; h = dstrect->h;
+  }
+
+  w = w < dst->w - x ? w : dst->w - x;
+  h = h < dst->h - y ? h : dst->h - y;
+  
+  uint8_t *p = dst->pixels;
+  size_t offset;
+  printf("before fill rect\n");
+  printf("x:%d y:%d w:%d h:%d\n", x, y, w, h);
+  for (int i = 0; i < h; i++) {
+    offset = (y + i) * dst->pitch + 4 * x;
+    // printf("offset:%d\n", offset);
+    memset(p + offset, color, w * sizeof(color));
+  }
+  printf("after fill rect\n");
 }
 
 // Makes sure the given area is updated on the given screen
