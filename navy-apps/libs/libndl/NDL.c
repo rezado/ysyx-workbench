@@ -44,7 +44,8 @@ void NDL_OpenCanvas(int *w, int *h) {
     }
     close(fbctl);
   }
-  // printf("w:%d h:%d\n", *w, *h);
+  printf("w:%d h:%d\n", *w, *h);
+  printf("screen: w%d h%d\n", screen_w, screen_h);
   if (*w == 0 && *h == 0) {
     *w = screen_w; *h = screen_h;
   }
@@ -61,21 +62,23 @@ void NDL_DrawRect(uint32_t *pixels, int x, int y, int w, int h) {
   if (x0 == 0 && y0 == 0 && x == 0 && y == 0 && w == screen_w && h == screen_h) {
     // 全屏幕绘图
     printf("into full screen\n");
+    lseek(fd, 0, SEEK_SET);
     write(fd, pixels, w * h * 4);
+    return;
   }
 
   uint32_t *p = pixels;
   int x1, y1, offset;
   int width = w, height = h;
+  x1 = x0 + x;
   if (w > can_w - x) w = can_w - x;
   if (h > can_h - y) h = can_h - y;
   for (int i = 0; i < h; i++) {
     y1 = y0 + y + i;
-    x1 = x0 + x;
     offset = y1 * screen_w + x1;
     // printf("write at x:%d y:%d offset:%d w:%d\n", x1, y1, offset, w);
-    lseek(fd, offset, SEEK_SET);
-    write(fd, p + i * width, w);
+    lseek(fd, offset * 4, SEEK_SET);
+    write(fd, p + i * width, w * 4);
   }
 }
 

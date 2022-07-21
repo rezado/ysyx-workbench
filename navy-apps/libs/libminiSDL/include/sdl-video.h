@@ -35,17 +35,17 @@ typedef struct {
 	SDL_Palette *palette;
 	uint8_t BitsPerPixel;
 	uint8_t BytesPerPixel;
-	uint8_t Rloss, Gloss, Bloss, Aloss;
-	uint8_t Rshift, Gshift, Bshift, Ashift;
-	uint32_t Rmask, Gmask, Bmask, Amask;
+	uint8_t Rloss, Gloss, Bloss, Aloss;  // Precision loss of each color component
+	uint8_t Rshift, Gshift, Bshift, Ashift;  // Binary left shift of each color component in the pixel value
+	uint32_t Rmask, Gmask, Bmask, Amask;  // Binary mask used to retrieve individual color values
 } SDL_PixelFormat;
 
 typedef struct {
-	uint32_t flags;
-	SDL_PixelFormat *format;
-	int w, h;
-	uint16_t pitch;
-	uint8_t *pixels;
+	uint32_t flags;				/* Read-only */
+	SDL_PixelFormat *format;	/* Read-only */
+	int w, h;					/* Read-only */
+	uint16_t pitch;				/* Read-only Length of a surface scanline in bytes */
+	uint8_t *pixels;			/* Read-write */
 } SDL_Surface;
 
 SDL_Surface* SDL_CreateRGBSurfaceFrom(void *pixels, int width, int height, int depth,
