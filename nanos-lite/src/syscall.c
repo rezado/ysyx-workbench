@@ -44,7 +44,7 @@ void do_syscall(Context *c) {
       #endif
       break;
     case SYS_exit:
-      halt(a[0]);
+      _exec("/bin/menu", NULL, NULL);
       #ifdef ETRACE
       Log("Syscall: exit(%x)", a[0]);
       #endif
@@ -92,8 +92,10 @@ void do_syscall(Context *c) {
       #endif
       break;
     case SYS_execve:
-      c->GPRx = _exec((const char*)a[1], (char *const*)a[2], (char *const*)a[3]);
-
+      c->GPRx = _exec((char*)a[1], (char **)a[2], (char **)a[3]);
+      #ifdef ETRACE
+        Log("Syscall: esxecve(%x)", (char*)a[1]);
+      #endif
       break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }
