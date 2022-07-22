@@ -1,6 +1,7 @@
 #include <common.h>
 #include "syscall.h"
 #include <fs.h>
+#include <proc.h>
 
 // #define ETRACE
 
@@ -19,6 +20,11 @@ int _gettime(struct timeval *tv, struct timezone *tz) {
   tv->tv_usec = us % 1000000;
   tv->tv_sec = us / 1000000;
   return 0;
+}
+
+int _exec(const char *fname, char * const argv[], char *const envp[]) {
+  naive_uload(NULL, fname);
+  return -1;
 }
 
 void do_syscall(Context *c) {
@@ -84,6 +90,10 @@ void do_syscall(Context *c) {
       #ifdef ETRACE
         Log("Syscall: gettimeofday(%x, %x) = %d", a[1], a[2], c->GPRx);
       #endif
+      break;
+    case SYS_execve:
+      c->GPRx = _exec((const char*)a[1], (char *const*)a[2], (char *const*)a[3]);
+
       break;
     default: panic("Unhandled syscall ID = %d", a[0]);
   }

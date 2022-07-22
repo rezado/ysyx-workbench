@@ -27,8 +27,8 @@ void SDL_BlitSurface(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   uint8_t *dp = dst->pixels;
   size_t soff, doff;
   for (int i = 0; i < h; i++) {
-    soff = (sy + i) * src->pitch + 4 * sx;
-    doff = (dy + i) * dst->pitch + 4 * dx;
+    soff = (sy + i) * src->pitch + sx * src->format->BytesPerPixel;
+    doff = (dy + i) * dst->pitch + dx * dst->format->BytesPerPixel;
     memcpy(dp + doff, sp + soff, w * src->format->BytesPerPixel);
   }
 }
@@ -52,22 +52,38 @@ void SDL_FillRect(SDL_Surface *dst, SDL_Rect *dstrect, uint32_t color) {
   printf("before fill rect\n");
   printf("x:%d y:%d w:%d h:%d\n", x, y, w, h);
   for (int i = 0; i < h; i++) {
-    offset = (y + i) * dst->pitch + 4 * x;
+    offset = (y + i) * dst->pitch + x * dst->format->BytesPerPixel;
     // printf("offset:%d\n", offset);
-    memset(p + offset, color, w * sizeof(color));
+    memset(p + offset, color, w * dst->format->BytesPerPixel);
   }
   printf("after fill rect\n");
 }
 
 // Makes sure the given area is updated on the given screen
 void SDL_UpdateRect(SDL_Surface *s, int x, int y, int w, int h) {
-  if (x == 0 && y == 0 && w == 0 && h == 0) {
-    // update all screen
-    NDL_DrawRect(s->pixels, x, y, s->w, s->h);
-    return;
+
+  if (s->format->BitsPerPixel == 8) {
+    uint32_t *buf = (uint32_t*)malloc(s->w * s->h * sizeof(uint32_t));
+    for (int i = 0; i < s->h * s->w; i++) {
+      buf[i] = s->format->palette->colors[s->pixels[i]].val;
+    }
+    if (x == 0 && y == 0 && w == 0 && h == 0) {
+      // update all
+      NDL_DrawRect(buf, x, y, s->w, s->h);
+    }
+    else
+      NDL_DrawRect(buf, x, y, w, h);
+    free(buf);
   }
-  
-  NDL_DrawRect(s->pixels, x, y, w, h);
+  else {
+    if (x == 0 && y == 0 && w == 0 && h == 0) {
+      // update all screen
+      NDL_DrawRect(s->pixels, x, y, s->w, s->h);
+      return;
+    }
+    
+    NDL_DrawRect(s->pixels, x, y, w, h);
+  }
 }
 
 // APIs below are already implemented.
@@ -161,6 +177,7 @@ void SDL_SoftStretch(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
   int w = (srcrect == NULL ? src->w : srcrect->w);
   int h = (srcrect == NULL ? src->h : srcrect->h);
 
+
   assert(dstrect);
   if(w == dstrect->w && h == dstrect->h) {
     /* The source rectangle and the destination rectangle
@@ -174,6 +191,7 @@ void SDL_SoftStretch(SDL_Surface *src, SDL_Rect *srcrect, SDL_Surface *dst, SDL_
     SDL_BlitSurface(src, &rect, dst, dstrect);
   }
   else {
+    printf("src: w:%d h:%d dstrect: w:%d h:%d\n", src->w, src->h, dstrect->w, dstrect->h);
     assert(0);
   }
 }
