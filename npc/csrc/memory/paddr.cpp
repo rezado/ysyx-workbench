@@ -11,8 +11,8 @@ static uint8_t *pmem = NULL;
 static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
 #endif
 
-#define RTC_ADDR        0xa000048
-#define SERIAL_PORT     0xa0003f8
+#define RTC_ADDR        0xa0000048
+#define SERIAL_PORT     0xa00003f8
 
 
 uint8_t* guest_to_host(paddr_t paddr) { return pmem + paddr - CONFIG_MBASE; }
