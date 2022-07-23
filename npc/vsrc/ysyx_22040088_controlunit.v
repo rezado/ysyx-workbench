@@ -75,7 +75,6 @@ wire inst_div;
 wire inst_sraw;
 wire inst_srlw;
 
-wire inst_mulu;
 wire inst_divu;
 wire inst_remu;
 
