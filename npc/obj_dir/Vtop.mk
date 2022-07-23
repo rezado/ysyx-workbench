@@ -53,7 +53,6 @@ VM_USER_CFLAGS = \
 	-ggdb3 \
 	-DITRACE_COND=true \
 	-D__GUEST_ISA__=riscv64 \
-	-DTOP_NAME="Vtop" \
 	-I/usr/lib/llvm-12/include \
 	-std=c++14 \
 	-fno-exceptions \
