@@ -64,6 +64,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
   // printf("write:waddr:%llx, wdata:%llx, wmask:%x\n", waddr, wdata, wmask);
   if (waddr == SERIAL_PORT) {
+    printf("write to serial port\n");
     putc((char)wdata, stderr);
     return;
   }
