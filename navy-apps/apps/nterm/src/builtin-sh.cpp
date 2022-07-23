@@ -26,6 +26,7 @@ static void sh_handle_cmd(const char *cmd) {
   char str[100];
   strcpy(str, cmd);
   str[strlen(str) - 1] = 0;
+  setenv("PATH", "/bin", 0);
   execve(str, NULL, NULL);
 }
 
