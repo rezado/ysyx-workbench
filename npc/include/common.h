@@ -32,13 +32,7 @@ typedef uint16_t ioaddr_t;
 #include <debug.h>
 
 
-// Verilator
-#include "verilated.h"
-#include "verilated_vcd_c.h"
-#include "Vtop.h"
-#include "svdpi.h"
-#include "Vtop__Dpi.h"
-#include "verilated_dpi.h"
+
 
 extern Vtop* top;
 
