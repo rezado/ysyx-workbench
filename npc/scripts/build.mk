@@ -22,7 +22,7 @@ CXX := g++
 endif
 LD := $(CXX)
 INCLUDES = $(addprefix -I, $(INC_PATH))
-CFLAGS  += -O2 -MMD -Wall $(INCLUDES)
+CFLAGS  += -O2 -MMD -Wall
 LDFLAGS := -O2 
 
 
