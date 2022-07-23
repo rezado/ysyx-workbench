@@ -79,7 +79,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
       waddr += 1;
     }
     #ifdef CONFIG_MTRACE
-      printf("Write Memory at 0x%016llx  data:  0x%016llx\n", waddr, wdata);
+      if (wmask) printf("Write Memory at 0x%016llx  data:  0x%016llx\n", waddr, wdata);
     #endif
     return;
   }
