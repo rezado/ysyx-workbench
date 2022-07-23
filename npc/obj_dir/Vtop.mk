@@ -35,6 +35,26 @@ VM_PREFIX = Vtop
 VM_MODPREFIX = Vtop
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
+	-O2 \
+	-Og \
+	-ggdb3 \
+	-DITRACE_COND=true \
+	-D__GUEST_ISA__=riscv64 \
+	-O2 \
+	-MMD \
+	-Wall \
+	-I/home/bill/ysyx-workbench/npc/include \
+	-I/home/bill/ysyx-workbench/npc/include \
+	-I/home/bill/ysyx-workbench/npc/csrc/engine/interpreter \
+	-I/home/bill/ysyx-workbench/npc/csrc/isa/riscv64/include \
+	-O2 \
+	-MMD \
+	-Wall \
+	-I/home/bill/ysyx-workbench/npc/include \
+	-I/home/bill/ysyx-workbench/npc/include \
+	-I/home/bill/ysyx-workbench/npc/csrc/engine/interpreter \
+	-I/home/bill/ysyx-workbench/npc/csrc/isa/riscv64/include \
+	-DTOP_NAME="Vtop" \
 	-I/usr/lib/llvm-12/include \
 	-std=c++14 \
 	-fno-exceptions \
