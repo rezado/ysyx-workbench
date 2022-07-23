@@ -1,7 +1,6 @@
 #ifndef __UTILS_H__
 #define __UTILS_H__
 
-
 // ----------- state -----------
 
 enum { NEMU_RUNNING, NEMU_STOP, NEMU_END, NEMU_ABORT, NEMU_QUIT };
