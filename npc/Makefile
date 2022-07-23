@@ -42,8 +42,6 @@ include $(AM_HOME)/Makefile
 LINKAGE += $(ARCHIVES)
 else
 # Include rules to build NEMU
-include $(NPC_HOME)/scripts/native.mk
-
 include $(NPC_HOME)/scripts/build.mk
 
 # Include rules to verilator
