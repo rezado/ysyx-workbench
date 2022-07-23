@@ -1,6 +1,4 @@
 -include $(NPC_HOME)/../Makefile
-include $(NPC_HOME)/scripts/build.mk
-
 include $(NPC_HOME)/tools/difftest.mk
 
 compile_git:
