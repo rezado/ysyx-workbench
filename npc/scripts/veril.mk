@@ -17,6 +17,18 @@ $(shell mkdir -p $(BUILD_DIR))
 VSRCS = $(shell find $(abspath ./vsrc) -name "*.v")
 # CSRCS = $(shell find $(abspath ./csrc) -name "*.c" -or -name "*.cc" -or -name "*.cpp")
 
+compile_git:
+	$(call git_commit, "compile NPC")
+$(BINARY): compile_git
+
+# Some convenient rules
+
+override ARGS ?= --log=$(BUILD_DIR)/npc-log.txt
+override ARGS += $(ARGS_DIFF)
+
+# Command to execute NEMU
+IMG ?=
+
 # rules for verilator
 CFLAGS += -DTOP_NAME="\"V$(TOPNAME)\""
 # CFLAGS += $(shell llvm-config --cxxflags) -fPIE
@@ -26,6 +38,7 @@ LDFLAGS += $(shell llvm-config --libs)
 LDFLAGS += -rdynamic
 NPCFLAGS := 
 NPC_EXEC := $(BIN) $(ARGS) $(IMG)
+
 
 clean:
 	-rm -rf ./obj_dir
