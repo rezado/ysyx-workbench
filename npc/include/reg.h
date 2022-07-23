@@ -2,6 +2,7 @@
 #define __REG_H__
 
 #include <common.h>
+#include <veri.h>
 
 extern "C" void set_gpr_ptr(const svOpenArrayHandle r);
 void dump_gpr();
