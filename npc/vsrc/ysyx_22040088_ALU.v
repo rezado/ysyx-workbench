@@ -63,7 +63,7 @@ wire [63:0] remu_result;
 assign and_result = alu_src1 & alu_src2;
 assign or_result  = alu_src1 | alu_src2;
 assign xor_result = alu_src1 ^ alu_src2;
-assign lui_result = {{32{alu_src2[19]}}, alu_src2[31:0]};
+assign lui_result = alu_src2;
 
 wire [63:0] adder_a;
 wire [63:0] adder_b;
