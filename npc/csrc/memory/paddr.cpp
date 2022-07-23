@@ -51,7 +51,7 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   if (likely(in_pmem((paddr_t)raddr))) {
     *rdata = host_read(guest_to_host(raddr & ~0x7ull), 8);
     #ifdef CONFIG_MTRACE
-      // if (raddr != RESET_VECTOR) printf("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
+      if (raddr != RESET_VECTOR) printf("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
     #endif
     return;
   }
