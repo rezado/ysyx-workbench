@@ -68,6 +68,9 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
     putc((char)wdata, stderr);
     return;
   }
+  #ifdef CONFIG_MTRACE
+      if (wmask) printf("Write Memory at 0x%016llx  data:  0x%016llx\n", waddr, wdata);
+  #endif
   if (likely(in_pmem((paddr_t)waddr))) {
     waddr = waddr & ~0x7ull;
     for (int i = 0; i < 8; i++) {
@@ -78,9 +81,6 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
       wmask >>= 1;
       waddr += 1;
     }
-    #ifdef CONFIG_MTRACE
-      if (wmask) printf("Write Memory at 0x%016llx  data:  0x%016llx\n", waddr, wdata);
-    #endif
     return;
   }
   out_of_bound((paddr_t)waddr);
