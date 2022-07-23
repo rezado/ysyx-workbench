@@ -39,9 +39,11 @@ void *malloc(size_t size) {
   //   panic() -> putchar() -> (glibc) -> malloc() -> panic()
 
   #if !(defined(__ISA_NATIVE__) && defined(__NATIVE_USE_KLIB__))
-    if (!hbrk) hbrk = (void*)ROUNDUP(heap.start, 8);
+    if (!hbrk) {
+      hbrk = (void*)ROUNDUP(heap.start, 8);
+      printf("initial:hbrk %x start %x\n", hbrk, heap.start);
     size = (size_t)ROUNDUP(size, 8);
-    printf("size:%d hbrk:%d\n", size, hbrk);
+    printf("size:%d hbrk:%x\n", size, hbrk);
     assert((size & 1) == 0);
     char *old = hbrk;
     hbrk += size;
