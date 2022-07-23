@@ -4,6 +4,7 @@
 #include <cpu/decode.h>
 #include <cpu/difftest.h>
 #include <locale.h>
+#include <veri.h>
 
 #define MAX_INST_TO_PRINT 10
 

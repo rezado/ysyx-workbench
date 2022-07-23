@@ -1,6 +1,7 @@
 #include <common.h>
 #include <memory/paddr.h>
 #include <isa.h>
+#include <veri.h>
 
 /* We use the POSIX regex functions to process regular expressions.
  * Type 'man regex' for more information about POSIX regex functions.
