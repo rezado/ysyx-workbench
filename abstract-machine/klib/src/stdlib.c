@@ -42,6 +42,7 @@ void *malloc(size_t size) {
     if (!hbrk) {
       hbrk = (void*)ROUNDUP(heap.start, 8);
       printf("initial:hbrk %x start %x\n", hbrk, heap.start);
+    }
     size = (size_t)ROUNDUP(size, 8);
     printf("size:%d hbrk:%x\n", size, hbrk);
     assert((size & 1) == 0);
