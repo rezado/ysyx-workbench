@@ -36,7 +36,7 @@ assign inst = (pc[2:0] == 3'b000) ? inst_data[31:0] :
 // end
 
 // 控制信号
-wire [13:0] alu_op;
+wire [16:0] alu_op;
 wire [ 6:0] sel_nextpc;
 wire [ 3:0] sel_alusrc1;
 wire [ 6:0] sel_alusrc2;
