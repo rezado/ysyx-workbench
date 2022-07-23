@@ -2,6 +2,7 @@
 #define __REG_H__
 
 #include <common.h>
+#include <veri.h>
 
 extern "C" void set_gpr_ptr(const svOpenArrayHandle r);
 void dump_gpr();
@@ -12,7 +13,7 @@ static inline int check_reg_idx(int idx) {
   return idx;
 }
 
-#define gpr(idx) (cpu.gpr[check_reg_idx(idx)])
+#define gpr(idx) (CPU.gpr[check_reg_idx(idx)])
 
 static inline const char* reg_name(int idx, int width) {
   extern const char* regs[];

@@ -32,7 +32,7 @@ CFLAGS_BUILD += $(if $(CONFIG_CC_DEBUG),-Og -ggdb3,)
 CFLAGS_BUILD += $(if $(CONFIG_CC_ASAN),-fsanitize=address,)
 CFLAGS_TRACE += -DITRACE_COND=$(if $(CONFIG_ITRACE_COND),$(call remove_quote,$(CONFIG_ITRACE_COND)),true)
 CFLAGS  += $(CFLAGS_BUILD) $(CFLAGS_TRACE) -D__GUEST_ISA__=$(GUEST_ISA)
-LDFLAGS += $(CFLAGS_BUILD)
+# LDFLAGS += $(CFLAGS_BUILD)
 
 # Include rules for menuconfig
 include $(NPC_HOME)/scripts/config.mk
@@ -42,8 +42,6 @@ include $(AM_HOME)/Makefile
 LINKAGE += $(ARCHIVES)
 else
 # Include rules to build NEMU
-include $(NPC_HOME)/scripts/native.mk
-
 include $(NPC_HOME)/scripts/build.mk
 
 # Include rules to verilator

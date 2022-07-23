@@ -36,24 +36,13 @@ VM_MODPREFIX = Vtop
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
 	-O2 \
-	-MMD \
-	-Wall \
-	-I/home/bill/ysyx-workbench/npc/include \
-	-I/home/bill/ysyx-workbench/npc/include \
-	-I/home/bill/ysyx-workbench/npc/csrc/engine/interpreter \
-	-I/home/bill/ysyx-workbench/npc/csrc/isa/riscv64/include \
-	-O2 \
-	-MMD \
-	-Wall \
-	-I/home/bill/ysyx-workbench/npc/include \
-	-I/home/bill/ysyx-workbench/npc/csrc/engine/interpreter \
-	-I/home/bill/ysyx-workbench/npc/csrc/isa/riscv64/include \
-	-O2 \
 	-Og \
 	-ggdb3 \
 	-DITRACE_COND=true \
 	-D__GUEST_ISA__=riscv64 \
-	-I/home/bill/ysyx-workbench/npc/include \
+	-O2 \
+	-MMD \
+	-Wall \
 	-I/home/bill/ysyx-workbench/npc/include \
 	-I/home/bill/ysyx-workbench/npc/csrc/engine/interpreter \
 	-I/home/bill/ysyx-workbench/npc/csrc/isa/riscv64/include \
@@ -70,10 +59,6 @@ VM_USER_CFLAGS = \
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
 	-O2 \
-	-O2 \
-	-O2 \
-	-Og \
-	-ggdb3 \
 	-lreadline \
 	-g \
 	-ldl \

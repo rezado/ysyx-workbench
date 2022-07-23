@@ -17,9 +17,20 @@ $(shell mkdir -p $(BUILD_DIR))
 VSRCS = $(shell find $(abspath ./vsrc) -name "*.v")
 # CSRCS = $(shell find $(abspath ./csrc) -name "*.c" -or -name "*.cc" -or -name "*.cpp")
 
+compile_git:
+	$(call git_commit, "compile NPC")
+$(BINARY): compile_git
+
+# Some convenient rules
+
+override ARGS ?= --log=$(BUILD_DIR)/npc-log.txt
+override ARGS += $(ARGS_DIFF)
+
+# Command to execute NEMU
+IMG ?=
+
 # rules for verilator
-INCFLAGS = $(addprefix -I, $(INC_PATH))
-CFLAGS += $(INCFLAGS) -DTOP_NAME="\"V$(TOPNAME)\""
+CFLAGS += -DTOP_NAME="\"V$(TOPNAME)\""
 # CFLAGS += $(shell llvm-config --cxxflags) -fPIE
 # CFLAGS += -Werror
 LDFLAGS += -lreadline -g -ldl
@@ -27,6 +38,7 @@ LDFLAGS += $(shell llvm-config --libs)
 LDFLAGS += -rdynamic
 NPCFLAGS := 
 NPC_EXEC := $(BIN) $(ARGS) $(IMG)
+
 
 clean:
 	-rm -rf ./obj_dir
@@ -36,7 +48,6 @@ all:
 
 sim:
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
-	@echo "Write this Makefile by your self."
 	$(VERILATOR) $(VERILATOR_SIM_CFLAGS) --top-module $(TOPNAME) $(VSRCS) $(CSRCS) $(CXXSRC) $(addprefix -LDFLAGS , $(LDFLAGS)) \
 		$(addprefix -CFLAGS , $(CFLAGS)) $(addprefix -CFLAGS , $(CXXFLAGS))
 
