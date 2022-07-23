@@ -23,8 +23,7 @@ static void sh_prompt() {
 }
 
 static void sh_handle_cmd(const char *cmd) {
-  // 解析命令
-
+  execve(cmd, NULL, NULL);
 }
 
 void builtin_sh_run() {
