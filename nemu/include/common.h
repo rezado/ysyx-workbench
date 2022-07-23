@@ -2,6 +2,7 @@
 #define __COMMON_H__
 
 #include <stdint.h>
+#include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
 
