@@ -6,7 +6,7 @@
 void single_cycle();
 void cpu_exec(uint64_t n);
 void reset(int n);
-void finish_sim();
+extern "C" void finish_sim();
 
 void set_npc_state(int state, vaddr_t pc, int halt_ret);
 void invalid_inst(vaddr_t thispc);
