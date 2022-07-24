@@ -400,7 +400,7 @@ word_t eval(word_t p, word_t q, bool *legal)
     if (tokens[op].type == TK_DEREF)
     {
       word_t val = eval(op + 1, q, legal);
-      word_t result = 0;
+      long long result = 0;
       pmem_read(val, &result);
       return result;
     }
