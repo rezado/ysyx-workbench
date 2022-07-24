@@ -18,20 +18,35 @@ void sdb_mainloop();
 /* 仿真开始结束相关 */
 
 void single_cycle() {
-    top->clk = 1; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
-    top->clk = 0; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
+    top->clk = 1; top->eval(); 
+    #ifdef CONFIG_DUMPWAVE
+    contextp->timeInc(1); tfp->dump(contextp->time());
+    #endif
+    top->clk = 0; top->eval();
+    #ifdef CONFIG_DUMPWAVE
+    contextp->timeInc(1); tfp->dump(contextp->time());
+    #endif
 }
 
 void rst_cycle() {
-    top->clk = 0; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
-    top->clk = 1; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
+    top->clk = 0; top->eval();
+    #ifdef CONFIG_DUMPWAVE
+    contextp->timeInc(1); tfp->dump(contextp->time());
+    #endif
+    top->clk = 1; top->eval();
+    #ifdef CONFIG_DUMPWAVE
+    contextp->timeInc(1); tfp->dump(contextp->time());
+    #endif
 }
 
 void reset(int n) {
     top->rst = 1;
     while (n--) rst_cycle();
     top->rst = 0;
-    top->clk = 0; top->eval(); contextp->timeInc(1); tfp->dump(contextp->time());
+    top->clk = 0; top->eval();
+    #ifdef CONFIG_DUMPWAVE
+    contextp->timeInc(1); tfp->dump(contextp->time());
+    #endif
 }
 
 void sim_init() {
