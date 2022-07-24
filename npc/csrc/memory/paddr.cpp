@@ -73,7 +73,6 @@ extern "C" void npc_write(long long waddr, long long wdata, char wmask) {
   #endif
   waddr = waddr & ~0x7ull;
   if (waddr == SERIAL_PORT) {
-    printf("write to serial port\n");
     putc((char)wdata, stderr);
     return;
   }
