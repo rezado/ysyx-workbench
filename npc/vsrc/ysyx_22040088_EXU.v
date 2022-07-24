@@ -7,7 +7,7 @@ module ysyx_22040088_EXU(
     input [ 6:0] sel_nextpc,
     input [ 3:0] sel_alusrc1,
     input [ 6:0] sel_alusrc2,
-    input [ 1:0] sel_alures,
+    input [ 3:0] sel_alures,
 
     // 寄存器 立即数
     input [63:0] rf_rdata1,
@@ -77,6 +77,8 @@ ysyx_22040088_ALU u_ysyx_22040088_ALU(
 // 选择ALU结果
 assign alu_result = sel_alures[0] ? alu_res :
                     sel_alures[1] ? {{32{alu_res[31]}}, alu_res[31:0]} :
+                    sel_alures[2] ? {{32{alu_res[63]}}, alu_res[63:32]} :
+                    sel_alures[3] ? {32'b0, alu_res[63:32]} :
                                     alu_res;
 
 // PC跳转

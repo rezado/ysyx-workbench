@@ -12,7 +12,7 @@ module ysyx_22040088_controlunit(
     output         mem_wen,
     output  [ 3:0] mem_mask,
     output         inv,
-    output  [ 1:0] sel_alures
+    output  [ 3:0] sel_alures
 );
 // 指令
 wire inst_lui;
@@ -69,9 +69,9 @@ wire inst_srlw;
 wire inst_sraw;
 
 wire inst_mul;
-// mulh
-// mulhsu
-// mulhu
+wire inst_mulh;
+wire inst_mulhsu;
+wire inst_mulhu;
 wire inst_div;
 wire inst_divu;
 wire inst_remu;
@@ -79,13 +79,9 @@ wire inst_rem;
 
 wire inst_mulw;
 wire inst_divw;
-//divuw
+wire inst_divuw;
 wire inst_remw;
-// remuw
-
-
-
-
+wire inst_remuw;
 
 
 // 指令译码
@@ -151,6 +147,11 @@ assign inst_rem = (opcode == 7'b0110011) && (funct3 == 3'b110) && (funct7 == 7'b
 
 assign inst_slti = (opcode == 7'b0010011) && (funct3 == 3'b010);
 assign inst_ori = (opcode == 7'b0010011) && (funct3 == 3'b110);
+assign inst_mulh = (opcode == 7'b0110011) && (funct3 == 3'b001) && (funct7 == 7'b0000001);
+assign inst_mulhsu = (opcode == 7'b0110011) && (funct3 == 3'b010) && (funct7 == 7'b0000001);
+assign inst_mulhu = (opcode == 7'b0110011) && (funct3 == 3'b011) && (funct7 == 7'b0000001);
+assign inst_divuw = (opcode == 7'b0111011) && (funct3 == 3'b101) && (funct7 == 7'b0000001);
+assign inst_remuw = (opcode == 7'b0111011) && (funct3 == 3'b111) && (funct7 == 7'b0000001);
 
 // TODO:每次添加指令这里都要修改
 assign inv = ~(inst_addi | inst_lui | inst_auipc | inst_jal | inst_jalr | inst_sd | inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor | inst_sll | inst_srl | inst_sra |
@@ -158,14 +159,14 @@ assign inv = ~(inst_addi | inst_lui | inst_auipc | inst_jal | inst_jalr | inst_s
                inst_addw | inst_sltiu | inst_andi |inst_addiw | inst_srai | inst_slli | inst_srli | inst_mulw |
                inst_divw | inst_remw | inst_subw | inst_sllw | inst_xori | inst_slliw | inst_sraiw | inst_srliw |
                inst_mul | inst_div | inst_sraw | inst_srlw | inst_remu | inst_divu |  inst_rem |
-               inst_slti | inst_ori);
+               inst_slti | inst_ori | inst_mulh | inst_mulhsu | inst_mulhu | inst_divuw | inst_remuw);
 
 // 指令类型
 wire r_type, b_type;
 // divw remw sllw sraw srlw因源操作数特殊性不加入r_type
 assign r_type = inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor
             | inst_sll | inst_srl | inst_sra | inst_addw | inst_mulw | inst_subw | inst_mul | inst_div
-            | inst_remu | inst_divu | inst_rem;
+            | inst_remu | inst_divu | inst_rem | inst_mulh | inst_mulhsu | inst_mulhu | inst_divuw | inst_remuw;
 assign b_type = inst_beq | inst_bne | inst_bge | inst_bgeu | inst_blt | inst_bltu;
 
 wire load, store;
@@ -174,15 +175,15 @@ assign store = inst_sd | inst_sw | inst_sh | inst_sb;
 
 wire word;
 assign word = inst_addw | inst_addiw | inst_lbu | inst_lhu | inst_lwu | inst_mulw | inst_divw | inst_remw | inst_subw |
-              inst_slliw | inst_srliw | inst_sraiw | inst_sraw | inst_srlw;
+              inst_slliw | inst_srliw | inst_sraiw | inst_sraw | inst_srlw | inst_remuw | inst_divuw;
 
 // 控制信号生成
-assign alu_op = {inst_remu,  // 无符号取余
-                inst_divu,  // 无符号除法
-                1'b0,  // 无符号乘法
+assign alu_op = {inst_remu | inst_remuw,  // 无符号取余
+                inst_divu | inst_divuw,  // 无符号除法
+                inst_mulhsu | inst_mulhu,  // 无符号乘法
                 inst_remw | inst_rem,
                 inst_divw | inst_div,
-                inst_mulw | inst_mul,
+                inst_mulw | inst_mul | inst_mulh,
                 inst_lui,
                 inst_sra | inst_srai | inst_sraiw | inst_sraw,
                 inst_srl | inst_srli | inst_srliw | inst_srlw,
@@ -236,7 +237,9 @@ assign mem_mask = inst_ld | inst_sd ? 4'b0001 :
                   inst_lb | inst_sb | inst_lbu ? 4'b1000 :
                                       4'b0000;
 
-assign sel_alures = {word
-                    , ~word};
+assign sel_alures = {inst_mulhsu | inst_mulhu  // 无符号右移32位
+                    ,inst_mulh  // 带符号右移32位
+                    ,word  // 低32位
+                    , ~(word | inst_mulh | inst_mulhsu | inst_mulhu)};
 
 endmodule

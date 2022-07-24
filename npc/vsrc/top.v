@@ -57,7 +57,7 @@ wire mem_ena;
 wire [3:0] mem_mask;
 wire [63:0] mem_rdata;
 wire       inst_inv;
-wire [ 1:0] sel_alures;
+wire [ 3:0] sel_alures;
 ysyx_22040088_genrfwdata u_ysyx_22040088_genrfwdata(
 	.alu_result  (alu_result  ),
 	.mem_rdata   (mem_rdata   ),

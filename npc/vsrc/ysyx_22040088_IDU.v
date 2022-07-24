@@ -13,7 +13,7 @@ module ysyx_22040088_IDU(
     output        mem_ena,
     output [ 3:0] mem_mask,
     output        inv,
-    output [ 1:0] sel_alures,
+    output [ 3:0] sel_alures,
     
     // 寄存器 立即数
     output [63:0] rf_rdata1,
