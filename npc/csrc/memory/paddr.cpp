@@ -45,16 +45,19 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   #ifdef CONFIG_MTRACE
       if (raddr != RESET_VECTOR) printf("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
   #endif
+
   if (raddr == RTC_ADDR) {
     timeval s;
     gettimeofday(&s, NULL);
     *rdata = s.tv_sec * 1000 + s.tv_usec / 1000;
     return;
   }
+
   if (likely(in_pmem((paddr_t)raddr))) {
     *rdata = host_read(guest_to_host(raddr & ~0x7ull), 8);
     return;
   }
+
   out_of_bound((paddr_t)raddr);
 }
 
@@ -66,6 +69,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   #ifdef CONFIG_MTRACE
       if (wmask) printf("Write Memory at 0x%016llx  data:  0x%016llx\n", waddr, wdata);
   #endif
+  waddr = waddr & ~0x7ull;
   if (waddr == SERIAL_PORT) {
     printf("write to serial port\n");
     putc((char)wdata, stderr);
@@ -73,7 +77,6 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   }
 
   if (likely(in_pmem((paddr_t)waddr))) {
-    waddr = waddr & ~0x7ull;
     for (int i = 0; i < 8; i++) {
       if (wmask & 1 == 1) {
         host_write(guest_to_host(waddr), 1, wdata);
