@@ -77,6 +77,7 @@ wire inst_srlw;
 
 wire inst_divu;
 wire inst_remu;
+wire inst_rem;
 
 // 指令译码
 assign inst_addi = (opcode == 7'b0010011) && (funct3 == 3'b000);
@@ -137,20 +138,21 @@ assign inst_srlw = (opcode == 7'b0111011) && (funct3 == 3'b101) && (funct7 == 7'
 
 assign inst_remu = (opcode == 7'b0110011) && (funct3 == 3'b111) && (funct7 == 7'b0000001);
 assign inst_divu = (opcode == 7'b0110011) && (funct3 == 3'b101) && (funct7 == 7'b0000001);
+assign inst_rem = (opcode == 7'b0110011) && (funct3 == 3'b110) && (funct7 == 7'b0000001);
 
 // TODO:每次添加指令这里都要修改
 assign inv = ~(inst_addi | inst_lui | inst_auipc | inst_jal | inst_jalr | inst_sd | inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor | inst_sll | inst_srl | inst_sra |
                inst_beq | inst_bne | inst_blt | inst_bltu | inst_bge | inst_bgeu | load | store | inst_add |
                inst_addw | inst_sltiu | inst_andi |inst_addiw | inst_srai | inst_slli | inst_srli | inst_mulw |
                inst_divw | inst_remw | inst_subw | inst_sllw | inst_xori | inst_slliw | inst_sraiw | inst_srliw |
-               inst_mul | inst_div | inst_sraw | inst_srlw | inst_remu | inst_divu);
+               inst_mul | inst_div | inst_sraw | inst_srlw | inst_remu | inst_divu |  inst_rem);
 
 // 指令类型
 wire r_type, b_type;
 // divw remw sllw sraw srlw因源操作数特殊性不加入r_type
 assign r_type = inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor
             | inst_sll | inst_srl | inst_sra | inst_addw | inst_mulw | inst_subw | inst_mul | inst_div
-            | inst_remu | inst_divu;
+            | inst_remu | inst_divu | inst_rem;
 assign b_type = inst_beq | inst_bne | inst_bge | inst_bgeu | inst_blt | inst_bltu;
 
 wire load, store;
@@ -165,7 +167,7 @@ assign word = inst_addw | inst_addiw | inst_lbu | inst_lhu | inst_lwu | inst_mul
 assign alu_op = {inst_remu,  // 无符号取余
                 inst_divu,  // 无符号除法
                 1'b0,  // 无符号乘法
-                inst_remw,
+                inst_remw | inst_rem,
                 inst_divw | inst_div,
                 inst_mulw | inst_mul,
                 inst_lui,
