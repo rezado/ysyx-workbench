@@ -71,6 +71,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
     putc((char)wdata, stderr);
     return;
   }
+
   if (likely(in_pmem((paddr_t)waddr))) {
     waddr = waddr & ~0x7ull;
     for (int i = 0; i < 8; i++) {
@@ -83,20 +84,21 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
     }
     return;
   }
+
   out_of_bound((paddr_t)waddr);
 }
 
-word_t paddr_read(paddr_t addr, int len) {
-  if (likely(in_pmem(addr))) {
-    return host_read(guest_to_host(addr), len);
-  }
-  IFDEF(CONFIG_DEVICE, return mmio_read(addr, len));
-  out_of_bound(addr);
-  return 0;
-}
+// word_t paddr_read(paddr_t addr, int len) {
+//   if (likely(in_pmem(addr))) {
+//     return host_read(guest_to_host(addr), len);
+//   }
+//   IFDEF(CONFIG_DEVICE, return mmio_read(addr, len));
+//   out_of_bound(addr);
+//   return 0;
+// }
 
-void paddr_write(paddr_t addr, int len, word_t data) {
-  if (likely(in_pmem(addr))) { host_write(guest_to_host(addr), len, data); return; }
-  IFDEF(CONFIG_DEVICE, mmio_write(addr, len, data); return);
-  out_of_bound(addr);
-}
+// void paddr_write(paddr_t addr, int len, word_t data) {
+//   if (likely(in_pmem(addr))) { host_write(guest_to_host(addr), len, data); return; }
+//   IFDEF(CONFIG_DEVICE, mmio_write(addr, len, data); return);
+//   out_of_bound(addr);
+// }
