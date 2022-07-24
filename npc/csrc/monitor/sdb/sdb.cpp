@@ -110,7 +110,7 @@ static int cmd_x(char *args) {
         uint32_t cur_addr = paddr + i * sizeof(uint32_t);
         long long data;
         pmem_read(cur_addr, &data);
-        printf("%8lx at %8x\n", data, cur_addr);
+        printf("%8lx at %8x\n", (word_t)data, cur_addr);
       }
     }
   }
