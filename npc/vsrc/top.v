@@ -15,13 +15,13 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 );
 assign pc = rst ? 64'h80000000 : pc_out;
 
-import "DPI-C" function void pmem_read(
+import "DPI-C" function void npc_read(
   input longint raddr, output longint rdata);
 wire [63:0] inst_data;
 wire [31:0] inst;
 
 always @(*) begin
-	pmem_read(pc, inst_data);
+	npc_read(pc, inst_data);
 end
 
 assign inst = (pc[2:0] == 3'b000) ? inst_data[31:0] :
@@ -30,7 +30,7 @@ assign inst = (pc[2:0] == 3'b000) ? inst_data[31:0] :
 
 // always @(posedge clk) begin
 // 	if (~rst) begin
-// 		pmem_read(pc, inst_data);
+// 		npc_read(pc, inst_data);
 // 		$display("read at ", pc, "inst: ", inst_data);
 // 	end
 // end

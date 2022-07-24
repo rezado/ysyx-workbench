@@ -40,7 +40,7 @@ void init_mem() {
       (paddr_t)CONFIG_MBASE, (paddr_t)CONFIG_MBASE + CONFIG_MSIZE);
 }
 
-extern "C" void pmem_read(long long raddr, long long *rdata) {
+extern "C" void npc_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   // printf("read %llx from %llx\n", *rdata, raddr);
   #ifdef CONFIG_MTRACE
@@ -59,7 +59,7 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
     return;
   }
 
-  printf("pmem_read\n");
+  printf("npc_read\n");
   out_of_bound((paddr_t)raddr);
 }
 

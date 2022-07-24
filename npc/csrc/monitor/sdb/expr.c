@@ -401,7 +401,7 @@ word_t eval(word_t p, word_t q, bool *legal)
     {
       word_t val = eval(op + 1, q, legal);
       long long result = 0;
-      pmem_read(val, &result);
+      npc_read(val, &result);
       return result;
     }
 

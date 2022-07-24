@@ -8,7 +8,7 @@ module mem(
 );
 
 // memory
-import "DPI-C" function void pmem_read(
+import "DPI-C" function void npc_read(
   input longint raddr, output longint rdata);
 import "DPI-C" function void pmem_write(
   input longint waddr, input longint wdata, input byte wmask);
@@ -56,7 +56,7 @@ assign offset = {idx, 3'b0};
 
 wire [63:0] tmpdata;
 always @(*) begin
-  pmem_read(raddr, tmpdata);
+  npc_read(raddr, tmpdata);
   pmem_write(waddr, wdata, mask & {8{wen}});
 end
 
