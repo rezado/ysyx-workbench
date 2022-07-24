@@ -51,6 +51,7 @@ extern "C" void npc_read(long long raddr, long long *rdata) {
     timeval s;
     gettimeofday(&s, NULL);
     *rdata = s.tv_sec * 1000000 + s.tv_usec;
+    printf("us:%d\n", *rdata);
     return;
   }
 
