@@ -15,6 +15,6 @@ static inline bool in_pmem(paddr_t addr) {
 }
 
 extern "C" void npc_read(long long raddr, long long *rdata);
-extern "C" void pmem_write(long long waddr, long long wdata, char wmask);
+extern "C" void npc_write(long long waddr, long long wdata, char wmask);
 
 #endif
