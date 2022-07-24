@@ -60,10 +60,10 @@ VL_INLINE_OPT void Vtop___024root____Vdpiimwrap_top__DOT__u_ysyx_22040088_IDU__D
     set_gpr_ptr(&a__Vopenarray);
 }
 
-extern "C" void pmem_write(long long waddr, long long wdata, char wmask);
+extern "C" void npc_write(long long waddr, long long wdata, char wmask);
 
-VL_INLINE_OPT void Vtop___024root____Vdpiimwrap_top__DOT__u_mem__DOT__pmem_write_TOP(QData/*63:0*/ waddr, QData/*63:0*/ wdata, CData/*7:0*/ wmask) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root____Vdpiimwrap_top__DOT__u_mem__DOT__pmem_write_TOP\n"); );
+VL_INLINE_OPT void Vtop___024root____Vdpiimwrap_top__DOT__u_mem__DOT__npc_write_TOP(QData/*63:0*/ waddr, QData/*63:0*/ wdata, CData/*7:0*/ wmask) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root____Vdpiimwrap_top__DOT__u_mem__DOT__npc_write_TOP\n"); );
     // Body
     long long waddr__Vcvt;
     for (size_t waddr__Vidx = 0; waddr__Vidx < 1; ++waddr__Vidx) waddr__Vcvt = waddr;
@@ -71,7 +71,7 @@ VL_INLINE_OPT void Vtop___024root____Vdpiimwrap_top__DOT__u_mem__DOT__pmem_write
     for (size_t wdata__Vidx = 0; wdata__Vidx < 1; ++wdata__Vidx) wdata__Vcvt = wdata;
     char wmask__Vcvt;
     for (size_t wmask__Vidx = 0; wmask__Vidx < 1; ++wmask__Vidx) wmask__Vcvt = wmask;
-    pmem_write(waddr__Vcvt, wdata__Vcvt, wmask__Vcvt);
+    npc_write(waddr__Vcvt, wdata__Vcvt, wmask__Vcvt);
 }
 
 VL_INLINE_OPT void Vtop___024root___sequent__TOP__1(Vtop___024root* vlSelf) {
@@ -1198,13 +1198,13 @@ VL_INLINE_OPT void Vtop___024root___settle__TOP__3(Vtop___024root* vlSelf) {
                                                           ? vlSelf->top__DOT__alu_result
                                                           : 0x80000000ULL), vlSelf->__Vtask_top__DOT__u_mem__DOT__npc_read__5__rdata);
     vlSelf->top__DOT__u_mem__DOT__tmpdata = vlSelf->__Vtask_top__DOT__u_mem__DOT__npc_read__5__rdata;
-    Vtop___024root____Vdpiimwrap_top__DOT__u_mem__DOT__pmem_write_TOP(
-                                                                      (((IData)(vlSelf->top__DOT__mem_ena) 
-                                                                        & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__store))
-                                                                        ? vlSelf->top__DOT__alu_result
-                                                                        : 0x80000000ULL), vlSelf->top__DOT__rf_rdata2, 
-                                                                      ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
-                                                                       & (- (IData)((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__store)))));
+    Vtop___024root____Vdpiimwrap_top__DOT__u_mem__DOT__npc_write_TOP(
+                                                                     (((IData)(vlSelf->top__DOT__mem_ena) 
+                                                                       & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__store))
+                                                                       ? vlSelf->top__DOT__alu_result
+                                                                       : 0x80000000ULL), vlSelf->top__DOT__rf_rdata2, 
+                                                                     ((IData)(vlSelf->top__DOT__u_mem__DOT__mask) 
+                                                                      & (- (IData)((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__store)))));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__pair_list[0U][0U] 
         = vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT____Vcellinp__u_MuxKeyWithDefault__lut[0U];
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_gennextpc__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__pair_list[0U][1U] 
