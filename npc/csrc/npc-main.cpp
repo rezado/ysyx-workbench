@@ -50,12 +50,16 @@ void reset(int n) {
 }
 
 void sim_init() {
+  #ifdef CONFIG_DUMPWAVE
   contextp = new VerilatedContext;
   tfp = new VerilatedVcdC;
+  #endif
   top = new Vtop;
+  #ifdef CONFIG_DUMPWAVE
   contextp->traceEverOn(true);
   top->trace(tfp, 0);
   tfp->open("/home/bill/ysyx-workbench/npc/vcd/dump.vcd");
+  #endif
 
 	// printf("image form:%s\n", arg);
 	// FILE *fp = fopen(arg, "rb");
@@ -77,9 +81,11 @@ void sim_init() {
 
 void sim_exit() {
     single_cycle();
+    #ifdef CONFIG_DUMPWAVE
     tfp->close();
     delete contextp;
     delete tfp;
+    #endif
 }
 
 int main(int argc, char *argv[]) {
