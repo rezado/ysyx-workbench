@@ -40,7 +40,7 @@ void sim_init() {
   top = new Vtop;
   contextp->traceEverOn(true);
   top->trace(tfp, 0);
-  tfp->open("dump.vcd");
+  tfp->open("/home/bill/ysyx-workbench/npc/vcd/dump.vcd");
 
 	// printf("image form:%s\n", arg);
 	// FILE *fp = fopen(arg, "rb");

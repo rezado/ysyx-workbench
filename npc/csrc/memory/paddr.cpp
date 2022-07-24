@@ -42,6 +42,9 @@ void init_mem() {
 extern "C" void pmem_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   // printf("read %llx from %llx\n", *rdata, raddr);
+  #ifdef CONFIG_MTRACE
+      if (raddr != RESET_VECTOR) printf("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
+  #endif
   if (raddr == RTC_ADDR) {
     timeval s;
     gettimeofday(&s, NULL);
@@ -50,9 +53,6 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
   }
   if (likely(in_pmem((paddr_t)raddr))) {
     *rdata = host_read(guest_to_host(raddr & ~0x7ull), 8);
-    #ifdef CONFIG_MTRACE
-      if (raddr != RESET_VECTOR) printf("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
-    #endif
     return;
   }
   out_of_bound((paddr_t)raddr);
@@ -63,14 +63,14 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
   // `wmask`中每比特表示`wdata`中1个字节的掩码,
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
   // printf("write:waddr:%llx, wdata:%llx, wmask:%x\n", waddr, wdata, wmask);
+  #ifdef CONFIG_MTRACE
+      if (wmask) printf("Write Memory at 0x%016llx  data:  0x%016llx\n", waddr, wdata);
+  #endif
   if (waddr == SERIAL_PORT) {
     printf("write to serial port\n");
     putc((char)wdata, stderr);
     return;
   }
-  #ifdef CONFIG_MTRACE
-      if (wmask) printf("Write Memory at 0x%016llx  data:  0x%016llx\n", waddr, wdata);
-  #endif
   if (likely(in_pmem((paddr_t)waddr))) {
     waddr = waddr & ~0x7ull;
     for (int i = 0; i < 8; i++) {
