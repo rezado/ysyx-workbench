@@ -58,6 +58,7 @@ extern "C" void pmem_read(long long raddr, long long *rdata) {
     return;
   }
 
+  printf("pmem_read\n");
   out_of_bound((paddr_t)raddr);
 }
 
@@ -88,6 +89,7 @@ extern "C" void pmem_write(long long waddr, long long wdata, char wmask) {
     return;
   }
 
+  pirntf("pmem_write\n");
   out_of_bound((paddr_t)waddr);
 }
 
