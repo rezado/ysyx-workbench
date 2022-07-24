@@ -1,4 +1,5 @@
 module mem(
+    input         clk,
     input         ena,
     input         wen,
     input [ 3:0]  mem_mask,
@@ -57,6 +58,9 @@ assign offset = {idx, 3'b0};
 wire [63:0] tmpdata;
 always @(*) begin
   npc_read(raddr, tmpdata);
+end
+
+always @(posedge clk) begin
   npc_write(waddr, wdata, mask & {8{wen}});
 end
 
