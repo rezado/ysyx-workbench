@@ -239,7 +239,7 @@ assign mem_mask = inst_ld | inst_sd ? 4'b0001 :
 
 assign sel_alures = {inst_mulhsu | inst_mulhu  // 无符号右移32位
                     ,inst_mulh  // 带符号右移32位
-                    ,1'b0  // 低32位
+                    ,word  // 低32位
                     , ~(word | inst_mulh | inst_mulhsu | inst_mulhu)};
 
 endmodule
