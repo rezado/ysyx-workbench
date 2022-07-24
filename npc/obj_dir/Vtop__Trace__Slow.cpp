@@ -359,6 +359,7 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declQuad(c+335,"top u_ysyx_22040088_EXU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 lut_out", false,-1, 63,0);
         tracep->declBit(c+337,"top u_ysyx_22040088_EXU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 hit", false,-1);
         tracep->declBus(c+378,"top u_ysyx_22040088_EXU u_ysyx_22040088_gennextpc u_MuxKeyWithDefault i0 i", false,-1, 31,0);
+        tracep->declBit(c+347,"top u_mem clk", false,-1);
         tracep->declBit(c+91,"top u_mem ena", false,-1);
         tracep->declBit(c+90,"top u_mem wen", false,-1);
         tracep->declBus(c+92,"top u_mem mem_mask", false,-1, 3,0);

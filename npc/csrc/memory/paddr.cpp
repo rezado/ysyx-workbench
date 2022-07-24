@@ -50,7 +50,7 @@ extern "C" void npc_read(long long raddr, long long *rdata) {
   if (raddr == RTC_ADDR) {
     timeval s;
     gettimeofday(&s, NULL);
-    *rdata = s.tv_sec * 1000 + s.tv_usec / 1000;
+    *rdata = s.tv_sec * 1000000 + s.tv_usec;
     return;
   }
 
