@@ -15,13 +15,13 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 );
 assign pc = rst ? 64'h80000000 : pc_out;
 
-import "DPI-C" function void pmem_read(
+import "DPI-C" function void npc_read(
   input longint raddr, output longint rdata);
 wire [63:0] inst_data;
 wire [31:0] inst;
 
 always @(*) begin
-	pmem_read(pc, inst_data);
+	npc_read(pc, inst_data);
 end
 
 assign inst = (pc[2:0] == 3'b000) ? inst_data[31:0] :
@@ -30,13 +30,13 @@ assign inst = (pc[2:0] == 3'b000) ? inst_data[31:0] :
 
 // always @(posedge clk) begin
 // 	if (~rst) begin
-// 		pmem_read(pc, inst_data);
+// 		npc_read(pc, inst_data);
 // 		$display("read at ", pc, "inst: ", inst_data);
 // 	end
 // end
 
 // 控制信号
-wire [13:0] alu_op;
+wire [16:0] alu_op;
 wire [ 6:0] sel_nextpc;
 wire [ 3:0] sel_alusrc1;
 wire [ 6:0] sel_alusrc2;
@@ -57,7 +57,7 @@ wire mem_ena;
 wire [3:0] mem_mask;
 wire [63:0] mem_rdata;
 wire       inst_inv;
-wire [ 1:0] sel_alures;
+wire [ 3:0] sel_alures;
 ysyx_22040088_genrfwdata u_ysyx_22040088_genrfwdata(
 	.alu_result  (alu_result  ),
 	.mem_rdata   (mem_rdata   ),
@@ -138,6 +138,7 @@ end
 
 // memory
 mem u_mem(
+	.clk	  (clk        ),
 	.ena      (mem_ena    ),
 	.wen      (mem_wen    ),
 	.mem_mask (mem_mask ),

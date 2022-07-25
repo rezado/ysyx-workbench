@@ -1,6 +1,6 @@
 //ALU
 module ysyx_22040088_ALU(
-	input 	[13:0] alu_control,
+	input 	[16:0] alu_control,
 	input 	[63:0] alu_src1,
 	input 	[63:0] alu_src2,
 	output	[63:0] alu_result
@@ -20,6 +20,9 @@ wire op_lui;	//高位加载
 wire op_mul;    //乘法
 wire op_div;	//除法
 wire op_rem;	//取余
+wire op_mulu;	//无符号乘法
+wire op_divu;	//无符号乘法
+wire op_remu;	//无符号取余
 
 assign op_add 	= alu_control[ 0];
 assign op_sub	= alu_control[ 1];
@@ -35,6 +38,10 @@ assign op_lui	= alu_control[10];
 assign op_mul	= alu_control[11];
 assign op_div	= alu_control[12];
 assign op_rem	= alu_control[13];
+assign op_mulu	= alu_control[14];
+assign op_divu	= alu_control[15];
+assign op_remu	= alu_control[16];
+
 
 wire [63:0] add_sub_result;
 wire [63:0] slt_result;
@@ -49,11 +56,14 @@ wire [63:0] lui_result;
 wire [63:0] mul_result;
 wire [63:0] div_result;
 wire [63:0] rem_result;
+wire [63:0] mulu_result;
+wire [63:0] divu_result;
+wire [63:0] remu_result;
 
 assign and_result = alu_src1 & alu_src2;
 assign or_result  = alu_src1 | alu_src2;
 assign xor_result = alu_src1 ^ alu_src2;
-assign lui_result = {{32{alu_src2[19]}}, alu_src2[31:0]};
+assign lui_result = alu_src2;
 
 wire [63:0] adder_a;
 wire [63:0] adder_b;
@@ -85,11 +95,15 @@ assign srl_result = alu_src1 >> alu_src2[5:0];
 assign sra_result = ($signed(alu_src1) >>> alu_src2[5:0]);
 
 //乘法
-assign mul_result = alu_src1 * alu_src2;
+assign mulu_result = alu_src1 * alu_src2;
+assign mul_result = $signed(alu_src1) * $signed(alu_src2);
 //除法
-assign div_result = alu_src1 / alu_src2;
+assign divu_result = alu_src1 / alu_src2;
+assign div_result = $signed(alu_src1) / $signed(alu_src2);
 //取余
-assign rem_result = alu_src1 % alu_src2;
+assign remu_result = alu_src1 % alu_src2;
+assign rem_result = $signed(alu_src1) % $signed(alu_src2);
+
 
 assign  alu_result = ({64{op_add|op_sub	}} & add_sub_result)
 				   | ({64{op_sltu      	}} & sltu_result)
@@ -103,6 +117,9 @@ assign  alu_result = ({64{op_add|op_sub	}} & add_sub_result)
 				   | ({64{op_lui		}} & lui_result)
 				   | ({64{op_mul        }} & mul_result)
 				   | ({64{op_div        }} & div_result)
-				   | ({64{op_rem        }} & rem_result);
+				   | ({64{op_rem        }} & rem_result)
+				   | ({64{op_mulu       }} & mulu_result)
+				   | ({64{op_divu       }} & divu_result)
+				   | ({64{op_remu       }} & remu_result);
 
 endmodule

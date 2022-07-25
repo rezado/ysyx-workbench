@@ -23,6 +23,8 @@ $(BINARY): compile_git
 
 # Some convenient rules
 
+-include $(NPC_HOME)/tools/difftest.mk
+
 override ARGS ?= --log=$(BUILD_DIR)/npc-log.txt
 override ARGS += $(ARGS_DIFF)
 
@@ -50,8 +52,10 @@ sim:
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	$(VERILATOR) $(VERILATOR_SIM_CFLAGS) --top-module $(TOPNAME) $(VSRCS) $(CSRCS) $(CXXSRC) $(addprefix -LDFLAGS , $(LDFLAGS)) \
 		$(addprefix -CFLAGS , $(CFLAGS)) $(addprefix -CFLAGS , $(CXXFLAGS))
+	@echo $(CFLAGS)
 
 run:
+	@echo $(NPC_EXEC)
 	$(NPC_EXEC)
 
 gdb:

@@ -1,4 +1,5 @@
 module mem(
+    input         clk,
     input         ena,
     input         wen,
     input [ 3:0]  mem_mask,
@@ -8,9 +9,9 @@ module mem(
 );
 
 // memory
-import "DPI-C" function void pmem_read(
+import "DPI-C" function void npc_read(
   input longint raddr, output longint rdata);
-import "DPI-C" function void pmem_write(
+import "DPI-C" function void npc_write(
   input longint waddr, input longint wdata, input byte wmask);
 
 wire [63:0] raddr, waddr;
@@ -56,8 +57,11 @@ assign offset = {idx, 3'b0};
 
 wire [63:0] tmpdata;
 always @(*) begin
-  pmem_read(raddr, tmpdata);
-  pmem_write(waddr, wdata, mask & {8{wen}});
+  npc_read(raddr, tmpdata);
+end
+
+always @(posedge clk) begin
+  npc_write(waddr, wdata, mask & {8{wen}});
 end
 
 // 截取需要部分并右移

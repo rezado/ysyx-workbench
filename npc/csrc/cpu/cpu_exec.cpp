@@ -12,8 +12,9 @@ CPU_state CPU = {};
 uint64_t g_nr_guest_inst = 0;
 static uint64_t g_timer = 0; // unit: us
 static bool g_print_step = false;
-
-#define MAX_SIM_TIME 100
+#ifdef CONFIG_DUMPWAVE
+#define MAX_SIM_TIME 5000
+#endif
 uint64_t sim_time = 0;
 bool run_flag = true;
 
@@ -114,6 +115,12 @@ void execute(uint64_t n) {
     trace_and_difftest(&s, CPU.pc);
     if (npc_state.state != NEMU_RUNNING) break;
     IFDEF(CONFIG_DEVICE, device_update());
+    #ifdef CONFIG_DUMPWAVE
+    if (t > MAX_SIM_TIME) {
+      Log("Reach MAX_SIM_TIME at pc:" FMT_WORD , s->pc);
+      break;
+    }
+    #endif
   }
 }
 
