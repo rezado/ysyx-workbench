@@ -89,6 +89,7 @@ ysyx_22040088_regfile u_ysyx_22040088_regfile(
 );
 
 // 立即数符号扩展
+/* verilator lint_off UNUSED */
 wire [63:0] immI_sext, immJ_sext, immU_sext, immB_sext, immS_sext;
 ysyx_22040088_signext#(12, 64) u_ysyx_22040088_signext1(
     .in  (immI      ),

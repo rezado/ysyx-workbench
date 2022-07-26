@@ -15,7 +15,7 @@ module WB_reg(
     output reg  [ 1:0] wb_sel_rfres,
     output reg  [63:0] wb_rdata
 );
-
+/* verilator lint_off UNUSED */
 always @(posedge clk) begin
     if (rst) begin
         wb_pc <= 64'h80000000;

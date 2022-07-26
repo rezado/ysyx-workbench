@@ -8,7 +8,7 @@ module ID_reg(
     output reg [63:0] id_pc,
     output reg [31:0] id_inst
 );
-
+/* verilator lint_off UNUSED */
 always @(posedge clk) begin
     if (rst) begin
         id_pc <= 64'h80000000;

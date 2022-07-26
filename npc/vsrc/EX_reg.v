@@ -29,7 +29,7 @@ module EX_reg(
     output reg [63:0] ex_rf_rdata2,
     output reg [ 1:0] ex_sel_memdata
 );
-
+/* verilator lint_off UNUSED */
 always @(posedge clk) begin
     if (rst) begin
         ex_pc <= 64'h80000000;
@@ -57,7 +57,7 @@ always @(posedge clk) begin
         ex_alu_src1 <= id_alu_src1;
         ex_alu_src2 <= id_alu_src2;
         ex_rf_rdata2 <= id_rf_rdata2;
-        ex_sel_memdata <= 2'b0;
+        ex_sel_memdata <= id_sel_memdata;
     end
 end
 

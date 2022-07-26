@@ -23,7 +23,7 @@ module MEM_reg(
     output  reg [63:0] mem_rf_rdata2,
     output  reg [ 1:0] mem_sel_memdata
 );
-
+/* verilator lint_off UNUSED */
 always @(posedge clk) begin
     if (rst) begin
         mem_pc <= 64'h80000000;
