@@ -7,13 +7,12 @@ module ysyx_22040088_controlunit(
     output  [ 3:0] sel_alusrc1,
     output  [ 6:0] sel_alusrc2,
     output  [ 6:0] sel_nextpc,
-    output  [ 1:0] sel_rfres,
+    output  [ 2:0] sel_rfres,
     output         mem_ena,
     output         mem_wen,
     output  [ 3:0] mem_mask,
     output         inv,
-    output  [ 3:0] sel_alures,
-    output  [ 1:0] sel_memdata
+    output  [ 3:0] sel_alures
 );
 // 指令
 wire inst_lui;
@@ -227,7 +226,9 @@ assign sel_nextpc = {inst_bge | inst_bgeu,
                      inst_sltiu | inst_andi | inst_addiw | inst_srai | inst_slli | inst_srli |
                      inst_divw | inst_remw | inst_sllw | inst_xori | inst_slliw | inst_srliw | inst_sraiw |
                      inst_sraw | inst_srlw | inst_slti | inst_ori};
-assign sel_rfres = {load, ~load};
+assign sel_rfres = {inst_lwu | inst_lhu | inst_lbu
+                    , inst_ld | inst_lw | inst_lh | inst_lb
+                    , ~load};
 assign mem_ena = load | store;
 assign mem_wen = store;
 assign mem_mask = inst_ld | inst_sd ? 4'b0001 :
@@ -240,8 +241,5 @@ assign sel_alures = {inst_mulhsu | inst_mulhu  // 无符号右移32位
                     ,inst_mulh  // 带符号右移32位
                     ,word  // 低32位
                     , ~(word | inst_mulh | inst_mulhsu | inst_mulhu)};
-
-assign sel_memdata = {inst_lwu | inst_lhu | inst_lbu
-                    , inst_ld | inst_lw | inst_lh | inst_lb};
 
 endmodule
