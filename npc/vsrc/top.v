@@ -3,7 +3,7 @@ module top(
     input   rst,
 	output	[63:0] pc
 );
-
+/* verilator lint_off UNUSED */
 wire [63:0] npc;
 wire [63:0] pc_out;
 wire [31:0] inst;
