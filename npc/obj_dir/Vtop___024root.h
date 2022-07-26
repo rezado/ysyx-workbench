@@ -39,7 +39,6 @@ VL_MODULE(Vtop___024root) {
         CData/*3:0*/ top__DOT__mem_sel_alures;
         CData/*1:0*/ top__DOT__mem_sel_memdata;
         CData/*1:0*/ top__DOT__wb_sel_rfres;
-        CData/*0:0*/ top__DOT__inv;
         CData/*3:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__sel_alusrc1;
         CData/*6:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__sel_alusrc2;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_jalr;
@@ -90,9 +89,9 @@ VL_MODULE(Vtop___024root) {
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sraw;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_mul;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_mulh;
+        CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_mulhsu;
     };
     struct {
-        CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_mulhsu;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_mulhu;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_div;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_divu;
@@ -113,7 +112,6 @@ VL_MODULE(Vtop___024root) {
         CData/*7:0*/ top__DOT__u_MEM__DOT__u_mem__DOT__mask;
         SData/*12:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__immB;
         SData/*11:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__immS;
-        IData/*31:0*/ top__DOT__inst;
         IData/*31:0*/ top__DOT__id_inst;
         IData/*16:0*/ top__DOT__id_alu_op;
         IData/*31:0*/ top__DOT__ex_inst;

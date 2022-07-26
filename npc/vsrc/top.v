@@ -225,6 +225,7 @@ wire inv;
 assign inv = inst_inv & ~ebreak;
 import "DPI-C" function void get_inv(int inv);
 always @(*) begin
+	$display("inv:", inv);
     get_inv({{31{inv}}, inv});
 end
 
