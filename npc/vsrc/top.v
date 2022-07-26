@@ -18,12 +18,9 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.inst   (inst   )
 );
 
-// always @(posedge clk) begin
-// 	if (~rst) begin
-// 		npc_read(pc, inst_data);
-// 		$display("read at ", pc, "inst: ", inst_data);
-// 	end
-// end
+always @(posedge clk) begin
+	$display("read at ", pc, "inst: ", inst);
+end
 
 
 // IF_ID
