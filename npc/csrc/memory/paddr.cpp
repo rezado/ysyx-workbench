@@ -61,7 +61,7 @@ extern "C" void npc_read(long long raddr, long long *rdata) {
   }
 
   printf("npc_read\n");
-  out_of_bound((paddr_t)raddr);
+  // out_of_bound((paddr_t)raddr);
 }
 
 extern "C" void npc_write(long long waddr, long long wdata, char wmask) {
@@ -91,7 +91,7 @@ extern "C" void npc_write(long long waddr, long long wdata, char wmask) {
   }
 
   printf("npc_write\n");
-  out_of_bound((paddr_t)waddr);
+  // out_of_bound((paddr_t)waddr);
 }
 
 // word_t paddr_read(paddr_t addr, int len) {
