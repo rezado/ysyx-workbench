@@ -1,114 +1,212 @@
-;module top(
+module top(
     input   clk,
     input   rst,
 	output	[63:0] pc
 );
-
+/* verilator lint_off UNUSED */
 wire [63:0] npc;
 wire [63:0] pc_out;
+wire [31:0] inst;
 // IFU
+assign npc = pc + 4;
+assign pc = pc_out;
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.clk    (clk    ),
 	.rst    (rst    ),
 	.nextpc (npc    ),
-	.pc     (pc_out )
+	.pc     (pc_out ),
+	.inst   (inst   )
 );
-assign pc = rst ? 64'h80000000 : pc_out;
 
-import "DPI-C" function void npc_read(
-  input longint raddr, output longint rdata);
-wire [63:0] inst_data;
-wire [31:0] inst;
-
-always @(*) begin
-	npc_read(pc, inst_data);
+always @(posedge clk) begin
+	$display("read at ", pc, "inst: ", inst);
 end
 
-assign inst = (pc[2:0] == 3'b000) ? inst_data[31:0] :
-			  (pc[2:0] == 3'b100) ? inst_data[63:32] :
-			  						32'b0;
 
-// always @(posedge clk) begin
-// 	if (~rst) begin
-// 		npc_read(pc, inst_data);
-// 		$display("read at ", pc, "inst: ", inst_data);
-// 	end
-// end
-
-// 控制信号
-wire [16:0] alu_op;
-wire [ 6:0] sel_nextpc;
-wire [ 3:0] sel_alusrc1;
-wire [ 6:0] sel_alusrc2;
-// 数据
-wire [63:0] rf_rdata1;
-wire [63:0] rf_rdata2;
-wire [11:0] immI;
-wire [20:0] immJ;
-wire [19:0] immU;
-wire [12:0] immB;
-wire [11:0] immS;
-wire [63:0] rf_wdata;
-wire [63:0] alu_result;
-// IDU
-wire [2:0] sel_rfres;
-wire mem_wen;
-wire mem_ena;
-wire [3:0] mem_mask;
-wire [63:0] mem_rdata;
-wire       inst_inv;
-wire [ 3:0] sel_alures;
-ysyx_22040088_genrfwdata u_ysyx_22040088_genrfwdata(
-	.alu_result  (alu_result  ),
-	.mem_rdata   (mem_rdata   ),
-	.sel_rfwdata (sel_rfres   ),
-	.mem_mask    (mem_mask    ),
-	.rf_wdata    (rf_wdata    )
+// IF_ID
+wire [63:0] if_pc, id_pc;
+wire [31:0] if_inst, id_inst;
+assign if_pc = pc_out;
+assign if_inst = inst;
+ID_reg u_ID_reg(
+	.clk     (clk     ),
+	.rst     (rst     ),
+	.valid   (1'b1    ),
+	.ena     (1'b1    ),
+	.if_pc   (if_pc   ),
+	.if_inst (if_inst ),
+	.id_pc   (id_pc   ),
+	.id_inst (id_inst )
 );
 
+
+// ID
+wire [16:0] id_alu_op;
+wire [ 6:0] id_sel_nextpc;
+wire [ 1:0] id_sel_rfres;
+wire        id_mem_wen;
+wire        id_mem_ena;
+wire [ 3:0] id_mem_mask;
+wire [ 3:0] id_sel_alures;
+wire [ 1:0] id_sel_memdata;
+wire [63:0] id_alu_src1;
+wire [63:0] id_alu_src2;
+wire [63:0] id_rf_rdata2;
+// write back from WB
+wire [63:0] rf_wdata;
+// direct to top
+wire inst_inv;
 
 ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.clk         (clk         ),
-	.inst        (inst[31:0]  ),
+	.pc          (id_pc          ),
+	.inst        (id_inst        ),
 	.rf_wdata    (rf_wdata    ),
-	.alu_op      (alu_op      ),
-	.sel_nextpc  (sel_nextpc  ),
-	.sel_alusrc1 (sel_alusrc1 ),
-	.sel_alusrc2 (sel_alusrc2 ),
-	.rf_rdata1   (rf_rdata1   ),
-	.rf_rdata2   (rf_rdata2   ),
-	.immI        (immI        ),
-	.immJ        (immJ        ),
-	.immU        (immU        ),
-	.immB        (immB        ),
-	.immS		 (immS        ),
-	.sel_rfres   (sel_rfres   ),
-	.mem_wen     (mem_wen     ),
-	.mem_ena     (mem_ena     ),
-	.mem_mask    (mem_mask    ),
-	.inv         (inst_inv    ),
-	.sel_alures  (sel_alures  )
+	.alu_op      (id_alu_op      ),
+	.sel_nextpc  (id_sel_nextpc  ),
+	.sel_rfres   (id_sel_rfres   ),
+	.mem_wen     (id_mem_wen     ),
+	.mem_ena     (id_mem_ena     ),
+	.mem_mask    (id_mem_mask    ),
+	.inv         (inst_inv       ),
+	.sel_alures  (id_sel_alures  ),
+	.sel_memdata (id_sel_memdata ),
+	.alu_src1    (id_alu_src1    ),
+	.alu_src2    (id_alu_src2    ),
+	.rf_rdata2   (id_rf_rdata2   )
 );
 
+// ID_EX
+wire [63:0] ex_pc;
+wire [31:0] ex_inst;
+wire [16:0] ex_alu_op;
+wire [ 1:0] ex_sel_rfres;
+wire        ex_mem_wen;
+wire        ex_mem_ena;
+wire [ 3:0] ex_mem_mask;
+wire [ 3:0] ex_sel_alures;
+wire [63:0] ex_alu_src1;
+wire [63:0] ex_alu_src2;
+wire [63:0] ex_rf_rdata2;
+wire [ 1:0] ex_sel_memdata;
 
-// EXU
+EX_reg u_EX_reg(
+	.clk           (clk           ),
+	.rst           (rst           ),
+	.valid         (1'b1          ),
+	.ena           (1'b1          ),
+	.id_pc         (id_pc         ),
+	.id_inst       (id_inst       ),
+	.id_alu_op     (id_alu_op     ),
+	.id_sel_rfres  (id_sel_rfres  ),
+	.id_mem_wen    (id_mem_wen    ),
+	.id_mem_ena    (id_mem_ena    ),
+	.id_mem_mask   (id_mem_mask   ),
+	.id_sel_alures (id_sel_alures ),
+	.id_alu_src1   (id_alu_src1   ),
+	.id_alu_src2   (id_alu_src2   ),
+	.id_rf_rdata2  (id_rf_rdata2  ),
+	.id_sel_memdata(id_sel_memdata),
+	.ex_pc         (ex_pc         ),
+	.ex_inst       (ex_inst       ),
+	.ex_alu_op     (ex_alu_op     ),
+	.ex_sel_rfres  (ex_sel_rfres  ),
+	.ex_mem_wen    (ex_mem_wen    ),
+	.ex_mem_ena    (ex_mem_ena    ),
+	.ex_mem_mask   (ex_mem_mask   ),
+	.ex_sel_alures (ex_sel_alures ),
+	.ex_alu_src1   (ex_alu_src1   ),
+	.ex_alu_src2   (ex_alu_src2   ),
+	.ex_rf_rdata2  (ex_rf_rdata2  ),
+	.ex_sel_memdata(ex_sel_memdata)
+);
+
+// EX
+wire [63:0] ex_alu_result;
 ysyx_22040088_EXU u_ysyx_22040088_EXU(
-	.pc          (pc          ),
-	.alu_op      (alu_op      ),
-	.sel_nextpc  (sel_nextpc  ),
-	.sel_alusrc1 (sel_alusrc1 ),
-	.sel_alusrc2 (sel_alusrc2 ),
-	.sel_alures  (sel_alures  ),
-	.rf_rdata1   (rf_rdata1   ),
-	.rf_rdata2   (rf_rdata2   ),
-	.immI        (immI        ),
-	.immJ        (immJ        ),
-	.immU        (immU        ),
-	.immB        (immB        ),
-	.immS		 (immS        ),
-	.alu_result  (alu_result  ),
-	.nextpc      (npc      )
+	.alu_op     (ex_alu_op     ),
+	.alu_src1   (ex_alu_src1   ),
+	.alu_src2   (ex_alu_src2   ),
+	.sel_alures (ex_sel_alures ),
+	.alu_result (ex_alu_result )
 );
+
+// EX_MEM
+wire [63:0] mem_pc;
+wire [31:0] mem_inst;
+wire [ 1:0] mem_sel_rfres;
+wire        mem_mem_wen;
+wire        mem_mem_ena;
+wire [ 3:0] mem_mem_mask;
+wire [ 3:0] mem_sel_alures;
+wire [63:0] mem_rf_rdata2;
+wire [63:0] mem_alu_result;
+wire [ 1:0] mem_sel_memdata;
+MEM_reg u_MEM_reg(
+	.clk            (clk            ),
+	.rst            (rst            ),
+	.valid          (1'b1          ),
+	.ena            (1'b1            ),
+	.ex_pc          (ex_pc          ),
+	.ex_inst        (ex_inst        ),
+	.ex_alu_result  (ex_alu_result  ),
+	.ex_sel_rfres   (ex_sel_rfres   ),
+	.ex_mem_wen     (ex_mem_wen     ),
+	.ex_mem_ena     (ex_mem_ena     ),
+	.ex_mem_mask    (ex_mem_mask    ),
+	.ex_rf_rdata2   (ex_rf_rdata2   ),
+	.ex_sel_memdata (ex_sel_memdata ),
+	.mem_pc         (mem_pc         ),
+	.mem_inst       (mem_inst       ),
+	.mem_alu_result (mem_alu_result ),
+	.mem_sel_rfres  (mem_sel_rfres  ),
+	.mem_mem_wen    (mem_mem_wen    ),
+	.mem_mem_ena    (mem_mem_ena    ),
+	.mem_mem_mask   (mem_mem_mask   ),
+	.mem_rf_rdata2  (mem_rf_rdata2  ),
+	.mem_sel_memdata(mem_sel_memdata)
+);
+
+wire [63:0] mem_rdata;
+MEM u_MEM(
+	.clk         (clk         ),
+	.ena         (mem_mem_ena         ),
+	.wen         (mem_mem_wen         ),
+	.mem_mask    (mem_mem_mask    ),
+	.addr        (mem_alu_result        ),
+	.wdata       (mem_rf_rdata2       ),
+	.sel_memdata (mem_sel_memdata ),
+	.rdata       (mem_rdata       )
+);
+
+// MEM_WB
+wire [63:0] wb_pc, wb_alu_result, wb_rdata;
+wire [31:0] wb_inst;
+wire [ 1:0] wb_sel_rfres;
+WB_reg u_WB_reg(
+	.clk            (clk            ),
+	.rst            (rst            ),
+	.valid          (1'b1          ),
+	.ena            (1'b1            ),
+	.mem_pc         (mem_pc         ),
+	.mem_inst       (mem_inst       ),
+	.mem_alu_result (mem_alu_result ),
+	.mem_sel_rfres  (mem_sel_rfres  ),
+	.mem_rdata      (mem_rdata      ),
+	.wb_pc          (wb_pc          ),
+	.wb_inst        (wb_inst        ),
+	.wb_alu_result  (wb_alu_result  ),
+	.wb_sel_rfres   (wb_sel_rfres   ),
+	.wb_rdata       (wb_rdata       )
+);
+
+WB u_WB(
+	.alu_result  (wb_alu_result  ),
+	.mem_rdata   (wb_rdata   ),
+	.sel_rfwdata (wb_sel_rfres ),
+	.rf_wdata    (rf_wdata    )
+);
+
 
 
 // ebreak
@@ -127,6 +225,7 @@ wire inv;
 assign inv = inst_inv & ~ebreak;
 import "DPI-C" function void get_inv(int inv);
 always @(*) begin
+	$display("inv:", inv);
     get_inv({{31{inv}}, inv});
 end
 
@@ -135,17 +234,5 @@ import "DPI-C" function void get_inst(int inst);
 always@(*) begin
 	get_inst(inst[31:0]);
 end
-
-// memory
-mem u_mem(
-	.clk	  (clk        ),
-	.ena      (mem_ena    ),
-	.wen      (mem_wen    ),
-	.mem_mask (mem_mask ),
-	.addr     (alu_result     ),
-	.wdata    (rf_rdata2    ),
-	.rdata    (mem_rdata    )
-);
-
 
 endmodule
