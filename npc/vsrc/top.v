@@ -52,6 +52,8 @@ wire [ 1:0] id_sel_memdata;
 wire [63:0] id_alu_src1;
 wire [63:0] id_alu_src2;
 wire [63:0] id_rf_rdata2;
+wire        id_rf_we;
+wire [ 4:0] id_rf_waddr;
 // write back from WB
 wire [63:0] rf_wdata;
 // direct to top
@@ -62,6 +64,8 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.pc          (id_pc          ),
 	.inst        (id_inst        ),
 	.rf_wdata    (rf_wdata    ),
+	.rf_waddr_i  (wb_rf_waddr    ),
+	.rf_we_i     (wb_rf_we       ),
 	.alu_op      (id_alu_op      ),
 	.sel_nextpc  (id_sel_nextpc  ),
 	.sel_rfres   (id_sel_rfres   ),
@@ -73,7 +77,9 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.sel_memdata (id_sel_memdata ),
 	.alu_src1    (id_alu_src1    ),
 	.alu_src2    (id_alu_src2    ),
-	.rf_rdata2   (id_rf_rdata2   )
+	.rf_rdata2   (id_rf_rdata2   ),
+	.rf_we_o     (id_rf_we       ),
+	.rf_waddr_o  (id_rf_waddr    )
 );
 
 // ID_EX
@@ -89,37 +95,43 @@ wire [63:0] ex_alu_src1;
 wire [63:0] ex_alu_src2;
 wire [63:0] ex_rf_rdata2;
 wire [ 1:0] ex_sel_memdata;
-
+wire        ex_rf_we;
+wire [ 4:0] ex_rf_waddr;
 EX_reg u_EX_reg(
-	.clk           (clk           ),
-	.rst           (rst           ),
-	.valid         (1'b1          ),
-	.ena           (1'b1          ),
-	.id_pc         (id_pc         ),
-	.id_inst       (id_inst       ),
-	.id_alu_op     (id_alu_op     ),
-	.id_sel_rfres  (id_sel_rfres  ),
-	.id_mem_wen    (id_mem_wen    ),
-	.id_mem_ena    (id_mem_ena    ),
-	.id_mem_mask   (id_mem_mask   ),
-	.id_sel_alures (id_sel_alures ),
-	.id_alu_src1   (id_alu_src1   ),
-	.id_alu_src2   (id_alu_src2   ),
-	.id_rf_rdata2  (id_rf_rdata2  ),
-	.id_sel_memdata(id_sel_memdata),
-	.ex_pc         (ex_pc         ),
-	.ex_inst       (ex_inst       ),
-	.ex_alu_op     (ex_alu_op     ),
-	.ex_sel_rfres  (ex_sel_rfres  ),
-	.ex_mem_wen    (ex_mem_wen    ),
-	.ex_mem_ena    (ex_mem_ena    ),
-	.ex_mem_mask   (ex_mem_mask   ),
-	.ex_sel_alures (ex_sel_alures ),
-	.ex_alu_src1   (ex_alu_src1   ),
-	.ex_alu_src2   (ex_alu_src2   ),
-	.ex_rf_rdata2  (ex_rf_rdata2  ),
-	.ex_sel_memdata(ex_sel_memdata)
+	.clk            (clk           ),
+	.rst            (rst           ),
+	.valid          (1'b1          ),
+	.ena            (1'b1          ),
+	.id_pc          (id_pc          ),
+	.id_inst        (id_inst        ),
+	.id_alu_op      (id_alu_op      ),
+	.id_sel_rfres   (id_sel_rfres   ),
+	.id_mem_wen     (id_mem_wen     ),
+	.id_mem_ena     (id_mem_ena     ),
+	.id_mem_mask    (id_mem_mask    ),
+	.id_sel_alures  (id_sel_alures  ),
+	.id_alu_src1    (id_alu_src1    ),
+	.id_alu_src2    (id_alu_src2    ),
+	.id_rf_rdata2   (id_rf_rdata2   ),
+	.id_sel_memdata (id_sel_memdata ),
+	.id_rf_we       (id_rf_we       ),
+	.id_rf_waddr    (id_rf_waddr    ),
+	.ex_pc          (ex_pc          ),
+	.ex_inst        (ex_inst        ),
+	.ex_alu_op      (ex_alu_op      ),
+	.ex_sel_rfres   (ex_sel_rfres   ),
+	.ex_mem_wen     (ex_mem_wen     ),
+	.ex_mem_ena     (ex_mem_ena     ),
+	.ex_mem_mask    (ex_mem_mask    ),
+	.ex_sel_alures  (ex_sel_alures  ),
+	.ex_alu_src1    (ex_alu_src1    ),
+	.ex_alu_src2    (ex_alu_src2    ),
+	.ex_rf_rdata2   (ex_rf_rdata2   ),
+	.ex_sel_memdata (ex_sel_memdata ),
+	.ex_rf_we       (ex_rf_we       ),
+	.ex_rf_waddr    (ex_rf_waddr    )
 );
+
 
 // EX
 wire [63:0] ex_alu_result;
@@ -142,30 +154,37 @@ wire [ 3:0] mem_sel_alures;
 wire [63:0] mem_rf_rdata2;
 wire [63:0] mem_alu_result;
 wire [ 1:0] mem_sel_memdata;
+wire        mem_rf_we;
+wire [ 4:0] mem_rf_waddr;
 MEM_reg u_MEM_reg(
-	.clk            (clk            ),
-	.rst            (rst            ),
-	.valid          (1'b1          ),
-	.ena            (1'b1            ),
-	.ex_pc          (ex_pc          ),
-	.ex_inst        (ex_inst        ),
-	.ex_alu_result  (ex_alu_result  ),
-	.ex_sel_rfres   (ex_sel_rfres   ),
-	.ex_mem_wen     (ex_mem_wen     ),
-	.ex_mem_ena     (ex_mem_ena     ),
-	.ex_mem_mask    (ex_mem_mask    ),
-	.ex_rf_rdata2   (ex_rf_rdata2   ),
-	.ex_sel_memdata (ex_sel_memdata ),
-	.mem_pc         (mem_pc         ),
-	.mem_inst       (mem_inst       ),
-	.mem_alu_result (mem_alu_result ),
-	.mem_sel_rfres  (mem_sel_rfres  ),
-	.mem_mem_wen    (mem_mem_wen    ),
-	.mem_mem_ena    (mem_mem_ena    ),
-	.mem_mem_mask   (mem_mem_mask   ),
-	.mem_rf_rdata2  (mem_rf_rdata2  ),
-	.mem_sel_memdata(mem_sel_memdata)
+	.clk             (clk             ),
+	.rst             (rst             ),
+	.valid           (1'b1            ),
+	.ena             (1'b1            ),
+	.ex_pc           (ex_pc           ),
+	.ex_inst         (ex_inst         ),
+	.ex_alu_result   (ex_alu_result   ),
+	.ex_sel_rfres    (ex_sel_rfres    ),
+	.ex_mem_wen      (ex_mem_wen      ),
+	.ex_mem_ena      (ex_mem_ena      ),
+	.ex_mem_mask     (ex_mem_mask     ),
+	.ex_rf_rdata2    (ex_rf_rdata2    ),
+	.ex_sel_memdata  (ex_sel_memdata  ),
+	.ex_rf_we        (ex_rf_we        ),
+	.ex_rf_waddr     (ex_rf_waddr     ),
+	.mem_pc          (mem_pc          ),
+	.mem_inst        (mem_inst        ),
+	.mem_alu_result  (mem_alu_result  ),
+	.mem_sel_rfres   (mem_sel_rfres   ),
+	.mem_mem_wen     (mem_mem_wen     ),
+	.mem_mem_ena     (mem_mem_ena     ),
+	.mem_mem_mask    (mem_mem_mask    ),
+	.mem_rf_rdata2   (mem_rf_rdata2   ),
+	.mem_sel_memdata (mem_sel_memdata ),
+	.mem_rf_we       (mem_rf_we       ),
+	.mem_rf_waddr    (mem_rf_waddr    )
 );
+
 
 wire [63:0] mem_rdata;
 MEM u_MEM(
@@ -183,22 +202,29 @@ MEM u_MEM(
 wire [63:0] wb_pc, wb_alu_result, wb_rdata;
 wire [31:0] wb_inst;
 wire [ 1:0] wb_sel_rfres;
+wire        wb_rf_we;
+wire [ 4:0] wb_rf_waddr;
 WB_reg u_WB_reg(
 	.clk            (clk            ),
 	.rst            (rst            ),
-	.valid          (1'b1          ),
-	.ena            (1'b1            ),
+	.valid          (1'b1           ),
+	.ena            (1'b1           ),
 	.mem_pc         (mem_pc         ),
 	.mem_inst       (mem_inst       ),
 	.mem_alu_result (mem_alu_result ),
 	.mem_sel_rfres  (mem_sel_rfres  ),
 	.mem_rdata      (mem_rdata      ),
+	.mem_rf_we      (mem_rf_we      ),
+	.mem_rf_waddr   (mem_rf_waddr   ),
 	.wb_pc          (wb_pc          ),
 	.wb_inst        (wb_inst        ),
 	.wb_alu_result  (wb_alu_result  ),
 	.wb_sel_rfres   (wb_sel_rfres   ),
-	.wb_rdata       (wb_rdata       )
+	.wb_rdata       (wb_rdata       ),
+	.wb_rf_we       (wb_rf_we       ),
+	.wb_rf_waddr    (wb_rf_waddr    )
 );
+
 
 WB u_WB(
 	.alu_result  (wb_alu_result  ),

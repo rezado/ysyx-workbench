@@ -46,15 +46,15 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
     // Body
     VL_WRITEF("inv:0\n");
     Vtop___024root____Vdpiimwrap_top__DOT__get_inv_TOP(0U);
-    if (VL_UNLIKELY((0x100073U == vlSelf->top__DOT__wb_inst))) {
-        Vtop___024root____Vdpiimwrap_top__DOT__finish_sim_TOP();
-        VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 219, "");
-    }
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_cin 
         = (IData)((0U != (0xeU & vlSelf->top__DOT__ex_alu_op)));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_b 
         = ((IData)((0U != (0xeU & vlSelf->top__DOT__ex_alu_op)))
             ? (~ vlSelf->top__DOT__ex_alu_src2) : vlSelf->top__DOT__ex_alu_src2);
+    if (VL_UNLIKELY((0x100073U == vlSelf->top__DOT__mem_inst))) {
+        Vtop___024root____Vdpiimwrap_top__DOT__finish_sim_TOP();
+        VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 219, "");
+    }
     vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__mask 
         = ((1U & (IData)(vlSelf->top__DOT__mem_mem_mask))
             ? 0xffU : ((2U & (IData)(vlSelf->top__DOT__mem_mem_mask))
