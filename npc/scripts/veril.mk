@@ -62,7 +62,8 @@ gdb:
 	$(call git_commit, "gdb NPC")
 	gdb -s $(BINARY) --args $(NPC_EXEC)
 
-vcd:
+wave:
+	@echo Show wave
 	gtkwave $(NPC_HOME)/vcd/dump.vcd
 
 include ../Makefile

@@ -59,8 +59,8 @@ wire inst_inv;
 
 ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.clk         (clk         ),
-	.pc          (pc          ),
-	.inst        (inst        ),
+	.pc          (id_pc          ),
+	.inst        (id_inst        ),
 	.rf_wdata    (rf_wdata    ),
 	.alu_op      (id_alu_op      ),
 	.sel_nextpc  (id_sel_nextpc  ),
@@ -68,7 +68,7 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.mem_wen     (id_mem_wen     ),
 	.mem_ena     (id_mem_ena     ),
 	.mem_mask    (id_mem_mask    ),
-	.inv         (inst_inv            ),
+	.inv         (inst_inv       ),
 	.sel_alures  (id_sel_alures  ),
 	.sel_memdata (id_sel_memdata ),
 	.alu_src1    (id_alu_src1    ),

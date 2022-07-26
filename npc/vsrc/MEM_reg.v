@@ -27,7 +27,7 @@ module MEM_reg(
 
 always @(posedge clk) begin
     if (rst) begin
-        mem_pc <= 64'h80000000;
+        mem_pc <= 64'h7ffffffc;
         mem_inst <= 32'b0;
         mem_alu_result <= 64'b0;
         mem_sel_rfres <= 2'b0;

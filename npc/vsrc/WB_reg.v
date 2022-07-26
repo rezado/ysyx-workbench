@@ -19,7 +19,7 @@ module WB_reg(
 
 always @(posedge clk) begin
     if (rst) begin
-        wb_pc <= 64'h80000000;
+        wb_pc <= 64'h7ffffffc;
         wb_inst <= 32'b0;
         wb_alu_result <= 64'b0;
         wb_sel_rfres <= 2'b0;
