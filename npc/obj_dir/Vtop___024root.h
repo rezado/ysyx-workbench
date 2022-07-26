@@ -32,13 +32,19 @@ VL_MODULE(Vtop___024root) {
         CData/*3:0*/ top__DOT__ex_mem_mask;
         CData/*3:0*/ top__DOT__ex_sel_alures;
         CData/*1:0*/ top__DOT__ex_sel_memdata;
+        CData/*0:0*/ top__DOT__ex_rf_we;
+        CData/*4:0*/ top__DOT__ex_rf_waddr;
         CData/*1:0*/ top__DOT__mem_sel_rfres;
         CData/*0:0*/ top__DOT__mem_mem_wen;
         CData/*0:0*/ top__DOT__mem_mem_ena;
         CData/*3:0*/ top__DOT__mem_mem_mask;
         CData/*3:0*/ top__DOT__mem_sel_alures;
         CData/*1:0*/ top__DOT__mem_sel_memdata;
+        CData/*0:0*/ top__DOT__mem_rf_we;
+        CData/*4:0*/ top__DOT__mem_rf_waddr;
         CData/*1:0*/ top__DOT__wb_sel_rfres;
+        CData/*0:0*/ top__DOT__wb_rf_we;
+        CData/*4:0*/ top__DOT__wb_rf_waddr;
         CData/*3:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__sel_alusrc1;
         CData/*6:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__sel_alusrc2;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_jalr;
@@ -84,14 +90,14 @@ VL_MODULE(Vtop___024root) {
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_srliw;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addw;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_subw;
+    };
+    struct {
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sllw;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_srlw;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sraw;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_mul;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_mulh;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_mulhsu;
-    };
-    struct {
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_mulhu;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_div;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_divu;

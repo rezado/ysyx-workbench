@@ -53,7 +53,7 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
             ? (~ vlSelf->top__DOT__ex_alu_src2) : vlSelf->top__DOT__ex_alu_src2);
     if (VL_UNLIKELY((0x100073U == vlSelf->top__DOT__mem_inst))) {
         Vtop___024root____Vdpiimwrap_top__DOT__finish_sim_TOP();
-        VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 219, "");
+        VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 245, "");
     }
     vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__mask 
         = ((1U & (IData)(vlSelf->top__DOT__mem_mem_mask))
@@ -878,6 +878,8 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__ex_alu_src2 = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__ex_rf_rdata2 = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__ex_sel_memdata = VL_RAND_RESET_I(2);
+    vlSelf->top__DOT__ex_rf_we = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__ex_rf_waddr = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__mem_pc = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__mem_inst = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__mem_sel_rfres = VL_RAND_RESET_I(2);
@@ -888,11 +890,15 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__mem_rf_rdata2 = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__mem_alu_result = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__mem_sel_memdata = VL_RAND_RESET_I(2);
+    vlSelf->top__DOT__mem_rf_we = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__mem_rf_waddr = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__wb_pc = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__wb_alu_result = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__wb_rdata = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__wb_inst = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__wb_sel_rfres = VL_RAND_RESET_I(2);
+    vlSelf->top__DOT__wb_rf_we = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__wb_rf_waddr = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immJ = VL_RAND_RESET_I(21);
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immB = VL_RAND_RESET_I(13);

@@ -238,7 +238,7 @@ WB u_WB(
 // ebreak
 import "DPI-C" function void finish_sim();
 wire ebreak;
-assign ebreak = (mem_inst == 32'b000000000001_00000_000_00000_1110011);
+assign ebreak = (wb_inst == 32'b000000000001_00000_000_00000_1110011);
 always @(*) begin
 	if (ebreak) begin
 		finish_sim();
