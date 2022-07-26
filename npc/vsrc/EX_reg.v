@@ -1,6 +1,7 @@
 module EX_reg(
     input             clk,
     input             rst,
+    /* verilator lint_off UNUSED */
     input             valid,
     input             ena,
     input      [63:0] id_pc,
