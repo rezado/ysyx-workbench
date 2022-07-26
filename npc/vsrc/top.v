@@ -213,7 +213,7 @@ WB u_WB(
 import "DPI-C" function void finish_sim();
 wire ebreak;
 assign ebreak = (wb_inst == 32'b000000000001_00000_000_00000_1110011);
-always @(posedge clk) begin
+always @(*) begin
 	if (ebreak) begin
 		finish_sim();
 		$finish();
