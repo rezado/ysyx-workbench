@@ -162,7 +162,7 @@ assign inst_remuw = (opcode == 7'b0111011) && (funct3 == 3'b111) && (funct7 == 7
 //                inst_mul | inst_div | inst_sraw | inst_srlw | inst_remu | inst_divu |  inst_rem |
 //                inst_slti | inst_ori | inst_mulh | inst_mulhsu | inst_mulhu | inst_divuw | inst_remuw);
 
-assign inv = 1;
+assign inv = 1'b0;
 
 // 指令类型
 wire r_type, b_type;

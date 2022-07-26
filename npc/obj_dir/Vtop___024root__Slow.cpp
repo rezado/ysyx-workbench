@@ -467,6 +467,17 @@ void Vtop___024root___settle__TOP__3(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT____Vcellinp__u_MuxKeyWithDefault__lut[8U] 
         = (0x1000U | ((IData)((vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__rf_rdata1 
                                >> 0x20U)) >> 0x14U));
+    VL_WRITEF("inv:%1#\n",1,(0x100073U != ((0U == (7U 
+                                                   & (IData)(vlSelf->top__DOT__pc_out)))
+                                            ? (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data)
+                                            : ((4U 
+                                                == 
+                                                (7U 
+                                                 & (IData)(vlSelf->top__DOT__pc_out)))
+                                                ? (IData)(
+                                                          (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data 
+                                                           >> 0x20U))
+                                                : 0U))));
     Vtop___024root____Vdpiimwrap_top__DOT__get_inv_TOP(
                                                        (- (IData)(
                                                                   (0x100073U 
