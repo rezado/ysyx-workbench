@@ -32,7 +32,7 @@ always @(posedge clk) begin
 		inst <= inst_data[63:32];
 	end
     else begin
-		inst <= 32'b1;
+		inst <= 32'b0;
 	end
 end
 
