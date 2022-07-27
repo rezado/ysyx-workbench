@@ -48,7 +48,7 @@ wire [ 3:0] id_mem_mask;
 wire [ 3:0] id_sel_alures;
 wire [ 1:0] id_sel_memdata;
 wire [63:0] id_alu_src1;
-wire [63:0] id_alu_src2;id_inst
+wire [63:0] id_alu_src2;
 wire [63:0] id_rf_rdata2;
 wire        id_rf_we;
 wire [ 4:0] id_rf_waddr;
