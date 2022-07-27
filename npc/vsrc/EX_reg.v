@@ -39,7 +39,7 @@ module EX_reg(
 
 always @(posedge clk) begin
     if (rst) begin
-        ex_pc <= 64'h7ffffffc;
+        ex_pc <= 64'h80000000;
         ex_inst <= 32'b0;
         ex_alu_op <= 17'b0;
         ex_sel_rfres <= 2'b0;

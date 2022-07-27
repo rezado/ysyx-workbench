@@ -12,7 +12,7 @@ module ID_reg(
 /* verilator lint_off UNUSED */
 always @(posedge clk) begin
     if (rst) begin
-        id_pc <= 64'h7ffffffc;
+        id_pc <= 64'h80000000;
         id_inst <= 32'b0;
     end
     else if (ena) begin
