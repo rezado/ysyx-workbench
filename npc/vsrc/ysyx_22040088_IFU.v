@@ -25,9 +25,15 @@ always @(posedge clk) begin
 end
 
 always @(posedge clk) begin
-    inst <= (pc[2:0] == 3'b000) ? inst_data[31:0] :
-			(pc[2:0] == 3'b100) ? inst_data[63:32] :
-								32'b0;
+	if (pc[2:0] == 3'b000) begin
+		inst <= inst_data[31:0];
+	end
+	else if (pc[2:0] == 3'b100) begin
+		inst <= inst_data[63:32];
+	end
+    else begin
+		inst <= 32'b1;
+	end
 end
 
 endmodule
