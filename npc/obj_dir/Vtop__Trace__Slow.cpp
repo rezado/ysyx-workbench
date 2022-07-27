@@ -1204,7 +1204,7 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->fullBit(oldp+355,(0U));
         tracep->fullCData(oldp+356,(vlSelf->top__DOT__mem_sel_alures),4);
         tracep->fullIData(oldp+357,(0x40U),32);
-        tracep->fullQData(oldp+358,(0x7ffffffcULL),64);
+        tracep->fullQData(oldp+358,(0x80000000ULL),64);
         tracep->fullBit(oldp+360,(1U));
         tracep->fullQData(oldp+361,(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__nexpc),64);
         tracep->fullIData(oldp+363,(0xcU),32);

@@ -127,7 +127,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     if (vlSelf->rst) {
         vlSelf->top__DOT__ex_alu_src1 = 0ULL;
         vlSelf->top__DOT__ex_alu_op = 0U;
-        vlSelf->top__DOT__wb_pc = 0x7ffffffcULL;
+        vlSelf->top__DOT__wb_pc = 0x80000000ULL;
         vlSelf->top__DOT__wb_inst = 0U;
     } else {
         vlSelf->top__DOT__ex_alu_src1 = vlSelf->top__DOT__id_alu_src1;
@@ -211,7 +211,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_cin 
         = (IData)((0U != (0xeU & vlSelf->top__DOT__ex_alu_op)));
     if (vlSelf->rst) {
-        vlSelf->top__DOT__mem_pc = 0x7ffffffcULL;
+        vlSelf->top__DOT__mem_pc = 0x80000000ULL;
         vlSelf->top__DOT__mem_inst = 0U;
     } else {
         vlSelf->top__DOT__mem_pc = vlSelf->top__DOT__ex_pc;
@@ -309,7 +309,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
                                     & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__load) 
                                        | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__store)));
     if (vlSelf->rst) {
-        vlSelf->top__DOT__ex_pc = 0x7ffffffcULL;
+        vlSelf->top__DOT__ex_pc = 0x80000000ULL;
         vlSelf->top__DOT__ex_inst = 0U;
     } else {
         vlSelf->top__DOT__ex_pc = vlSelf->top__DOT__id_pc;
@@ -442,7 +442,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
                                         >> 0x10U))))) 
               & VL_MODDIV_QQQ(64, vlSelf->top__DOT__ex_alu_src1, vlSelf->top__DOT__ex_alu_src2)));
     if (vlSelf->rst) {
-        vlSelf->top__DOT__id_pc = 0x7ffffffcULL;
+        vlSelf->top__DOT__id_pc = 0x80000000ULL;
         vlSelf->top__DOT__ex_sel_rfres = 0U;
         vlSelf->top__DOT__ex_sel_alures = 0U;
         vlSelf->top__DOT__ex_sel_memdata = 0U;
@@ -644,7 +644,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
                                                       << 3U)));
     if (vlSelf->rst) {
         vlSelf->top__DOT__id_inst = 0U;
-        vlSelf->top__DOT__pc_out = 0x7ffffffcULL;
+        vlSelf->top__DOT__pc_out = 0x80000000ULL;
     } else {
         vlSelf->top__DOT__id_inst = ((0U == (7U & (IData)(vlSelf->top__DOT__pc_out)))
                                       ? (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data)
