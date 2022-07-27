@@ -82,8 +82,8 @@ assign slt_result[63:1] = 63'b0;
 //带符号数比较
 //1.如果src1为正数，src2为负数，src1>src2，返回0；
 //2.如果src1与src2同号，则看相减结果的符号位，为正则src1 > src2，返回0；为负则src1 < src2，返回1
-assign slt_result[0] = (alu_src1[31] & ~alu_src2[31])
-					 | (~(alu_src1[31] ^ alu_src2[31]) & adder_result[31]);
+assign slt_result[0] = (alu_src1[63] & ~alu_src2[63])
+					 | (~(alu_src1[63] ^ alu_src2[63]) & adder_result[63]);
 //无符号数比较
 assign sltu_result[63:1] = 63'b0;
 assign sltu_result[0]    = ~adder_cout;

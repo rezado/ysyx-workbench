@@ -117,7 +117,7 @@ void execute(uint64_t n) {
     IFDEF(CONFIG_DEVICE, device_update());
     #ifdef CONFIG_DUMPWAVE
     if (t > MAX_SIM_TIME) {
-      Log("Reach MAX_SIM_TIME at pc:" FMT_WORD , s.pc);
+      Log("Reach MAX_SIM_TIME at pc:" FMT_WORD , s->pc);
       break;
     }
     #endif
