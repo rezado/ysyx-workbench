@@ -143,6 +143,7 @@ ysyx_22040088_genALUsrc2 u_ysyx_22040088_genALUsrc2(
 wire zero, lt, ltu;
 wire [63:0] sub_result;
 wire cout;
+/* verilator lint_off WIDTH */
 assign {cout, sub_result} = rf_rdata1 + ~rf_rdata2 + {{63{1'b0}}, 1'b1};
 assign zero = (sub_result == 64'b0);  // 比较器
 assign lt = (rf_rdata1[63] & ~rf_rdata2[63])
