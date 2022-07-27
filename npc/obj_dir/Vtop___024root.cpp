@@ -101,11 +101,13 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     __Vdly__top__DOT__pc_out = vlSelf->top__DOT__pc_out;
     __Vdlyvset__top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf__v0 = 0U;
     VL_WRITEF("read at %20#inst: %10#\n",64,vlSelf->pc,
-              32,((0U == (7U & (IData)(vlSelf->top__DOT__pc_out)))
-                   ? (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data)
-                   : ((4U == (7U & (IData)(vlSelf->top__DOT__pc_out)))
-                       ? (IData)((vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data 
-                                  >> 0x20U)) : 0U)));
+              32,vlSelf->top__DOT__inst);
+    vlSelf->top__DOT__inst = ((0U == (7U & (IData)(vlSelf->top__DOT__pc_out)))
+                               ? (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data)
+                               : ((4U == (7U & (IData)(vlSelf->top__DOT__pc_out)))
+                                   ? (IData)((vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data 
+                                              >> 0x20U))
+                                   : 0U));
     if (VL_UNLIKELY((1U & (~ (IData)(vlSelf->rst))))) {
         Vtop___024root____Vdpiimwrap_top__DOT__u_ysyx_22040088_IFU__DOT__npc_read_TOP(vlSelf->top__DOT__pc_out, __Vtask_top__DOT__u_ysyx_22040088_IFU__DOT__npc_read__3__rdata);
         vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data 
@@ -289,6 +291,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
         __Vdlyvdim0__top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf__v0 
             = vlSelf->top__DOT__wb_rf_waddr;
     }
+    Vtop___024root____Vdpiimwrap_top__DOT__get_inst_TOP(vlSelf->top__DOT__inst);
     if (__Vdlyvset__top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf__v0) {
         vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf[__Vdlyvdim0__top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf__v0] 
             = __Vdlyvval__top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf__v0;
@@ -756,6 +759,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
                                        | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_slti)) 
                                       | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_ori));
     }
+    vlSelf->top__DOT__pc_out = __Vdly__top__DOT__pc_out;
     vlSelf->top__DOT__u_MEM__DOT__mem_rdata = ((vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__tmpdata 
                                                 & (((QData)((IData)(
                                                                     (((- (IData)(
@@ -806,35 +810,12 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
                                                >> (0x38U 
                                                    & ((IData)(vlSelf->top__DOT__mem_alu_result) 
                                                       << 3U)));
+    vlSelf->pc = vlSelf->top__DOT__pc_out;
     if (vlSelf->rst) {
         vlSelf->top__DOT__id_inst = 0U;
     } else if ((1U & (~ (IData)(vlSelf->rst)))) {
-        vlSelf->top__DOT__id_inst = ((0U == (7U & (IData)(vlSelf->top__DOT__pc_out)))
-                                      ? (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data)
-                                      : ((4U == (7U 
-                                                 & (IData)(vlSelf->top__DOT__pc_out)))
-                                          ? (IData)(
-                                                    (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data 
-                                                     >> 0x20U))
-                                          : 0U));
+        vlSelf->top__DOT__id_inst = vlSelf->top__DOT__inst;
     }
-    vlSelf->top__DOT__pc_out = __Vdly__top__DOT__pc_out;
-    Vtop___024root____Vdpiimwrap_top__DOT__get_inst_TOP(
-                                                        ((0U 
-                                                          == 
-                                                          (7U 
-                                                           & (IData)(vlSelf->top__DOT__pc_out)))
-                                                          ? (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data)
-                                                          : 
-                                                         ((4U 
-                                                           == 
-                                                           (7U 
-                                                            & (IData)(vlSelf->top__DOT__pc_out)))
-                                                           ? (IData)(
-                                                                     (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data 
-                                                                      >> 0x20U))
-                                                           : 0U)));
-    vlSelf->pc = vlSelf->top__DOT__pc_out;
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immJ 
         = ((0x100000U & (vlSelf->top__DOT__id_inst 
                          >> 0xbU)) | ((0xff000U & vlSelf->top__DOT__id_inst) 

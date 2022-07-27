@@ -586,12 +586,7 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
                                                          + vlSelf->top__DOT__id_pc))
                                                         : 0x80000000ULL)))))))))),64);
         tracep->fullQData(oldp+3,(vlSelf->top__DOT__pc_out),64);
-        tracep->fullIData(oldp+5,(((0U == (7U & (IData)(vlSelf->top__DOT__pc_out)))
-                                    ? (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data)
-                                    : ((4U == (7U & (IData)(vlSelf->top__DOT__pc_out)))
-                                        ? (IData)((vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data 
-                                                   >> 0x20U))
-                                        : 0U))),32);
+        tracep->fullIData(oldp+5,(vlSelf->top__DOT__inst),32);
         tracep->fullQData(oldp+6,(vlSelf->top__DOT__id_pc),64);
         tracep->fullIData(oldp+8,(vlSelf->top__DOT__id_inst),32);
         tracep->fullIData(oldp+9,(vlSelf->top__DOT__id_alu_op),17);
