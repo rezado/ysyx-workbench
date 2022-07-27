@@ -44,7 +44,7 @@ extern "C" void npc_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   // printf("read %llx from %llx\n", *rdata, raddr);
   #ifdef CONFIG_MTRACE
-      if (raddr != RESET_VECTOR) Log("Read Memory at 0x%016llx   data: 0x%016llx", raddr, *rdata);
+      if (raddr != RESET_VECTOR) printf("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
   #endif
 
   if (raddr == RTC_ADDR) {
@@ -70,7 +70,7 @@ extern "C" void npc_write(long long waddr, long long wdata, char wmask) {
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
   // printf("write:waddr:%llx, wdata:%llx, wmask:%x\n", waddr, wdata, wmask);
   #ifdef CONFIG_MTRACE
-      if (wmask) Log("Write Memory at 0x%016llx  data:  0x%016llx", waddr, wdata);
+      if (wmask) printf("Write Memory at 0x%016llx  data:  0x%016llx\n", waddr, wdata);
   #endif
   waddr = waddr & ~0x7ull;
   if (waddr == SERIAL_PORT) {

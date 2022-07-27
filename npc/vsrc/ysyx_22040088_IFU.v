@@ -18,7 +18,10 @@ import "DPI-C" function void npc_read(
 wire [63:0] inst_data;
 
 always @(posedge clk) begin
-	if (!rst) npc_read(pc, inst_data);
+	if (!rst) begin
+		npc_read(pc, inst_data);
+		$display("IF read");
+	end
 end
 
 assign inst = (pc[2:0] == 3'b000) ? inst_data[31:0] :
