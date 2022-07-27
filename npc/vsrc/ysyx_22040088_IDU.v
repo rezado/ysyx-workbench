@@ -8,7 +8,6 @@ module ysyx_22040088_IDU(
     input        rf_we_i,
     // 控制信号
     output [16:0] alu_op,
-    output [ 6:0] sel_nextpc,
     output [ 1:0] sel_rfres,
     output        mem_wen,
     output        mem_ena,
@@ -23,7 +22,8 @@ module ysyx_22040088_IDU(
     output [63:0] alu_src1,
     output [63:0] alu_src2,
     output [63:0] rf_rdata2,
-    output        sys
+    output        sys,
+    output [63:0] nextpc
 );
 
 assign sys = (inst == 32'b000000000001_00000_000_00000_1110011);
@@ -63,6 +63,7 @@ assign rf_waddr_o = rd;
 // 控制单元
 wire [3:0]sel_alusrc1;
 wire [6:0]sel_alusrc2;
+wire [8:0]sel_nextpc;
 
 ysyx_22040088_controlunit u_ysyx_22040088_controlunit(
     .opcode      (opcode      ),
@@ -110,10 +111,6 @@ ysyx_22040088_signext#(21, 64) u_ysyx_22040088_signext2(
 
 assign immU_sext = {{32{immU[19]}}, immU, 12'b0};
 
-ysyx_22040088_signext#(13, 64) u_ysyx_22040088_signext4(
-    .in  (immB  ),
-    .out (immB_sext )
-);
 
 ysyx_22040088_signext#(12, 64) u_ysyx_22040088_signext5(
     .in  (immS  ),
@@ -152,14 +149,22 @@ assign ltu = ~cout;
 
 // 生成跳转和分支的地址
 wire [63:0] pcadd, jalpc, jalrpc, pcBranch;
-wire [63:0] nexpc;
 assign pcadd = pc + 4; 
 assign jalpc = pc + immJ_sext;
 assign jalrpc = (rf_rdata1 + immI_sext) & ~64'b1;
 assign pcBranch = pc + immB_sext;
 
 // 根据条件选择
-
+assign nextpc= sel_nextpc[0] ? pcadd :
+               sel_nextpc[1] ? jalpc :
+               sel_nextpc[2] ? jalrpc :
+               sel_nextpc[3] ? (zero ? pcBranch : pcadd) :
+               sel_nextpc[4] ? (zero ? pcadd : pcBranch) :
+               sel_nextpc[5] ? (lt ? pcBranch : pcadd) :
+               sel_nextpc[6] ? (ltu ? pcBranch : pcadd) :
+               sel_nextpc[7] ? (lt ? pcadd : pcBranch) :
+               sel_nextpc[8] ? (ltu ? pcadd : pcBranch) :
+                               64'h80000000;
 
 
 endmodule

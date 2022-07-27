@@ -8,7 +8,6 @@ wire [63:0] npc;
 wire [63:0] pc_out;
 wire [31:0] inst;
 // IFU
-assign npc = pc + 4;
 assign pc = pc_out;
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.clk    (clk    ),
@@ -40,9 +39,8 @@ ID_reg u_ID_reg(
 );
 
 
-// ID
+// IDprintf
 wire [16:0] id_alu_op;
-wire [ 6:0] id_sel_nextpc;
 wire [ 1:0] id_sel_rfres;
 wire        id_mem_wen;
 wire        id_mem_ena;
@@ -68,7 +66,6 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.rf_waddr_i  (wb_rf_waddr    ),
 	.rf_we_i     (wb_rf_we       ),
 	.alu_op      (id_alu_op      ),
-	.sel_nextpc  (id_sel_nextpc  ),
 	.sel_rfres   (id_sel_rfres   ),
 	.mem_wen     (id_mem_wen     ),
 	.mem_ena     (id_mem_ena     ),
@@ -81,7 +78,8 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.rf_rdata2   (id_rf_rdata2   ),
 	.rf_we_o     (id_rf_we       ),
 	.rf_waddr_o  (id_rf_waddr    ),
-	.sys         (id_sys         )
+	.sys         (id_sys         ),
+	.nextpc      (npc            )
 );
 
 // ID_EX
