@@ -22,8 +22,11 @@ module ysyx_22040088_IDU(
     // EXE源操作数
     output [63:0] alu_src1,
     output [63:0] alu_src2,
-    output [63:0] rf_rdata2
+    output [63:0] rf_rdata2,
+    output        sys
 );
+
+assign sys = (inst == 32'b000000000001_00000_000_00000_1110011);
 
 // 指令分割
 wire [6:0] opcode;

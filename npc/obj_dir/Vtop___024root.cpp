@@ -192,13 +192,14 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
                                      & (IData)(vlSelf->top__DOT__ex_mem_ena));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_cin 
         = (IData)((0U != (0xeU & vlSelf->top__DOT__ex_alu_op)));
-    if (vlSelf->rst) {
-        vlSelf->top__DOT__mem_pc = 0x7ffffffcULL;
-        vlSelf->top__DOT__mem_inst = 0U;
-    } else {
-        vlSelf->top__DOT__mem_pc = vlSelf->top__DOT__ex_pc;
-        vlSelf->top__DOT__mem_inst = vlSelf->top__DOT__ex_inst;
+    vlSelf->top__DOT__mem_pc = ((IData)(vlSelf->rst)
+                                 ? 0x7ffffffcULL : vlSelf->top__DOT__ex_pc);
+    if (VL_UNLIKELY((0x100073U == vlSelf->top__DOT__wb_inst))) {
+        Vtop___024root____Vdpiimwrap_top__DOT__finish_sim_TOP();
+        VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 245, "");
     }
+    vlSelf->top__DOT__mem_inst = ((IData)(vlSelf->rst)
+                                   ? 0U : vlSelf->top__DOT__ex_inst);
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_b 
         = ((IData)((0U != (0xeU & vlSelf->top__DOT__ex_alu_op)))
             ? (~ vlSelf->top__DOT__ex_alu_src2) : vlSelf->top__DOT__ex_alu_src2);
@@ -284,14 +285,13 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__ex_mem_ena = ((~ (IData)(vlSelf->rst)) 
                                     & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__load) 
                                        | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__store)));
-    vlSelf->top__DOT__ex_pc = ((IData)(vlSelf->rst)
-                                ? 0x7ffffffcULL : vlSelf->top__DOT__id_pc);
-    if (VL_UNLIKELY((0x100073U == vlSelf->top__DOT__mem_inst))) {
-        Vtop___024root____Vdpiimwrap_top__DOT__finish_sim_TOP();
-        VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 245, "");
+    if (vlSelf->rst) {
+        vlSelf->top__DOT__ex_pc = 0x7ffffffcULL;
+        vlSelf->top__DOT__ex_inst = 0U;
+    } else {
+        vlSelf->top__DOT__ex_pc = vlSelf->top__DOT__id_pc;
+        vlSelf->top__DOT__ex_inst = vlSelf->top__DOT__id_inst;
     }
-    vlSelf->top__DOT__ex_inst = ((IData)(vlSelf->rst)
-                                  ? 0U : vlSelf->top__DOT__id_inst);
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__slt_result 
         = (QData)((IData)((1U & (((IData)((vlSelf->top__DOT__ex_alu_src1 
                                            >> 0x1fU)) 
