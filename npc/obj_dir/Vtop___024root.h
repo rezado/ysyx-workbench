@@ -50,6 +50,8 @@ VL_MODULE(Vtop___024root) {
         CData/*0:0*/ top__DOT__wb_sys;
         CData/*3:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__sel_alusrc1;
         CData/*6:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__sel_alusrc2;
+        CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__lt;
+        CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__cout;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_jalr;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_beq;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_bne;
@@ -88,10 +90,10 @@ VL_MODULE(Vtop___024root) {
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_or;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_and;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addiw;
-        CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_slliw;
-        CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sraiw;
     };
     struct {
+        CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_slliw;
+        CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sraiw;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_srliw;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addw;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_subw;
@@ -119,8 +121,8 @@ VL_MODULE(Vtop___024root) {
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__hit;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_cin;
         CData/*7:0*/ top__DOT__u_MEM__DOT__u_mem__DOT__mask;
-        SData/*12:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__immB;
         SData/*11:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__immS;
+        SData/*8:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__sel_nextpc;
         IData/*31:0*/ top__DOT__id_inst;
         IData/*16:0*/ top__DOT__id_alu_op;
         IData/*31:0*/ top__DOT__ex_inst;
@@ -145,19 +147,21 @@ VL_MODULE(Vtop___024root) {
         QData/*63:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__inst_data;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__rf_rdata1;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__immI_sext;
-        QData/*63:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__nexpc;
+        QData/*63:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__immB_sext;
+        QData/*63:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__sub_result;
+        QData/*63:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__pcBranch;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__lut_out;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__alu_res;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__slt_result;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_b;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_result;
         QData/*63:0*/ top__DOT__u_MEM__DOT__mem_rdata;
+    };
+    struct {
         QData/*63:0*/ top__DOT__u_MEM__DOT__u_mem__DOT__tmpdata;
         VlUnpacked<QData/*63:0*/, 32> top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf;
         VlUnpacked<VlWide<3>/*67:0*/, 4> top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__pair_list;
         VlUnpacked<CData/*3:0*/, 4> top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__key_list;
-    };
-    struct {
         VlUnpacked<QData/*63:0*/, 4> top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__data_list;
     };
 

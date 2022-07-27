@@ -111,6 +111,10 @@ ysyx_22040088_signext#(21, 64) u_ysyx_22040088_signext2(
 
 assign immU_sext = {{32{immU[19]}}, immU, 12'b0};
 
+ysyx_22040088_signext#(13, 64) u_ysyx_22040088_signext4(
+    .in  (immB  ),
+    .out (immB_sext )
+);
 
 ysyx_22040088_signext#(12, 64) u_ysyx_22040088_signext5(
     .in  (immS  ),
