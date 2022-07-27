@@ -307,7 +307,7 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
                             >> 0xfU))) ? 0ULL : vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf
            [(0x1fU & (vlSelf->top__DOT__id_inst >> 0xfU))]);
     Vtop___024root____Vdpiimwrap_top__DOT__get_inst_TOP(vlSelf->top__DOT__inst);
-    vlSelf->pc = vlSelf->top__DOT__pc_out;
+    vlSelf->pc = (4ULL + vlSelf->top__DOT__pc_out);
     VL_EXTEND_WI(65,1, __Vtemp1, (IData)(vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_cin));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_result 
         = ((vlSelf->top__DOT__ex_alu_src1 + vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_b) 

@@ -8,7 +8,7 @@ wire [63:0] npc;
 wire [63:0] pc_out;
 wire [31:0] inst;
 // IFU
-assign pc = pc_out + 4;
+assign pc = pc_out;
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.clk    (clk    ),
 	.rst    (rst    ),
