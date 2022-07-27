@@ -29,7 +29,7 @@ override ARGS ?= --log=$(BUILD_DIR)/npc-log.txt
 override ARGS += $(ARGS_DIFF)
 
 # Command to execute NEMU
-IMG ?=
+IMG ?= $(NPC_HOME)/bin/IMG.bin
 
 # rules for verilator
 CFLAGS += -DTOP_NAME="\"V$(TOPNAME)\""
@@ -55,12 +55,17 @@ sim:
 	@echo $(CFLAGS)
 
 run:
+	make sim
 	@echo $(NPC_EXEC)
 	$(NPC_EXEC)
 
 gdb:
 	$(call git_commit, "gdb NPC")
 	gdb -s $(BINARY) --args $(NPC_EXEC)
+
+wave:
+	@echo Show wave
+	gtkwave $(NPC_HOME)/vcd/dump.vcd
 
 include ../Makefile
 .PHONY: clean run
