@@ -3,7 +3,7 @@ module ysyx_22040088_IFU(
     input       rst,
 	input [63:0] nextpc,
     output [63:0] pc,
-	output [31:0] inst
+	output reg [31:0] inst
 );
 
 ysyx_22040088_pc u_ysyx_22040088_pc(
@@ -24,8 +24,10 @@ always @(posedge clk) begin
 	end
 end
 
-assign inst = (pc[2:0] == 3'b000) ? inst_data[31:0] :
-			  (pc[2:0] == 3'b100) ? inst_data[63:32] :
-			  						32'b0;
+always @(posedge clk) begin
+    inst = (pc[2:0] == 3'b000) ? inst_data[31:0] :
+			(pc[2:0] == 3'b100) ? inst_data[63:32] :
+								32'b0;
+end
 
 endmodule

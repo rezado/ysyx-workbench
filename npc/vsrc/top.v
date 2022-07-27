@@ -23,16 +23,10 @@ end
 
 
 // IF_ID
-reg [63:0] if_pc, id_pc;
-reg [31:0] if_inst, id_inst;
+wire [63:0] if_pc, id_pc;
+wire [31:0] if_inst, id_inst;
 assign if_pc = pc_out;
-// assign if_inst = inst;
-always @(posedge clk) begin
-	if (!rst) begin
-		if_pc <= pc_out;
-		if_inst <= inst;
-	end
-end
+assign if_inst = inst;
 ID_reg u_ID_reg(
 	.clk     (clk     ),
 	.rst     (rst     ),
@@ -54,7 +48,7 @@ wire [ 3:0] id_mem_mask;
 wire [ 3:0] id_sel_alures;
 wire [ 1:0] id_sel_memdata;
 wire [63:0] id_alu_src1;
-wire [63:0] id_alu_src2;
+wire [63:0] id_alu_src2;id_inst
 wire [63:0] id_rf_rdata2;
 wire        id_rf_we;
 wire [ 4:0] id_rf_waddr;
