@@ -965,15 +965,15 @@ VL_INLINE_OPT void Vtop___024root___settle__TOP__3(Vtop___024root* vlSelf) {
               | (QData)((IData)(__Vtemp34[0U]))));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__slt_result 
         = (QData)((IData)((1U & (((IData)((vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__alu_src1 
-                                           >> 0x1fU)) 
+                                           >> 0x3fU)) 
                                   & (~ (IData)((vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__alu_src2 
-                                                >> 0x1fU)))) 
+                                                >> 0x3fU)))) 
                                  | ((~ ((IData)((vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__alu_src1 
-                                                 >> 0x1fU)) 
+                                                 >> 0x3fU)) 
                                         ^ (IData)((vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__alu_src2 
-                                                   >> 0x1fU)))) 
+                                                   >> 0x3fU)))) 
                                     & (IData)((vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_result 
-                                               >> 0x1fU)))))));
+                                               >> 0x3fU)))))));
     VL_EXTEND_WQ(65,64, __Vtemp36, vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__alu_src1);
     VL_EXTEND_WQ(65,64, __Vtemp37, vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_b);
     VL_ADD_W(3, __Vtemp38, __Vtemp36, __Vtemp37);
