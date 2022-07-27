@@ -55,6 +55,7 @@ sim:
 	@echo $(CFLAGS)
 
 run:
+	make sim
 	@echo $(NPC_EXEC)
 	$(NPC_EXEC)
 

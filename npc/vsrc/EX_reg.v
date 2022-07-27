@@ -16,6 +16,9 @@ module EX_reg(
     input      [63:0] id_alu_src2,
     input      [63:0] id_rf_rdata2,
     input      [ 1:0] id_sel_memdata,
+    input             id_rf_we,
+    input      [ 4:0] id_rf_waddr,
+    input             id_sys,
     
     output reg [63:0] ex_pc,
     output reg [31:0] ex_inst,
@@ -28,9 +31,12 @@ module EX_reg(
     output reg [63:0] ex_alu_src1,
     output reg [63:0] ex_alu_src2,
     output reg [63:0] ex_rf_rdata2,
-    output reg [ 1:0] ex_sel_memdata
+    output reg [ 1:0] ex_sel_memdata,
+    output reg        ex_rf_we,
+    output reg [ 4:0] ex_rf_waddr,
+    output reg        ex_sys
 );
-/* verilator lint_off UNUSED */
+
 always @(posedge clk) begin
     if (rst) begin
         ex_pc <= 64'h7ffffffc;
@@ -45,6 +51,9 @@ always @(posedge clk) begin
         ex_alu_src2 <= 64'b0;
         ex_rf_rdata2 <= 64'b0;
         ex_sel_memdata <= 2'b0;
+        ex_rf_we <= 1'b0;
+        ex_rf_waddr <= 5'b0;
+        ex_sys <= 1'b0;
     end
     else if (ena) begin
         ex_pc <= id_pc;
@@ -59,6 +68,9 @@ always @(posedge clk) begin
         ex_alu_src2 <= id_alu_src2;
         ex_rf_rdata2 <= id_rf_rdata2;
         ex_sel_memdata <= id_sel_memdata;
+        ex_rf_we <= id_rf_we;
+        ex_rf_waddr <= id_rf_waddr;
+        ex_sys <= id_sys;
     end
 end
 

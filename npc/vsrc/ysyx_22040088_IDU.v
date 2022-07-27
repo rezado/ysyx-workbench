@@ -4,6 +4,8 @@ module ysyx_22040088_IDU(
     input [63:0] pc,
     input [31:0] inst,
     input [63:0] rf_wdata,
+    input [ 4:0] rf_waddr_i,
+    input        rf_we_i,
     // 控制信号
     output [16:0] alu_op,
     output [ 6:0] sel_nextpc,
@@ -14,12 +16,17 @@ module ysyx_22040088_IDU(
     output        inv,
     output [ 3:0] sel_alures,
     output [ 1:0] sel_memdata,
+    output        rf_we_o,
+    output [ 4:0] rf_waddr_o,
     
     // EXE源操作数
     output [63:0] alu_src1,
     output [63:0] alu_src2,
-    output [63:0] rf_rdata2
+    output [63:0] rf_rdata2,
+    output        sys
 );
+
+assign sys = (inst == 32'b000000000001_00000_000_00000_1110011);
 
 // 指令分割
 wire [6:0] opcode;
@@ -45,6 +52,7 @@ assign immJ = {inst[31], inst[19:12], inst[20], inst[30:21], 1'b0};
 assign immU = inst[31:12];
 assign immB = {inst[31], inst[7], inst[30:25], inst[11:8], 1'b0};
 assign immS = {inst[31:25], inst[11:7]};
+assign rf_waddr_o = rd;
 
 // Debug
 // always@(posedge clk) begin
@@ -55,14 +63,13 @@ assign immS = {inst[31:25], inst[11:7]};
 // 控制单元
 wire [3:0]sel_alusrc1;
 wire [6:0]sel_alusrc2;
-wire rf_we;
 
 ysyx_22040088_controlunit u_ysyx_22040088_controlunit(
     .opcode      (opcode      ),
     .funct3      (funct3      ),
     .funct7      (funct7      ),
     .alu_op      (alu_op      ),
-    .rf_we       (rf_we       ),
+    .rf_we       (rf_we_o     ),
     .sel_alusrc1 (sel_alusrc1 ),
     .sel_alusrc2 (sel_alusrc2 ),
     .sel_nextpc  (sel_nextpc  ),
@@ -79,9 +86,9 @@ wire [63:0]rf_rdata1;
 
 ysyx_22040088_regfile u_ysyx_22040088_regfile(
     .clk    (clk    ),
-    .wdata  (rf_wdata  ),
-    .waddr  (rd  ),
-    .wen    (rf_we    ),
+    .wdata  (rf_wdata ),
+    .waddr  (rf_waddr_i  ),
+    .wen    (rf_we_i    ),
     .raddr1 (rs1 ),
     .raddr2 (rs2 ),
     .rdata1 (rf_rdata1 ),
