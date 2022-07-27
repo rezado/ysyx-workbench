@@ -41,9 +41,9 @@ void rst_cycle() {
 
 void reset(int n) {
     top->rst = 1;
-    while (n--) rst_cycle();
+    while (n--) single_cycle();
     top->rst = 0;
-    top->clk = 0; top->eval();
+    // top->clk = 0; top->eval();
     #ifdef CONFIG_DUMPWAVE
     contextp->timeInc(1); tfp->dump(contextp->time());
     #endif
