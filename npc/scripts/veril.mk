@@ -40,6 +40,7 @@ LDFLAGS += $(shell llvm-config --libs)
 LDFLAGS += -rdynamic
 NPCFLAGS := 
 NPC_EXEC := $(BIN) $(ARGS) $(IMG)
+WAVE_CONFIG = $(NPC_HOME)/vcd/config.gtkw
 
 
 clean:
@@ -65,7 +66,7 @@ gdb:
 
 wave:
 	@echo Show wave
-	gtkwave $(NPC_HOME)/vcd/dump.vcd
+	gtkwave $(NPC_HOME)/vcd/dump.vcd $(WAVE_CONFIG)
 
 include ../Makefile
 .PHONY: clean run
