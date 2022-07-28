@@ -4,7 +4,6 @@ module top(
 	output	[63:0] pc
 );
 /* verilator lint_off UNUSED */
-wire [63:0] npc;
 wire [63:0] pc_out;
 wire [31:0] inst;
 // IFU
@@ -84,7 +83,7 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.rf_waddr_o  (id_rf_waddr    ),
 	.sys         (id_sys         ),
 	.branch      (branch         ),
-	.nextpc      (npc            )
+	.nextpc      (branchpc       )
 );
 
 
