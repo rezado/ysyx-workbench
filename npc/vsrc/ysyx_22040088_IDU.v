@@ -17,6 +17,7 @@ module ysyx_22040088_IDU(
     output [ 1:0] sel_memdata,
     output        rf_we_o,
     output [ 4:0] rf_waddr_o,
+    output        branch,
     
     // EXE源操作数
     output [63:0] alu_src1,
@@ -63,7 +64,7 @@ assign rf_waddr_o = rd;
 // 控制单元
 wire [3:0]sel_alusrc1;
 wire [6:0]sel_alusrc2;
-wire [8:0]sel_nextpc;
+wire [6:0]sel_btype;
 
 ysyx_22040088_controlunit u_ysyx_22040088_controlunit(
     .opcode      (opcode      ),
@@ -73,7 +74,7 @@ ysyx_22040088_controlunit u_ysyx_22040088_controlunit(
     .rf_we       (rf_we_o     ),
     .sel_alusrc1 (sel_alusrc1 ),
     .sel_alusrc2 (sel_alusrc2 ),
-    .sel_nextpc  (sel_nextpc  ),
+    .sel_btype   (sel_btype   ),
     .sel_rfres   (sel_rfres   ),
     .mem_ena     (mem_ena     ),
     .mem_wen     (mem_wen     ),
@@ -152,23 +153,30 @@ assign lt = (rf_rdata1[63] & ~rf_rdata2[63])
 assign ltu = ~cout;
 
 // 生成跳转和分支的地址
-wire [63:0] pcadd, jalpc, jalrpc, pcBranch;
-assign pcadd = pc + 4; 
-assign jalpc = pc + immJ_sext;
+wire [63:0] jalrpc, branchpc;
 assign jalrpc = (rf_rdata1 + immI_sext) & ~64'b1;
-assign pcBranch = pc + immB_sext;
+assign branchpc = pc + immB_sext;
+
+// 判断是否跳转
+// sel_btype = {inst_bgeu,
+//                     inst_bge,
+//                     inst_bltu,
+//                     inst_blt,
+//                     inst_bne,
+//                     inst_beq,
+//                     inst_jalr};
+assign branch = sel_btype[0] ? 1'b1 :
+                sel_btype[1] ? zero :
+                sel_btype[2] ? ~zero :
+                sel_btype[3] ? lt :
+                sel_btype[4] ? ltu :
+                sel_btype[5] ? ~lt :
+                sel_btype[6] ? ~ltu :
+                               1'b0;
 
 // 根据条件选择
-assign nextpc= sel_nextpc[0] ? pcadd :
-               sel_nextpc[1] ? jalpc :
-               sel_nextpc[2] ? jalrpc :
-               sel_nextpc[3] ? (zero ? pcBranch : pcadd) :
-               sel_nextpc[4] ? (zero ? pcadd : pcBranch) :
-               sel_nextpc[5] ? (lt ? pcBranch : pcadd) :
-               sel_nextpc[6] ? (ltu ? pcBranch : pcadd) :
-               sel_nextpc[7] ? (lt ? pcadd : pcBranch) :
-               sel_nextpc[8] ? (ltu ? pcadd : pcBranch) :
-                               64'h80000000;
+assign nextpc= branch ? (sel_btype[0] ? jalrpc : branchpc) :
+                        64'b0;
 
 
 endmodule

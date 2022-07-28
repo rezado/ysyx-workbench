@@ -8,18 +8,22 @@ wire [63:0] npc;
 wire [63:0] pc_out;
 wire [31:0] inst;
 // IFU
+wire [63:0] branchpc;
+wire        branch;
 assign pc = pc_out;
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
-	.clk    (clk    ),
-	.rst    (rst    ),
-	.nextpc (npc    ),
-	.pc     (pc_out ),
-	.inst   (inst   )
+	.clk      (clk      ),
+	.rst      (rst      ),
+	.branchpc (branchpc ),
+	.branch   (branch   ),
+	.pc       (pc_out   ),
+	.inst     (inst     )
 );
 
-always @(posedge clk) begin
-	$display("read at ", pc, "inst: ", inst);
-end
+
+// always @(posedge clk) begin
+// 	$display("read at ", pc, "inst: ", inst);
+// end
 
 
 // IF_ID
@@ -29,7 +33,7 @@ assign if_pc = pc_out;
 assign if_inst = inst;
 ID_reg u_ID_reg(
 	.clk     (clk     ),
-	.rst     (rst     ),
+	.rst     (rst | branch),
 	.valid   (1'b1    ),
 	.ena     (~rst    ),
 	.if_pc   (if_pc   ),
@@ -39,7 +43,7 @@ ID_reg u_ID_reg(
 );
 
 
-// IDprintf
+// ID
 wire [16:0] id_alu_op;
 wire [ 1:0] id_sel_rfres;
 wire        id_mem_wen;
@@ -59,7 +63,7 @@ wire inst_inv;
 wire id_sys;
 
 ysyx_22040088_IDU u_ysyx_22040088_IDU(
-	.clk         (clk         ),
+	.clk         (clk            ),
 	.pc          (id_pc          ),
 	.inst        (id_inst        ),
 	.rf_wdata    (rf_wdata       ),
@@ -79,8 +83,10 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.rf_we_o     (id_rf_we       ),
 	.rf_waddr_o  (id_rf_waddr    ),
 	.sys         (id_sys         ),
+	.branch      (branch         ),
 	.nextpc      (npc            )
 );
+
 
 // ID_EX
 wire [63:0] ex_pc;

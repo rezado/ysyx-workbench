@@ -1,10 +1,13 @@
 module ysyx_22040088_IFU(
     input       clk,
     input       rst,
-	input [63:0] nextpc,
+	input [63:0] branchpc,
+	input       branch,
     output [63:0] pc,
 	output reg [31:0] inst
 );
+wire [63:0]nextpc;
+wire [63:0]addpc;
 
 ysyx_22040088_pc u_ysyx_22040088_pc(
 	.clk    (clk    ),
@@ -12,6 +15,23 @@ ysyx_22040088_pc u_ysyx_22040088_pc(
 	.pc_src (nextpc ),
 	.pc_out (pc     )
 );
+
+assign addpc = pc + 4;
+
+// 简单译码 执行jal指令
+wire jump;
+wire [63:0] jumppc;
+wire [63:0] offset;
+assign offset = {{44{inst[31]}}, inst[19:12], inst[20], inst[30:21], 1'b0};
+assign jump = (inst[6:0] == 7'b1101111);
+assign jumppc = pc + offset;
+
+// 选择nextpc
+assign nextpc = jump ? jumppc :
+		        branch ? branchpc :
+						addpc;
+
+
 
 import "DPI-C" function void npc_read(
   input longint raddr, output longint rdata);

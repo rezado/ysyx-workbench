@@ -6,7 +6,7 @@ module ysyx_22040088_controlunit(
     output         rf_we,
     output  [ 3:0] sel_alusrc1,
     output  [ 6:0] sel_alusrc2,
-    output  [ 8:0] sel_nextpc,
+    output  [ 6:0] sel_btype,
     output  [ 1:0] sel_rfres,
     output         mem_ena,
     output         mem_wen,
@@ -219,18 +219,13 @@ assign sel_alusrc2 = {inst_sllw | inst_sraw | inst_srlw, //zext(rdata2[4:0])
                       inst_slli | inst_srli | inst_xori | inst_slliw | inst_srliw | inst_sraiw |
                       inst_slti | inst_ori, // immI
                       r_type | b_type};  // rdata2
-assign sel_nextpc = {inst_bgeu,
-                     inst_bge,
-                     inst_bltu,
-                     inst_blt,
-                     inst_bne,
-                     inst_beq,
-                     inst_jalr,
-                     inst_jal,
-                     inst_addi | inst_auipc | inst_lui | r_type | load | store |
-                     inst_sltiu | inst_andi | inst_addiw | inst_srai | inst_slli | inst_srli |
-                     inst_divw | inst_remw | inst_sllw | inst_xori | inst_slliw | inst_srliw | inst_sraiw |
-                     inst_sraw | inst_srlw | inst_slti | inst_ori};
+assign sel_btype = {inst_bgeu,
+                    inst_bge,
+                    inst_bltu,
+                    inst_blt,
+                    inst_bne,
+                    inst_beq,
+                    inst_jalr};
 assign sel_rfres = {load, ~load};
 assign mem_ena = load | store;
 assign mem_wen = store;
