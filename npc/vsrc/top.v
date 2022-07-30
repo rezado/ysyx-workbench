@@ -16,9 +16,10 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.rst      (rst      ),
 	.branchpc (branchpc ),
 	.branch   (branch   ),
+	.jump_i   (id_jump  ),
 	.pc       (pc_out   ),
 	.inst     (inst     ),
-	.jump     (if_jump  )
+	.jump_o   (if_jump  )
 );
 
 
