@@ -6,6 +6,7 @@ module top(
 /* verilator lint_off UNUSED */
 wire [63:0] pc_out;
 wire [31:0] inst;
+wire        jump;
 // IFU
 wire [63:0] branchpc;
 wire        branch;
@@ -16,7 +17,8 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.branchpc (branchpc ),
 	.branch   (branch   ),
 	.pc       (pc_out   ),
-	.inst     (inst     )
+	.inst     (inst     ),
+	.jump     (jump     )
 );
 
 
@@ -32,7 +34,7 @@ assign if_pc = pc_out;
 assign if_inst = inst;
 ID_reg u_ID_reg(
 	.clk     (clk     ),
-	.rst     (rst | branch),
+	.rst     (rst | branch | jump),
 	.valid   (1'b1    ),
 	.ena     (~rst    ),
 	.if_pc   (if_pc   ),

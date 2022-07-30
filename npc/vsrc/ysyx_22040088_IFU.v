@@ -4,6 +4,7 @@ module ysyx_22040088_IFU(
 	input [63:0] branchpc,
 	input       branch,
     output [63:0] pc,
+	output      jump,
 	output reg [31:0] inst
 );
 wire [63:0]nextpc;
@@ -19,7 +20,7 @@ ysyx_22040088_pc u_ysyx_22040088_pc(
 assign addpc = pc + 4;
 
 // 简单译码 执行jal指令
-wire jump;
+// wire jump;
 wire [63:0] jumppc;
 wire [63:0] offset;
 assign offset = {{44{inst[31]}}, inst[19:12], inst[20], inst[30:21], 1'b0};
