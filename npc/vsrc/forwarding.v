@@ -32,13 +32,13 @@ assign we_forward_ex = ex_we && ~ex_load;
 assign we_forward_mem = mem_we && ~mem_load;
 assign we_forward_wb = wb_we;
 
-assign ForwardA_ex = we_forward_ex && ex_waddr == raddr1 && raddr1 != 0;
-assign ForwardA_mem = we_forward_mem && mem_waddr == raddr1 && raddr1 != 0;
-assign ForwardA_wb = we_forward_wb && wb_waddr == raddr1 && raddr1 != 0;
+assign ForwardA_ex = we_forward_ex && ex_waddr == raddr1 && raddr1 != 0 && re1;
+assign ForwardA_mem = we_forward_mem && mem_waddr == raddr1 && raddr1 != 0 && re1;
+assign ForwardA_wb = we_forward_wb && wb_waddr == raddr1 && raddr1 != 0 && re1;
 
-assign ForwardB_ex = we_forward_ex && ex_waddr == raddr2 && raddr2 != 0;
-assign ForwardB_mem = we_forward_mem && mem_waddr == raddr2 && raddr2 != 0;
-assign ForwardB_wb = we_forward_wb && wb_waddr == raddr2 && raddr2 != 0;
+assign ForwardB_ex = we_forward_ex && ex_waddr == raddr2 && raddr2 != 0 && re2;
+assign ForwardB_mem = we_forward_mem && mem_waddr == raddr2 && raddr2 != 0 && re2;
+assign ForwardB_wb = we_forward_wb && wb_waddr == raddr2 && raddr2 != 0 && re2;
 
 assign ForwardA = ForwardA_ex | ForwardA_mem | ForwardA_wb;
 assign ForwardB = ForwardB_ex | ForwardB_mem | ForwardB_wb;

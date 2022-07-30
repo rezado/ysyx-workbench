@@ -14,7 +14,9 @@ module ysyx_22040088_controlunit(
     output         inv,
     output  [ 3:0] sel_alures,
     output  [ 1:0] sel_memdata,
-    output         load
+    output         load,
+    output         rf_re1,
+    output         rf_re2
 );
 // 指令
 wire inst_lui;
@@ -243,5 +245,9 @@ assign sel_alures = {inst_mulhsu | inst_mulhu  // 无符号右移32位
 
 assign sel_memdata = {inst_lwu | inst_lhu | inst_lbu
                     , inst_ld | inst_lw | inst_lh | inst_lb};
+
+// jalr是pcbranch在读取rs1 branch读取rs1和rs2进行比较
+assign rf_re1 = sel_alusrc1[0] | sel_alusrc1[2] | sel_alusrc1[3] | inst_jalr | b_type;
+assign rf_re2 = sel_alusrc2[0] | sel_alusrc2[4] | sel_alusrc2[5] | sel_alusrc2[6] | b_type;
 
 endmodule
