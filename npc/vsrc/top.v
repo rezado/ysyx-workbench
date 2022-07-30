@@ -35,7 +35,7 @@ assign if_pc = pc_out;
 assign if_inst = inst;
 ID_reg u_ID_reg(
 	.clk     (clk     ),
-	.rst     (rst | branch | id_jump),
+	.rst     (rst | branch),
 	.valid   (1'b1    ),
 	.ena     (~rst    ),
 	.if_pc   (if_pc   ),

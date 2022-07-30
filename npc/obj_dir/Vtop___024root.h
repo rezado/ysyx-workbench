@@ -27,6 +27,7 @@ VL_MODULE(Vtop___024root) {
     // Anonymous structures to workaround compiler member-count bugs
     struct {
         CData/*0:0*/ top__DOT__branch;
+        CData/*0:0*/ top__DOT__id_jump;
         CData/*0:0*/ top__DOT__id_load;
         CData/*1:0*/ top__DOT__ex_sel_rfres;
         CData/*0:0*/ top__DOT__ex_mem_wen;
@@ -89,9 +90,9 @@ VL_MODULE(Vtop___024root) {
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sub;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sll;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_slt;
-        CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sltu;
     };
     struct {
+        CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sltu;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_xor;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_srl;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sra;
@@ -155,9 +156,9 @@ VL_MODULE(Vtop___024root) {
         QData/*63:0*/ top__DOT__ex_rf_rdata2;
         QData/*63:0*/ top__DOT__ex_alu_result;
         QData/*63:0*/ top__DOT__mem_pc;
-        QData/*63:0*/ top__DOT__mem_rf_rdata2;
     };
     struct {
+        QData/*63:0*/ top__DOT__mem_rf_rdata2;
         QData/*63:0*/ top__DOT__mem_alu_result;
         QData/*63:0*/ top__DOT__wb_pc;
         QData/*63:0*/ top__DOT__wb_alu_result;

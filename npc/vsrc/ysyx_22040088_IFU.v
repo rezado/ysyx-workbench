@@ -3,8 +3,9 @@ module ysyx_22040088_IFU(
     input       rst,
 	input [63:0] branchpc,
 	input       branch,
+	input       jump_i,
     output [63:0] pc,
-	output      jump,
+	output      jump_o,
 	output reg [31:0] inst
 );
 wire [63:0]nextpc;
@@ -24,15 +25,13 @@ assign addpc = pc + 4;
 wire [63:0] jumppc;
 wire [63:0] offset;
 assign offset = {{44{inst[31]}}, inst[19:12], inst[20], inst[30:21], 1'b0};
-assign jump = (inst[6:0] == 7'b1101111);
+assign jump_o = (inst[6:0] == 7'b1101111);
 assign jumppc = pc + offset;
 
 // 选择nextpc
-assign nextpc = jump ? jumppc :
+assign nextpc = jump_o ? jumppc :
 		        branch ? branchpc :
 						addpc;
-
-
 
 import "DPI-C" function void npc_read(
   input longint raddr, output longint rdata);
@@ -46,10 +45,10 @@ always @(posedge clk) begin
 end
 
 always @(posedge clk) begin
-	if (pc[2:0] == 3'b000) begin
+	if (!jump_i && !branch && pc[2:0] == 3'b000) begin
 		inst <= inst_data[31:0];
 	end
-	else if (pc[2:0] == 3'b100) begin
+	else if (!jump_i && !branch && pc[2:0] == 3'b100) begin
 		inst <= inst_data[63:32];
 	end
     else begin
