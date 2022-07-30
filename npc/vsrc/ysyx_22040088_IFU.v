@@ -28,9 +28,10 @@ assign jump_o = (inst[6:0] == 7'b1101111);
 assign jumppc = pc + offset;
 
 // 选择nextpc
-assign nextpc = jump_o ? jumppc :
+assign nextpc = rst    ? 64'h80000000 :
+				jump_o ? jumppc :
 		        branch ? branchpc :
-						64'h80000000;
+						 addpc;
 
 import "DPI-C" function void npc_read(
   input longint raddr, output longint rdata);
