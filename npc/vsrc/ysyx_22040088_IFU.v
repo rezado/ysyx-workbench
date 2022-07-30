@@ -3,7 +3,6 @@ module ysyx_22040088_IFU(
     input       rst,
 	input [63:0] branchpc,
 	input       branch,
-	input       jump_i,
     output [63:0] pc,
 	output      jump_o,
 	output reg [31:0] inst
@@ -45,10 +44,10 @@ always @(posedge clk) begin
 end
 
 always @(posedge clk) begin
-	if (!jump_i && !branch && pc[2:0] == 3'b000) begin
+	if (!jump_o && pc[2:0] == 3'b000) begin
 		inst <= inst_data[31:0];
 	end
-	else if (!jump_i && !branch && pc[2:0] == 3'b100) begin
+	else if (!jump_o && pc[2:0] == 3'b100) begin
 		inst <= inst_data[63:32];
 	end
     else begin

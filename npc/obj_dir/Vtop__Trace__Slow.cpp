@@ -100,8 +100,9 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declBit(c+382,"top u_ysyx_22040088_IFU rst", false,-1);
         tracep->declQuad(c+5,"top u_ysyx_22040088_IFU branchpc", false,-1, 63,0);
         tracep->declBit(c+7,"top u_ysyx_22040088_IFU branch", false,-1);
+        tracep->declBit(c+11,"top u_ysyx_22040088_IFU jump_i", false,-1);
         tracep->declQuad(c+1,"top u_ysyx_22040088_IFU pc", false,-1, 63,0);
-        tracep->declBit(c+4,"top u_ysyx_22040088_IFU jump", false,-1);
+        tracep->declBit(c+4,"top u_ysyx_22040088_IFU jump_o", false,-1);
         tracep->declBus(c+3,"top u_ysyx_22040088_IFU inst", false,-1, 31,0);
         tracep->declQuad(c+83,"top u_ysyx_22040088_IFU nextpc", false,-1, 63,0);
         tracep->declQuad(c+85,"top u_ysyx_22040088_IFU addpc", false,-1, 63,0);
