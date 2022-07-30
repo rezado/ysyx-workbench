@@ -98,7 +98,9 @@ ysyx_22040088_controlunit u_ysyx_22040088_controlunit(
     .inv         (inv         ),
     .sel_alures  (sel_alures  ),
     .sel_memdata (sel_memdata ),
-    .load        (load        )
+    .load        (load        ),
+    .rf_re1      (rf_re1      ),
+    .rf_re2      (rf_re2      )
 );
 
 wire [63:0] rf_rdata1;

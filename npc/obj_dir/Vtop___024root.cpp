@@ -945,49 +945,55 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_bgeu 
         = (IData)((0x7063U == (0x707fU & vlSelf->top__DOT__id_inst)));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__ForwardB_ex 
-        = (((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__we_forward_ex) 
-            & ((IData)(vlSelf->top__DOT__ex_rf_waddr) 
-               == (0x1fU & (vlSelf->top__DOT__id_inst 
-                            >> 0x14U)))) & (0U != (0x1fU 
-                                                   & (vlSelf->top__DOT__id_inst 
-                                                      >> 0x14U))));
+        = ((((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__we_forward_ex) 
+             & ((IData)(vlSelf->top__DOT__ex_rf_waddr) 
+                == (0x1fU & (vlSelf->top__DOT__id_inst 
+                             >> 0x14U)))) & (0U != 
+                                             (0x1fU 
+                                              & (vlSelf->top__DOT__id_inst 
+                                                 >> 0x14U)))) 
+           & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__rf_re2));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__ForwardB_mem 
-        = (((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__we_forward_mem) 
-            & ((IData)(vlSelf->top__DOT__mem_rf_waddr) 
-               == (0x1fU & (vlSelf->top__DOT__id_inst 
-                            >> 0x14U)))) & (0U != (0x1fU 
-                                                   & (vlSelf->top__DOT__id_inst 
-                                                      >> 0x14U))));
+        = ((((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__we_forward_mem) 
+             & ((IData)(vlSelf->top__DOT__mem_rf_waddr) 
+                == (0x1fU & (vlSelf->top__DOT__id_inst 
+                             >> 0x14U)))) & (0U != 
+                                             (0x1fU 
+                                              & (vlSelf->top__DOT__id_inst 
+                                                 >> 0x14U)))) 
+           & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__rf_re2));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__ForwardB_wb 
-        = (((IData)(vlSelf->top__DOT__wb_rf_we) & ((IData)(vlSelf->top__DOT__wb_rf_waddr) 
-                                                   == 
-                                                   (0x1fU 
-                                                    & (vlSelf->top__DOT__id_inst 
-                                                       >> 0x14U)))) 
-           & (0U != (0x1fU & (vlSelf->top__DOT__id_inst 
-                              >> 0x14U))));
+        = ((((IData)(vlSelf->top__DOT__wb_rf_we) & 
+             ((IData)(vlSelf->top__DOT__wb_rf_waddr) 
+              == (0x1fU & (vlSelf->top__DOT__id_inst 
+                           >> 0x14U)))) & (0U != (0x1fU 
+                                                  & (vlSelf->top__DOT__id_inst 
+                                                     >> 0x14U)))) 
+           & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__rf_re2));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__ForwardA_ex 
-        = (((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__we_forward_ex) 
-            & ((IData)(vlSelf->top__DOT__ex_rf_waddr) 
-               == (0x1fU & (vlSelf->top__DOT__id_inst 
-                            >> 0xfU)))) & (0U != (0x1fU 
-                                                  & (vlSelf->top__DOT__id_inst 
-                                                     >> 0xfU))));
+        = ((((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__we_forward_ex) 
+             & ((IData)(vlSelf->top__DOT__ex_rf_waddr) 
+                == (0x1fU & (vlSelf->top__DOT__id_inst 
+                             >> 0xfU)))) & (0U != (0x1fU 
+                                                   & (vlSelf->top__DOT__id_inst 
+                                                      >> 0xfU)))) 
+           & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__rf_re1));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__ForwardA_mem 
-        = (((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__we_forward_mem) 
-            & ((IData)(vlSelf->top__DOT__mem_rf_waddr) 
-               == (0x1fU & (vlSelf->top__DOT__id_inst 
-                            >> 0xfU)))) & (0U != (0x1fU 
-                                                  & (vlSelf->top__DOT__id_inst 
-                                                     >> 0xfU))));
+        = ((((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__we_forward_mem) 
+             & ((IData)(vlSelf->top__DOT__mem_rf_waddr) 
+                == (0x1fU & (vlSelf->top__DOT__id_inst 
+                             >> 0xfU)))) & (0U != (0x1fU 
+                                                   & (vlSelf->top__DOT__id_inst 
+                                                      >> 0xfU)))) 
+           & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__rf_re1));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__ForwardA_wb 
-        = (((IData)(vlSelf->top__DOT__wb_rf_we) & ((IData)(vlSelf->top__DOT__wb_rf_waddr) 
-                                                   == 
-                                                   (0x1fU 
-                                                    & (vlSelf->top__DOT__id_inst 
-                                                       >> 0xfU)))) 
-           & (0U != (0x1fU & (vlSelf->top__DOT__id_inst 
-                              >> 0xfU))));
+        = ((((IData)(vlSelf->top__DOT__wb_rf_we) & 
+             ((IData)(vlSelf->top__DOT__wb_rf_waddr) 
+              == (0x1fU & (vlSelf->top__DOT__id_inst 
+                           >> 0xfU)))) & (0U != (0x1fU 
+                                                 & (vlSelf->top__DOT__id_inst 
+                                                    >> 0xfU)))) 
+           & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__rf_re1));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__r_type 
         = (((((((((((((((((((((((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_add) 
                                 | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sub)) 
