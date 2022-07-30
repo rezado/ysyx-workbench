@@ -190,7 +190,6 @@ assign branch = sel_btype[0] ? 1'b1 :
 assign branchpc= branch ? (sel_btype[0] ? jalrpc : bpc) :
                         64'b0;
 
-
 // 判断流水线暂停
 assign stall = (ex_rf_we && ex_load && ex_rf_waddr == rs1 && rf_re1 && rs1 != 0) ||
                (ex_rf_we && ex_load && ex_rf_waddr == rs2 && rf_re2 && rs2 != 0) ||
