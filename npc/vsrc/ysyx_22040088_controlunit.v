@@ -13,7 +13,8 @@ module ysyx_22040088_controlunit(
     output  [ 3:0] mem_mask,
     output         inv,
     output  [ 3:0] sel_alures,
-    output  [ 1:0] sel_memdata
+    output  [ 1:0] sel_memdata,
+    output         load
 );
 // 指令
 wire inst_lui;
@@ -172,7 +173,7 @@ assign r_type = inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and 
             | inst_remu | inst_divu | inst_rem | inst_mulh | inst_mulhsu | inst_mulhu | inst_divuw | inst_remuw;
 assign b_type = inst_beq | inst_bne | inst_bge | inst_bgeu | inst_blt | inst_bltu;
 
-wire load, store;
+wire store;
 assign load = inst_ld | inst_lw | inst_lh | inst_lb | inst_lwu | inst_lhu | inst_lbu;
 assign store = inst_sd | inst_sw | inst_sh | inst_sb;
 

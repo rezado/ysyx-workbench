@@ -16,6 +16,7 @@ module MEM_reg(
     input              ex_rf_we,
     input       [ 4:0] ex_rf_waddr,
     input              ex_sys,
+    input              ex_load,
     
     output  reg [63:0] mem_pc,
     output  reg [31:0] mem_inst,
@@ -28,7 +29,8 @@ module MEM_reg(
     output  reg [ 1:0] mem_sel_memdata,
     output  reg        mem_rf_we,
     output  reg [ 4:0] mem_rf_waddr,
-    output  reg        mem_sys
+    output  reg        mem_sys,
+    output  reg        mem_load
 );
 
 always @(posedge clk) begin
@@ -45,6 +47,7 @@ always @(posedge clk) begin
         mem_rf_we <= 1'b0;
         mem_rf_waddr <= 5'b0;
         mem_sys <= 1'b0;
+        mem_load <= 1'b0;
     end
     else if (ena) begin
         mem_pc <= ex_pc;
@@ -59,6 +62,7 @@ always @(posedge clk) begin
         mem_rf_we <= ex_rf_we;
         mem_rf_waddr <= ex_rf_waddr;
         mem_sys <= ex_sys;
+        mem_load <= ex_load;
     end
 end
 

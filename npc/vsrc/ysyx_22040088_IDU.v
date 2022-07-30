@@ -6,6 +6,19 @@ module ysyx_22040088_IDU(
     input [63:0] rf_wdata,
     input [ 4:0] rf_waddr_i,
     input        rf_we_i,
+
+    // 数据前递
+    input        ex_load,
+    input        mem_load,
+    // 来自ex阶段
+    input              ex_rf_we,
+    input       [ 4:0] ex_rf_waddr,
+    input       [63:0] ex_alu_result,
+    // 来自mem阶段
+    input              mem_rf_we,
+    input       [ 4:0] mem_rf_waddr,
+    input       [63:0] mem_alu_result,
+    
     // 控制信号
     output [16:0] alu_op,
     output [ 1:0] sel_rfres,
@@ -17,14 +30,16 @@ module ysyx_22040088_IDU(
     output [ 1:0] sel_memdata,
     output        rf_we_o,
     output [ 4:0] rf_waddr_o,
+    output        load,
     output        branch,
+    output        stall,
     
     // EXE源操作数
     output [63:0] alu_src1,
     output [63:0] alu_src2,
     output [63:0] rf_rdata2,
     output        sys,
-    output [63:0] nextpc
+    output [63:0] branchpc
 );
 
 assign sys = (inst == 32'b000000000001_00000_000_00000_1110011);
@@ -65,6 +80,7 @@ assign rf_waddr_o = rd;
 wire [3:0]sel_alusrc1;
 wire [6:0]sel_alusrc2;
 wire [6:0]sel_btype;
+wire      rf_re1, rf_re2;
 
 ysyx_22040088_controlunit u_ysyx_22040088_controlunit(
     .opcode      (opcode      ),
@@ -81,10 +97,12 @@ ysyx_22040088_controlunit u_ysyx_22040088_controlunit(
     .mem_mask    (mem_mask    ),
     .inv         (inv         ),
     .sel_alures  (sel_alures  ),
-    .sel_memdata (sel_memdata )
+    .sel_memdata (sel_memdata ),
+    .load        (load        )
 );
 
-wire [63:0]rf_rdata1;
+wire [63:0] rf_rdata1;
+wire [63:0] rf_port1, rf_port2;
 
 ysyx_22040088_regfile u_ysyx_22040088_regfile(
     .clk    (clk    ),
@@ -93,8 +111,8 @@ ysyx_22040088_regfile u_ysyx_22040088_regfile(
     .wen    (rf_we_i    ),
     .raddr1 (rs1 ),
     .raddr2 (rs2 ),
-    .rdata1 (rf_rdata1 ),
-    .rdata2 (rf_rdata2 )
+    .rdata1 (rf_port1 ),
+    .rdata2 (rf_port2 )
 );
 
 // 立即数符号扩展
@@ -153,18 +171,10 @@ assign lt = (rf_rdata1[63] & ~rf_rdata2[63])
 assign ltu = ~cout;
 
 // 生成跳转和分支的地址
-wire [63:0] jalrpc, branchpc;
+wire [63:0] jalrpc, bpc;
 assign jalrpc = (rf_rdata1 + immI_sext) & ~64'b1;
-assign branchpc = pc + immB_sext;
+assign bpc = pc + immB_sext;
 
-// 判断是否跳转
-// sel_btype = {inst_bgeu,
-//                     inst_bge,
-//                     inst_bltu,
-//                     inst_blt,
-//                     inst_bne,
-//                     inst_beq,
-//                     inst_jalr};
 assign branch = sel_btype[0] ? 1'b1 :
                 sel_btype[1] ? zero :
                 sel_btype[2] ? ~zero :
@@ -175,8 +185,44 @@ assign branch = sel_btype[0] ? 1'b1 :
                                1'b0;
 
 // 根据条件选择
-assign nextpc= branch ? (sel_btype[0] ? jalrpc : branchpc) :
+assign branchpc= branch ? (sel_btype[0] ? jalrpc : bpc) :
                         64'b0;
+
+
+// 判断流水线暂停
+assign stall = (ex_rf_we && ex_load && ex_rf_waddr == rs1 && rf_re1 && rs1 != 0) ||
+               (ex_rf_we && ex_load && ex_rf_waddr == rs2 && rf_re2 && rs2 != 0) ||
+               (mem_rf_we && mem_load && mem_rf_waddr == rs1 && rf_re1 && rs1 != 0) ||
+               (mem_rf_we && mem_load && mem_rf_waddr == rs2 && rf_re2 && rs2 != 0);
+
+// 数据前递
+wire ForwardA, ForwardB;
+wire [63:0] ForA_data, ForB_data;
+forwarding u_forwarding(
+    .raddr1         (rs1            ),
+    .raddr2         (rs2            ),
+    .re1            (rf_re1         ),
+    .re2            (rf_re2         ),
+    .ex_we          (ex_rf_we       ),
+    .ex_load        (ex_load        ),
+    .ex_waddr       (ex_rf_waddr    ),
+    .ex_alu_result  (ex_alu_result  ),
+    .mem_we         (mem_rf_we      ),
+    .mem_load       (mem_load       ),
+    .mem_waddr      (mem_rf_waddr   ),
+    .mem_alu_result (mem_alu_result ),
+    .wb_we          (rf_we_i        ),
+    .wb_waddr       (rf_waddr_i     ),
+    .wb_wdata       (rf_wdata       ),
+    .ForwardA       (ForwardA       ),
+    .ForwardB       (ForwardB       ),
+    .ASrc           (ForA_data      ),
+    .BSrc           (ForB_data      )
+);
+
+// 选择regfile读端口数据
+assign rf_rdata1 = ForwardA ? ForA_data : rf_port1;
+assign rf_rdata2 = ForwardB ? ForB_data : rf_port2;
 
 
 endmodule
