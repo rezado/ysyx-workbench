@@ -39,7 +39,7 @@ wire [63:0] inst_data;
 
 always @(posedge clk) begin
 	if (!rst) begin
-		$display(pc);
+		$display("%x", pc);
 		npc_read(pc, inst_data);
 
 	end
