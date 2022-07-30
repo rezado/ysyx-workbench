@@ -20,11 +20,11 @@ void sdb_mainloop();
 void single_cycle() {
     top->clk = 1; top->eval(); 
     #ifdef CONFIG_DUMPWAVE
-    contextp->timeInc(1); tfp->dump(contextp->time());
+    contextp->timeInc(5); tfp->dump(contextp->time());
     #endif
     top->clk = 0; top->eval();
     #ifdef CONFIG_DUMPWAVE
-    contextp->timeInc(1); tfp->dump(contextp->time());
+    contextp->timeInc(5); tfp->dump(contextp->time());
     #endif
 }
 
@@ -41,12 +41,12 @@ void rst_cycle() {
 
 void reset(int n) {
     top->rst = 1;
-    while (n--) rst_cycle();
+    while (n--) single_cycle();
     top->rst = 0;
-    top->clk = 0; top->eval();
-    #ifdef CONFIG_DUMPWAVE
-    contextp->timeInc(1); tfp->dump(contextp->time());
-    #endif
+    // top->clk = 0; top->eval();
+    // #ifdef CONFIG_DUMPWAVE
+    // contextp->timeInc(1); tfp->dump(contextp->time());
+    // #endif
 }
 
 void sim_init() {

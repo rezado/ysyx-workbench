@@ -4,45 +4,52 @@ module top(
 	output	[63:0] pc
 );
 /* verilator lint_off UNUSED */
-wire [63:0] npc;
 wire [63:0] pc_out;
 wire [31:0] inst;
+wire        if_jump;
 // IFU
-assign npc = pc + 4;
+wire [63:0] branchpc;
+wire        branch;
 assign pc = pc_out;
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
-	.clk    (clk    ),
-	.rst    (rst    ),
-	.nextpc (npc    ),
-	.pc     (pc_out ),
-	.inst   (inst   )
+	.clk      (clk      ),
+	.rst      (rst      ),
+	.branchpc (branchpc ),
+	.branch   (branch   ),
+	// .jump_i   (id_jump  ),
+	.pc       (pc_out   ),
+	.inst     (inst     ),
+	.jump_o   (if_jump  )
 );
 
-always @(posedge clk) begin
-	$display("read at ", pc, "inst: ", inst);
-end
+
+// always @(posedge clk) begin
+// 	$display("read at ", pc, "inst: ", inst);
+// end
 
 
 // IF_ID
 wire [63:0] if_pc, id_pc;
 wire [31:0] if_inst, id_inst;
+wire        id_jump;
 assign if_pc = pc_out;
 assign if_inst = inst;
 ID_reg u_ID_reg(
 	.clk     (clk     ),
-	.rst     (rst     ),
+	.rst     (rst | branch),
 	.valid   (1'b1    ),
-	.ena     (1'b1    ),
+	.ena     (~rst    ),
 	.if_pc   (if_pc   ),
 	.if_inst (if_inst ),
+	.if_jump (if_jump ),
 	.id_pc   (id_pc   ),
-	.id_inst (id_inst )
+	.id_inst (id_inst ),
+	.id_jump (id_jump )
 );
 
 
 // ID
 wire [16:0] id_alu_op;
-wire [ 6:0] id_sel_nextpc;
 wire [ 1:0] id_sel_rfres;
 wire        id_mem_wen;
 wire        id_mem_ena;
@@ -54,35 +61,50 @@ wire [63:0] id_alu_src2;
 wire [63:0] id_rf_rdata2;
 wire        id_rf_we;
 wire [ 4:0] id_rf_waddr;
+wire        id_load;
 // write back from WB
 wire [63:0] rf_wdata;
 // direct to top
 wire inst_inv;
 wire id_sys;
+wire stall;
 
 ysyx_22040088_IDU u_ysyx_22040088_IDU(
-	.clk         (clk         ),
-	.pc          (id_pc          ),
-	.inst        (id_inst        ),
-	.rf_wdata    (rf_wdata       ),
-	.rf_waddr_i  (wb_rf_waddr    ),
-	.rf_we_i     (wb_rf_we       ),
-	.alu_op      (id_alu_op      ),
-	.sel_nextpc  (id_sel_nextpc  ),
-	.sel_rfres   (id_sel_rfres   ),
-	.mem_wen     (id_mem_wen     ),
-	.mem_ena     (id_mem_ena     ),
-	.mem_mask    (id_mem_mask    ),
-	.inv         (inst_inv       ),
-	.sel_alures  (id_sel_alures  ),
-	.sel_memdata (id_sel_memdata ),
-	.alu_src1    (id_alu_src1    ),
-	.alu_src2    (id_alu_src2    ),
-	.rf_rdata2   (id_rf_rdata2   ),
-	.rf_we_o     (id_rf_we       ),
-	.rf_waddr_o  (id_rf_waddr    ),
-	.sys         (id_sys         )
+	.clk            (clk            ),
+	.pc             (id_pc             ),
+	.inst           (id_inst           ),
+	.rf_wdata       (rf_wdata       ),
+	.rf_waddr_i     (wb_rf_waddr     ),
+	.rf_we_i        (wb_rf_we        ),
+	.ex_load        (ex_load        ),
+	.mem_load       (mem_load       ),
+	.ex_rf_we       (ex_rf_we       ),
+	.ex_rf_waddr    (ex_rf_waddr    ),
+	.ex_alu_result  (ex_alu_result  ),
+	.mem_rf_we      (mem_rf_we      ),
+	.mem_rf_waddr   (mem_rf_waddr   ),
+	.mem_alu_result (mem_alu_result ),
+	.alu_op         (id_alu_op         ),
+	.sel_rfres      (id_sel_rfres      ),
+	.mem_wen        (id_mem_wen        ),
+	.mem_ena        (id_mem_ena        ),
+	.mem_mask       (id_mem_mask       ),
+	.inv            (inst_inv            ),
+	.sel_alures     (id_sel_alures     ),
+	.sel_memdata    (id_sel_memdata    ),
+	.rf_we_o        (id_rf_we        ),
+	.rf_waddr_o     (id_rf_waddr     ),
+	.load           (id_load           ),
+	.branch         (branch         ),
+	.stall          (stall          ),
+	.alu_src1       (id_alu_src1       ),
+	.alu_src2       (id_alu_src2       ),
+	.rf_rdata2      (id_rf_rdata2      ),
+	.sys            (id_sys            ),
+	.branchpc       (branchpc         )
 );
+
+
 
 // ID_EX
 wire [63:0] ex_pc;
@@ -100,11 +122,12 @@ wire [ 1:0] ex_sel_memdata;
 wire        ex_rf_we;
 wire [ 4:0] ex_rf_waddr;
 wire		ex_sys;
+wire        ex_load;
 EX_reg u_EX_reg(
 	.clk            (clk           ),
 	.rst            (rst           ),
 	.valid          (1'b1          ),
-	.ena            (1'b1          ),
+	.ena            (~rst          ),
 	.id_pc          (id_pc          ),
 	.id_inst        (id_inst        ),
 	.id_alu_op      (id_alu_op      ),
@@ -120,6 +143,7 @@ EX_reg u_EX_reg(
 	.id_rf_we       (id_rf_we       ),
 	.id_rf_waddr    (id_rf_waddr    ),
 	.id_sys         (id_sys         ),
+	.id_load        (id_load        ),
 	.ex_pc          (ex_pc          ),
 	.ex_inst        (ex_inst        ),
 	.ex_alu_op      (ex_alu_op      ),
@@ -134,7 +158,8 @@ EX_reg u_EX_reg(
 	.ex_sel_memdata (ex_sel_memdata ),
 	.ex_rf_we       (ex_rf_we       ),
 	.ex_rf_waddr    (ex_rf_waddr    ),
-	.ex_sys         (ex_sys         )
+	.ex_sys         (ex_sys         ),
+	.ex_load        (ex_load        )
 );
 
 
@@ -162,11 +187,12 @@ wire [ 1:0] mem_sel_memdata;
 wire        mem_rf_we;
 wire [ 4:0] mem_rf_waddr;
 wire		mem_sys;
+wire        mem_load;
 MEM_reg u_MEM_reg(
 	.clk             (clk             ),
 	.rst             (rst             ),
 	.valid           (1'b1            ),
-	.ena             (1'b1            ),
+	.ena             (~rst            ),
 	.ex_pc           (ex_pc           ),
 	.ex_inst         (ex_inst         ),
 	.ex_alu_result   (ex_alu_result   ),
@@ -179,6 +205,7 @@ MEM_reg u_MEM_reg(
 	.ex_rf_we        (ex_rf_we        ),
 	.ex_rf_waddr     (ex_rf_waddr     ),
 	.ex_sys			 (ex_sys          ),
+	.ex_load         (ex_load         ),
 	.mem_pc          (mem_pc          ),
 	.mem_inst        (mem_inst        ),
 	.mem_alu_result  (mem_alu_result  ),
@@ -190,7 +217,8 @@ MEM_reg u_MEM_reg(
 	.mem_sel_memdata (mem_sel_memdata ),
 	.mem_rf_we       (mem_rf_we       ),
 	.mem_rf_waddr    (mem_rf_waddr    ),
-	.mem_sys		 (mem_sys         )
+	.mem_sys		 (mem_sys         ),
+	.mem_load        (mem_load        )
 );
 
 
@@ -217,7 +245,7 @@ WB_reg u_WB_reg(
 	.clk            (clk            ),
 	.rst            (rst            ),
 	.valid          (1'b1           ),
-	.ena            (1'b1           ),
+	.ena            (~rst           ),
 	.mem_pc         (mem_pc         ),
 	.mem_inst       (mem_inst       ),
 	.mem_alu_result (mem_alu_result ),

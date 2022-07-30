@@ -57,6 +57,7 @@ extern "C" void npc_read(long long raddr, long long *rdata) {
 
   if (likely(in_pmem((paddr_t)raddr))) {
     *rdata = host_read(guest_to_host(raddr & ~0x7ull), 8);
+    printf("raddr:%llx data:%llx\n", raddr, *rdata);
     return;
   }
 

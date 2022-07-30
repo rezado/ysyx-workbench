@@ -56,12 +56,18 @@ wire [5:0] offset;
 assign offset = {idx, 3'b0};
 
 wire [63:0] tmpdata;
-always @(*) begin
-  npc_read(raddr, tmpdata);
+always @(posedge clk) begin
+  if (ena) begin
+    npc_read(raddr, tmpdata);
+    $display("Mem read");
+  end
 end
 
 always @(posedge clk) begin
-  npc_write(waddr, wdata, mask & {8{wen}});
+  if (ena) begin
+    npc_write(waddr, wdata, mask & {8{wen}});
+    $display("Mem write");
+  end
 end
 
 // 截取需要部分并右移
