@@ -59,7 +59,7 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
     Vtop___024root____Vdpiimwrap_top__DOT__get_inv_TOP(0U);
     if (VL_UNLIKELY(vlSelf->top__DOT__wb_sys)) {
         Vtop___024root____Vdpiimwrap_top__DOT__finish_sim_TOP();
-        VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 276, "");
+        VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 278, "");
     }
     vlSelf->top__DOT__rf_wdata = (((- (QData)((IData)(
                                                       (1U 
@@ -956,8 +956,13 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__key_list[3U] 
         = (0xfU & vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__pair_list
            [3U][2U]);
-    vlSelf->top__DOT____Vcellinp__u_ID_reg__rst = ((IData)(vlSelf->rst) 
-                                                   | (IData)(vlSelf->top__DOT__branch));
+    vlSelf->top__DOT____Vcellinp__u_ID_reg__rst = (
+                                                   ((IData)(vlSelf->rst) 
+                                                    | (IData)(vlSelf->top__DOT__branch)) 
+                                                   | (0x6fU 
+                                                      == 
+                                                      (0x7fU 
+                                                       & vlSelf->top__DOT__inst)));
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__nextpc 
         = ((0x6fU == (0x7fU & vlSelf->top__DOT__inst))
             ? (vlSelf->top__DOT__pc_out + (((- (QData)((IData)(
