@@ -19,7 +19,7 @@ extern "C" {
     extern void get_inst(int inst);
     // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:289:30
     extern void get_inv(int inv);
-    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/ysyx_22040088_IFU.v:35:30
+    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/ysyx_22040088_IFU.v:36:30
     extern void npc_read(long long raddr, long long* rdata);
     // DPI import at /home/bill/ysyx-workbench/npc/vsrc/mem.v:14:30
     extern void npc_write(long long waddr, long long wdata, char wmask);
