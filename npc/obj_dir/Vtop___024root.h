@@ -28,7 +28,6 @@ VL_MODULE(Vtop___024root) {
     struct {
         CData/*0:0*/ top__DOT__branch;
         CData/*0:0*/ top__DOT__id_load;
-        CData/*0:0*/ top__DOT__inst_inv;
         CData/*1:0*/ top__DOT__ex_sel_rfres;
         CData/*0:0*/ top__DOT__ex_mem_wen;
         CData/*0:0*/ top__DOT__ex_mem_ena;
@@ -53,7 +52,6 @@ VL_MODULE(Vtop___024root) {
         CData/*0:0*/ top__DOT__wb_rf_we;
         CData/*4:0*/ top__DOT__wb_rf_waddr;
         CData/*0:0*/ top__DOT__wb_sys;
-        CData/*0:0*/ top__DOT__inv;
         CData/*3:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__sel_alusrc1;
         CData/*6:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__sel_alusrc2;
         CData/*6:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__sel_btype;
@@ -90,10 +88,10 @@ VL_MODULE(Vtop___024root) {
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_add;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sub;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sll;
-    };
-    struct {
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_slt;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sltu;
+    };
+    struct {
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_xor;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_srl;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sra;
@@ -156,10 +154,10 @@ VL_MODULE(Vtop___024root) {
         QData/*63:0*/ top__DOT__ex_alu_src2;
         QData/*63:0*/ top__DOT__ex_rf_rdata2;
         QData/*63:0*/ top__DOT__ex_alu_result;
-    };
-    struct {
         QData/*63:0*/ top__DOT__mem_pc;
         QData/*63:0*/ top__DOT__mem_rf_rdata2;
+    };
+    struct {
         QData/*63:0*/ top__DOT__mem_alu_result;
         QData/*63:0*/ top__DOT__wb_pc;
         QData/*63:0*/ top__DOT__wb_alu_result;
