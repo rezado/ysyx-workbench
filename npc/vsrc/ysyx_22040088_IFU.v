@@ -39,8 +39,9 @@ wire [63:0] inst_data;
 
 always @(posedge clk) begin
 	if (!rst) begin
+		$display(pc);
 		npc_read(pc, inst_data);
-		$display("IF read");
+
 	end
 end
 
