@@ -13,7 +13,7 @@ uint64_t g_nr_guest_inst = 0;
 static uint64_t g_timer = 0; // unit: us
 static bool g_print_step = false;
 #ifdef CONFIG_DUMPWAVE
-#define MAX_SIM_TIME 50000
+#define MAX_SIM_TIME 5000
 #endif
 uint64_t sim_time = 0;
 bool run_flag = true;
@@ -58,10 +58,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   // DIFFTEST比DUT晚一个周期更新
-  if (g_nr_guest_inst <= 5 || top->skip == 1) {
-    difftest_skip_ref();
-    printf("time:%d pc:%x\n", g_nr_guest_inst, _this->pc);
-  }
+  if (first_exec) first_exec = false;
   else IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
 #ifdef CONFIG_WATCHPOINT
   // scan watchpoints

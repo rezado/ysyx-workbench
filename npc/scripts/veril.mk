@@ -29,7 +29,7 @@ override ARGS ?= --log=$(BUILD_DIR)/npc-log.txt
 override ARGS += $(ARGS_DIFF)
 
 # Command to execute NEMU
-IMG ?= $(NPC_HOME)/bin/IMG.bin
+IMG ?=
 
 # rules for verilator
 CFLAGS += -DTOP_NAME="\"V$(TOPNAME)\""
@@ -40,7 +40,6 @@ LDFLAGS += $(shell llvm-config --libs)
 LDFLAGS += -rdynamic
 NPCFLAGS := 
 NPC_EXEC := $(BIN) $(ARGS) $(IMG)
-WAVE_CONFIG = $(NPC_HOME)/vcd/config.gtkw
 
 
 clean:
@@ -56,17 +55,12 @@ sim:
 	@echo $(CFLAGS)
 
 run:
-	make sim
 	@echo $(NPC_EXEC)
 	$(NPC_EXEC)
 
 gdb:
 	$(call git_commit, "gdb NPC")
 	gdb -s $(BINARY) --args $(NPC_EXEC)
-
-wave:
-	@echo Show wave
-	gtkwave $(NPC_HOME)/vcd/dump.vcd $(WAVE_CONFIG)
 
 include ../Makefile
 .PHONY: clean run
