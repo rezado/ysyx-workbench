@@ -10,7 +10,7 @@ wire        if_jump;
 // IFU
 wire [63:0] branchpc;
 wire        branch;
-assign pc = pc_out;
+assign pc = wb_pc;
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.clk      (clk      ),
 	.rst      (rst      ),
