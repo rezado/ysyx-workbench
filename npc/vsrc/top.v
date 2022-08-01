@@ -16,35 +16,23 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.rst      (rst      ),
 	.branchpc (branchpc ),
 	.branch   (branch   ),
-	// .jump_i   (id_jump  ),
-	.pc       (pc_out   ),
-	.inst     (inst     ),
-	.jump_o   (if_jump  )
+	.pc       (pc_out   )
 );
-
 
 // always @(posedge clk) begin
 // 	$display("read at ", pc, "inst: ", inst);
 // end
 
-
 // IF_ID
 wire [63:0] if_pc, id_pc;
-wire [31:0] if_inst, id_inst;
-wire        id_jump;
 assign if_pc = pc_out;
-assign if_inst = inst;
 ID_reg u_ID_reg(
 	.clk     (clk     ),
 	.rst     (rst | branch),
 	.valid   (1'b1    ),
 	.ena     (~rst    ),
 	.if_pc   (if_pc   ),
-	.if_inst (if_inst ),
-	.if_jump (if_jump ),
-	.id_pc   (id_pc   ),
-	.id_inst (id_inst ),
-	.id_jump (id_jump )
+	.id_pc   (id_pc   )
 );
 
 
@@ -62,6 +50,7 @@ wire [63:0] id_rf_rdata2;
 wire        id_rf_we;
 wire [ 4:0] id_rf_waddr;
 wire        id_load;
+wire [31:0] id_inst;
 // write back from WB
 wire [63:0] rf_wdata;
 // direct to top
@@ -69,10 +58,12 @@ wire inst_inv;
 wire id_sys;
 wire stall;
 
+assign id_inst = inst;
+
 ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.clk            (clk            ),
+	.rst            (rst            ),
 	.pc             (id_pc             ),
-	.inst           (id_inst           ),
 	.rf_wdata       (rf_wdata       ),
 	.rf_waddr_i     (wb_rf_waddr     ),
 	.rf_we_i        (wb_rf_we        ),
@@ -84,6 +75,7 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.mem_rf_we      (mem_rf_we      ),
 	.mem_rf_waddr   (mem_rf_waddr   ),
 	.mem_alu_result (mem_alu_result ),
+	.inst           (inst           ),
 	.alu_op         (id_alu_op         ),
 	.sel_rfres      (id_sel_rfres      ),
 	.mem_wen        (id_mem_wen        ),
@@ -104,8 +96,6 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.branchpc       (branchpc         )
 );
 
-
-
 // ID_EX
 wire [63:0] ex_pc;
 wire [31:0] ex_inst;
@@ -123,6 +113,7 @@ wire        ex_rf_we;
 wire [ 4:0] ex_rf_waddr;
 wire		ex_sys;
 wire        ex_load;
+
 EX_reg u_EX_reg(
 	.clk            (clk           ),
 	.rst            (rst           ),
