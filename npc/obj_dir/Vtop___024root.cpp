@@ -332,6 +332,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     } else if ((1U & (~ (IData)(vlSelf->rst)))) {
         vlSelf->top__DOT__mem_mem_ena = vlSelf->top__DOT__ex_mem_ena;
     }
+    vlSelf->pc = vlSelf->top__DOT__wb_pc;
     if (vlSelf->rst) {
         vlSelf->top__DOT__mem_pc = 0x80000000ULL;
     } else if ((1U & (~ (IData)(vlSelf->rst)))) {
@@ -764,7 +765,6 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     } else if ((1U & (~ (IData)(vlSelf->rst)))) {
         vlSelf->top__DOT__id_inst = vlSelf->top__DOT__inst;
     }
-    vlSelf->pc = vlSelf->top__DOT__pc_out;
     vlSelf->top__DOT__inst = ((0U == (7U & (IData)(vlSelf->top__DOT__pc_out)))
                                ? (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data)
                                : ((4U == (7U & (IData)(vlSelf->top__DOT__pc_out)))
