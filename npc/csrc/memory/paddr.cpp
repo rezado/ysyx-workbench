@@ -24,7 +24,7 @@ static void out_of_bound(paddr_t addr) {
       addr, CONFIG_MBASE, CONFIG_MBASE + CONFIG_MSIZE, CPU.pc);
 }
 
-void init_mem() {
+extern "C" void init_mem() {
 #if   defined(CONFIG_PMEM_MALLOC)
   pmem = malloc(CONFIG_MSIZE);
   assert(pmem);
