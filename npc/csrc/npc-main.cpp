@@ -90,7 +90,7 @@ void sim_exit() {
 
 int main(int argc, char *argv[]) {
   sim_init();
-  reset(4);
+  reset(1);
 
   /* Initialize the monitor. */
 #ifdef CONFIG_TARGET_AM
