@@ -2,7 +2,6 @@
 #include <memory/paddr.h>
 #include <device/mmio.h>
 #include <isa.h>
-#include <utils.h>
 #include <debug.h>
 #include <sys/time.h>
 
