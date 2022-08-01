@@ -20,11 +20,11 @@ void sdb_mainloop();
 void single_cycle() {
     top->clk = 1; top->eval(); 
     #ifdef CONFIG_DUMPWAVE
-    contextp->timeInc(1); tfp->dump(contextp->time());
+    contextp->timeInc(5); tfp->dump(contextp->time());
     #endif
     top->clk = 0; top->eval();
     #ifdef CONFIG_DUMPWAVE
-    contextp->timeInc(1); tfp->dump(contextp->time());
+    contextp->timeInc(5); tfp->dump(contextp->time());
     #endif
 }
 

@@ -1,7 +1,8 @@
 module ysyx_22040088_IDU(
     input       clk,
-    input       rst,
+    // input       rst,
     input [63:0] pc,
+    input [31:0] inst,
     input [63:0] rf_wdata,
     input [ 4:0] rf_waddr_i,
     input        rf_we_i,
@@ -17,9 +18,6 @@ module ysyx_22040088_IDU(
     input              mem_rf_we,
     input       [ 4:0] mem_rf_waddr,
     input       [63:0] mem_alu_result,
-    
-    // 指令
-    output [31:0] inst,
     
     // 控制信号
     output [16:0] alu_op,
@@ -43,21 +41,6 @@ module ysyx_22040088_IDU(
     output        sys,
     output [63:0] branchpc
 );
-
-import "DPI-C" function void npc_read(
-  input longint raddr, output longint rdata);
-wire [63:0] inst_data;
-
-always @(posedge clk) begin
-	if (!rst) begin
-		// $display("%x", pc);
-		npc_read(pc, inst_data);
-	end
-end
-
-assign inst = (pc[2:0] == 3'b000) ? inst_data[31:0] :
-			  (pc[2:0] == 3'b100) ? inst_data[63:32] :
-			  						32'b0;
 
 assign sys = (inst == 32'b000000000001_00000_000_00000_1110011);
 
