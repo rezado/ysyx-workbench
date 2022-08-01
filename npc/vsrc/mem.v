@@ -63,7 +63,6 @@ end
 always @(posedge clk) begin
   if (ena) begin
     npc_write(waddr, wdata, mask & {8{wen}});
-    $display("Mem write");
   end
 end
 

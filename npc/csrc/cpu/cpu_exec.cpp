@@ -60,7 +60,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   // DIFFTEST比DUT晚一个周期更新
   if (g_nr_guest_inst <= 5 || top->skip == 1) {
     difftest_skip_ref();
-    printf("time:%d pc:%x\n", g_nr_guest_inst, _this->pc);
+    // printf("time:%d pc:%x\n", g_nr_guest_inst, _this->pc);
   }
   else IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
 #ifdef CONFIG_WATCHPOINT
