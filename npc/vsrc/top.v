@@ -1,7 +1,8 @@
 module top(
     input   clk,
     input   rst,
-	output	[63:0] pc
+	output	[63:0] pc,
+	output  skip
 );
 /* verilator lint_off UNUSED */
 wire [63:0] pc_out;
@@ -10,7 +11,7 @@ wire        if_jump;
 // IFU
 wire [63:0] branchpc;
 wire        branch;
-assign pc = pc_out;
+assign pc = wb_pc;
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.clk      (clk      ),
 	.rst      (rst      ),
@@ -272,7 +273,7 @@ WB u_WB(
 	.rf_wdata    (rf_wdata    )
 );
 
-
+assign skip = (wb_inst == 32'b0);
 
 // ebreak
 import "DPI-C" function void finish_sim();

@@ -59,8 +59,10 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
     Vtop___024root____Vdpiimwrap_top__DOT__get_inv_TOP(0U);
     if (VL_UNLIKELY(vlSelf->top__DOT__wb_sys)) {
         Vtop___024root____Vdpiimwrap_top__DOT__finish_sim_TOP();
-        VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 282, "");
+        VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 283, "");
     }
+    vlSelf->pc = vlSelf->top__DOT__wb_pc;
+    vlSelf->skip = (0U == vlSelf->top__DOT__wb_inst);
     vlSelf->top__DOT__rf_wdata = (((- (QData)((IData)(
                                                       (1U 
                                                        & (IData)(vlSelf->top__DOT__wb_sel_rfres))))) 
@@ -139,7 +141,6 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
         = ((IData)(vlSelf->top__DOT__mem_rf_we) & (~ (IData)(vlSelf->top__DOT__mem_load)));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__we_forward_ex 
         = ((IData)(vlSelf->top__DOT__ex_rf_we) & (~ (IData)(vlSelf->top__DOT__ex_load)));
-    vlSelf->pc = vlSelf->top__DOT__pc_out;
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immJ 
         = ((0x100000U & (vlSelf->top__DOT__id_inst 
                          >> 0xbU)) | ((0xff000U & vlSelf->top__DOT__id_inst) 
@@ -1100,6 +1101,7 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->clk = VL_RAND_RESET_I(1);
     vlSelf->rst = VL_RAND_RESET_I(1);
     vlSelf->pc = VL_RAND_RESET_Q(64);
+    vlSelf->skip = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__pc_out = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__inst = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__branch = VL_RAND_RESET_I(1);
