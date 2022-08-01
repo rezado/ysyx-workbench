@@ -24,7 +24,7 @@ static void out_of_bound(paddr_t addr) {
       addr, CONFIG_MBASE, CONFIG_MBASE + CONFIG_MSIZE, CPU.pc);
 }
 
-extern "C" void init_mem() {
+void init_mem() {
 #if   defined(CONFIG_PMEM_MALLOC)
   pmem = malloc(CONFIG_MSIZE);
   assert(pmem);
@@ -44,8 +44,8 @@ extern "C" void npc_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   // printf("read %llx from %llx\n", *rdata, raddr);
   #ifdef CONFIG_MTRACE
-      // if (raddr != RESET_VECTOR) printf("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
-      Log("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
+      if (raddr != RESET_VECTOR) printf("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
+      // Log("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
   #endif
 
   if (raddr == RTC_ADDR) {
