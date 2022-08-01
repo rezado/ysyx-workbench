@@ -41,12 +41,12 @@ void rst_cycle() {
 
 void reset(int n) {
     top->rst = 1;
-    while (n--) rst_cycle();
+    while (n--) single_cycle();
     top->rst = 0;
-    top->clk = 0; top->eval();
-    #ifdef CONFIG_DUMPWAVE
-    contextp->timeInc(1); tfp->dump(contextp->time());
-    #endif
+    // top->clk = 0; top->eval();
+    // #ifdef CONFIG_DUMPWAVE
+    // contextp->timeInc(1); tfp->dump(contextp->time());
+    // #endif
 }
 
 void sim_init() {
@@ -80,7 +80,7 @@ void sim_init() {
 }
 
 void sim_exit() {
-    single_cycle();
+    // single_cycle();
     #ifdef CONFIG_DUMPWAVE
     tfp->close();
     delete contextp;
@@ -90,7 +90,7 @@ void sim_exit() {
 
 int main(int argc, char *argv[]) {
   sim_init();
-  reset(4);
+  reset(1);
 
   /* Initialize the monitor. */
 #ifdef CONFIG_TARGET_AM

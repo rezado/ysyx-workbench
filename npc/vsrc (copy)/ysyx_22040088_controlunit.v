@@ -6,17 +6,13 @@ module ysyx_22040088_controlunit(
     output         rf_we,
     output  [ 3:0] sel_alusrc1,
     output  [ 6:0] sel_alusrc2,
-    output  [ 6:0] sel_btype,
-    output  [ 1:0] sel_rfres,
+    output  [ 6:0] sel_nextpc,
+    output  [ 2:0] sel_rfres,
     output         mem_ena,
     output         mem_wen,
     output  [ 3:0] mem_mask,
     output         inv,
-    output  [ 3:0] sel_alures,
-    output  [ 1:0] sel_memdata,
-    output         load,
-    output         rf_re1,
-    output         rf_re2
+    output  [ 3:0] sel_alures
 );
 // 指令
 wire inst_lui;
@@ -158,14 +154,12 @@ assign inst_divuw = (opcode == 7'b0111011) && (funct3 == 3'b101) && (funct7 == 7
 assign inst_remuw = (opcode == 7'b0111011) && (funct3 == 3'b111) && (funct7 == 7'b0000001);
 
 // TODO:每次添加指令这里都要修改
-// assign inv = ~(inst_addi | inst_lui | inst_auipc | inst_jal | inst_jalr | inst_sd | inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor | inst_sll | inst_srl | inst_sra |
-//                inst_beq | inst_bne | inst_blt | inst_bltu | inst_bge | inst_bgeu | load | store | inst_add |
-//                inst_addw | inst_sltiu | inst_andi |inst_addiw | inst_srai | inst_slli | inst_srli | inst_mulw |
-//                inst_divw | inst_remw | inst_subw | inst_sllw | inst_xori | inst_slliw | inst_sraiw | inst_srliw |
-//                inst_mul | inst_div | inst_sraw | inst_srlw | inst_remu | inst_divu |  inst_rem |
-//                inst_slti | inst_ori | inst_mulh | inst_mulhsu | inst_mulhu | inst_divuw | inst_remuw);
-
-assign inv = 1'b0;
+assign inv = ~(inst_addi | inst_lui | inst_auipc | inst_jal | inst_jalr | inst_sd | inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor | inst_sll | inst_srl | inst_sra |
+               inst_beq | inst_bne | inst_blt | inst_bltu | inst_bge | inst_bgeu | load | store | inst_add |
+               inst_addw | inst_sltiu | inst_andi |inst_addiw | inst_srai | inst_slli | inst_srli | inst_mulw |
+               inst_divw | inst_remw | inst_subw | inst_sllw | inst_xori | inst_slliw | inst_sraiw | inst_srliw |
+               inst_mul | inst_div | inst_sraw | inst_srlw | inst_remu | inst_divu |  inst_rem |
+               inst_slti | inst_ori | inst_mulh | inst_mulhsu | inst_mulhu | inst_divuw | inst_remuw);
 
 // 指令类型
 wire r_type, b_type;
@@ -175,7 +169,7 @@ assign r_type = inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and 
             | inst_remu | inst_divu | inst_rem | inst_mulh | inst_mulhsu | inst_mulhu | inst_divuw | inst_remuw;
 assign b_type = inst_beq | inst_bne | inst_bge | inst_bgeu | inst_blt | inst_bltu;
 
-wire store;
+wire load, store;
 assign load = inst_ld | inst_lw | inst_lh | inst_lb | inst_lwu | inst_lhu | inst_lbu;
 assign store = inst_sd | inst_sw | inst_sh | inst_sb;
 
@@ -222,14 +216,19 @@ assign sel_alusrc2 = {inst_sllw | inst_sraw | inst_srlw, //zext(rdata2[4:0])
                       inst_slli | inst_srli | inst_xori | inst_slliw | inst_srliw | inst_sraiw |
                       inst_slti | inst_ori, // immI
                       r_type | b_type};  // rdata2
-assign sel_btype = {inst_bgeu,
-                    inst_bge,
-                    inst_bltu,
-                    inst_blt,
-                    inst_bne,
-                    inst_beq,
-                    inst_jalr};
-assign sel_rfres = {load, ~load};
+assign sel_nextpc = {inst_bge | inst_bgeu,
+                     inst_blt | inst_bltu,
+                     inst_bne,
+                     inst_beq,
+                     inst_jalr,
+                     inst_jal,
+                     inst_addi | inst_auipc | inst_lui | r_type | load | store |
+                     inst_sltiu | inst_andi | inst_addiw | inst_srai | inst_slli | inst_srli |
+                     inst_divw | inst_remw | inst_sllw | inst_xori | inst_slliw | inst_srliw | inst_sraiw |
+                     inst_sraw | inst_srlw | inst_slti | inst_ori};
+assign sel_rfres = {inst_lwu | inst_lhu | inst_lbu
+                    , inst_ld | inst_lw | inst_lh | inst_lb
+                    , ~load};
 assign mem_ena = load | store;
 assign mem_wen = store;
 assign mem_mask = inst_ld | inst_sd ? 4'b0001 :
@@ -242,12 +241,5 @@ assign sel_alures = {inst_mulhsu | inst_mulhu  // 无符号右移32位
                     ,inst_mulh  // 带符号右移32位
                     ,word  // 低32位
                     , ~(word | inst_mulh | inst_mulhsu | inst_mulhu)};
-
-assign sel_memdata = {inst_lwu | inst_lhu | inst_lbu
-                    , inst_ld | inst_lw | inst_lh | inst_lb};
-
-// jalr是pcbranch在读取rs1 branch读取rs1和rs2进行比较
-assign rf_re1 = sel_alusrc1[0] | sel_alusrc1[2] | sel_alusrc1[3] | inst_jalr | b_type;
-assign rf_re2 = sel_alusrc2[0] | sel_alusrc2[4] | sel_alusrc2[5] | sel_alusrc2[6] | b_type;
 
 endmodule

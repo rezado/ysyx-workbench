@@ -7,7 +7,6 @@
 #define CONFIG_ISA_riscv64 1
 #define CONFIG_DIFFTEST_REF_NAME "nemu-interpreter"
 #define CONFIG_ENGINE "interpreter"
-#define CONFIG_WATCHPOINT 1
 #define CONFIG_PC_RESET_OFFSET 0x0
 #define CONFIG_DUMPWAVE 1
 #define CONFIG_TARGET_NATIVE_ELF 1
@@ -21,7 +20,6 @@
 #define CONFIG_TIMER_GETTIMEOFDAY 1
 #define CONFIG_ENGINE_INTERPRETER 1
 #define CONFIG_CC_OPT "-O2"
-#define CONFIG_MTRACE 1
 #define CONFIG_RT_CHECK 1
 #define CONFIG_ISA64 1
 #define CONFIG_CC_GPP 1
