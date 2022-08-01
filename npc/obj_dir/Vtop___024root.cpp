@@ -108,7 +108,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data 
             = __Vtask_top__DOT__u_ysyx_22040088_IFU__DOT__npc_read__3__rdata;
     }
-    if (VL_UNLIKELY(vlSelf->top__DOT__mem_mem_ena)) {
+    if (vlSelf->top__DOT__mem_mem_ena) {
         Vtop___024root____Vdpiimwrap_top__DOT__u_MEM__DOT__u_mem__DOT__npc_write_TOP(
                                                                                 (((IData)(vlSelf->top__DOT__mem_mem_ena) 
                                                                                 & (IData)(vlSelf->top__DOT__mem_mem_wen))
@@ -116,7 +116,6 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
                                                                                  : 0x80000000ULL), vlSelf->top__DOT__mem_rf_rdata2, 
                                                                                 ((IData)(vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__mask) 
                                                                                 & (- (IData)((IData)(vlSelf->top__DOT__mem_mem_wen)))));
-        VL_WRITEF("Mem write\n");
     }
     if (vlSelf->top__DOT____Vcellinp__u_ID_reg__rst) {
         vlSelf->top__DOT__id_jump = 0U;
