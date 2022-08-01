@@ -58,7 +58,10 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   // DIFFTEST比DUT晚一个周期更新
-  if (sim_time < 5) sim_time++; 
+  if (sim_time < 5) {
+    sim_time++; 
+    printf("time:%d inst:%s\n", sim_time, _this->logbuf);
+  }
   else IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
 #ifdef CONFIG_WATCHPOINT
   // scan watchpoints
