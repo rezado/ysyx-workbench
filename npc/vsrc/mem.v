@@ -56,11 +56,8 @@ wire [5:0] offset;
 assign offset = {idx, 3'b0};
 
 wire [63:0] tmpdata;
-always @(posedge clk) begin
-  if (ena) begin
+always @(*) begin
     npc_read(raddr, tmpdata);
-    $display("Mem read");
-  end
 end
 
 always @(posedge clk) begin
@@ -71,7 +68,7 @@ always @(posedge clk) begin
 end
 
 // 截取需要部分并右移
-assign rdata = (tmpdata & {{8{mask[7]}}, {8{mask[6]}}, {8{mask[5]}}, {8{mask[4]}},
+assign rdata = ((tmpdata & {64{ena}}) & {{8{mask[7]}}, {8{mask[6]}}, {8{mask[5]}}, {8{mask[4]}},
                           {8{mask[3]}}, {8{mask[2]}}, {8{mask[1]}}, {8{mask[0]}}}) >> offset;
 
 endmodule
