@@ -2,7 +2,7 @@
 #include <memory/paddr.h>
 #include <device/mmio.h>
 #include <isa.h>
-#include <utils.h>
+#include <debug.h>
 #include <sys/time.h>
 
 #if   defined(CONFIG_PMEM_MALLOC)
@@ -45,6 +45,7 @@ extern "C" void npc_read(long long raddr, long long *rdata) {
   // printf("read %llx from %llx\n", *rdata, raddr);
   #ifdef CONFIG_MTRACE
       if (raddr != RESET_VECTOR) printf("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
+      // Log("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
   #endif
 
   if (raddr == RTC_ADDR) {
@@ -57,11 +58,12 @@ extern "C" void npc_read(long long raddr, long long *rdata) {
 
   if (likely(in_pmem((paddr_t)raddr))) {
     *rdata = host_read(guest_to_host(raddr & ~0x7ull), 8);
-    printf("raddr:%llx data:%llx\n", raddr, *rdata);
+    #ifdef CONFIG_MTRACE
+      if (raddr != RESET_VECTOR) printf("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
+    #endif
     return;
   }
 
-  printf("npc_read\n");
   // out_of_bound((paddr_t)raddr);
 }
 
@@ -91,7 +93,6 @@ extern "C" void npc_write(long long waddr, long long wdata, char wmask) {
     return;
   }
 
-  printf("npc_write\n");
   // out_of_bound((paddr_t)waddr);
 }
 

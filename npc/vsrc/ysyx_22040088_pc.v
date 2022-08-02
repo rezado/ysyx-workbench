@@ -2,6 +2,7 @@
 module ysyx_22040088_pc(
     input              clk,
     input              rst,
+    input              wen,
     input       [63:0] pc_src,
     output reg  [63:0] pc_out
 );
@@ -11,7 +12,7 @@ Reg #(64, 64'h80000000) pc_Reg(
     .rst(rst),
     .din(pc_src),
     .dout(pc_out),
-    .wen(1'b1)
+    .wen(wen)
 );
 
 endmodule

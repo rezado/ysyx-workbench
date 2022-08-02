@@ -1,7 +1,6 @@
 module WB_reg(
     input              clk,
     input              rst,
-    /* verilator lint_off UNUSED */
     input              valid,
     input              ena,
     input       [63:0] mem_pc,
@@ -24,7 +23,7 @@ module WB_reg(
 );
 
 always @(posedge clk) begin
-    if (rst) begin
+    if (rst || ~valid) begin
         wb_pc <= 64'h80000000;
         wb_inst <= 32'b0;
         wb_alu_result <= 64'b0;
