@@ -31,10 +31,10 @@ assign jumppc = pc + offset;
 
 // 选择nextpc
 assign nextpc = rst    ? 64'h80000000 :
+				~ena   ? pc :
 				jump_o ? jumppc :
 		        branch ? branchpc :
-				ena    ? addpc :
-				         pc;
+				         addpc;
 
 import "DPI-C" function void npc_read(
   input longint raddr, output longint rdata);
@@ -47,7 +47,8 @@ always @(posedge clk) begin
 	end
 end
 
-assign inst = (pc[2:0] == 3'b000) ? inst_data[31:0] :
+assign inst = branch ? 32'b0 :
+			  (pc[2:0] == 3'b000) ? inst_data[31:0] :
 			  (pc[2:0] == 3'b100) ? inst_data[63:32] :
 			  						32'b0;
 
