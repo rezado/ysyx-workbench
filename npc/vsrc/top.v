@@ -303,4 +303,22 @@ always@(*) begin
 	get_inst(wb_inst);
 end
 
+// 阻塞
+ctrl u_ctrl(
+	.id_stall  (id_stall  ),
+	.ex_stall  (1'b0      ),
+	.mem_stall (1'b0      ),
+	.if_ena    (if_ena    ),
+	.if_valid  (if_valid  ),
+	.id_ena    (id_ena    ),
+	.id_valid  (id_valid  ),
+	.ex_ena    (ex_ena    ),
+	.ex_valid  (ex_valid  ),
+	.mem_ena   (mem_ena   ),
+	.mem_valid (mem_valid ),
+	.wb_ena    (wb_ena    ),
+	.wb_valid  (wb_valid  )
+);
+
+
 endmodule

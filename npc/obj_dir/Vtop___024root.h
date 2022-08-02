@@ -27,9 +27,15 @@ VL_MODULE(Vtop___024root) {
     // LOCAL SIGNALS
     // Anonymous structures to workaround compiler member-count bugs
     struct {
+        CData/*0:0*/ top__DOT__if_ena;
+        CData/*0:0*/ top__DOT__if_valid;
         CData/*0:0*/ top__DOT__branch;
         CData/*0:0*/ top__DOT__id_jump;
+        CData/*0:0*/ top__DOT__id_ena;
+        CData/*0:0*/ top__DOT__id_valid;
         CData/*0:0*/ top__DOT__id_load;
+        CData/*0:0*/ top__DOT__ex_ena;
+        CData/*0:0*/ top__DOT__ex_valid;
         CData/*1:0*/ top__DOT__ex_sel_rfres;
         CData/*0:0*/ top__DOT__ex_mem_wen;
         CData/*0:0*/ top__DOT__ex_mem_ena;
@@ -40,6 +46,8 @@ VL_MODULE(Vtop___024root) {
         CData/*4:0*/ top__DOT__ex_rf_waddr;
         CData/*0:0*/ top__DOT__ex_sys;
         CData/*0:0*/ top__DOT__ex_load;
+        CData/*0:0*/ top__DOT__mem_ena;
+        CData/*0:0*/ top__DOT__mem_valid;
         CData/*1:0*/ top__DOT__mem_sel_rfres;
         CData/*0:0*/ top__DOT__mem_mem_wen;
         CData/*0:0*/ top__DOT__mem_mem_ena;
@@ -50,6 +58,8 @@ VL_MODULE(Vtop___024root) {
         CData/*4:0*/ top__DOT__mem_rf_waddr;
         CData/*0:0*/ top__DOT__mem_sys;
         CData/*0:0*/ top__DOT__mem_load;
+        CData/*0:0*/ top__DOT__wb_ena;
+        CData/*0:0*/ top__DOT__wb_valid;
         CData/*1:0*/ top__DOT__wb_sel_rfres;
         CData/*0:0*/ top__DOT__wb_rf_we;
         CData/*4:0*/ top__DOT__wb_rf_waddr;
@@ -81,6 +91,8 @@ VL_MODULE(Vtop___024root) {
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addi;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_slti;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sltiu;
+    };
+    struct {
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_xori;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_ori;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_andi;
@@ -91,8 +103,6 @@ VL_MODULE(Vtop___024root) {
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sub;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sll;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_slt;
-    };
-    struct {
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sltu;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_xor;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_srl;
@@ -147,6 +157,8 @@ VL_MODULE(Vtop___024root) {
         IData/*31:0*/ top__DOT__wb_inst;
         IData/*20:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__immJ;
         QData/*63:0*/ top__DOT__pc_out;
+    };
+    struct {
         QData/*63:0*/ top__DOT__id_pc;
         QData/*63:0*/ top__DOT__id_alu_src1;
         QData/*63:0*/ top__DOT__id_rf_rdata2;
@@ -157,8 +169,6 @@ VL_MODULE(Vtop___024root) {
         QData/*63:0*/ top__DOT__ex_rf_rdata2;
         QData/*63:0*/ top__DOT__ex_alu_result;
         QData/*63:0*/ top__DOT__mem_pc;
-    };
-    struct {
         QData/*63:0*/ top__DOT__mem_rf_rdata2;
         QData/*63:0*/ top__DOT__mem_alu_result;
         QData/*63:0*/ top__DOT__wb_pc;
@@ -183,11 +193,12 @@ VL_MODULE(Vtop___024root) {
     };
 
     // LOCAL VARIABLES
+    CData/*0:0*/ top__DOT____Vcellinp__u_ysyx_22040088_IFU__rst;
     CData/*0:0*/ top__DOT____Vcellinp__u_ID_reg__rst;
     CData/*0:0*/ __Vclklast__TOP__clk;
     VlWide<9>/*271:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT____Vcellinp__u_MuxKeyWithDefault__lut;
     QData/*63:0*/ __Vtask_top__DOT__u_MEM__DOT__u_mem__DOT__npc_read__5__rdata;
-    VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
+    VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
 
     // INTERNAL VARIABLES
     Vtop__Syms* vlSymsp;  // Symbol table

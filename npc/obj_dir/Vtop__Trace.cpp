@@ -750,13 +750,15 @@ void Vtop___024root__traceChgSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep) 
                                                  << 3U))),6);
             tracep->chgQData(oldp+376,(vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__tmpdata),64);
         }
-        tracep->chgBit(oldp+378,(vlSelf->clk));
-        tracep->chgBit(oldp+379,(vlSelf->rst));
-        tracep->chgQData(oldp+380,(vlSelf->pc),64);
-        tracep->chgBit(oldp+382,(vlSelf->skip));
-        tracep->chgQData(oldp+383,(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__nextpc),64);
-        tracep->chgBit(oldp+385,(vlSelf->top__DOT____Vcellinp__u_ID_reg__rst));
-        tracep->chgBit(oldp+386,((1U & (~ (IData)(vlSelf->rst)))));
+        if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[2U])) {
+            tracep->chgBit(oldp+378,(vlSelf->top__DOT____Vcellinp__u_ysyx_22040088_IFU__rst));
+            tracep->chgQData(oldp+379,(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__nextpc),64);
+            tracep->chgBit(oldp+381,(vlSelf->top__DOT____Vcellinp__u_ID_reg__rst));
+        }
+        tracep->chgBit(oldp+382,(vlSelf->clk));
+        tracep->chgBit(oldp+383,(vlSelf->rst));
+        tracep->chgQData(oldp+384,(vlSelf->pc),64);
+        tracep->chgBit(oldp+386,(vlSelf->skip));
     }
 }
 
@@ -768,5 +770,6 @@ void Vtop___024root__traceCleanup(void* voidSelf, VerilatedVcd* /*unused*/) {
         vlSymsp->__Vm_activity = false;
         vlSymsp->TOP.__Vm_traceActivity[0U] = 0U;
         vlSymsp->TOP.__Vm_traceActivity[1U] = 0U;
+        vlSymsp->TOP.__Vm_traceActivity[2U] = 0U;
     }
 }
