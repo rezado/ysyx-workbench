@@ -1489,8 +1489,11 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__4(Vtop___024root* vlSelf) {
                                                         | (QData)((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immB)))))
                                                       : 0ULL)
                                                      : 
-                                                    (4ULL 
-                                                     + vlSelf->top__DOT__pc_out))));
+                                                    ((IData)(vlSelf->top__DOT__id_stall)
+                                                      ? vlSelf->top__DOT__pc_out
+                                                      : 
+                                                     (4ULL 
+                                                      + vlSelf->top__DOT__pc_out)))));
 }
 
 void Vtop___024root___eval(Vtop___024root* vlSelf) {

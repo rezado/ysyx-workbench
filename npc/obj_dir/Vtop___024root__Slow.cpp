@@ -1058,8 +1058,11 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
                                                         | (QData)((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immB)))))
                                                       : 0ULL)
                                                      : 
-                                                    (4ULL 
-                                                     + vlSelf->top__DOT__pc_out))));
+                                                    ((IData)(vlSelf->top__DOT__id_stall)
+                                                      ? vlSelf->top__DOT__pc_out
+                                                      : 
+                                                     (4ULL 
+                                                      + vlSelf->top__DOT__pc_out)))));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__lut_out 
         = ((- (QData)((IData)(((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__sel_alusrc1) 
                                == vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__key_list
