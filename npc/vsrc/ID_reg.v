@@ -1,7 +1,6 @@
 module ID_reg(
     input             clk,
     input             rst,
-    /* verilator lint_off UNUSED */
     input             valid,
     input             ena,
     input      [63:0] if_pc,
@@ -13,7 +12,7 @@ module ID_reg(
 );
 /* verilator lint_off UNUSED */
 always @(posedge clk) begin
-    if (rst) begin
+    if (rst || ~valid) begin
         id_pc <= 64'h80000000;
         id_inst <= 32'b0;
         id_jump <= 1'b0;

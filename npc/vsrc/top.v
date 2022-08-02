@@ -8,16 +8,18 @@ module top(
 wire [63:0] pc_out;
 wire [31:0] inst;
 wire        if_jump;
+wire        if_ena;
+wire        if_valid;
 // IFU
 wire [63:0] branchpc;
 wire        branch;
 assign pc = wb_pc;
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.clk      (clk      ),
-	.rst      (rst      ),
+	.rst      (rst || ~if_valid),
 	.branchpc (branchpc ),
 	.branch   (branch   ),
-	// .jump_i   (id_jump  ),
+	.ena      (if_ena   ),
 	.pc       (pc_out   ),
 	.inst     (inst     ),
 	.jump_o   (if_jump  )
@@ -33,13 +35,14 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 wire [63:0] if_pc, id_pc;
 wire [31:0] if_inst, id_inst;
 wire        id_jump;
+wire        id_ena, id_valid;
 assign if_pc = pc_out;
 assign if_inst = inst;
 ID_reg u_ID_reg(
 	.clk     (clk     ),
 	.rst     (rst | branch),
-	.valid   (1'b1    ),
-	.ena     (~rst    ),
+	.valid   (id_valid    ),
+	.ena     (id_ena     ),
 	.if_pc   (if_pc   ),
 	.if_inst (if_inst ),
 	.if_jump (if_jump ),
@@ -68,7 +71,7 @@ wire [63:0] rf_wdata;
 // direct to top
 wire inst_inv;
 wire id_sys;
-wire stall;
+wire id_stall;
 
 ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.clk            (clk            ),
@@ -97,7 +100,7 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.rf_waddr_o     (id_rf_waddr     ),
 	.load           (id_load           ),
 	.branch         (branch         ),
-	.stall          (stall          ),
+	.stall          (id_stall          ),
 	.alu_src1       (id_alu_src1       ),
 	.alu_src2       (id_alu_src2       ),
 	.rf_rdata2      (id_rf_rdata2      ),
@@ -106,6 +109,7 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 );
 
 // ID_EX
+wire        ex_ena, ex_valid;
 wire [63:0] ex_pc;
 wire [31:0] ex_inst;
 wire [16:0] ex_alu_op;
@@ -125,8 +129,8 @@ wire        ex_load;
 EX_reg u_EX_reg(
 	.clk            (clk           ),
 	.rst            (rst           ),
-	.valid          (1'b1          ),
-	.ena            (~rst          ),
+	.valid          (ex_valid      ),
+	.ena            (ex_ena        ),
 	.id_pc          (id_pc          ),
 	.id_inst        (id_inst        ),
 	.id_alu_op      (id_alu_op      ),
@@ -173,6 +177,7 @@ ysyx_22040088_EXU u_ysyx_22040088_EXU(
 );
 
 // EX_MEM
+wire        mem_ena, mem_valid;
 wire [63:0] mem_pc;
 wire [31:0] mem_inst;
 wire [ 1:0] mem_sel_rfres;
@@ -190,8 +195,8 @@ wire        mem_load;
 MEM_reg u_MEM_reg(
 	.clk             (clk             ),
 	.rst             (rst             ),
-	.valid           (1'b1            ),
-	.ena             (~rst            ),
+	.valid           (mem_valid       ),
+	.ena             (mem_ena         ),
 	.ex_pc           (ex_pc           ),
 	.ex_inst         (ex_inst         ),
 	.ex_alu_result   (ex_alu_result   ),
@@ -234,6 +239,7 @@ MEM u_MEM(
 );
 
 // MEM_WB
+wire        wb_ena, wb_valid;
 wire [63:0] wb_pc, wb_alu_result, wb_rdata;
 wire [31:0] wb_inst;
 wire [ 1:0] wb_sel_rfres;
@@ -243,8 +249,8 @@ wire		wb_sys;
 WB_reg u_WB_reg(
 	.clk            (clk            ),
 	.rst            (rst            ),
-	.valid          (1'b1           ),
-	.ena            (~rst           ),
+	.valid          (wb_valid       ),
+	.ena            (wb_ena         ),
 	.mem_pc         (mem_pc         ),
 	.mem_inst       (mem_inst       ),
 	.mem_alu_result (mem_alu_result ),

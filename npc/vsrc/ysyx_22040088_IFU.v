@@ -3,6 +3,7 @@ module ysyx_22040088_IFU(
     input       rst,
 	input [63:0] branchpc,
 	input       branch,
+	input       ena,
     output [63:0] pc,
 	output      jump_o,
 	output [31:0] inst
@@ -13,6 +14,7 @@ wire [63:0]addpc;
 ysyx_22040088_pc u_ysyx_22040088_pc(
 	.clk    (clk    ),
 	.rst    (rst    ),
+	.wen    (ena    ),
 	.pc_src (nextpc ),
 	.pc_out (pc     )
 );
