@@ -105,8 +105,6 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.branchpc       (branchpc         )
 );
 
-
-
 // ID_EX
 wire [63:0] ex_pc;
 wire [31:0] ex_inst;
@@ -296,7 +294,7 @@ end
 // inst
 import "DPI-C" function void get_inst(int inst);
 always@(*) begin
-	get_inst(inst[31:0]);
+	get_inst(wb_inst);
 end
 
 endmodule
