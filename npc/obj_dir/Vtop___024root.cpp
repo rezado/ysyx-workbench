@@ -692,12 +692,6 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     } else if ((1U & (~ (IData)(vlSelf->top__DOT__id_stall)))) {
         vlSelf->top__DOT__id_inst = vlSelf->top__DOT__inst;
     }
-    vlSelf->top__DOT__inst = ((0U == (7U & (IData)(vlSelf->top__DOT__pc_out)))
-                               ? (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data)
-                               : ((4U == (7U & (IData)(vlSelf->top__DOT__pc_out)))
-                                   ? (IData)((vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data 
-                                              >> 0x20U))
-                                   : 0U));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immJ 
         = ((0x100000U & (vlSelf->top__DOT__id_inst 
                          >> 0xbU)) | ((0xff000U & vlSelf->top__DOT__id_inst) 
@@ -1391,6 +1385,15 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__key_list[3U] 
         = (0xfU & vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__pair_list
            [3U][2U]);
+    vlSelf->top__DOT__inst = ((IData)(vlSelf->top__DOT__branch)
+                               ? 0U : ((0U == (7U & (IData)(vlSelf->top__DOT__pc_out)))
+                                        ? (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data)
+                                        : ((4U == (7U 
+                                                   & (IData)(vlSelf->top__DOT__pc_out)))
+                                            ? (IData)(
+                                                      (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data 
+                                                       >> 0x20U))
+                                            : 0U)));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__lut_out 
         = ((- (QData)((IData)(((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__sel_alusrc1) 
                                == vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__key_list
