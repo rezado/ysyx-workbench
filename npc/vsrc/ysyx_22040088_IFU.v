@@ -47,7 +47,8 @@ always @(posedge clk) begin
 	end
 end
 
-assign inst = (pc[2:0] == 3'b000) ? inst_data[31:0] :
+assign inst = branch ? 32'b0 :
+			  (pc[2:0] == 3'b000) ? inst_data[31:0] :
 			  (pc[2:0] == 3'b100) ? inst_data[63:32] :
 			  						32'b0;
 
