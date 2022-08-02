@@ -102,7 +102,7 @@ static void exec_once(Decode *s) {
       s->pc, (uint8_t *)&instr.val, ilen);
   
   // iringbuf
-  if (!top.skip) {
+  if (!top->skip) {
     strcpy(rbuf[rptr], logbuf);
     rptr = (rptr + 1) % 20;
   }
