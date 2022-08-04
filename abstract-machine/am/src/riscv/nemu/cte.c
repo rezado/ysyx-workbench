@@ -48,7 +48,7 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
 }
 
 void yield() {
-  printf("into nemu yield\n");
+  // printf("into nemu yield\n");
   asm volatile("li a7, -1; ecall");
 }
 
