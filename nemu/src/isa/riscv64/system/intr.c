@@ -30,5 +30,6 @@ word_t isa_ret_intr(vaddr_t pc) {
 #ifdef CONFIG_ETRACE
   Log("RET: oldPC " FMT_WORD "  newPC " FMT_WORD "  mcause: %ld", cpu.pc, cpu.csr[MEPC] + 4, cpu.csr[MCAUSE]);
 #endif
+  printf("%lx\n", cpu.csr[MTVEC]);
   return cpu.csr[MEPC];
 }
