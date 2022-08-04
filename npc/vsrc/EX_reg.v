@@ -17,7 +17,7 @@ module EX_reg(
     input      [ 1:0] id_sel_memdata,
     input             id_rf_we,
     input      [ 4:0] id_rf_waddr,
-    input             id_sys,
+    input             id_ebreak,
     input             id_load,
     
     output reg [63:0] ex_pc,
@@ -34,7 +34,7 @@ module EX_reg(
     output reg [ 1:0] ex_sel_memdata,
     output reg        ex_rf_we,
     output reg [ 4:0] ex_rf_waddr,
-    output reg        ex_sys,
+    output reg        ex_ebreak,
     output reg        ex_load
 );
 
@@ -54,7 +54,7 @@ always @(posedge clk) begin
         ex_sel_memdata <= 2'b0;
         ex_rf_we <= 1'b0;
         ex_rf_waddr <= 5'b0;
-        ex_sys <= 1'b0;
+        ex_ebreak <= 1'b0;
         ex_load <= 1'b0;
     end
     else if (ena) begin
@@ -72,7 +72,7 @@ always @(posedge clk) begin
         ex_sel_memdata <= id_sel_memdata;
         ex_rf_we <= id_rf_we;
         ex_rf_waddr <= id_rf_waddr;
-        ex_sys <= id_sys;
+        ex_ebreak <= id_ebreak;
         ex_load <= id_load;
     end
 end

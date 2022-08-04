@@ -70,7 +70,7 @@ wire        id_load;
 wire [63:0] rf_wdata;
 // direct to top
 wire inst_inv;
-wire id_sys;
+wire id_ebreak;
 wire id_stall;
 
 ysyx_22040088_IDU u_ysyx_22040088_IDU(
@@ -104,8 +104,8 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.alu_src1       (id_alu_src1       ),
 	.alu_src2       (id_alu_src2       ),
 	.rf_rdata2      (id_rf_rdata2      ),
-	.sys            (id_sys            ),
-	.branchpc       (branchpc         )
+	.branchpc       (branchpc         ),
+	.ebreak         (id_ebreak     )
 );
 
 // ID_EX
@@ -124,7 +124,7 @@ wire [63:0] ex_rf_rdata2;
 wire [ 1:0] ex_sel_memdata;
 wire        ex_rf_we;
 wire [ 4:0] ex_rf_waddr;
-wire		ex_sys;
+wire		ex_ebreak;
 wire        ex_load;
 EX_reg u_EX_reg(
 	.clk            (clk           ),
@@ -145,7 +145,7 @@ EX_reg u_EX_reg(
 	.id_sel_memdata (id_sel_memdata ),
 	.id_rf_we       (id_rf_we       ),
 	.id_rf_waddr    (id_rf_waddr    ),
-	.id_sys         (id_sys         ),
+	.id_ebreak         (id_ebreak         ),
 	.id_load        (id_load        ),
 	.ex_pc          (ex_pc          ),
 	.ex_inst        (ex_inst        ),
@@ -161,7 +161,7 @@ EX_reg u_EX_reg(
 	.ex_sel_memdata (ex_sel_memdata ),
 	.ex_rf_we       (ex_rf_we       ),
 	.ex_rf_waddr    (ex_rf_waddr    ),
-	.ex_sys         (ex_sys         ),
+	.ex_ebreak         (ex_ebreak         ),
 	.ex_load        (ex_load        )
 );
 
@@ -190,7 +190,7 @@ wire [63:0] mem_alu_result;
 wire [ 1:0] mem_sel_memdata;
 wire        mem_rf_we;
 wire [ 4:0] mem_rf_waddr;
-wire		mem_sys;
+wire		mem_ebreak;
 wire        mem_load;
 MEM_reg u_MEM_reg(
 	.clk             (clk             ),
@@ -208,7 +208,7 @@ MEM_reg u_MEM_reg(
 	.ex_sel_memdata  (ex_sel_memdata  ),
 	.ex_rf_we        (ex_rf_we        ),
 	.ex_rf_waddr     (ex_rf_waddr     ),
-	.ex_sys			 (ex_sys          ),
+	.ex_ebreak			 (ex_ebreak          ),
 	.ex_load         (ex_load         ),
 	.mem_pc          (mem_pc          ),
 	.mem_inst        (mem_inst        ),
@@ -221,7 +221,7 @@ MEM_reg u_MEM_reg(
 	.mem_sel_memdata (mem_sel_memdata ),
 	.mem_rf_we       (mem_rf_we       ),
 	.mem_rf_waddr    (mem_rf_waddr    ),
-	.mem_sys		 (mem_sys         ),
+	.mem_ebreak		 (mem_ebreak         ),
 	.mem_load        (mem_load        )
 );
 
@@ -245,7 +245,7 @@ wire [31:0] wb_inst;
 wire [ 1:0] wb_sel_rfres;
 wire        wb_rf_we;
 wire [ 4:0] wb_rf_waddr;
-wire		wb_sys;
+wire		wb_ebreak;
 WB_reg u_WB_reg(
 	.clk            (clk            ),
 	.rst            (rst            ),
@@ -258,7 +258,7 @@ WB_reg u_WB_reg(
 	.mem_rdata      (mem_rdata      ),
 	.mem_rf_we      (mem_rf_we      ),
 	.mem_rf_waddr   (mem_rf_waddr   ),
-	.mem_sys        (mem_sys        ),
+	.mem_ebreak        (mem_ebreak        ),
 	.wb_pc          (wb_pc          ),
 	.wb_inst        (wb_inst        ),
 	.wb_alu_result  (wb_alu_result  ),
@@ -266,7 +266,7 @@ WB_reg u_WB_reg(
 	.wb_rdata       (wb_rdata       ),
 	.wb_rf_we       (wb_rf_we       ),
 	.wb_rf_waddr    (wb_rf_waddr    ),
-	.wb_sys			(wb_sys         )
+	.wb_ebreak			(wb_ebreak         )
 );
 
 
@@ -282,7 +282,7 @@ assign skip = (wb_inst == 32'b0);
 // ebreak
 import "DPI-C" function void finish_sim();
 always @(*) begin
-	if (wb_sys) begin
+	if (wb_ebreak) begin
 		finish_sim();
 		$finish();
 	end
@@ -290,7 +290,7 @@ end
 
 // inv
 wire inv;
-assign inv = inst_inv & ~wb_sys;
+assign inv = inst_inv & ~wb_ebreak;
 import "DPI-C" function void get_inv(int inv);
 always @(*) begin
 	$display("inv:", inv);

@@ -1,7 +1,5 @@
 module ysyx_22040088_controlunit(
-    input   [ 6:0] opcode,
-    input   [ 2:0] funct3,
-    input   [ 6:0] funct7,
+    input   [31:0] inst,
     output  [16:0] alu_op,
     output         rf_we,
     output  [ 3:0] sel_alusrc1,
@@ -16,8 +14,26 @@ module ysyx_22040088_controlunit(
     output  [ 1:0] sel_memdata,
     output         load,
     output         rf_re1,
-    output         rf_re2
+    output         rf_re2,
+    output         csr_re,
+    output         csr_we,
+    output  [ 5:0] sel_csrres,
+    output         ebreak,
+    output         ecall,
+    output         mret
 );
+wire [ 6:0] opcode;
+wire [ 2:0] funct3;
+wire [ 6:0] funct7;
+assign opcode = inst[6:0];
+assign funct3 = inst[14:12];
+assign funct7 = inst[31:25];
+
+// 特殊指令
+assign ebreak = (inst == 32'b000000000001_00000_000_00000_1110011);
+assign ecall = (inst == 32'b000000000000_00000_000_00000_1110011);
+assign mret = (inst == 32'b0011000_00010_00000_000_00000_1110011);
+
 // 指令
 wire inst_lui;
 wire inst_auipc;
@@ -87,6 +103,13 @@ wire inst_divuw;
 wire inst_remw;
 wire inst_remuw;
 
+// CSR
+wire inst_csrrw;
+wire inst_csrrs;
+wire inst_csrrc;
+wire inst_csrrwi;
+wire inst_csrrsi;
+wire inst_csrrci;
 
 // 指令译码
 assign inst_addi = (opcode == 7'b0010011) && (funct3 == 3'b000);
@@ -156,6 +179,14 @@ assign inst_mulhsu = (opcode == 7'b0110011) && (funct3 == 3'b010) && (funct7 == 
 assign inst_mulhu = (opcode == 7'b0110011) && (funct3 == 3'b011) && (funct7 == 7'b0000001);
 assign inst_divuw = (opcode == 7'b0111011) && (funct3 == 3'b101) && (funct7 == 7'b0000001);
 assign inst_remuw = (opcode == 7'b0111011) && (funct3 == 3'b111) && (funct7 == 7'b0000001);
+
+wire csrr;
+assign csrr = (opcode == 7'b1110011);
+assign inst_csrrw = csrr && (funct3 == 3'b001);
+assign inst_csrrs = csrr && (funct3 == 3'b010);
+assign inst_csrrc = csrr && (funct3 == 3'b011);
+assign inst_csrrwi = csrr && (funct3 == 3'b110);
+assign inst_csrrci = csrr && (funct3 == 3'b111);
 
 // TODO:每次添加指令这里都要修改
 // assign inv = ~(inst_addi | inst_lui | inst_auipc | inst_jal | inst_jalr | inst_sd | inst_add | inst_sub | inst_or | inst_slt | inst_sltu | inst_and | inst_xor | inst_sll | inst_srl | inst_sra |
@@ -246,8 +277,12 @@ assign sel_alures = {inst_mulhsu | inst_mulhu  // 无符号右移32位
 assign sel_memdata = {inst_lwu | inst_lhu | inst_lbu
                     , inst_ld | inst_lw | inst_lh | inst_lb};
 
-// jalr是pcbranch在读取rs1 branch读取rs1和rs2进行比较
-assign rf_re1 = sel_alusrc1[0] | sel_alusrc1[2] | sel_alusrc1[3] | inst_jalr | b_type;
+// jalr是pcbranch在读取rs1 branch读取rs1和rs2进行比较 ecall读取rs1(指定为a7)
+assign rf_re1 = sel_alusrc1[0] | sel_alusrc1[2] | sel_alusrc1[3] | inst_jalr | b_type | ecall;
 assign rf_re2 = sel_alusrc2[0] | sel_alusrc2[4] | sel_alusrc2[5] | sel_alusrc2[6] | b_type;
+
+assign csr_re = csrr;
+assign csr_we = csrr;
+assign sel_csrres = {inst_csrrci, inst_csrrsi, inst_csrrwi, inst_csrrc, inst_csrrs, inst_csrrw};
 
 endmodule
