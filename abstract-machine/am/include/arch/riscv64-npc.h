@@ -12,7 +12,6 @@ struct Context {
 #define GPR3 gpr[11] // a1
 #define GPR4 gpr[12] // a2
 #define GPRx gpr[10] // a0
-#endif
 
 #define DEVICE_BASE 0xa0000000
 #define MMIO_BASE 0xa0000000

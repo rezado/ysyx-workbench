@@ -110,7 +110,7 @@ ysyx_22040088_regfile u_ysyx_22040088_regfile(
     .wdata  (rf_wdata ),
     .waddr  (rf_waddr_i  ),
     .wen    (rf_we_i    ),
-    .raddr1 (ecall ? 5'd17 : rs1),  // ecall 读取a7
+    .raddr1 (rs1),
     .raddr2 (rs2 ),
     .rdata1 (rf_port1 ),
     .rdata2 (rf_port2 )
@@ -239,7 +239,7 @@ assign csr_wdata = sel_csrres[0] ? rf_rdata1 :
                    sel_csrres[3] ? zimm :
                    sel_csrres[4] ? csr_rdata | zimm :
                    sel_csrres[5] ? csr_rdata & ~zimm :
-                   ecall         ? rf_rdata1 :
+                   ecall         ? 64'hb :
                                    64'b0;
 // CSR寄存器
 wire [63:0] csr_rdata;
