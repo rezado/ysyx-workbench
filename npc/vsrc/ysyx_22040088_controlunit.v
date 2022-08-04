@@ -185,7 +185,8 @@ assign csrr = (opcode == 7'b1110011);
 assign inst_csrrw = csrr && (funct3 == 3'b001);
 assign inst_csrrs = csrr && (funct3 == 3'b010);
 assign inst_csrrc = csrr && (funct3 == 3'b011);
-assign inst_csrrwi = csrr && (funct3 == 3'b110);
+assign inst_csrrwi = csrr && (funct3 == 3'b101);
+assign inst_csrrsi = csrr && (funct3 == 3'b110);
 assign inst_csrrci = csrr && (funct3 == 3'b111);
 
 // TODO:每次添加指令这里都要修改
