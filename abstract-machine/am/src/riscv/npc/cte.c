@@ -4,6 +4,7 @@
 static Context* (*user_handler)(Event, Context*) = NULL;
 
 Context* __am_irq_handle(Context *c) {
+  printf("into npc irqhandle\n");
   if (user_handler) {
     Event ev = {0};
     switch (c->gpr[17]) {

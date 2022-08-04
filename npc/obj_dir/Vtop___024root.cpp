@@ -827,9 +827,6 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
                                                  >> 0x14U))) 
                                   | (0x73U == vlSelf->top__DOT__id_inst))))) 
               & vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_CSRs__DOT__mtvec));
-    vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT____Vcellinp__u_ysyx_22040088_regfile__raddr1 
-        = ((0x73U == vlSelf->top__DOT__id_inst) ? 0x11U
-            : (0x1fU & (vlSelf->top__DOT__id_inst >> 0xfU)));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_addi 
         = (IData)((0x13U == (0x707fU & vlSelf->top__DOT__id_inst)));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sltiu 
@@ -1323,9 +1320,11 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
                  ? vlSelf->top__DOT__mem_alu_result
                  : ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__ForwardA_wb)
                      ? vlSelf->top__DOT__rf_wdata : 0ULL)))
-            : ((0U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT____Vcellinp__u_ysyx_22040088_regfile__raddr1))
-                ? 0ULL : vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf
-               [vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT____Vcellinp__u_ysyx_22040088_regfile__raddr1]));
+            : ((0U == (0x1fU & (vlSelf->top__DOT__id_inst 
+                                >> 0xfU))) ? 0ULL : 
+               vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf
+               [(0x1fU & (vlSelf->top__DOT__id_inst 
+                          >> 0xfU))]));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__csr_wdata 
         = ((1U & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__sel_csrres))
             ? vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__rf_rdata1
@@ -1351,8 +1350,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
                                                          & (vlSelf->top__DOT__id_inst 
                                                             >> 0xfU))))))
                                 : ((0x73U == vlSelf->top__DOT__id_inst)
-                                    ? vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__rf_rdata1
-                                    : 0ULL)))))));
+                                    ? 0xbULL : 0ULL)))))));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__sub_result 
         = (1ULL + (vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__rf_rdata1 
                    + (~ vlSelf->top__DOT__id_rf_rdata2)));
