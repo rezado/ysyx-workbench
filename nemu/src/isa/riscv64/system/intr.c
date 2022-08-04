@@ -32,5 +32,5 @@ word_t isa_ret_intr(vaddr_t pc) {
 #endif
   printf("%lx\n", cpu.csr[MTVEC]);
 
-  return cpu.csr[MEPC] + 4;
+  return cpu.csr[MEPC];
 }
