@@ -11,6 +11,7 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
 #ifdef CONFIG_ETRACE
   Log("ECALL: oldPC " FMT_WORD "  newPC " FMT_WORD "  mcause: %ld", epc, cpu.csr[MTVEC], NO);
 #endif
+  printf("%lx\n", cpu.csr[MTVEC]);
 
   return cpu.csr[MTVEC];
 }
