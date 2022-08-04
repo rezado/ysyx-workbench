@@ -770,8 +770,9 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
                          >> 0x14U)));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__sel_csrres 
         = (((IData)((0x7073U == (0x707fU & vlSelf->top__DOT__id_inst))) 
-            << 5U) | (((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_csrrsi) 
-                       << 4U) | (((IData)((0x6073U 
+            << 5U) | (((IData)((0x6073U == (0x707fU 
+                                            & vlSelf->top__DOT__id_inst))) 
+                       << 4U) | (((IData)((0x5073U 
                                            == (0x707fU 
                                                & vlSelf->top__DOT__id_inst))) 
                                   << 3U) | (((IData)(
