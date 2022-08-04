@@ -26,7 +26,7 @@ static void fail(void *buf) { panic("access nonexist register"); }
 bool ioe_init() {
   for (int i = 0; i < LENGTH(lut); i++)
     if (!lut[i]) {
-      printf("i:%d fail\n", i);
+      // printf("i:%d fail\n", i);
       lut[i] = fail;
     }
   printf("finish lut check\n");
