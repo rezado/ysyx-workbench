@@ -101,6 +101,8 @@ static void exec_once(Decode *s) {
   disassemble(p, logbuf + sizeof(logbuf) - p,
       s->pc, (uint8_t *)&instr.val, ilen);
   
+  strcpy(s->logbuf, logbuf);
+  
   // iringbuf
   if (!top->skip) {
     strcpy(rbuf[rptr], logbuf);
