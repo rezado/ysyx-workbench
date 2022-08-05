@@ -52,6 +52,7 @@ static void prbuf() {
 }
 #endif
 static bool skip = false;
+// static uint64_t pre_pc;
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
   if (ITRACE_COND) { log_write("%s\n", _this->logbuf); }
@@ -65,7 +66,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   }
   else if (instr.val == 0) {
     skip = true;
-    IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
+    IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, _this->pc));
   }
   else IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
 #ifdef CONFIG_WATCHPOINT
