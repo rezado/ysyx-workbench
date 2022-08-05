@@ -82,7 +82,6 @@ static void exec_once(Decode *s) {
   s->pc = top->pc;
   s->snpc = top->pc;
 
-  // single_cycle();
   isa_exec_once(s);
   gprcpy();  // 通过DPI-C更新寄存器状态
   CPU.pc = s->dnpc;
