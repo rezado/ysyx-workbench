@@ -370,8 +370,7 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
     Vtop___024root____Vdpiimwrap_top__DOT__u_ysyx_22040088_IFU__DOT__npc_read_TOP(vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__raddr, vlSelf->__Vtask_top__DOT__u_MEM__DOT__u_mem__DOT__npc_read__5__rdata);
     vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__tmpdata 
         = vlSelf->__Vtask_top__DOT__u_MEM__DOT__u_mem__DOT__npc_read__5__rdata;
-    VL_WRITEF("Read at memx rdata:memlx%20#%20#\n",
-              64,vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__raddr,
+    VL_WRITEF("Read at %x rdata:%x\n",64,vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__raddr,
               64,vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__tmpdata);
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__sel_csrres 
         = (((IData)((0x7073U == (0x707fU & vlSelf->top__DOT__id_inst))) 
