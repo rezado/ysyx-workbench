@@ -3,7 +3,7 @@
 #include <fs.h>
 #include <proc.h>
 
-#define ETRACE
+// #define ETRACE
 
 struct timeval {
     long      tv_sec;     /* seconds */
