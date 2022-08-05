@@ -204,6 +204,15 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
                                                  >> 0x14U))) 
                                   | (0x73U == vlSelf->top__DOT__id_inst))))) 
               & vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_CSRs__DOT__mtvec));
+    if (VL_LIKELY(vlSelf->rst)) {
+        vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data = 0ULL;
+    } else {
+        Vtop___024root____Vdpiimwrap_top__DOT__u_ysyx_22040088_IFU__DOT__npc_read_TOP(vlSelf->top__DOT__pc_out, vlSelf->__Vtask_top__DOT__u_ysyx_22040088_IFU__DOT__npc_read__3__rdata);
+        vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data 
+            = vlSelf->__Vtask_top__DOT__u_ysyx_22040088_IFU__DOT__npc_read__3__rdata;
+        VL_WRITEF("IFetch addr:%x rdata:%x\n",64,vlSelf->top__DOT__pc_out,
+                  64,vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data);
+    }
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_csrrw 
         = (IData)((0x1073U == (0x707fU & vlSelf->top__DOT__id_inst)));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_csrrs 
@@ -1223,6 +1232,7 @@ void Vtop___024root___eval_settle(Vtop___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtop___024root___eval_settle\n"); );
     // Body
     Vtop___024root___settle__TOP__1(vlSelf);
+    vlSelf->__Vm_traceActivity[2U] = 1U;
     vlSelf->__Vm_traceActivity[1U] = 1U;
     vlSelf->__Vm_traceActivity[0U] = 1U;
 }
@@ -1415,8 +1425,9 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__raddr = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__mask = VL_RAND_RESET_I(8);
     vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__tmpdata = VL_RAND_RESET_Q(64);
+    vlSelf->__Vtask_top__DOT__u_ysyx_22040088_IFU__DOT__npc_read__3__rdata = 0;
     vlSelf->__Vtask_top__DOT__u_MEM__DOT__u_mem__DOT__npc_read__5__rdata = 0;
-    for (int __Vi0=0; __Vi0<2; ++__Vi0) {
+    for (int __Vi0=0; __Vi0<3; ++__Vi0) {
         vlSelf->__Vm_traceActivity[__Vi0] = VL_RAND_RESET_I(1);
     }
 }
