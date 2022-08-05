@@ -42,8 +42,8 @@ wire [63:0] inst_data;
 
 always @(posedge clk) begin
 	if (!rst) begin
-		// $display("%x", pc);
 		npc_read(nextpc, inst_data);
+		$display("IFetch addr:%x rdata:%x", nextpc, inst_data);
 	end
 end
 
