@@ -38,12 +38,15 @@ assign nextpc = rst    ? 64'h80000000 :
 
 import "DPI-C" function void npc_read(
   input longint raddr, output longint rdata);
-wire [63:0] inst_data;
+reg [63:0] inst_data;
 
-always @(posedge clk) begin
+always @(*) begin
 	if (!rst) begin
-		npc_read(nextpc, inst_data);
-		$display("IFetch addr:%x rdata:%x", nextpc, inst_data);
+		npc_read(pc, inst_data);
+		$display("IFetch addr:%x rdata:%x", pc, inst_data);
+	end
+	else begin
+		inst_data = 64'0;
 	end
 end
 
