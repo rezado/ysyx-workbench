@@ -1,8 +1,7 @@
 module top(
     input   clk,
     input   rst,
-	output	[63:0] pc,
-	output reg  skip
+	output	[63:0] pc
 );
 /* verilator lint_off UNUSED */
 wire [63:0] pc_out;
@@ -288,11 +287,6 @@ WB u_WB(
 	.sel_rfwdata (wb_sel_rfres ),
 	.rf_wdata    (rf_wdata    )
 );
-
-always @(posedge clk) begin
-	if (rst) skip <= 1'b0;
-	else skip <= (wb_inst != 32'b0);
-end
 
 // ebreak
 import "DPI-C" function void finish_sim();
