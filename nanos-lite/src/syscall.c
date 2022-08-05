@@ -56,11 +56,10 @@ void do_syscall(Context *c) {
       #endif
       break;
     case SYS_open:
-    #ifdef ETRACE
+      c->GPRx = fs_open((char*)a[1], a[2], a[3]);
+      #ifdef ETRACE
         Log("Syscall: open(%s, %x, %x) = %d", (char*)a[1], a[2], a[3], (int)c->GPRx);
       #endif
-      c->GPRx = fs_open((char*)a[1], a[2], a[3]);
-      
       break;
     case SYS_read:
       c->GPRx = fs_read(a[1], (void*)a[2], a[3]);
