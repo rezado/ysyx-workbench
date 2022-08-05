@@ -60,6 +60,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   // DIFFTEST比DUT晚一个周期更新
   if (top->skip == 1) {
     skip = true;
+    IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
   }
   else if (g_nr_guest_inst <= 5 || skip) {
     skip = false;
