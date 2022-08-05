@@ -44,7 +44,7 @@ extern "C" void npc_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   // printf("read %llx from %llx\n", *rdata, raddr);
   #ifdef CONFIG_MTRACE
-      if (raddr != RESET_VECTOR) printf("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
+      if (raddr != RESET_VECTOR) printf("pc: %lx Read Memory at 0x%016llx   data: 0x%016llx\n", CPU.pc, raddr, *rdata);
       // Log("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
   #endif
 
@@ -58,9 +58,6 @@ extern "C" void npc_read(long long raddr, long long *rdata) {
 
   if (likely(in_pmem((paddr_t)raddr))) {
     *rdata = host_read(guest_to_host(raddr & ~0x7ull), 8);
-    #ifdef CONFIG_MTRACE
-      if (raddr != RESET_VECTOR) printf("pc: %lx Read Memory at 0x%016llx   data: 0x%016llx\n", CPU.pc, raddr, *rdata);
-    #endif
     return;
   }
 
