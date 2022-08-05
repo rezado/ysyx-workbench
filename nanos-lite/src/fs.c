@@ -48,12 +48,12 @@ int screen_w, screen_h;
 
 void init_fs() {
   // TODO: initialize the size of /dev/fb
-  // AM_GPU_CONFIG_T ev = io_read(AM_GPU_CONFIG);
-  // screen_w = ev.width; screen_h = ev.height;
-  // int size = screen_w * screen_h * 4;
-  // // printf("w:%d h:%d\n", screen_w, screen_h);
-  // file_table[FD_FB].size = size;
-  // // printf("size:%d\n", (int)file_table[FD_FB].size);
+  AM_GPU_CONFIG_T ev = io_read(AM_GPU_CONFIG);
+  screen_w = ev.width; screen_h = ev.height;
+  int size = screen_w * screen_h * 4;
+  // printf("w:%d h:%d\n", screen_w, screen_h);
+  file_table[FD_FB].size = size;
+  // printf("size:%d\n", (int)file_table[FD_FB].size);
 }
 
 int fs_open(const char *pathname, int flags, int mode) {
