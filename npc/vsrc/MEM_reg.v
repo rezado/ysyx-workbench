@@ -6,7 +6,7 @@ module MEM_reg(
     input       [63:0] ex_pc,
     input       [31:0] ex_inst,
     input       [63:0] ex_alu_result,
-    input       [ 1:0] ex_sel_rfres,
+    input       [ 2:0] ex_sel_rfres,
     input              ex_mem_wen,
     input              ex_mem_ena,
     input       [ 3:0] ex_mem_mask,
@@ -14,13 +14,14 @@ module MEM_reg(
     input       [ 1:0] ex_sel_memdata,
     input              ex_rf_we,
     input       [ 4:0] ex_rf_waddr,
-    input              ex_sys,
+    input              ex_ebreak,
     input              ex_load,
+    input       [63:0] ex_csr_data,
     
     output  reg [63:0] mem_pc,
     output  reg [31:0] mem_inst,
     output  reg [63:0] mem_alu_result,
-    output  reg [ 1:0] mem_sel_rfres,
+    output  reg [ 2:0] mem_sel_rfres,
     output  reg        mem_mem_wen,
     output  reg        mem_mem_ena,
     output  reg [ 3:0] mem_mem_mask,
@@ -28,8 +29,9 @@ module MEM_reg(
     output  reg [ 1:0] mem_sel_memdata,
     output  reg        mem_rf_we,
     output  reg [ 4:0] mem_rf_waddr,
-    output  reg        mem_sys,
-    output  reg        mem_load
+    output  reg        mem_ebreak,
+    output  reg        mem_load,
+    output  reg [63:0] mem_csr_data
 );
 
 always @(posedge clk) begin
@@ -37,7 +39,7 @@ always @(posedge clk) begin
         mem_pc <= 64'h80000000;
         mem_inst <= 32'b0;
         mem_alu_result <= 64'b0;
-        mem_sel_rfres <= 2'b0;
+        mem_sel_rfres <= 3'b0;
         mem_mem_wen <= 1'b0;
         mem_mem_ena <= 1'b0;
         mem_rf_rdata2 <= 64'b0;
@@ -45,8 +47,9 @@ always @(posedge clk) begin
         mem_sel_memdata <= 2'b0;
         mem_rf_we <= 1'b0;
         mem_rf_waddr <= 5'b0;
-        mem_sys <= 1'b0;
+        mem_ebreak <= 1'b0;
         mem_load <= 1'b0;
+        mem_csr_data <= 64'b0;
     end
     else if (ena) begin
         mem_pc <= ex_pc;
@@ -60,8 +63,9 @@ always @(posedge clk) begin
         mem_sel_memdata <= ex_sel_memdata;
         mem_rf_we <= ex_rf_we;
         mem_rf_waddr <= ex_rf_waddr;
-        mem_sys <= ex_sys;
+        mem_ebreak <= ex_ebreak;
         mem_load <= ex_load;
+        mem_csr_data <= ex_csr_data;
     end
 end
 

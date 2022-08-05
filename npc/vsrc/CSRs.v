@@ -4,6 +4,8 @@ module CSRs(
     input              csr_re,
     input              csr_we,
     input              mret,
+    input              ecall,
+    input       [63:0] epc,
     input       [63:0] csr_wdata,
     output      [63:0] csr_rdata
 );
@@ -32,10 +34,10 @@ assign we_mcause = csr_we & sel_mcause;
 assign we_mtvec = csr_we & sel_mtvec;
 
 // read
-assign csr_rdata = ({64{re_mepc}} & mepc)
-                 | ({64{re_mstatus}} & mstatus)
-                 | ({64{re_mcause}} & mcause)
-                 | ({64{re_mtvec}} & mtvec);
+assign csr_rdata = ({64{re_mepc | mret}}        & mepc)
+                 | ({64{re_mstatus}}            & mstatus)
+                 | ({64{re_mcause}}             & mcause)
+                 | ({64{re_mtvec | ecall}}      & mtvec);
 
 // write
 always @(posedge clk) begin
@@ -43,10 +45,14 @@ always @(posedge clk) begin
         mcause[3] <= mcause[7];  // MIE = MPIE
         mcause[7] <= 1'b1;  // MPIE = 1
     end
-    if (we_mcause) mcause <= csr_wdata;
-    if (we_mepc) mepc <= csr_wdata;
-    if (we_mstatus) mstatus <= csr_wdata;
-    if (we_mtvec) mtvec <= csr_wdata;
+    else if (ecall) begin
+        mepc <= epc;
+        mcause <= csr_wdata;
+    end
+    else if (we_mcause) mcause <= csr_wdata;
+    else if (we_mepc) mepc <= csr_wdata;
+    else if (we_mstatus) mstatus <= csr_wdata;
+    else if (we_mtvec) mtvec <= csr_wdata;
 end
 
 endmodule

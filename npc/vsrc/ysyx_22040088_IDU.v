@@ -21,7 +21,7 @@ module ysyx_22040088_IDU(
     
     // 控制信号
     output [16:0] alu_op,
-    output [ 1:0] sel_rfres,
+    output [ 2:0] sel_rfres,
     output        mem_wen,
     output        mem_ena,
     output [ 3:0] mem_mask,
@@ -33,21 +33,19 @@ module ysyx_22040088_IDU(
     output        load,
     output        branch,
     output        stall,
+    output        ebreak,
     
     // EXE源操作数
     output [63:0] alu_src1,
     output [63:0] alu_src2,
     output [63:0] rf_rdata2,
-    output        sys,
-    output [63:0] branchpc
+    output [63:0] branchpc,
+
+    // 写回寄存器
+    output [63:0] csr_data
 );
 
-assign sys = (inst == 32'b000000000001_00000_000_00000_1110011);
-
 // 指令分割
-wire [6:0] opcode;
-wire [2:0] funct3;
-wire [6:0] funct7;
 wire [4:0] rd;
 wire [4:0] rs1;
 wire [4:0] rs2;
@@ -57,9 +55,6 @@ wire [19:0] immU;
 wire [12:0] immB;
 wire [11:0] immS;
 
-assign opcode = inst[6:0];
-assign funct3 = inst[14:12];
-assign funct7 = inst[31:25];
 assign rd = inst[11:7];
 assign rs1 = inst[19:15];
 assign rs2 = inst[24:20];
@@ -81,11 +76,12 @@ wire [3:0]sel_alusrc1;
 wire [6:0]sel_alusrc2;
 wire [6:0]sel_btype;
 wire      rf_re1, rf_re2;
+wire      csr_re, csr_we;
+wire [5:0]sel_csrres;
+wire ecall, mret;
 
 ysyx_22040088_controlunit u_ysyx_22040088_controlunit(
-    .opcode      (opcode      ),
-    .funct3      (funct3      ),
-    .funct7      (funct7      ),
+    .inst        (inst        ),
     .alu_op      (alu_op      ),
     .rf_we       (rf_we_o     ),
     .sel_alusrc1 (sel_alusrc1 ),
@@ -100,7 +96,13 @@ ysyx_22040088_controlunit u_ysyx_22040088_controlunit(
     .sel_memdata (sel_memdata ),
     .load        (load        ),
     .rf_re1      (rf_re1      ),
-    .rf_re2      (rf_re2      )
+    .rf_re2      (rf_re2      ),
+    .csr_re      (csr_re      ),
+    .csr_we      (csr_we      ),
+    .sel_csrres  (sel_csrres  ),
+    .ebreak      (ebreak      ),
+    .ecall       (ecall       ),
+    .mret        (mret        )
 );
 
 wire [63:0] rf_rdata1;
@@ -111,7 +113,7 @@ ysyx_22040088_regfile u_ysyx_22040088_regfile(
     .wdata  (rf_wdata ),
     .waddr  (rf_waddr_i  ),
     .wen    (rf_we_i    ),
-    .raddr1 (rs1 ),
+    .raddr1 (rs1),
     .raddr2 (rs2 ),
     .rdata1 (rf_port1 ),
     .rdata2 (rf_port2 )
@@ -175,7 +177,6 @@ assign ltu = ~cout;
 wire [63:0] jalrpc, bpc;
 assign jalrpc = (rf_rdata1 + immI_sext) & ~64'b1;
 assign bpc = pc + immB_sext;
-
 assign branch = sel_btype[0] ? 1'b1 :
                 sel_btype[1] ? zero :
                 sel_btype[2] ? ~zero :
@@ -183,11 +184,14 @@ assign branch = sel_btype[0] ? 1'b1 :
                 sel_btype[4] ? ltu :
                 sel_btype[5] ? ~lt :
                 sel_btype[6] ? ~ltu :
+                (ecall || mret) ? 1'b1 :
                                1'b0;
 
 // 根据条件选择
-assign branchpc= branch ? (sel_btype[0] ? jalrpc : bpc) :
-                        64'b0;
+assign branchpc= branch ? ((ecall || mret) ? csr_rdata :
+                           sel_btype[0] ? jalrpc :
+                                          bpc) :
+                          64'b0;
 
 // 判断流水线暂停
 assign stall = (ex_rf_we && ex_load && ex_rf_waddr == rs1 && rf_re1 && rs1 != 0) ||
@@ -223,6 +227,38 @@ forwarding u_forwarding(
 // 选择regfile读端口数据
 assign rf_rdata1 = ForwardA ? ForA_data : rf_port1;
 assign rf_rdata2 = ForwardB ? ForB_data : rf_port2;
+
+// 选择CSR写数据
+wire [63:0] csr_wdata;
+wire [63:0] zimm;
+ysyx_22040088_zeroext#(5, 64) u_ysyx_22040088_zeroext(
+    .in  (inst[19:15]),
+    .out (zimm)
+);
+
+assign csr_wdata = sel_csrres[0] ? rf_rdata1 :
+                   sel_csrres[1] ? csr_rdata | rf_rdata1 :
+                   sel_csrres[2] ? csr_rdata & ~rf_rdata1 :
+                   sel_csrres[3] ? zimm :
+                   sel_csrres[4] ? csr_rdata | zimm :
+                   sel_csrres[5] ? csr_rdata & ~zimm :
+                   ecall         ? 64'hb :
+                                   64'b0;
+// CSR寄存器
+wire [63:0] csr_rdata;
+CSRs u_CSRs(
+    .clk       (clk       ),
+    .csr_id    (immI      ),
+    .csr_re    (csr_re    ),
+    .csr_we    (csr_we    ),
+    .mret      (mret      ),
+    .ecall     (ecall     ),
+    .epc       (pc        ),
+    .csr_wdata (csr_wdata ),
+    .csr_rdata (csr_rdata )
+);
+
+assign csr_data = csr_re ? csr_rdata : 64'b0;
 
 
 endmodule

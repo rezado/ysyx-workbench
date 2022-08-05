@@ -1,12 +1,31 @@
 #include <am.h>
 #include <klib.h>
+#include <stdio.h>
 
 static Context* (*user_handler)(Event, Context*) = NULL;
 
 Context* __am_irq_handle(Context *c) {
+  // printf("into npc irqhandle\n");
   if (user_handler) {
     Event ev = {0};
-    switch (c->mcause) {
+    // printf("regs:\n");
+    // for (int i = 1; i < 32; i++) {
+    //   printf("%x\t\t", c->gpr[i]);
+    // }
+    // printf("\n");
+    // printf("mepc:%x mcause:%x mstatus:%x\n", c->mepc, c->mcause, c->mstatus);
+    switch (c->gpr[17]) {
+      case -1: 
+        ev.event = EVENT_YIELD;
+        c->mepc += 4;
+        break;
+      case 0: case 1: case 2: case 3:
+      case 4: case 5: case 6: case 7:
+      case 8: case 9: case 10: case 11:
+      case 12: case 13: case 14: case 15:
+      case 16: case 17: case 18: case 19:
+        ev.event = EVENT_SYSCALL;
+        break;
       default: ev.event = EVENT_ERROR; break;
     }
 
@@ -34,6 +53,7 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
 }
 
 void yield() {
+  // printf("into yield\n");
   asm volatile("li a7, -1; ecall");
 }
 

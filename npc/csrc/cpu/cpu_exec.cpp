@@ -13,7 +13,7 @@ uint64_t g_nr_guest_inst = 0;
 static uint64_t g_timer = 0; // unit: us
 static bool g_print_step = false;
 #ifdef CONFIG_DUMPWAVE
-#define MAX_SIM_TIME 50000
+#define MAX_SIM_TIME 100000
 #endif
 uint64_t sim_time = 0;
 bool run_flag = true;
@@ -100,6 +100,8 @@ static void exec_once(Decode *s) {
   
   disassemble(p, logbuf + sizeof(logbuf) - p,
       s->pc, (uint8_t *)&instr.val, ilen);
+  
+  strcpy(s->logbuf, logbuf);
   
   // iringbuf
   if (!top->skip) {

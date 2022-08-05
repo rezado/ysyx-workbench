@@ -18,10 +18,11 @@ static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
 uint8_t* guest_to_host(paddr_t paddr) { return pmem + paddr - CONFIG_MBASE; }
 paddr_t host_to_guest(uint8_t *haddr) { return haddr - pmem + CONFIG_MBASE; }
 
+extern void sim_exit();
 static void out_of_bound(paddr_t addr) {
-  printf("in paddr\n");
-  panic("address = " FMT_PADDR " is out of bound of pmem [" FMT_PADDR ", " FMT_PADDR ") at pc = " FMT_WORD,
+  Log("address = " FMT_PADDR " is out of bound of pmem [" FMT_PADDR ", " FMT_PADDR ") at pc = " FMT_WORD,
       addr, CONFIG_MBASE, CONFIG_MBASE + CONFIG_MSIZE, CPU.pc);
+  sim_exit();
 }
 
 void init_mem() {
@@ -44,7 +45,7 @@ extern "C" void npc_read(long long raddr, long long *rdata) {
   // 总是读取地址为`raddr & ~0x7ull`的8字节返回给`rdata`
   // printf("read %llx from %llx\n", *rdata, raddr);
   #ifdef CONFIG_MTRACE
-      if (raddr != RESET_VECTOR && raddr == 0x80008fe8) printf("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
+      if (raddr != RESET_VECTOR) printf("pc: %lx Read Memory at 0x%016llx   data: 0x%016llx\n", CPU.pc, raddr, *rdata);
       // Log("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
   #endif
 
@@ -58,13 +59,10 @@ extern "C" void npc_read(long long raddr, long long *rdata) {
 
   if (likely(in_pmem((paddr_t)raddr))) {
     *rdata = host_read(guest_to_host(raddr & ~0x7ull), 8);
-    #ifdef CONFIG_MTRACE
-      if (raddr != RESET_VECTOR) printf("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
-    #endif
     return;
   }
 
-  // out_of_bound((paddr_t)raddr);
+  if (CPU.pc > 0x80000000) out_of_bound((paddr_t)raddr);
 }
 
 extern "C" void npc_write(long long waddr, long long wdata, char wmask) {
@@ -73,7 +71,7 @@ extern "C" void npc_write(long long waddr, long long wdata, char wmask) {
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
   // printf("write:waddr:%llx, wdata:%llx, wmask:%x\n", waddr, wdata, wmask);
   #ifdef CONFIG_MTRACE
-      if (wmask && waddr == 0x80008fe8) printf("Write Memory at 0x%016llx  data:  0x%016llx\n", waddr, wdata);
+      if (wmask) printf("pc: %lx Write Memory at 0x%016llx  data:  0x%016llx\n", CPU.pc, waddr, wdata);
   #endif
   waddr = waddr & ~0x7ull;
   if (waddr == SERIAL_PORT) {
@@ -93,7 +91,7 @@ extern "C" void npc_write(long long waddr, long long wdata, char wmask) {
     return;
   }
 
-  // out_of_bound((paddr_t)waddr);
+  if (CPU.pc > 0x80000000) out_of_bound((paddr_t)waddr);
 }
 
 // word_t paddr_read(paddr_t addr, int len) {
