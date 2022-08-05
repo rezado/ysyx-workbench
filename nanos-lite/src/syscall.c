@@ -44,7 +44,8 @@ void do_syscall(Context *c) {
       #endif
       break;
     case SYS_exit:
-      _exec("/bin/nterm", NULL, NULL);
+      // _exec("/bin/nterm", NULL, NULL);
+      halt(0);
       #ifdef ETRACE
         Log("Syscall: exit(%x)", a[0]);
       #endif
