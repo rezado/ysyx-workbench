@@ -259,7 +259,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
             = vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__csr_wdata;
     }
     vlSelf->skip = ((~ (IData)(vlSelf->rst)) & (0U 
-                                                == vlSelf->top__DOT__wb_inst));
+                                                != vlSelf->top__DOT__wb_inst));
     if ((0x30200073U != vlSelf->top__DOT__id_inst)) {
         if ((0x73U == vlSelf->top__DOT__id_inst)) {
             vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_CSRs__DOT__mepc 
