@@ -59,7 +59,7 @@ extern "C" void npc_read(long long raddr, long long *rdata) {
   if (likely(in_pmem((paddr_t)raddr))) {
     *rdata = host_read(guest_to_host(raddr & ~0x7ull), 8);
     #ifdef CONFIG_MTRACE
-      if (raddr != RESET_VECTOR) printf("Read Memory at 0x%016llx   data: 0x%016llx\n", raddr, *rdata);
+      if (raddr != RESET_VECTOR) printf("pc: %lx Read Memory at 0x%016llx   data: 0x%016llx\n", top->pc, raddr, *rdata);
     #endif
     return;
   }
@@ -73,7 +73,7 @@ extern "C" void npc_write(long long waddr, long long wdata, char wmask) {
   // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
   // printf("write:waddr:%llx, wdata:%llx, wmask:%x\n", waddr, wdata, wmask);
   #ifdef CONFIG_MTRACE
-      if (wmask) printf("Write Memory at 0x%016llx  data:  0x%016llx\n", waddr, wdata);
+      if (wmask) printf("pc: %lx Write Memory at 0x%016llx  data:  0x%016llx\n", top->pc, waddr, wdata);
   #endif
   waddr = waddr & ~0x7ull;
   if (waddr == SERIAL_PORT) {
