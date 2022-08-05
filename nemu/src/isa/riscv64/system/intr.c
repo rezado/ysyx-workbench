@@ -12,6 +12,7 @@ word_t isa_raise_intr(word_t NO, vaddr_t epc) {
   Log("ECALL: oldPC " FMT_WORD "  newPC " FMT_WORD "  mcause: %ld", epc, cpu.csr[MTVEC], NO);
 #endif
   // printf("ecall:%lx\n", cpu.csr[MEPC]);
+  printf("nemu ecall:%lx\n", cpu.csr[MCAUSE]);
 
   return cpu.csr[MTVEC];
 }
