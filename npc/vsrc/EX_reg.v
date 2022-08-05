@@ -6,7 +6,7 @@ module EX_reg(
     input      [63:0] id_pc,
     input      [31:0] id_inst,
     input      [16:0] id_alu_op,
-    input      [ 1:0] id_sel_rfres,
+    input      [ 2:0] id_sel_rfres,
     input             id_mem_wen,
     input             id_mem_ena,
     input      [ 3:0] id_mem_mask,
@@ -19,11 +19,12 @@ module EX_reg(
     input      [ 4:0] id_rf_waddr,
     input             id_ebreak,
     input             id_load,
+    input      [63:0] id_csr_data,
     
     output reg [63:0] ex_pc,
     output reg [31:0] ex_inst,
     output reg [16:0] ex_alu_op,
-    output reg [ 1:0] ex_sel_rfres,
+    output reg [ 2:0] ex_sel_rfres,
     output reg        ex_mem_wen,
     output reg        ex_mem_ena,
     output reg [ 3:0] ex_mem_mask,
@@ -35,7 +36,8 @@ module EX_reg(
     output reg        ex_rf_we,
     output reg [ 4:0] ex_rf_waddr,
     output reg        ex_ebreak,
-    output reg        ex_load
+    output reg        ex_load,
+    output reg [63:0] ex_csr_data
 );
 
 always @(posedge clk) begin
@@ -43,7 +45,7 @@ always @(posedge clk) begin
         ex_pc <= 64'h80000000;
         ex_inst <= 32'b0;
         ex_alu_op <= 17'b0;
-        ex_sel_rfres <= 2'b0;
+        ex_sel_rfres <= 3'b0;
         ex_mem_wen <= 1'b0;
         ex_mem_ena <= 1'b0;
         ex_mem_mask <= 4'b0;
@@ -56,6 +58,7 @@ always @(posedge clk) begin
         ex_rf_waddr <= 5'b0;
         ex_ebreak <= 1'b0;
         ex_load <= 1'b0;
+        ex_csr_data <= 64'b0;
     end
     else if (ena) begin
         ex_pc <= id_pc;
@@ -74,6 +77,7 @@ always @(posedge clk) begin
         ex_rf_waddr <= id_rf_waddr;
         ex_ebreak <= id_ebreak;
         ex_load <= id_load;
+        ex_csr_data <= id_csr_data;
     end
 end
 

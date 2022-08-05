@@ -54,7 +54,7 @@ ID_reg u_ID_reg(
 
 // ID
 wire [16:0] id_alu_op;
-wire [ 1:0] id_sel_rfres;
+wire [ 2:0] id_sel_rfres;
 wire        id_mem_wen;
 wire        id_mem_ena;
 wire [ 3:0] id_mem_mask;
@@ -66,6 +66,7 @@ wire [63:0] id_rf_rdata2;
 wire        id_rf_we;
 wire [ 4:0] id_rf_waddr;
 wire        id_load;
+wire [63:0] id_csr_data;
 // write back from WB
 wire [63:0] rf_wdata;
 // direct to top
@@ -105,7 +106,8 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.alu_src2       (id_alu_src2       ),
 	.rf_rdata2      (id_rf_rdata2      ),
 	.branchpc       (branchpc         ),
-	.ebreak         (id_ebreak     )
+	.ebreak         (id_ebreak     ),
+	.csr_data       (id_csr_data   )
 );
 
 // ID_EX
@@ -113,7 +115,7 @@ wire        ex_ena, ex_valid;
 wire [63:0] ex_pc;
 wire [31:0] ex_inst;
 wire [16:0] ex_alu_op;
-wire [ 1:0] ex_sel_rfres;
+wire [ 2:0] ex_sel_rfres;
 wire        ex_mem_wen;
 wire        ex_mem_ena;
 wire [ 3:0] ex_mem_mask;
@@ -126,6 +128,7 @@ wire        ex_rf_we;
 wire [ 4:0] ex_rf_waddr;
 wire		ex_ebreak;
 wire        ex_load;
+wire [63:0] ex_csr_data;
 EX_reg u_EX_reg(
 	.clk            (clk           ),
 	.rst            (rst           ),
@@ -145,8 +148,9 @@ EX_reg u_EX_reg(
 	.id_sel_memdata (id_sel_memdata ),
 	.id_rf_we       (id_rf_we       ),
 	.id_rf_waddr    (id_rf_waddr    ),
-	.id_ebreak         (id_ebreak         ),
+	.id_ebreak      (id_ebreak      ),
 	.id_load        (id_load        ),
+	.id_csr_data    (id_csr_data    ),
 	.ex_pc          (ex_pc          ),
 	.ex_inst        (ex_inst        ),
 	.ex_alu_op      (ex_alu_op      ),
@@ -161,8 +165,9 @@ EX_reg u_EX_reg(
 	.ex_sel_memdata (ex_sel_memdata ),
 	.ex_rf_we       (ex_rf_we       ),
 	.ex_rf_waddr    (ex_rf_waddr    ),
-	.ex_ebreak         (ex_ebreak         ),
-	.ex_load        (ex_load        )
+	.ex_ebreak      (ex_ebreak      ),
+	.ex_load        (ex_load        ),
+	.ex_csr_data    (ex_csr_data    )
 );
 
 
@@ -180,7 +185,7 @@ ysyx_22040088_EXU u_ysyx_22040088_EXU(
 wire        mem_ena, mem_valid;
 wire [63:0] mem_pc;
 wire [31:0] mem_inst;
-wire [ 1:0] mem_sel_rfres;
+wire [ 2:0] mem_sel_rfres;
 wire        mem_mem_wen;
 wire        mem_mem_ena;
 wire [ 3:0] mem_mem_mask;
@@ -192,6 +197,7 @@ wire        mem_rf_we;
 wire [ 4:0] mem_rf_waddr;
 wire		mem_ebreak;
 wire        mem_load;
+wire [63:0] mem_csr_data;
 MEM_reg u_MEM_reg(
 	.clk             (clk             ),
 	.rst             (rst             ),
@@ -208,8 +214,9 @@ MEM_reg u_MEM_reg(
 	.ex_sel_memdata  (ex_sel_memdata  ),
 	.ex_rf_we        (ex_rf_we        ),
 	.ex_rf_waddr     (ex_rf_waddr     ),
-	.ex_ebreak			 (ex_ebreak          ),
+	.ex_ebreak       (ex_ebreak       ),
 	.ex_load         (ex_load         ),
+	.ex_csr_data     (ex_csr_data     ),
 	.mem_pc          (mem_pc          ),
 	.mem_inst        (mem_inst        ),
 	.mem_alu_result  (mem_alu_result  ),
@@ -221,8 +228,9 @@ MEM_reg u_MEM_reg(
 	.mem_sel_memdata (mem_sel_memdata ),
 	.mem_rf_we       (mem_rf_we       ),
 	.mem_rf_waddr    (mem_rf_waddr    ),
-	.mem_ebreak		 (mem_ebreak         ),
-	.mem_load        (mem_load        )
+	.mem_ebreak		 (mem_ebreak      ),
+	.mem_load        (mem_load        ),
+	.mem_csr_data    (mem_csr_data    )
 );
 
 
@@ -242,10 +250,11 @@ MEM u_MEM(
 wire        wb_ena, wb_valid;
 wire [63:0] wb_pc, wb_alu_result, wb_rdata;
 wire [31:0] wb_inst;
-wire [ 1:0] wb_sel_rfres;
+wire [ 2:0] wb_sel_rfres;
 wire        wb_rf_we;
 wire [ 4:0] wb_rf_waddr;
 wire		wb_ebreak;
+wire [63:0] wb_csr_data;
 WB_reg u_WB_reg(
 	.clk            (clk            ),
 	.rst            (rst            ),
@@ -258,7 +267,8 @@ WB_reg u_WB_reg(
 	.mem_rdata      (mem_rdata      ),
 	.mem_rf_we      (mem_rf_we      ),
 	.mem_rf_waddr   (mem_rf_waddr   ),
-	.mem_ebreak        (mem_ebreak        ),
+	.mem_ebreak     (mem_ebreak     ),
+	.mem_csr_data   (mem_csr_data   ),
 	.wb_pc          (wb_pc          ),
 	.wb_inst        (wb_inst        ),
 	.wb_alu_result  (wb_alu_result  ),
@@ -266,13 +276,15 @@ WB_reg u_WB_reg(
 	.wb_rdata       (wb_rdata       ),
 	.wb_rf_we       (wb_rf_we       ),
 	.wb_rf_waddr    (wb_rf_waddr    ),
-	.wb_ebreak			(wb_ebreak         )
+	.wb_ebreak		(wb_ebreak      ),
+	.wb_csr_data    (wb_csr_data    )
 );
 
 
 WB u_WB(
 	.alu_result  (wb_alu_result  ),
 	.mem_rdata   (wb_rdata   ),
+	.csr_data    (wb_csr_data  ),
 	.sel_rfwdata (wb_sel_rfres ),
 	.rf_wdata    (rf_wdata    )
 );

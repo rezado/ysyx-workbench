@@ -21,7 +21,7 @@ module ysyx_22040088_IDU(
     
     // 控制信号
     output [16:0] alu_op,
-    output [ 1:0] sel_rfres,
+    output [ 2:0] sel_rfres,
     output        mem_wen,
     output        mem_ena,
     output [ 3:0] mem_mask,
@@ -39,7 +39,10 @@ module ysyx_22040088_IDU(
     output [63:0] alu_src1,
     output [63:0] alu_src2,
     output [63:0] rf_rdata2,
-    output [63:0] branchpc
+    output [63:0] branchpc,
+
+    // 写回寄存器
+    output [63:0] csr_data
 );
 
 // 指令分割
@@ -255,6 +258,7 @@ CSRs u_CSRs(
     .csr_rdata (csr_rdata )
 );
 
+assign csr_data = csr_re ? csr_rdata : 64'b0;
 
 
 endmodule

@@ -9,7 +9,7 @@ Context* __am_irq_handle(Context *c) {
   if (user_handler) {
     Event ev = {0};
     printf("regs:\n");
-    for (int i = 0; i < 32; i++) {
+    for (int i = 1; i < 32; i++) {
       printf("%x\t\t", c->gpr[i]);
     }
     printf("\n");
