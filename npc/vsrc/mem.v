@@ -58,7 +58,7 @@ assign offset = {idx, 3'b0};
 wire [63:0] tmpdata;
 always @(*) begin
     npc_read(raddr, tmpdata);
-    $display("Load addr:%x rdata:%x", raddr, tmpdata);
+    // $display("Load addr:%x rdata:%x", raddr, tmpdata);
 end
 
 always @(posedge clk) begin

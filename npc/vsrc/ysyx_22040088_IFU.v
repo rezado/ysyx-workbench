@@ -43,7 +43,7 @@ reg [63:0] inst_data;
 always @(*) begin
 	if (!rst) begin
 		npc_read(pc, inst_data);
-		$display("IFetch addr:%x rdata:%x", pc, inst_data);
+		// $display("IFetch addr:%x rdata:%x", pc, inst_data);
 	end
 	else begin
 		inst_data = 64'0;
