@@ -38,7 +38,6 @@ VM_USER_CFLAGS = \
 	-O2 \
 	-Og \
 	-ggdb3 \
-	-fsanitize=address \
 	-DITRACE_COND=true \
 	-D__GUEST_ISA__=riscv64 \
 	-O2 \
