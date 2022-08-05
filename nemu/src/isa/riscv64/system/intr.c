@@ -26,7 +26,7 @@ word_t isa_ret_intr(vaddr_t pc) {
     cpu.csr[MSTATUS] |= 0x10000000;
   else
     cpu.csr[MSTATUS] &= ~0x10000000;
-  cpu.csr[MSTATUS] |= 0x8;
+  // cpu.csr[MSTATUS] |= 0x8;
 #ifdef CONFIG_ETRACE
   Log("RET: oldPC " FMT_WORD "  newPC " FMT_WORD "  mcause: %ld", cpu.pc, cpu.csr[MEPC] + 4, cpu.csr[MCAUSE]);
 #endif
