@@ -18,10 +18,11 @@ static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
 uint8_t* guest_to_host(paddr_t paddr) { return pmem + paddr - CONFIG_MBASE; }
 paddr_t host_to_guest(uint8_t *haddr) { return haddr - pmem + CONFIG_MBASE; }
 
+extern void sim_exit();
 static void out_of_bound(paddr_t addr) {
-  printf("in paddr\n");
-  panic("address = " FMT_PADDR " is out of bound of pmem [" FMT_PADDR ", " FMT_PADDR ") at pc = " FMT_WORD,
+  Log("address = " FMT_PADDR " is out of bound of pmem [" FMT_PADDR ", " FMT_PADDR ") at pc = " FMT_WORD,
       addr, CONFIG_MBASE, CONFIG_MBASE + CONFIG_MSIZE, CPU.pc);
+  sim_exit();
 }
 
 void init_mem() {
@@ -61,7 +62,7 @@ extern "C" void npc_read(long long raddr, long long *rdata) {
     return;
   }
 
-  // out_of_bound((paddr_t)raddr);
+  out_of_bound((paddr_t)raddr);
 }
 
 extern "C" void npc_write(long long waddr, long long wdata, char wmask) {
@@ -90,7 +91,7 @@ extern "C" void npc_write(long long waddr, long long wdata, char wmask) {
     return;
   }
 
-  // out_of_bound((paddr_t)waddr);
+  out_of_bound((paddr_t)waddr);
 }
 
 // word_t paddr_read(paddr_t addr, int len) {
