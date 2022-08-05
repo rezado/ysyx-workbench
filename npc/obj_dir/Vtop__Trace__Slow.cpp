@@ -1127,15 +1127,9 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->fullBit(oldp+208,(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_divuw));
         tracep->fullBit(oldp+209,(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_remw));
         tracep->fullBit(oldp+210,(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_remuw));
-        tracep->fullBit(oldp+211,((IData)((0x1073U 
-                                           == (0x707fU 
-                                               & vlSelf->top__DOT__id_inst)))));
-        tracep->fullBit(oldp+212,((IData)((0x2073U 
-                                           == (0x707fU 
-                                               & vlSelf->top__DOT__id_inst)))));
-        tracep->fullBit(oldp+213,((IData)((0x3073U 
-                                           == (0x707fU 
-                                               & vlSelf->top__DOT__id_inst)))));
+        tracep->fullBit(oldp+211,(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_csrrw));
+        tracep->fullBit(oldp+212,(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_csrrs));
+        tracep->fullBit(oldp+213,(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_csrrc));
         tracep->fullBit(oldp+214,((IData)((0x5073U 
                                            == (0x707fU 
                                                & vlSelf->top__DOT__id_inst)))));
