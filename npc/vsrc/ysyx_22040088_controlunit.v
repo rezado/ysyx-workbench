@@ -278,8 +278,8 @@ assign sel_alures = {inst_mulhsu | inst_mulhu  // 无符号右移32位
 assign sel_memdata = {inst_lwu | inst_lhu | inst_lbu
                     , inst_ld | inst_lw | inst_lh | inst_lb};
 
-// jalr是pcbranch在读取rs1 branch读取rs1和rs2进行比较 ecall读取rs1(指定为a7)
-assign rf_re1 = sel_alusrc1[0] | sel_alusrc1[2] | sel_alusrc1[3] | inst_jalr | b_type | ecall;
+// jalr是pcbranch在读取rs1 branch读取rs1和rs2进行比较 csrr读取rs1
+assign rf_re1 = sel_alusrc1[0] | sel_alusrc1[2] | sel_alusrc1[3] | inst_jalr | b_type | inst_csrrw | inst_csrrs | inst_csrrc;
 assign rf_re2 = sel_alusrc2[0] | sel_alusrc2[4] | sel_alusrc2[5] | sel_alusrc2[6] | b_type;
 
 assign csr_re = csrr;
