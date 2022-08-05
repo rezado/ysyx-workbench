@@ -65,7 +65,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   }
   else if (instr.val == 0) {
     skip = true;
-    IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc))
+    IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
   }
   else IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
 #ifdef CONFIG_WATCHPOINT
