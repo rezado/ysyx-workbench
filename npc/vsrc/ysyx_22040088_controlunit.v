@@ -237,7 +237,7 @@ assign rf_we =  inst_addi | inst_jal | inst_jalr | inst_lui | inst_auipc |
                 r_type | load | inst_sltiu | inst_andi | inst_addiw |
                 inst_srai | inst_slli | inst_srli | inst_divw | inst_remw |
                 inst_sllw | inst_xori | inst_srliw | inst_slliw | inst_sraiw |
-                inst_sraw | inst_srlw | inst_slti | inst_ori;
+                inst_sraw | inst_srlw | inst_slti | inst_ori | csrr;
 assign sel_alusrc1 = {inst_sraw | inst_sraiw, // sext(rdata[31:0])
                       inst_divw | inst_remw | inst_srliw | inst_srlw, //zext(rdata1[31:0])
                       inst_auipc | inst_jal | inst_jalr,  // pc
