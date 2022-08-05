@@ -109,7 +109,7 @@ static void exec_once(Decode *s) {
   strcpy(s->logbuf, logbuf);
   
   // iringbuf
-  if (!top->skip) {
+  if (instr.val != 0) {
     strcpy(rbuf[rptr], logbuf);
     rptr = (rptr + 1) % 20;
   }
