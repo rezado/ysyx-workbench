@@ -80,7 +80,7 @@ void sim_init() {
 }
 
 void sim_exit() {
-    // single_cycle();
+    single_cycle();
     #ifdef CONFIG_DUMPWAVE
     tfp->close();
     delete contextp;
