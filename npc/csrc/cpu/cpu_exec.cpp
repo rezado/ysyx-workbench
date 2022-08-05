@@ -66,10 +66,13 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   }
   else if (instr.val == 0) {
     skip = true;
-    printf("pc:%x npc:%x\n", _this->pc, dnpc);
+    printf("pc:%x npc:%x inst:%x\n", _this->pc, dnpc, instr.val);
     IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, _this->pc));
   }
-  else IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
+  else {
+    printf("pc:%x inst:%x\n", g_nr_guest_inst, _this->pc, instr.val);
+    IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
+  }
 #ifdef CONFIG_WATCHPOINT
   // scan watchpoints
   bool flag = scan_wp();
