@@ -5,7 +5,7 @@
 static Context* (*user_handler)(Event, Context*) = NULL;
 
 Context* __am_irq_handle(Context *c) {
-  // printf("into npc irqhandle\n");
+  printf("into npc irqhandle\n");
   if (user_handler) {
     Event ev = {0};
     // printf("regs:\n");
@@ -53,7 +53,7 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
 }
 
 void yield() {
-  // printf("into yield\n");
+  printf("into yield\n");
   asm volatile("li a7, -1; ecall");
 }
 
