@@ -63,7 +63,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
     difftest_skip_ref();
     printf("time:%d pc:%x\n", g_nr_guest_inst, _this->pc);
   }
-  else if (instr.val == 0) {
+  else if (_this->pc == 0) {
     skip = true;
     IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
   }
