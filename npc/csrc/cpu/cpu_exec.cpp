@@ -61,7 +61,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   if (g_nr_guest_inst <= 5 || skip) {
     skip = false;
     difftest_skip_ref();
-    // printf("time:%d pc:%x\n", g_nr_guest_inst, _this->pc);
+    printf("time:%d pc:%x\n", g_nr_guest_inst, _this->pc);
   }
   else if (instr.val == 0) {
     skip = true;
