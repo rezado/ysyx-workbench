@@ -1,7 +1,7 @@
 module top(
     input   clk,
     input   rst,
-	output	[63:0] pc
+	output reg	[63:0] pc
 );
 /* verilator lint_off UNUSED */
 wire [63:0] pc_out;
@@ -12,7 +12,11 @@ wire        if_valid;
 // IFU
 wire [63:0] branchpc;
 wire        branch;
-assign pc = wb_pc;
+
+always @(posedge clk) begin
+	pc <= wb_pc;
+end
+
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.clk      (clk      ),
 	.rst      (rst || ~if_valid),
