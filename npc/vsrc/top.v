@@ -291,7 +291,10 @@ WB u_WB(
 
 always @(posedge clk) begin
 	if (rst) skip <= 1'b0;
-	else if (wb_inst == 32'b0) skip <= 1'b1;
+	else if (wb_inst == 32'b0)
+		skip <= 1'b1;
+	else
+		skip <= 1'b0;
 end
 
 // ebreak
