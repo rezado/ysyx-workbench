@@ -752,10 +752,7 @@ void Vtop___024root__traceChgSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep) 
                                                                     (0xffU 
                                                                      & (IData)(vlSelf->top__DOT__u_MEM__DOT__mem_rdata)))))
                                                   : 0ULL))))),64);
-            tracep->chgQData(oldp+405,((((IData)(vlSelf->top__DOT__mem_mem_ena) 
-                                         & (~ (IData)(vlSelf->top__DOT__mem_mem_wen)))
-                                         ? vlSelf->top__DOT__mem_alu_result
-                                         : 0x80000000ULL)),64);
+            tracep->chgQData(oldp+405,(vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__raddr),64);
             tracep->chgQData(oldp+407,((((IData)(vlSelf->top__DOT__mem_mem_ena) 
                                          & (IData)(vlSelf->top__DOT__mem_mem_wen))
                                          ? vlSelf->top__DOT__mem_alu_result
