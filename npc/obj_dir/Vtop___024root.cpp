@@ -258,11 +258,8 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
         vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_CSRs__DOT__mcause 
             = vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__csr_wdata;
     }
-    if (vlSelf->rst) {
-        vlSelf->skip = 0U;
-    } else if ((0U == vlSelf->top__DOT__wb_inst)) {
-        vlSelf->skip = 1U;
-    }
+    vlSelf->skip = ((~ (IData)(vlSelf->rst)) & (0U 
+                                                == vlSelf->top__DOT__wb_inst));
     if ((0x30200073U != vlSelf->top__DOT__id_inst)) {
         if ((0x73U == vlSelf->top__DOT__id_inst)) {
             vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_CSRs__DOT__mepc 
@@ -371,7 +368,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     }
     if (VL_UNLIKELY(vlSelf->top__DOT__wb_ebreak)) {
         Vtop___024root____Vdpiimwrap_top__DOT__finish_sim_TOP();
-        VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 302, "");
+        VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 305, "");
     }
     vlSelf->top__DOT__mem_ebreak = ((~ (IData)(vlSelf->rst)) 
                                     & (IData)(vlSelf->top__DOT__ex_ebreak));
