@@ -76,7 +76,6 @@ VM_USER_CLASSES = \
 	inst \
 	logo \
 	reg \
-	intr \
 	mmu \
 	paddr \
 	vaddr \
@@ -132,8 +131,6 @@ inst.o: csrc/isa/riscv64/inst.cpp
 logo.o: csrc/isa/riscv64/logo.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 reg.o: csrc/isa/riscv64/reg.cpp
-	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-intr.o: csrc/isa/riscv64/system/intr.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 mmu.o: csrc/isa/riscv64/system/mmu.c
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
