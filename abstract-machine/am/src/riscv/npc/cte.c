@@ -8,12 +8,12 @@ Context* __am_irq_handle(Context *c) {
   printf("into npc irqhandle\n");
   if (user_handler) {
     Event ev = {0};
-    printf("regs:\n");
-    for (int i = 1; i < 32; i++) {
-      printf("%x\t\t", c->gpr[i]);
-    }
-    printf("\n");
-    printf("mepc:%x mcause:%x mstatus:%x\n", c->mepc, c->mcause, c->mstatus);
+    // printf("regs:\n");
+    // for (int i = 1; i < 32; i++) {
+    //   printf("%x\t\t", c->gpr[i]);
+    // }
+    // printf("\n");
+    // printf("mepc:%x mcause:%x mstatus:%x\n", c->mepc, c->mcause, c->mstatus);
     switch (c->gpr[17]) {
       case -1: 
         ev.event = EVENT_YIELD;
