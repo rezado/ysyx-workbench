@@ -51,7 +51,7 @@ static void prbuf() {
   }
 }
 #endif
-
+// static bool skip = false;
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
   if (ITRACE_COND) { log_write("%s\n", _this->logbuf); }
@@ -59,6 +59,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   // DIFFTEST比DUT晚一个周期更新
   if (g_nr_guest_inst <= 5 || top->skip == 1) {
+    // skip = false;
     difftest_skip_ref();
     // printf("time:%d pc:%x\n", g_nr_guest_inst, _this->pc);
   }

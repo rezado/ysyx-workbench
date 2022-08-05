@@ -9,7 +9,7 @@ Context* __am_irq_handle(Context *c) {
   // printf("into am_irq_handler\n");
   if (user_handler) {
     Event ev = {0};
-    switch (c->mcause) {
+    switch (c->gpr[17]) {
       case -1: 
         ev.event = EVENT_YIELD;
         c->mepc += 4;
@@ -20,6 +20,7 @@ Context* __am_irq_handle(Context *c) {
       case 12: case 13: case 14: case 15:
       case 16: case 17: case 18: case 19:
         ev.event = EVENT_SYSCALL;
+        c->mepc += 4;
         break;
       default: ev.event = EVENT_ERROR; break;
     }

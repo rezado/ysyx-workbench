@@ -44,7 +44,9 @@ void do_syscall(Context *c) {
       #endif
       break;
     case SYS_exit:
+      // TODO:这里在npc会报错 因为进入了nterm要初始化VGA
       _exec("/bin/nterm", NULL, NULL);
+      // halt(0);
       #ifdef ETRACE
         Log("Syscall: exit(%x)", a[0]);
       #endif

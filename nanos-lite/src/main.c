@@ -16,6 +16,7 @@ int main() {
   init_mm();
 
   init_device();
+  printf("finish init device\n");
 
   init_ramdisk();
 

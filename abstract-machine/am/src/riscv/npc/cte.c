@@ -25,6 +25,7 @@ Context* __am_irq_handle(Context *c) {
       case 12: case 13: case 14: case 15:
       case 16: case 17: case 18: case 19:
         ev.event = EVENT_SYSCALL;
+        c->mepc += 4;
         break;
       default: ev.event = EVENT_ERROR; break;
     }
@@ -55,6 +56,7 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
 void yield() {
   // printf("into yield\n");
   asm volatile("li a7, -1; ecall");
+  // printf("out of yield\n");
 }
 
 bool ienabled() {
