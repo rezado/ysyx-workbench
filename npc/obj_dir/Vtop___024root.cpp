@@ -101,10 +101,12 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     QData/*63:0*/ __Vdlyvval__top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf__v0;
     // Body
     __Vdlyvset__top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_regfile__DOT__rf__v0 = 0U;
-    if ((1U & (~ (IData)(vlSelf->rst)))) {
+    if (VL_UNLIKELY((1U & (~ (IData)(vlSelf->rst))))) {
         Vtop___024root____Vdpiimwrap_top__DOT__u_ysyx_22040088_IFU__DOT__npc_read_TOP(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__nextpc, __Vtask_top__DOT__u_ysyx_22040088_IFU__DOT__npc_read__3__rdata);
         vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data 
             = __Vtask_top__DOT__u_ysyx_22040088_IFU__DOT__npc_read__3__rdata;
+        VL_WRITEF("IFetch addr:%x rdata:%x\n",64,vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__nextpc,
+                  64,vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data);
     }
     if (vlSelf->top__DOT__mem_mem_ena) {
         Vtop___024root____Vdpiimwrap_top__DOT__u_MEM__DOT__u_mem__DOT__npc_write_TOP(
@@ -538,7 +540,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     Vtop___024root____Vdpiimwrap_top__DOT__u_ysyx_22040088_IFU__DOT__npc_read_TOP(vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__raddr, vlSelf->__Vtask_top__DOT__u_MEM__DOT__u_mem__DOT__npc_read__5__rdata);
     vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__tmpdata 
         = vlSelf->__Vtask_top__DOT__u_MEM__DOT__u_mem__DOT__npc_read__5__rdata;
-    VL_WRITEF("Read at %x rdata:%x\n",64,vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__raddr,
+    VL_WRITEF("Load addr:%x rdata:%x\n",64,vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__raddr,
               64,vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__tmpdata);
     VL_EXTEND_WQ(65,64, __Vtemp59, vlSelf->top__DOT__ex_alu_src1);
     VL_EXTEND_WQ(65,64, __Vtemp60, vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_b);
