@@ -31,7 +31,7 @@ VL_MODULE(Vtop___024root) {
         CData/*0:0*/ top__DOT__id_jump;
         CData/*0:0*/ top__DOT__id_load;
         CData/*0:0*/ top__DOT__id_stall;
-        CData/*1:0*/ top__DOT__ex_sel_rfres;
+        CData/*2:0*/ top__DOT__ex_sel_rfres;
         CData/*0:0*/ top__DOT__ex_mem_wen;
         CData/*0:0*/ top__DOT__ex_mem_ena;
         CData/*3:0*/ top__DOT__ex_mem_mask;
@@ -41,7 +41,7 @@ VL_MODULE(Vtop___024root) {
         CData/*4:0*/ top__DOT__ex_rf_waddr;
         CData/*0:0*/ top__DOT__ex_ebreak;
         CData/*0:0*/ top__DOT__ex_load;
-        CData/*1:0*/ top__DOT__mem_sel_rfres;
+        CData/*2:0*/ top__DOT__mem_sel_rfres;
         CData/*0:0*/ top__DOT__mem_mem_wen;
         CData/*0:0*/ top__DOT__mem_mem_ena;
         CData/*3:0*/ top__DOT__mem_mem_mask;
@@ -51,7 +51,7 @@ VL_MODULE(Vtop___024root) {
         CData/*4:0*/ top__DOT__mem_rf_waddr;
         CData/*0:0*/ top__DOT__mem_ebreak;
         CData/*0:0*/ top__DOT__mem_load;
-        CData/*1:0*/ top__DOT__wb_sel_rfres;
+        CData/*2:0*/ top__DOT__wb_sel_rfres;
         CData/*0:0*/ top__DOT__wb_rf_we;
         CData/*4:0*/ top__DOT__wb_rf_waddr;
         CData/*0:0*/ top__DOT__wb_ebreak;
@@ -165,13 +165,16 @@ VL_MODULE(Vtop___024root) {
         QData/*63:0*/ top__DOT__ex_alu_src1;
         QData/*63:0*/ top__DOT__ex_alu_src2;
         QData/*63:0*/ top__DOT__ex_rf_rdata2;
+        QData/*63:0*/ top__DOT__ex_csr_data;
         QData/*63:0*/ top__DOT__ex_alu_result;
         QData/*63:0*/ top__DOT__mem_pc;
         QData/*63:0*/ top__DOT__mem_rf_rdata2;
         QData/*63:0*/ top__DOT__mem_alu_result;
+        QData/*63:0*/ top__DOT__mem_csr_data;
         QData/*63:0*/ top__DOT__wb_pc;
         QData/*63:0*/ top__DOT__wb_alu_result;
         QData/*63:0*/ top__DOT__wb_rdata;
+        QData/*63:0*/ top__DOT__wb_csr_data;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__nextpc;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__inst_data;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__rf_rdata1;

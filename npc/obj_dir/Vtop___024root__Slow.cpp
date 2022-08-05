@@ -58,20 +58,25 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
     Vtop___024root____Vdpiimwrap_top__DOT__get_inv_TOP(0U);
     if (VL_UNLIKELY(vlSelf->top__DOT__wb_ebreak)) {
         Vtop___024root____Vdpiimwrap_top__DOT__finish_sim_TOP();
-        VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 287, "");
+        VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 299, "");
     }
     Vtop___024root____Vdpiimwrap_top__DOT__get_inst_TOP(vlSelf->top__DOT__wb_inst);
     vlSelf->pc = vlSelf->top__DOT__wb_pc;
     vlSelf->skip = (0U == vlSelf->top__DOT__wb_inst);
-    vlSelf->top__DOT__rf_wdata = (((- (QData)((IData)(
-                                                      (1U 
-                                                       & (IData)(vlSelf->top__DOT__wb_sel_rfres))))) 
-                                   & vlSelf->top__DOT__wb_alu_result) 
+    vlSelf->top__DOT__rf_wdata = ((((- (QData)((IData)(
+                                                       (1U 
+                                                        & (IData)(vlSelf->top__DOT__wb_sel_rfres))))) 
+                                    & vlSelf->top__DOT__wb_alu_result) 
+                                   | ((- (QData)((IData)(
+                                                         (1U 
+                                                          & ((IData)(vlSelf->top__DOT__wb_sel_rfres) 
+                                                             >> 1U))))) 
+                                      & vlSelf->top__DOT__wb_rdata)) 
                                   | ((- (QData)((IData)(
                                                         (1U 
                                                          & ((IData)(vlSelf->top__DOT__wb_sel_rfres) 
-                                                            >> 1U))))) 
-                                     & vlSelf->top__DOT__wb_rdata));
+                                                            >> 2U))))) 
+                                     & vlSelf->top__DOT__wb_csr_data));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_cin 
         = (IData)((0U != (0xeU & vlSelf->top__DOT__ex_alu_op)));
     vlSelf->top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_b 
@@ -1263,7 +1268,7 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__ex_pc = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__ex_inst = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__ex_alu_op = VL_RAND_RESET_I(17);
-    vlSelf->top__DOT__ex_sel_rfres = VL_RAND_RESET_I(2);
+    vlSelf->top__DOT__ex_sel_rfres = VL_RAND_RESET_I(3);
     vlSelf->top__DOT__ex_mem_wen = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__ex_mem_ena = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__ex_mem_mask = VL_RAND_RESET_I(4);
@@ -1276,10 +1281,11 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__ex_rf_waddr = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__ex_ebreak = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__ex_load = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__ex_csr_data = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__ex_alu_result = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__mem_pc = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__mem_inst = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT__mem_sel_rfres = VL_RAND_RESET_I(2);
+    vlSelf->top__DOT__mem_sel_rfres = VL_RAND_RESET_I(3);
     vlSelf->top__DOT__mem_mem_wen = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__mem_mem_ena = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__mem_mem_mask = VL_RAND_RESET_I(4);
@@ -1291,14 +1297,16 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__mem_rf_waddr = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__mem_ebreak = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__mem_load = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__mem_csr_data = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__wb_pc = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__wb_alu_result = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__wb_rdata = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__wb_inst = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT__wb_sel_rfres = VL_RAND_RESET_I(2);
+    vlSelf->top__DOT__wb_sel_rfres = VL_RAND_RESET_I(3);
     vlSelf->top__DOT__wb_rf_we = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__wb_rf_waddr = VL_RAND_RESET_I(5);
     vlSelf->top__DOT__wb_ebreak = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__wb_csr_data = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__nextpc = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__inst_data = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immJ = VL_RAND_RESET_I(21);
