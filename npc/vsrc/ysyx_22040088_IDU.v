@@ -1,6 +1,6 @@
 module ysyx_22040088_IDU(
     input       clk,
-    // input       rst,
+    input       rst,
     input [63:0] pc,
     input [31:0] inst,
     input [63:0] rf_wdata,
@@ -248,6 +248,7 @@ assign csr_wdata = sel_csrres[0] ? rf_rdata1 :
 wire [63:0] csr_rdata;
 CSRs u_CSRs(
     .clk       (clk       ),
+    .rst       (rst       ),
     .csr_id    (immI      ),
     .csr_re    (csr_re    ),
     .csr_we    (csr_we    ),

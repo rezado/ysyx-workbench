@@ -1,5 +1,6 @@
 module CSRs(
     input              clk,
+    input              rst,
     input       [11:0] csr_id,
     input              csr_re,
     input              csr_we,
@@ -41,7 +42,13 @@ assign csr_rdata = ({64{re_mepc | mret}}        & mepc)
 
 // write
 always @(posedge clk) begin
-    if (mret) begin
+    if (rst) begin
+        mstatus <= 64'ha00001800;
+        mepc <= 64'b0;
+        mcause <= 64'b0;
+        mtvec <= 64'b0;
+    end
+    else if (mret) begin
         mcause[3] <= mcause[7];  // MIE = MPIE
         mcause[7] <= 1'b1;  // MPIE = 1
     end

@@ -52,18 +52,26 @@ static void prbuf() {
 }
 #endif
 // static bool skip = false;
+// static uint64_t pre_pc;
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
   if (ITRACE_COND) { log_write("%s\n", _this->logbuf); }
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   // DIFFTEST比DUT晚一个周期更新
-  if (g_nr_guest_inst <= 5 || top->skip == 1) {
-    // skip = false;
-    difftest_skip_ref();
-    // printf("time:%d pc:%x\n", g_nr_guest_inst, _this->pc);
+  if (sim_time <= 5 || instr.val == 0) {
+    // difftest_skip_ref();
+    // printf("time:%d pc:%x inst:%x\n", g_nr_guest_inst, _this->pc, instr.val);
   }
-  else IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
+  // else if (instr.val == 0) {
+  //   skip = true;
+  //   printf("pc:%x npc:%x inst:%x\n", _this->pc, dnpc, instr.val);
+  //   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, _this->pc));
+  // }
+  else {
+    // printf("dnpc:%x inst:%x\n", dnpc, instr.val);
+    IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
+  }
 #ifdef CONFIG_WATCHPOINT
   // scan watchpoints
   bool flag = scan_wp();
@@ -78,7 +86,6 @@ static void exec_once(Decode *s) {
   s->pc = top->pc;
   s->snpc = top->pc;
 
-  // single_cycle();
   isa_exec_once(s);
   gprcpy();  // 通过DPI-C更新寄存器状态
   CPU.pc = s->dnpc;
@@ -105,7 +112,7 @@ static void exec_once(Decode *s) {
   strcpy(s->logbuf, logbuf);
   
   // iringbuf
-  if (!top->skip) {
+  if (instr.val != 0) {
     strcpy(rbuf[rptr], logbuf);
     rptr = (rptr + 1) % 20;
   }
