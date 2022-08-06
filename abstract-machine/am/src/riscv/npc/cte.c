@@ -66,7 +66,7 @@ bool ienabled() {
 void iset(bool enable) {
   if (enable) {
     printf("into iset\n");
-    // asm volatile("csrsi mstatus, 8");  // mstatus_MIE
+    asm volatile("csrsi mstatus, 8");  // mstatus_MIE
     // set_csr(mie, MIP_MTIP);  // mie_MTIE
     // asm volatile("csrsi mie, 128");
     printf("out iset\n");
