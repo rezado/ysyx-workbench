@@ -80,6 +80,7 @@ wire id_stall;
 
 ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.clk            (clk            ),
+	.rst            (rst            ),
 	.pc             (id_pc             ),
 	.inst           (id_inst           ),
 	.rf_wdata       (rf_wdata       ),
