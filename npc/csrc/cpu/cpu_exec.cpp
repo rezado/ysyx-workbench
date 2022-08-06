@@ -51,7 +51,7 @@ static void prbuf() {
   }
 }
 #endif
-static bool skip = false;
+// static bool skip = false;
 // static uint64_t pre_pc;
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
@@ -60,9 +60,8 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   // DIFFTEST比DUT晚一个周期更新
   if (sim_time <= 5 || instr.val == 0) {
-    skip = false;
     // difftest_skip_ref();
-    printf("time:%d pc:%x inst:%x\n", g_nr_guest_inst, _this->pc, instr.val);
+    // printf("time:%d pc:%x inst:%x\n", g_nr_guest_inst, _this->pc, instr.val);
   }
   // else if (instr.val == 0) {
   //   skip = true;
@@ -70,7 +69,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   //   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, _this->pc));
   // }
   else {
-    printf("dnpc:%x inst:%x\n", dnpc, instr.val);
+    // printf("dnpc:%x inst:%x\n", dnpc, instr.val);
     IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
   }
 #ifdef CONFIG_WATCHPOINT
