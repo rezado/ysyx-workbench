@@ -8,11 +8,24 @@ module CSRs(
     input              ecall,
     input       [63:0] epc,
     input       [63:0] csr_wdata,
-    output      [63:0] csr_rdata
+    output      [63:0] csr_rdata,
+    output             tint
 );
 
-// csrs
 reg [63:0] mepc, mstatus, mcause, mtvec, mie, mip;
+
+// CLINT
+wire MIE, MTIE;
+assign MIE = mstatus[3];
+assign MTIE = mie[7];
+clint u_clint(
+    .clk  (clk  ),
+    .rst  (rst  ),
+    .MIE  (MIE  ),
+    .MTIE (MTIE ),
+    .tint (tint )
+);
+
 
 // 读写使能信号
 wire sel_mepc, sel_mstatus, sel_mcause, sel_mtvec, sel_mie, sel_mip;
@@ -44,7 +57,7 @@ assign we_mip = csr_we & sel_mip;
 assign csr_rdata = ({64{re_mepc | mret}}        & mepc)
                  | ({64{re_mstatus}}            & mstatus)
                  | ({64{re_mcause}}             & mcause)
-                 | ({64{re_mtvec | ecall}}      & mtvec)
+                 | ({64{re_mtvec | ecall | tint}}      & mtvec)
                  | ({64{re_mie}}                & mie)
                  | ({64{re_mip}}                & mip);
 
@@ -59,12 +72,20 @@ always @(posedge clk) begin
         mip <= 64'b0;
     end
     else if (mret) begin
-        mcause[3] <= mcause[7];  // MIE = MPIE
-        mcause[7] <= 1'b1;  // MPIE = 1
+        mstatus[3] <= mstatus[7];  // MIE = MPIE
+        mstatus[7] <= 1'b1;  // MPIE = 1
     end
     else if (ecall) begin
         mepc <= epc;
         mcause <= csr_wdata;
+    end
+    else if (tint) begin
+        // 触发计时器中断 timer interrupt
+        // always内部是顺序执行的
+        mepc <= epc;
+        mcause <= 64'h8000000000000007;
+        mstatus[7] <= mstatus[3];  // MPIE = MIE
+        mstatus[3] <= 1'b0;  // MIE = 0
     end
     else if (we_mcause) mcause <= csr_wdata;
     else if (we_mepc) mepc <= csr_wdata;
