@@ -61,7 +61,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   // DIFFTEST比DUT晚一个周期更新
   if (sim_time <= 5 || instr.val == 0) {
     skip = false;
-    difftest_skip_ref();
+    // difftest_skip_ref();
     printf("time:%d pc:%x inst:%x\n", g_nr_guest_inst, _this->pc, instr.val);
   }
   // else if (instr.val == 0) {
