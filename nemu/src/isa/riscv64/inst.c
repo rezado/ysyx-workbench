@@ -55,7 +55,7 @@ static int decode_exec(Decode *s) {
   INSTPAT_START();
 
   // N-type
-  INSTPAT("0000000 00000 00000 000 00000 11100 11", ecall  , N, printf("into ecall\n"); s->dnpc = isa_raise_intr(0xb, s->pc));
+  INSTPAT("0000000 00000 00000 000 00000 11100 11", ecall  , N, s->dnpc = isa_raise_intr(0xb, s->pc));
   INSTPAT("0011000 00010 00000 000 00000 11100 11", mret   , N, s->dnpc = isa_ret_intr(s->pc));
   INSTPAT("0000000 00001 00000 000 00000 11100 11", ebreak , N, NEMUTRAP(s->pc, R(10))); // R(10) is $a0
   
@@ -147,7 +147,7 @@ static int decode_exec(Decode *s) {
   INSTPAT("??????? ????? ????? ??? ????? 11011 11", jal    , J, R(dest) = s->snpc, s->dnpc = s->pc + src1);
 
 
-  INSTPAT("??????? ????? ????? ??? ????? ????? ??", inv    , N, printf("into INV\n"); INV(s->pc));
+  INSTPAT("??????? ????? ????? ??? ????? ????? ??", inv    , N, INV(s->pc));
   INSTPAT_END();
 
   R(0) = 0; // reset $zero to 0
