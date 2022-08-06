@@ -59,16 +59,16 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   // DIFFTEST比DUT晚一个周期更新
-  if (sim_time <= 4 || skip) {
+  if (sim_time <= 4 || instr.val == 0) {
     skip = false;
     difftest_skip_ref();
     printf("time:%d pc:%x inst:%x\n", g_nr_guest_inst, _this->pc, instr.val);
   }
-  else if (instr.val == 0) {
-    skip = true;
-    printf("pc:%x npc:%x inst:%x\n", _this->pc, dnpc, instr.val);
-    IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, _this->pc));
-  }
+  // else if (instr.val == 0) {
+  //   skip = true;
+  //   printf("pc:%x npc:%x inst:%x\n", _this->pc, dnpc, instr.val);
+  //   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, _this->pc));
+  // }
   else {
     printf("dnpc:%x inst:%x\n", dnpc, instr.val);
     IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
