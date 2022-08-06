@@ -471,13 +471,17 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__ex_pc = (((IData)(vlSelf->rst) 
                                 | (IData)(vlSelf->top__DOT__id_stall))
                                 ? 0x80000000ULL : vlSelf->top__DOT__id_pc);
-    Vtop___024root____Vdpiimwrap_top__DOT__u_ysyx_22040088_IFU__DOT__npc_read_TOP(
+    if (vlSelf->top__DOT__mem_mem_ena) {
+        Vtop___024root____Vdpiimwrap_top__DOT__u_ysyx_22040088_IFU__DOT__npc_read_TOP(
                                                                                 (((IData)(vlSelf->top__DOT__mem_mem_ena) 
                                                                                 & (~ (IData)(vlSelf->top__DOT__mem_mem_wen)))
                                                                                  ? vlSelf->top__DOT__mem_alu_result
                                                                                  : 0x80000000ULL), vlSelf->__Vtask_top__DOT__u_MEM__DOT__u_mem__DOT__npc_read__5__rdata);
-    vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__tmpdata 
-        = vlSelf->__Vtask_top__DOT__u_MEM__DOT__u_mem__DOT__npc_read__5__rdata;
+        vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__tmpdata 
+            = vlSelf->__Vtask_top__DOT__u_MEM__DOT__u_mem__DOT__npc_read__5__rdata;
+    } else {
+        vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__tmpdata = 0ULL;
+    }
     vlSelf->top__DOT__ex_sel_memdata = (((IData)(vlSelf->rst) 
                                          | (IData)(vlSelf->top__DOT__id_stall))
                                          ? 0U : (((
