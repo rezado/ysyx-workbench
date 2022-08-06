@@ -64,7 +64,7 @@ assign csr_rdata = ({64{re_mepc | mret}}        & mepc)
 // write
 always @(posedge clk) begin
     if (rst) begin
-        mstatus <= 64'ha00001800;
+        mstatus <= 64'ha00001808;
         mepc <= 64'b0;
         mcause <= 64'b0;
         mtvec <= 64'b0;
