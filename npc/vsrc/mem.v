@@ -49,21 +49,26 @@ assign mask = (mem_mask[0] == 1'b1) ? 8'b11111111:
                 (idx == 3'b101) ? 8'b00100000:
                 (idx == 3'b110) ? 8'b01000000:
                 (idx == 3'b111) ? 8'b10000000:
-                                  8'b00000000 :
+                                  8'b00000000:
                                   8'b00000000;
 
 wire [5:0] offset;
 assign offset = {idx, 3'b0};
 
-wire [63:0] tmpdata;
+reg [63:0] tmpdata;
 always @(*) begin
+  if (ena) begin
     npc_read(raddr, tmpdata);
     // $display("Load addr:%x rdata:%x", raddr, tmpdata);
+  end
+  else begin
+    tmpdata = 64'b0;
+  end
 end
 
 always @(posedge clk) begin
-  if (ena) begin
-    npc_write(waddr, wdata, mask & {8{wen}});
+  if (ena & wen) begin
+    npc_write(waddr, wdata, mask);
   end
 end
 

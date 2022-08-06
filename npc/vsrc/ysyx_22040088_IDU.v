@@ -184,11 +184,12 @@ assign branch = sel_btype[0] ? 1'b1 :
                 sel_btype[4] ? ltu :
                 sel_btype[5] ? ~lt :
                 sel_btype[6] ? ~ltu :
-                (ecall || mret) ? 1'b1 :
+                (ecall || mret || tint) ? 1'b1 :
                                1'b0;
 
 // 根据条件选择
-assign branchpc= branch ? ((ecall || mret) ? csr_rdata :
+wire        tint;  // timer interrupt
+assign branchpc= branch ? ((ecall || mret || tint) ? csr_rdata :
                            sel_btype[0] ? jalrpc :
                                           bpc) :
                           64'b0;
@@ -256,7 +257,8 @@ CSRs u_CSRs(
     .ecall     (ecall     ),
     .epc       (pc        ),
     .csr_wdata (csr_wdata ),
-    .csr_rdata (csr_rdata )
+    .csr_rdata (csr_rdata ),
+    .tint      (tint      )
 );
 
 assign csr_data = csr_re ? csr_rdata : 64'b0;
