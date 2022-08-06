@@ -69,6 +69,7 @@ void iset(bool enable) {
     asm volatile("csrsi mstatus, 8");  // mstatus_MIE
     // set_csr(mie, MIP_MTIP);  // mie_MTIE
     // asm volatile("csrsi mie, 128");
+    printf("out iset\n");
   }
   else {
     asm volatile("csrci mstatus, 8");
