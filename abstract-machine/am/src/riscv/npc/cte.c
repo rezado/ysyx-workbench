@@ -14,17 +14,19 @@ Context* __am_irq_handle(Context *c) {
     // }
     // printf("\n");
     // printf("mepc:%x mcause:%x mstatus:%x\n", c->mepc, c->mcause, c->mstatus);
-    switch (c->gpr[17]) {
-      case -1: 
-        ev.event = EVENT_YIELD;
-        c->mepc += 4;
+    switch (c->mstatus) {
+      case 0xb:
+        if (c->gpr[17] == -1) {
+          ev.event = EVENT_YIELD;
+          c->mepc += 4;
+        }
+        else {
+          ev.event = EVENT_SYSCALL;
+          c->mepc += 4;
+        }
         break;
-      case 0: case 1: case 2: case 3:
-      case 4: case 5: case 6: case 7:
-      case 8: case 9: case 10: case 11:
-      case 12: case 13: case 14: case 15:
-      case 16: case 17: case 18: case 19:
-        ev.event = EVENT_SYSCALL;
+      case 0x8000000000000007:
+        ev.event = EVENT_IRQ_TIMER;
         c->mepc += 4;
         break;
       default: ev.event = EVENT_ERROR; break;
