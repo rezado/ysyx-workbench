@@ -27,6 +27,6 @@ end
 // 判断mtime
 wire mtime_bigger;
 assign mtime_bigger = (mtime >= mtimecmp);
-assign tint = mtime_bigger && MIE && MTIE;
+assign tint = mtime_bigger && MIE && MTIE && ~rst;
 
 endmodule
