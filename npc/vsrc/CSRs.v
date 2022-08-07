@@ -68,7 +68,7 @@ always @(posedge clk) begin
         mepc <= 64'b0;
         mcause <= 64'b0;
         mtvec <= 64'b0;
-        mie <= 64'd0;  // 手动置位
+        mie <= 64'd128;  // 手动置位
         mip <= 64'b0;
     end
     else if (mret) begin
