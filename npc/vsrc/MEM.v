@@ -6,16 +6,10 @@ module MEM(
     input [63:0]  addr,
     input [63:0]  wdata,
     input [ 1:0]  sel_memdata,
-    input [63:0]  mtimecmp_rdata,
-    output [63:0] rdata,
-    output        mtimecmp_wen,
-    output [63:0] mtimecmp_wdata,
+    output [63:0] rdata
 );
 
 wire [63:0] mem_rdata;
-wire mem_ena, mem_wen;
-assign mem_ena = ena & 
-assign 
 mem u_mem(
     .clk      (clk      ),
     .ena      (ena      ),
