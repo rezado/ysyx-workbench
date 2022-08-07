@@ -20,12 +20,13 @@ always @(posedge clk) begin
         npc_read(64'h0200bff8, mtime);
         npc_read(64'h02004000, mtimecmp);
         npc_write(64'h0200bff8, mtime + 1, 8'hff);
+        // $display("mtime:%x mtimecmp:%x", mtime, mtimecmp);
     end
 end
 
 // 判断mtime
 wire mtime_bigger;
 assign mtime_bigger = (mtime >= mtimecmp);
-assign tint = mtime_bigger && MIE && MTIE;
+assign tint = mtime_bigger && MIE && MTIE && ~rst;
 
 endmodule

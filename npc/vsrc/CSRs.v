@@ -68,12 +68,13 @@ always @(posedge clk) begin
         mepc <= 64'b0;
         mcause <= 64'b0;
         mtvec <= 64'b0;
-        mie <= 64'b0;
+        mie <= 64'd0;  // 手动置位
         mip <= 64'b0;
     end
     else if (mret) begin
         mstatus[3] <= mstatus[7];  // MIE = MPIE
         mstatus[7] <= 1'b1;  // MPIE = 1
+        mip[7] <= 1'b0;  // MTIP = 0
     end
     else if (ecall) begin
         mepc <= epc;
@@ -82,10 +83,12 @@ always @(posedge clk) begin
     else if (tint) begin
         // 触发计时器中断 timer interrupt
         // always内部是顺序执行的
+        $display("into tint");
         mepc <= epc;
         mcause <= 64'h8000000000000007;
         mstatus[7] <= mstatus[3];  // MPIE = MIE
         mstatus[3] <= 1'b0;  // MIE = 0
+        mip[7] <= 1'b1;  // MTIP = 1
     end
     else if (we_mcause) mcause <= csr_wdata;
     else if (we_mepc) mepc <= csr_wdata;
