@@ -1,6 +1,7 @@
 module clint(
     input       clk,
     input       rst,
+    input       ena,
     input       MIE,
     input       MTIE,
     output      tint
@@ -27,6 +28,6 @@ end
 // 判断mtime
 wire mtime_bigger;
 assign mtime_bigger = (mtime >= mtimecmp);
-assign tint = mtime_bigger && MIE && MTIE && ~rst;
+assign tint = mtime_bigger && MIE && MTIE && ena;
 
 endmodule
