@@ -15,12 +15,14 @@ import "DPI-C" function void npc_write(
 // 处理计时器中断
 reg [63:0] mtime, mtimecmp;
 
-// 写入mtime 读取mtime和mtimecmp
+// 写入mtime
 always @(posedge clk) begin
-    if (!rst) begin
-        npc_read(64'h0200bff8, mtime);
-        npc_read(64'h02004000, mtimecmp);
-        npc_write(64'h0200bff8, mtime + 1, 8'hff);
+    if (rst) begin
+      mtime <= 64'b0;
+      mtimecmp <= 64'b0;
+    end
+    else begin
+        mtime <= mtime + 1;  // mtime每个周期自增
         // $display("mtime:%x mtimecmp:%x", mtime, mtimecmp);
     end
 end
