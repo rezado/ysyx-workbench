@@ -83,6 +83,7 @@ always @(posedge clk) begin
     else if (tint) begin
         // 触发计时器中断 timer interrupt
         // always内部是顺序执行的
+        $display("into tint");
         mepc <= epc;
         mcause <= 64'h8000000000000007;
         mstatus[7] <= mstatus[3];  // MPIE = MIE
