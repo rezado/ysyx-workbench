@@ -5,7 +5,7 @@
 static Context* (*user_handler)(Event, Context*) = NULL;
 
 Context* __am_irq_handle(Context *c) {
-  printf("into npc irqhandle\n");
+  // printf("into npc irqhandle\n");
   if (user_handler) {
     Event ev = {0};
     // printf("regs:\n");
@@ -13,7 +13,7 @@ Context* __am_irq_handle(Context *c) {
     //   printf("%x\t\t", c->gpr[i]);
     // }
     // printf("\n");
-    printf("mepc:%x mcause:%x mstatus:%x\n", c->mepc, c->mcause, c->mstatus);
+    // printf("mepc:%x mcause:%x mstatus:%x\n", c->mepc, c->mcause, c->mstatus);
     switch (c->mcause) {
       case 0xb:
         if (c->gpr[17] == -1) {
