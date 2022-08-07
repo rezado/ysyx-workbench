@@ -99,7 +99,7 @@ extern "C" void npc_write(long long waddr, long long wdata, char wmask) {
   }
 
   if (waddr == MTIMECMP_ADDR) {
-    printf("write to mtimecmp:%x\n", wdata);
+    // printf("write to mtimecmp:%x\n", wdata);
     mtimecmp = wdata;
     return;
   }
