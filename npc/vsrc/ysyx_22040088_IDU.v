@@ -247,6 +247,8 @@ assign csr_wdata = sel_csrres[0] ? rf_rdata1 :
                                    64'b0;
 // CSR寄存器
 wire [63:0] csr_rdata;
+wire        tint_ena;
+assign tint_ena = ~(rst || stall);
 CSRs u_CSRs(
     .clk       (clk       ),
     .rst       (rst       ),
@@ -256,6 +258,7 @@ CSRs u_CSRs(
     .mret      (mret      ),
     .ecall     (ecall     ),
     .epc       (pc        ),
+    .tint_ena  (tint_ena  ),
     .csr_wdata (csr_wdata ),
     .csr_rdata (csr_rdata ),
     .tint      (tint      )

@@ -8,6 +8,7 @@ module CSRs(
     input              ecall,
     input       [63:0] epc,
     input       [63:0] csr_wdata,
+    input              tint_ena,
     output      [63:0] csr_rdata,
     output             tint
 );
@@ -21,6 +22,7 @@ assign MTIE = mie[7];
 clint u_clint(
     .clk  (clk  ),
     .rst  (rst  ),
+    .ena  (tint_ena),
     .MIE  (MIE  ),
     .MTIE (MTIE ),
     .tint (tint )
