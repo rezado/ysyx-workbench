@@ -257,7 +257,7 @@ MEM u_MEM(
 	.addr        (mem_alu_result        ),
 	.wdata       (mem_rf_rdata2       ),
 	.sel_memdata (mem_sel_memdata ),
-	.mtcmp_rdata (ex_csr_data     ),
+	.mtcmp_rdata (id_csr_data     ),  // 直接从ID阶段的CSR寄存器引过来线
 	.rdata       (mem_rdata       ),
 	.mtcmp_we    (mtcmp_we    ),
 	.mtcmp_re    (mtcmp_re    ),
