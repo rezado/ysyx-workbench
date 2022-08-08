@@ -270,7 +270,7 @@ CSRs u_CSRs(
     .tint      (tint      )
 );
 
-assign csr_data = csr_re ? csr_rdata : 64'b0;
+assign csr_data = csr_re || mtcmp_re ? csr_rdata : 64'b0;
 
 
 endmodule
