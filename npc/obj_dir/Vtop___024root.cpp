@@ -1711,8 +1711,9 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__4(Vtop___024root* vlSelf) {
                                                       | (0x30200073U 
                                                          == vlSelf->top__DOT__id_inst)) 
                                                      | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__tint))))))))));
-    vlSelf->top__DOT__id_csr_data = ((0x73U == (0x7fU 
-                                                & vlSelf->top__DOT__id_inst))
+    vlSelf->top__DOT__id_csr_data = (((0x73U == (0x7fU 
+                                                 & vlSelf->top__DOT__id_inst)) 
+                                      | (IData)(vlSelf->top__DOT__mtcmp_re))
                                       ? vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__csr_rdata
                                       : 0ULL);
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__csr_wdata 
