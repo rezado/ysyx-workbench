@@ -78,6 +78,11 @@ wire inst_inv;
 wire id_ebreak;
 wire id_stall;
 
+// write back from MEM
+wire mtcmp_we, mtcmp_re;
+wire [63:0] mtcmp_wdata;
+
+
 ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.clk            (clk            ),
 	.rst            (rst            ),
@@ -94,6 +99,9 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.mem_rf_we      (mem_rf_we      ),
 	.mem_rf_waddr   (mem_rf_waddr   ),
 	.mem_alu_result (mem_alu_result ),
+	.mtcmp_we       (mtcmp_we       ),
+	.mtcmp_re       (mtcmp_re       ),
+	.mtcmp_wdata    (mtcmp_wdata    ),
 	.alu_op         (id_alu_op         ),
 	.sel_rfres      (id_sel_rfres      ),
 	.mem_wen        (id_mem_wen        ),
@@ -114,6 +122,7 @@ ysyx_22040088_IDU u_ysyx_22040088_IDU(
 	.ebreak         (id_ebreak     ),
 	.csr_data       (id_csr_data   )
 );
+
 
 // ID_EX
 wire        ex_ena, ex_valid;
@@ -248,8 +257,13 @@ MEM u_MEM(
 	.addr        (mem_alu_result        ),
 	.wdata       (mem_rf_rdata2       ),
 	.sel_memdata (mem_sel_memdata ),
-	.rdata       (mem_rdata       )
+	.mtcmp_rdata (ex_csr_data     ),
+	.rdata       (mem_rdata       ),
+	.mtcmp_we    (mtcmp_we    ),
+	.mtcmp_re    (mtcmp_re    ),
+	.mtcmp_wdata (mtcmp_wdata )
 );
+
 
 // MEM_WB
 wire        wb_ena, wb_valid;
