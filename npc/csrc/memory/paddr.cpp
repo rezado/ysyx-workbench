@@ -17,8 +17,6 @@ static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
 #define MTIME_ADDR      CLINT_BASE + 0xBFF8
 #define MTIMECMP_ADDR   CLINT_BASE + 0x4000
 
-uint64_t mtime, mtimecmp;
-
 uint8_t* guest_to_host(paddr_t paddr) { return pmem + paddr - CONFIG_MBASE; }
 paddr_t host_to_guest(uint8_t *haddr) { return haddr - pmem + CONFIG_MBASE; }
 
@@ -61,16 +59,6 @@ extern "C" void npc_read(long long raddr, long long *rdata) {
     return;
   }
 
-  if (raddr == MTIME_ADDR) {
-    *rdata = mtime;
-    return;
-  }
-  
-  if (raddr == MTIMECMP_ADDR) {
-    *rdata = mtimecmp;
-    return;
-  }
-
   if (likely(in_pmem((paddr_t)raddr))) {
     *rdata = host_read(guest_to_host(raddr & ~0x7ull), 8);
     return;
@@ -90,17 +78,6 @@ extern "C" void npc_write(long long waddr, long long wdata, char wmask) {
   waddr = waddr & ~0x7ull;
   if (waddr == SERIAL_PORT) {
     putc((char)wdata, stderr);
-    return;
-  }
-
-  if (waddr == MTIME_ADDR) {
-    mtime = wdata;
-    return;
-  }
-
-  if (waddr == MTIMECMP_ADDR) {
-    // printf("write to mtimecmp:%x\n", wdata);
-    mtimecmp = wdata;
     return;
   }
 

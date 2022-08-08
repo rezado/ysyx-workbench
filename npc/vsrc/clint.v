@@ -4,25 +4,36 @@ module clint(
     input       ena,
     input       MIE,
     input       MTIE,
-    output      tint
+    input       mtcmp_we,
+    input [63:0] mtcmp_wdata,
+    output      tint,
+    output [63:0] mtcmp_rdata
 );
-
-import "DPI-C" function void npc_read(
-  input longint raddr, output longint rdata);
-import "DPI-C" function void npc_write(
-  input longint waddr, input longint wdata, input byte wmask);
 
 // 处理计时器中断
 reg [63:0] mtime, mtimecmp;
 
-// 写入mtime 读取mtime和mtimecmp
+assign mtcmp_rdata = mtimecmp;
+
+// mtime自增
 always @(posedge clk) begin
-    if (!rst) begin
-        npc_read(64'h0200bff8, mtime);
-        npc_read(64'h02004000, mtimecmp);
-        npc_write(64'h0200bff8, mtime + 1, 8'hff);
-        // $display("mtime:%x mtimecmp:%x", mtime, mtimecmp);
+    if (rst) begin
+      mtime <= 64'b0;
+      // $display("mtime:%x mtimecmp:%x", mtime, mtimecmp);
     end
+    else begin
+      mtime <= mtime + 1;
+    end
+end
+
+// 读取mtimecmp
+always @(posedge clk) begin
+  if (rst) begin
+    mtimecmp <= 64'b0;
+  end
+  else if (mtcmp_we) begin
+    mtimecmp <= mtcmp_wdata;
+  end
 end
 
 // 判断mtime

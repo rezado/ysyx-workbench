@@ -9,6 +9,9 @@ module CSRs(
     input       [63:0] epc,
     input       [63:0] csr_wdata,
     input              tint_ena,
+    input              mtcmp_we,
+    input              mtcmp_re,
+    input       [63:0] mtcmp_wdata,
     output      [63:0] csr_rdata,
     output             tint
 );
@@ -19,14 +22,20 @@ reg [63:0] mepc, mstatus, mcause, mtvec, mie, mip;
 wire MIE, MTIE;
 assign MIE = mstatus[3];
 assign MTIE = mie[7];
+wire [63:0] mtcmp_rdata;
+
 clint u_clint(
-    .clk  (clk  ),
-    .rst  (rst  ),
-    .ena  (tint_ena),
-    .MIE  (MIE  ),
-    .MTIE (MTIE ),
-    .tint (tint )
+    .clk         (clk         ),
+    .rst         (rst         ),
+    .ena         (tint_ena    ),
+    .MIE         (MIE         ),
+    .MTIE        (MTIE        ),
+    .mtcmp_we    (mtcmp_we    ),
+    .mtcmp_wdata (mtcmp_wdata ),
+    .tint        (tint        ),
+    .mtcmp_rdata (mtcmp_rdata )
 );
+
 
 
 // 读写使能信号
@@ -61,7 +70,8 @@ assign csr_rdata = ({64{re_mepc | mret}}        & mepc)
                  | ({64{re_mcause}}             & mcause)
                  | ({64{re_mtvec | ecall | tint}}      & mtvec)
                  | ({64{re_mie}}                & mie)
-                 | ({64{re_mip}}                & mip);
+                 | ({64{re_mip}}                & mip)
+                 | ({64{mtcmp_re}}              & mtcmp_rdata);
 
 // write
 always @(posedge clk) begin

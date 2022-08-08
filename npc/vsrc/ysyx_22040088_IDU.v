@@ -18,6 +18,9 @@ module ysyx_22040088_IDU(
     input              mem_rf_we,
     input       [ 4:0] mem_rf_waddr,
     input       [63:0] mem_alu_result,
+    input              mtcmp_we,
+    input              mtcmp_re,
+    input       [63:0] mtcmp_wdata,
     
     // 控制信号
     output [16:0] alu_op,
@@ -259,12 +262,15 @@ CSRs u_CSRs(
     .ecall     (ecall     ),
     .epc       (pc        ),
     .tint_ena  (tint_ena  ),
+    .mtcmp_we    (mtcmp_we    ),
+    .mtcmp_re    (mtcmp_re    ),
+    .mtcmp_wdata (mtcmp_wdata ),
     .csr_wdata (csr_wdata ),
     .csr_rdata (csr_rdata ),
     .tint      (tint      )
 );
 
-assign csr_data = csr_re ? csr_rdata : 64'b0;
+assign csr_data = csr_re || mtcmp_re ? csr_rdata : 64'b0;
 
 
 endmodule
