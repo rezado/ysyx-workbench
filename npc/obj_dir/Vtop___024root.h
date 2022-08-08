@@ -165,6 +165,7 @@ VL_MODULE(Vtop___024root) {
         QData/*63:0*/ top__DOT__id_pc;
         QData/*63:0*/ top__DOT__id_alu_src1;
         QData/*63:0*/ top__DOT__id_rf_rdata2;
+        QData/*63:0*/ top__DOT__id_csr_data;
         QData/*63:0*/ top__DOT__rf_wdata;
         QData/*63:0*/ top__DOT__ex_pc;
         QData/*63:0*/ top__DOT__ex_alu_src1;
