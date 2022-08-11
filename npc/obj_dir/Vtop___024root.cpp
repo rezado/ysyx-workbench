@@ -1487,7 +1487,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__3(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__next_state 
         = Vtop__ConstPool__TABLE_a244a12e_0[__Vtableidx1];
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__data_ok 
-        = ((1U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
+        = ((0U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
            & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__cache_hit));
     vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__mask 
         = ((1U & (IData)(vlSelf->top__DOT__mem_mask))
