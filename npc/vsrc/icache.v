@@ -25,7 +25,7 @@ parameter IDLE = 0, LOOKUP = 1, MISS = 2, REPLACE = 3;
 reg [2:0] state, next_state;
 
 assign addr_ok = (state == IDLE);
-assign data_ok = (state == LOOKUP && cache_hit);
+assign data_ok = (state == IDLE && cache_hit);
 assign rdata = load_res;
 
 // {v, tag}表
