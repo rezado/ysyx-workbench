@@ -107,7 +107,7 @@ end
 
 // Data Select
 wire [31:0] way0_load_word, way1_load_word, load_res;
-wire [63:0] way0_data, way1_data, replace_data;
+wire [63:0] way0_data, way1_data;
 assign way0_load_word = way0_data[reg_offset[2:0] * 32 +: 32];
 assign way1_load_word = way1_data[reg_offset[2:0] * 32 +: 32];
 // Selecter Buffer
@@ -124,7 +124,6 @@ always @(posedge clk) begin
 end
 assign load_res = {32{reg_way0_hit}} & way0_load_word
                 | {32{reg_way1_hit}} & way1_load_word;
-assign replace_data = replace_way ? way1_data : way0_data;
 assign ram_addr = (state == LOOKUP || state == REPLACE) ? reg_index : 6'b0;
 
 
