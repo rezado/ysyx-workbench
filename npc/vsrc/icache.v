@@ -99,8 +99,8 @@ end
 // Data Select
 wire [31:0] way0_load_word, way1_load_word, load_res;
 wire [63:0] way0_data, way1_data, replace_data;
-assign way0_load_word = way0_data[offset[2:0] * 32 +: 32];
-assign way1_load_word = way1_data[offset[2:0] * 32 +: 32];
+assign way0_load_word = way0_data[reg_offset[2:0] * 32 +: 32];
+assign way1_load_word = way1_data[reg_offset[2:0] * 32 +: 32];
 assign load_res = {32{way0_hit}} & way0_load_word
                 | {32{way1_hit}} & way1_load_word;
 assign replace_data = replace_way ? way1_data : way0_data;
@@ -134,14 +134,14 @@ assign way1_data = ram_rdata[127:64];
 // 向内存请求读
 assign rd_req = (state == MISS);
 assign rd_wstrb = 4'b1111;
-assign rd_addr = {32'b0, tag, index, offset};
+assign rd_addr = {32'b0, reg_tag, reg_index, reg_offset};
 
 // REPLACE 向内存请求写
 wire replace_req;
 assign replace_req = replace_way ? |way1_tag : |way0_tag;
 assign wr_req = (state == REPLACE) & replace_req;
 assign wr_wstrb = 4'b1111;
-assign wr_addr = {32'b0, tag, index, offset};
+assign wr_addr = {32'b0, reg_tag, reg_index, reg_offset};
 assign wr_data = replace_data;
 
 // 组合逻辑
