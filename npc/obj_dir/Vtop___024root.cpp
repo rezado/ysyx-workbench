@@ -154,11 +154,20 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__3(Vtop___024root* vlSelf) {
     if (vlSelf->rst) {
         vlSelf->top__DOT__wb_rdata = 0ULL;
         vlSelf->top__DOT__wb_csr_data = 0ULL;
-        vlSelf->top__DOT__wb_alu_result = 0ULL;
-        vlSelf->top__DOT__wb_pc = 0x80000000ULL;
     } else {
         vlSelf->top__DOT__wb_rdata = vlSelf->top__DOT__mem_rdata;
         vlSelf->top__DOT__wb_csr_data = vlSelf->top__DOT__mem_csr_data;
+    }
+    if (vlSelf->rst) {
+        vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_replace_way = 0U;
+    } else if ((2U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state))) {
+        vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_replace_way 
+            = vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__replace_way;
+    }
+    if (vlSelf->rst) {
+        vlSelf->top__DOT__wb_alu_result = 0ULL;
+        vlSelf->top__DOT__wb_pc = 0x80000000ULL;
+    } else {
         vlSelf->top__DOT__wb_alu_result = vlSelf->top__DOT__mem_alu_result;
         vlSelf->top__DOT__wb_pc = vlSelf->top__DOT__mem_pc;
     }
