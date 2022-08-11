@@ -807,7 +807,7 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
     VlWide<3>/*95:0*/ __Vtemp143;
     VlWide<3>/*95:0*/ __Vtemp144;
     VlWide<3>/*95:0*/ __Vtemp145;
-    VlWide<4>/*127:0*/ __Vtemp147;
+    VlWide<4>/*127:0*/ __Vtemp148;
     VlWide<4>/*127:0*/ __Vtemp149;
     vluint32_t* const oldp = tracep->oldp(vlSymsp->__Vm_baseCode);
     if (false && oldp) {}  // Prevent unused
@@ -1662,18 +1662,18 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
                                                    << 0xdU) 
                                                   | (QData)((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immB))))))
                                       : 0ULL)),64);
-        VL_EXTEND_WQ(128,64, __Vtemp147, vlSelf->top__DOT__mem_rdata);
+        VL_EXTEND_WQ(128,64, __Vtemp148, vlSelf->top__DOT__mem_rdata);
         if (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__replace_way) {
-            __Vtemp149[0U] = __Vtemp147[0U];
-            __Vtemp149[1U] = __Vtemp147[1U];
-            __Vtemp149[2U] = __Vtemp147[2U];
-            __Vtemp149[3U] = __Vtemp147[3U];
-        } else {
             __Vtemp149[0U] = 0U;
             __Vtemp149[1U] = 0U;
             __Vtemp149[2U] = (IData)(vlSelf->top__DOT__mem_rdata);
             __Vtemp149[3U] = (IData)((vlSelf->top__DOT__mem_rdata 
                                       >> 0x20U));
+        } else {
+            __Vtemp149[0U] = __Vtemp148[0U];
+            __Vtemp149[1U] = __Vtemp148[1U];
+            __Vtemp149[2U] = __Vtemp148[2U];
+            __Vtemp149[3U] = __Vtemp148[3U];
         }
         tracep->fullWData(oldp+492,(__Vtemp149),128);
         tracep->fullBit(oldp+496,(vlSelf->top__DOT__branch));

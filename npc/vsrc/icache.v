@@ -137,12 +137,14 @@ assign ram_addr = (state == LOOKUP || state == REPLACE) ? reg_index : 6'b0;
 wire [127:0] ram_rdata, ram_wdata;
 wire ram_cen, ram_wen;
 wire [5:0] ram_addr;
+wire [127:0] ram_bwen;
 // 读cache: 1.state == LOOKUP && cache命中  2.MISS读被替换的Cache行
 assign ram_cen = ~((state == LOOKUP && cache_hit) || (state == MISS) || (state == REPLACE));
 // 写cache： REPLACE阶段
 assign ram_wen = ~(state == REPLACE);
 assign ram_addr = (state == LOOKUP || state == REPLACE) ? reg_index : 6'b0;
 assign ram_wdata = replace_way ? {ret_data, 64'b0} : {64'b0, ret_data};
+assign ram_bwen = replace_way ? 128'hffffffff_00000000 : 128'h00000000_ffffffff;
 
 S011HD1P_X32Y2D128 
 u_S011HD1P_X32Y2D128(
@@ -153,6 +155,18 @@ u_S011HD1P_X32Y2D128(
     .A   (ram_addr   ),
     .D   (ram_wdata   )
 );
+
+S011HD1P_X32Y2D128_BW 
+u_S011HD1P_X32Y2D128_BW(
+    .Q   (ram_rdata   ),
+    .CLK (clk ),
+    .CEN (ram_cen ),
+    .WEN  (ram_wen  ),
+    .BWEN (ram_bwen ),
+    .A   (ram_addr   ),
+    .D   (ram_wdata   )
+);
+
 
 assign way0_data = ram_rdata[63:0];
 assign way1_data = ram_rdata[127:64];

@@ -39,7 +39,7 @@ void Vtop___024root__traceChgSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep) 
     VlWide<3>/*95:0*/ __Vtemp174;
     VlWide<3>/*95:0*/ __Vtemp175;
     VlWide<3>/*95:0*/ __Vtemp176;
-    VlWide<4>/*127:0*/ __Vtemp178;
+    VlWide<4>/*127:0*/ __Vtemp179;
     VlWide<4>/*127:0*/ __Vtemp180;
     vluint32_t* const oldp = tracep->oldp(vlSymsp->__Vm_baseCode + 1);
     if (false && oldp) {}  // Prevent unused
@@ -937,18 +937,18 @@ void Vtop___024root__traceChgSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep) 
                                                    << 0xdU) 
                                                   | (QData)((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immB))))))
                                          : 0ULL)),64);
-            VL_EXTEND_WQ(128,64, __Vtemp178, vlSelf->top__DOT__mem_rdata);
+            VL_EXTEND_WQ(128,64, __Vtemp179, vlSelf->top__DOT__mem_rdata);
             if (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__replace_way) {
-                __Vtemp180[0U] = __Vtemp178[0U];
-                __Vtemp180[1U] = __Vtemp178[1U];
-                __Vtemp180[2U] = __Vtemp178[2U];
-                __Vtemp180[3U] = __Vtemp178[3U];
-            } else {
                 __Vtemp180[0U] = 0U;
                 __Vtemp180[1U] = 0U;
                 __Vtemp180[2U] = (IData)(vlSelf->top__DOT__mem_rdata);
                 __Vtemp180[3U] = (IData)((vlSelf->top__DOT__mem_rdata 
                                           >> 0x20U));
+            } else {
+                __Vtemp180[0U] = __Vtemp179[0U];
+                __Vtemp180[1U] = __Vtemp179[1U];
+                __Vtemp180[2U] = __Vtemp179[2U];
+                __Vtemp180[3U] = __Vtemp179[3U];
             }
             tracep->chgWData(oldp+491,(__Vtemp180),128);
         }
