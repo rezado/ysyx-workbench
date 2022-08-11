@@ -14,20 +14,40 @@ wire [63:0] branchpc;
 wire        branch;
 
 assign pc = wb_pc;
-// always @(posedge clk) begin
-// 	pc <= wb_pc;
-// end
+
+wire			icache_rd_req;
+wire [ 3:0]   icache_rd_wstrb;
+wire [63:0]	icache_rd_addr;
+wire [63:0]	icache_ret_data;
+wire			icache_wr_req;
+wire [ 3:0]   icache_wr_wstrb;
+wire [63:0]	icache_wr_addr;
+wire [63:0]	icache_wr_data;
+
+wire if_stall;
+
+assign icache_ret_data = mem_rdata;
 
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
-	.clk      (clk      ),
-	.rst      (rst || ~if_valid),
-	.branchpc (branchpc ),
-	.branch   (branch   ),
-	.ena      (if_ena   ),
-	.pc       (pc_out   ),
-	.inst     (inst     ),
-	.jump_o   (if_jump  )
+	.clk             (clk             ),
+	.rst             (rst || ~if_valid ),
+	.ena             (if_ena          ),
+	.branchpc        (branchpc        ),
+	.branch          (branch          ),
+	.pc              (pc_out          ),
+	.jump_o          (if_jump         ),
+	.inst            (inst            ),
+	.if_stall        (if_stall        ),
+	.icache_rd_req   (icache_rd_req   ),
+	.icache_rd_wstrb (icache_rd_wstrb ),
+	.icache_rd_addr  (icache_rd_addr  ),
+	.icache_ret_data (icache_ret_data ),
+	.icache_wr_req   (icache_wr_req   ),
+	.icache_wr_wstrb (icache_wr_wstrb ),
+	.icache_wr_addr  (icache_wr_addr  ),
+	.icache_wr_data  (icache_wr_data  )
 );
+
 
 
 // always @(posedge clk) begin
@@ -247,16 +267,36 @@ MEM_reg u_MEM_reg(
 	.mem_csr_data    (mem_csr_data    )
 );
 
-
+wire mem_ena, mem_wen;
+wire [3:0] mem_mask;
+wire [63:0] mem_addr;
 wire [63:0] mem_rdata;
+wire [63:0] mem_wdata;
+wire [ 1:0] sel_memdata;
+assign mem_ena = mem_mem_ena || icache_rd_req || icache_wr_req;
+assign mem_wen = mem_mem_wen || icache_wr_req;
+assign mem_mask = mem_mem_ena || mem_mem_wen ? mem_mem_mask :
+					  icache_rd_req ? icache_rd_wstrb :
+					  icache_wr_req ? icache_wr_wstrb :
+					  				  4'b0;
+assign mem_addr = mem_mem_ena || mem_mem_wen ? mem_alu_result :
+				  icache_rd_req ? icache_rd_addr :
+				  icache_wr_req ? icache_wr_addr :
+				  				  64'b0;
+assign mem_wdata = mem_mem_wen ? mem_rf_rdata2 :
+				   icache_wr_req ? icache_wr_data :
+				   				   64'b0;
+assign sel_memdata = (icache_rd_req || icache_wr_req) ? 2'b01:
+					 								   mem_sel_memdata;
+
 MEM u_MEM(
 	.clk         (clk         ),
-	.ena         (mem_mem_ena         ),
-	.wen         (mem_mem_wen         ),
-	.mem_mask    (mem_mem_mask    ),
-	.addr        (mem_alu_result        ),
-	.wdata       (mem_rf_rdata2       ),
-	.sel_memdata (mem_sel_memdata ),
+	.ena         (mem_ena  ),
+	.wen         (mem_wen         ),
+	.mem_mask    (mem_mask   ),
+	.addr        (mem_addr        ),
+	.wdata       (mem_wdata       ),
+	.sel_memdata (sel_memdata     ),
 	.mtcmp_rdata (id_csr_data     ),  // 直接从ID阶段的CSR寄存器引过来线
 	.rdata       (mem_rdata       ),
 	.mtcmp_we    (mtcmp_we    ),
@@ -334,6 +374,7 @@ end
 
 // 阻塞
 ctrl u_ctrl(
+	.if_stall  (if_stall  ),
 	.id_stall  (id_stall  ),
 	.ex_stall  (1'b0      ),
 	.mem_stall (1'b0      ),
