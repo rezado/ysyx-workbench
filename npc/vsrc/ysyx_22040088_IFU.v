@@ -12,11 +12,7 @@ module ysyx_22040088_IFU(
 	output			icache_rd_req,
 	output [ 3:0]   icache_rd_wstrb,
 	output [63:0]	icache_rd_addr,
-	input  [63:0]	icache_ret_data,
-	output			icache_wr_req,
-	output [ 3:0]   icache_wr_wstrb,
-	output [63:0]	icache_wr_addr,
-	output [63:0]	icache_wr_data
+	input  [63:0]	icache_ret_data
 );
 
 wire [63:0]nextpc;
@@ -74,11 +70,7 @@ icache icache(
 	.rd_req   (icache_rd_req   ),
 	.rd_wstrb (icache_rd_wstrb ),
 	.rd_addr  (icache_rd_addr  ),
-	.ret_data (icache_ret_data ),
-	.wr_req   (icache_wr_req   ),
-	.wr_wstrb (icache_wr_wstrb ),
-	.wr_addr  (icache_wr_addr  ),
-	.wr_data  (icache_wr_data  )
+	.ret_data (icache_ret_data )
 );
 
 assign if_stall = ~data_ok;

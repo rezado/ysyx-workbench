@@ -19,11 +19,6 @@ wire			icache_rd_req;
 wire [ 3:0]   icache_rd_wstrb;
 wire [63:0]	icache_rd_addr;
 wire [63:0]	icache_ret_data;
-wire			icache_wr_req;
-wire [ 3:0]   icache_wr_wstrb;
-wire [63:0]	icache_wr_addr;
-wire [63:0]	icache_wr_data;
-
 wire if_stall;
 
 assign icache_ret_data = mem_rdata;
@@ -41,11 +36,7 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.icache_rd_req   (icache_rd_req   ),
 	.icache_rd_wstrb (icache_rd_wstrb ),
 	.icache_rd_addr  (icache_rd_addr  ),
-	.icache_ret_data (icache_ret_data ),
-	.icache_wr_req   (icache_wr_req   ),
-	.icache_wr_wstrb (icache_wr_wstrb ),
-	.icache_wr_addr  (icache_wr_addr  ),
-	.icache_wr_data  (icache_wr_data  )
+	.icache_ret_data (icache_ret_data )
 );
 
 
@@ -273,21 +264,18 @@ wire [63:0] mem_addr;
 wire [63:0] mem_rdata;
 wire [63:0] mem_wdata;
 wire [ 1:0] sel_memdata;
-assign mem_ena = mem_mem_ena || icache_rd_req || icache_wr_req;
-assign mem_wen = mem_mem_wen || icache_wr_req;
+assign mem_ena = mem_mem_ena || icache_rd_req;
+assign mem_wen = mem_mem_wen;
 assign mem_mask = mem_mem_ena || mem_mem_wen ? mem_mem_mask :
 					  icache_rd_req ? icache_rd_wstrb :
-					  icache_wr_req ? icache_wr_wstrb :
 					  				  4'b0;
 assign mem_addr = mem_mem_ena || mem_mem_wen ? mem_alu_result :
 				  icache_rd_req ? icache_rd_addr :
-				  icache_wr_req ? icache_wr_addr :
 				  				  64'b0;
 assign mem_wdata = mem_mem_wen ? mem_rf_rdata2 :
-				   icache_wr_req ? icache_wr_data :
 				   				   64'b0;
-assign sel_memdata = (icache_rd_req || icache_wr_req) ? 2'b01:
-					 								   mem_sel_memdata;
+assign sel_memdata = (icache_rd_req) ? 2'b01:
+					 				   mem_sel_memdata;
 
 MEM u_MEM(
 	.clk         (clk         ),
