@@ -59,6 +59,8 @@ assign index = nextpc[8:3];
 assign tag = nextpc[31:9];
 assign valid = data_ok;
 
+assign inst = icache_rdata;
+
 icache icache(
 	.clk      (clk      ),
 	.rst      (rst      ),

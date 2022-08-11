@@ -36,7 +36,7 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.branch          (branch          ),
 	.pc              (pc_out          ),
 	.jump_o          (if_jump         ),
-	.inst            (inst            ),
+	.inst            (if_inst         ),
 	.if_stall        (if_stall        ),
 	.icache_rd_req   (icache_rd_req   ),
 	.icache_rd_wstrb (icache_rd_wstrb ),
@@ -275,7 +275,7 @@ wire [63:0] mem_wdata;
 wire [ 1:0] sel_memdata;
 assign mem_ena = mem_mem_ena || icache_rd_req || icache_wr_req;
 assign mem_wen = mem_mem_wen || icache_wr_req;
-assign mem_mem_mask = mem_mem_ena || mem_mem_wen ? mem_mem_mask :
+assign mem_mask = mem_mem_ena || mem_mem_wen ? mem_mem_mask :
 					  icache_rd_req ? icache_rd_wstrb :
 					  icache_wr_req ? icache_wr_wstrb :
 					  				  4'b0;
