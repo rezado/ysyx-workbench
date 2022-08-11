@@ -53,7 +53,7 @@ wire valid;
 assign off = pc[2:0];
 assign index = pc[8:3];
 assign tag = pc[31:9];
-assign valid = addr_ok;
+assign valid = data_ok;
 
 assign inst = icache_rdata;
 
