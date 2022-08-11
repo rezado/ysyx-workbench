@@ -113,6 +113,7 @@ wire [63:0] way0_data, way1_data, replace_data;
 assign way0_load_word = way0_data[reg_offset[2:0] * 32 +: 32];
 assign way1_load_word = way1_data[reg_offset[2:0] * 32 +: 32];
 assign load_res = {32{way0_hit}} & way0_load_word
+                | {32{way1_hit}} & way1_load_word;
 assign ram_addr = (state == LOOKUP || state == REPLACE) ? reg_index : 6'b0;
 
 
