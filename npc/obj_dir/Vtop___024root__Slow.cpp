@@ -634,13 +634,13 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__cache_hit 
         = ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way0_hit) 
            | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way1_hit));
-    vlSelf->top__DOT__sel_memdata = (((2U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
+    vlSelf->top__DOT__sel_memdata = (((3U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
                                       | (IData)(vlSelf->top__DOT__icache_wr_req))
                                       ? 1U : (IData)(vlSelf->top__DOT__mem_sel_memdata));
     vlSelf->top__DOT__mem_mask = (((IData)(vlSelf->top__DOT__mem_mem_ena) 
                                    | (IData)(vlSelf->top__DOT__mem_mem_wen))
                                    ? (IData)(vlSelf->top__DOT__mem_mem_mask)
-                                   : ((2U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state))
+                                   : ((3U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state))
                                        ? 0xfU : ((IData)(vlSelf->top__DOT__icache_wr_req)
                                                   ? 0xfU
                                                   : 0U)));
@@ -649,7 +649,7 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__mem_addr = (((IData)(vlSelf->top__DOT__mem_mem_ena) 
                                    | (IData)(vlSelf->top__DOT__mem_mem_wen))
                                    ? vlSelf->top__DOT__mem_alu_result
-                                   : ((2U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state))
+                                   : ((3U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state))
                                        ? (((QData)((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_tag)) 
                                            << 9U) | (QData)((IData)(
                                                                     (((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_index) 
@@ -1577,11 +1577,13 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_index = VL_RAND_RESET_I(6);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset = VL_RAND_RESET_I(3);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_tag = VL_RAND_RESET_I(23);
+    vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_ret_data = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way0_hit = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way1_hit = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__cache_hit = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__replace_way = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__load_res = VL_RAND_RESET_I(32);
+    vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__replace_data = VL_RAND_RESET_Q(64);
     VL_RAND_RESET_W(128, vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_rdata);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_cen = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_addr = VL_RAND_RESET_I(6);
