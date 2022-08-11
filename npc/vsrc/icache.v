@@ -71,6 +71,17 @@ always @(posedge clk) begin
     end
 end
 
+// Missing Buffer
+reg [63:0] reg_ret_data;
+always @(posedge clk) begin
+    if (rst) begin
+        reg_ret_data <= 64'b0;
+    end
+    else if (state == MISS) begin
+        reg_ret_data <= ret_data;
+    end
+end
+
 // Tag Compare
 wire way0_hit, way1_hit, cache_hit;
 wire way0_v, way1_v;
@@ -102,8 +113,7 @@ wire [63:0] way0_data, way1_data, replace_data;
 assign way0_load_word = way0_data[reg_offset[2:0] * 32 +: 32];
 assign way1_load_word = way1_data[reg_offset[2:0] * 32 +: 32];
 assign load_res = {32{way0_hit}} & way0_load_word
-                | {32{way1_hit}} & way1_load_word;
-assign replace_data = replace_way ? way1_data : way0_data;
+assign ram_addr = (state == LOOKUP || state == REPLACE) ? reg_index : 6'b0;
 
 
 // RAM
@@ -115,7 +125,7 @@ assign ram_cen = ~((state == LOOKUP && cache_hit) || (state == MISS) || (state =
 // 写cache： REPLACE阶段
 assign ram_wen = ~(state == REPLACE);
 assign ram_addr = (state == LOOKUP || state == REPLACE) ? reg_index : 6'b0;
-assign ram_wdata = replace_way ? {64'b0, ret_data} : {ret_data, 64'b0};
+assign ram_wdata = replace_way ? {64'b0, reg_ret_data} : {reg_ret_data, 64'b0};
 
 S011HD1P_X32Y2D128 
 u_S011HD1P_X32Y2D128(
@@ -132,7 +142,7 @@ assign way1_data = ram_rdata[127:64];
 
 // MISS
 // 向内存请求读
-assign rd_req = (state == MISS);
+assign rd_req = (state == REPLACE);
 assign rd_wstrb = 4'b1111;
 assign rd_addr = {32'b0, reg_tag, reg_index, reg_offset};
 

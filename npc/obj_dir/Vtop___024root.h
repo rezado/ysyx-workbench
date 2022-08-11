@@ -236,10 +236,7 @@ VL_MODULE(Vtop___024root) {
 
     // LOCAL VARIABLES
     CData/*0:0*/ __Vclklast__TOP__clk;
-    CData/*0:0*/ __Vchglast__TOP__top__DOT__mtcmp_re;
-    CData/*0:0*/ __Vchglast__TOP__top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__cache_hit;
     VlWide<9>/*271:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT____Vcellinp__u_MuxKeyWithDefault__lut;
-    IData/*31:0*/ __Vchglast__TOP__top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__load_res;
     QData/*63:0*/ __Vtask_top__DOT__u_MEM__DOT__u_mem__DOT__npc_read__4__rdata;
     VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
 
