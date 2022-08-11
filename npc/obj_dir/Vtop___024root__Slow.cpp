@@ -1583,7 +1583,6 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__cache_hit = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__replace_way = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__load_res = VL_RAND_RESET_I(32);
-    vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__replace_data = VL_RAND_RESET_Q(64);
     VL_RAND_RESET_W(128, vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_rdata);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_cen = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_addr = VL_RAND_RESET_I(6);

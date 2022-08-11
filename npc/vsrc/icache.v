@@ -73,12 +73,15 @@ end
 
 // Missing Buffer
 reg [63:0] reg_ret_data;
+reg reg_replace_way;
 always @(posedge clk) begin
     if (rst) begin
         reg_ret_data <= 64'b0;
+        reg_replace_way <= 1'b0;
     end
     else if (state == MISS) begin
         reg_ret_data <= ret_data;
+        reg_replace_way <= replace_way;
     end
 end
 
