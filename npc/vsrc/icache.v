@@ -41,8 +41,8 @@ assign re_vtag = (state == LOOKUP);
 assign way0_vtag = re_vtag ? way0_vtag_tab[index] : 24'b0;
 assign way1_vtag = re_vtag ? way1_vtag_tab[index] : 24'b0;
 // 写(REPLACE阶段写入替换的新tag)
-assign we_way0_vtag = (state == REPLACE) & ~reg_replace_way;
-assign we_way1_vtag = (state == REPLACE) & reg_replace_way;
+assign we_way0_vtag = (state == REPLACE) & ~replace_way;
+assign we_way1_vtag = (state == REPLACE) & replace_way;
 assign way0_wdata = {1'b1, reg_tag};
 assign way1_wdata = {1'b1, reg_tag};
 always @(posedge clk) begin
@@ -71,19 +71,19 @@ always @(posedge clk) begin
     end
 end
 
-// Missing Buffer
-reg [63:0] reg_ret_data;
-reg reg_replace_way;
-always @(posedge clk) begin
-    if (rst) begin
-        reg_ret_data <= 64'b0;
-        reg_replace_way <= 1'b0;
-    end
-    else if (state == MISS) begin
-        reg_ret_data <= ret_data;
-        reg_replace_way <= replace_way; 
-    end
-end
+// // Missing Buffer
+// reg [63:0] reg_ret_data;
+// reg reg_replace_way;
+// always @(posedge clk) begin
+//     if (rst) begin
+//         reg_ret_data <= 64'b0;
+//         reg_replace_way <= 1'b0;
+//     end
+//     else if (state == MISS) begin
+//         reg_ret_data <= ret_data;
+//         reg_replace_way <= replace_way; 
+//     end
+// end
 
 // Tag Compare
 wire way0_hit, way1_hit, cache_hit;
@@ -117,7 +117,7 @@ assign way0_load_word = way0_data[reg_offset[2:0] * 32 +: 32];
 assign way1_load_word = way1_data[reg_offset[2:0] * 32 +: 32];
 assign load_res = {32{way0_hit}} & way0_load_word
                 | {32{way1_hit}} & way1_load_word;
-assign replace_data = reg_replace_way ? way1_data : way0_data;
+assign replace_data = replace_way ? way1_data : way0_data;
 assign ram_addr = (state == LOOKUP || state == REPLACE) ? reg_index : 6'b0;
 
 
@@ -130,7 +130,7 @@ assign ram_cen = ~((state == LOOKUP && cache_hit) || (state == MISS) || (state =
 // 写cache： REPLACE阶段
 assign ram_wen = ~(state == REPLACE);
 assign ram_addr = (state == LOOKUP || state == REPLACE) ? reg_index : 6'b0;
-assign ram_wdata = reg_replace_way ? {64'b0, reg_ret_data} : {reg_ret_data, 64'b0};
+assign ram_wdata = replace_way ? {64'b0, ret_data} : {ret_data, 64'b0};
 
 S011HD1P_X32Y2D128 
 u_S011HD1P_X32Y2D128(
