@@ -36,7 +36,7 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.branch          (branch          ),
 	.pc              (pc_out          ),
 	.jump_o          (if_jump         ),
-	.inst            (if_inst         ),
+	.inst            (inst            ),
 	.if_stall        (if_stall        ),
 	.icache_rd_req   (icache_rd_req   ),
 	.icache_rd_wstrb (icache_rd_wstrb ),
