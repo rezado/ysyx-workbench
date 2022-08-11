@@ -1,20 +1,31 @@
 module ysyx_22040088_IFU(
     input       clk,
     input       rst,
+	input       ena,
 	input [63:0] branchpc,
 	input       branch,
-	input       ena,
     output [63:0] pc,
 	output      jump_o,
-	output [31:0] inst
+	output [31:0] inst,
+	output        if_stall,
+	// ICache与内存接口
+	output			icache_rd_req,
+	output [ 3:0]   icache_rd_wstrb,
+	output [63:0]	icache_rd_addr,
+	input  [63:0]	icache_ret_data,
+	output			icache_wr_req,
+	output [ 3:0]   icache_wr_wstrb,
+	output [63:0]	icache_wr_addr,
+	output [63:0]	icache_wr_data
 );
+
 wire [63:0]nextpc;
 wire [63:0]addpc;
 
 ysyx_22040088_pc u_ysyx_22040088_pc(
 	.clk    (clk    ),
 	.rst    (rst    ),
-	.wen    (ena    ),
+	.wen    (ena && addr_ok),
 	.pc_src (nextpc ),
 	.pc_out (pc     )
 );
@@ -36,23 +47,38 @@ assign nextpc = rst    ? 64'h80000000 :
 		        branch ? branchpc :
 				         addpc;
 
-import "DPI-C" function void npc_read(
-  input longint raddr, output longint rdata);
-reg [63:0] inst_data;
+// ICache
+wire [ 5:0]   index;
+wire [22:0]   tag;
+wire [ 2:0]   off;
+wire addr_ok, data_ok;  // 握手信号
+wire [31:0] icache_rdata;
+wire valid;
+assign off = nextpc[2:0];
+assign index = nextpc[8:3];
+assign tag = nextpc[31:9];
+assign valid = data_ok;
 
-always @(*) begin
-	if (!rst) begin
-		npc_read(pc, inst_data);
-		// $display("IFetch addr:%x rdata:%x", pc, inst_data);
-	end
-	else begin
-		inst_data = 64'0;
-	end
-end
+icache icache(
+	.clk      (clk      ),
+	.rst      (rst      ),
+	.valid    (valid    ),
+	.index    (index    ),
+	.tag      (tag      ),
+	.offset   (off      ),
+	.addr_ok  (addr_ok  ),
+	.data_ok  (data_ok  ),
+	.rdata    (icache_rdata    ),
+	.rd_req   (icache_rd_req   ),
+	.rd_wstrb (icache_rd_wstrb ),
+	.rd_addr  (icache_rd_addr  ),
+	.ret_data (icache_ret_data ),
+	.wr_req   (icache_wr_req   ),
+	.wr_wstrb (icache_wr_wstrb ),
+	.wr_addr  (icache_wr_addr  ),
+	.wr_data  (icache_wr_data  )
+);
 
-assign inst = branch ? 32'b0 :
-			  (pc[2:0] == 3'b000) ? inst_data[31:0] :
-			  (pc[2:0] == 3'b100) ? inst_data[63:32] :
-			  						32'b0;
+assign if_stall = ~data_ok;
 
 endmodule

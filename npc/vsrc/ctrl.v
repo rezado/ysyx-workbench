@@ -1,4 +1,5 @@
 module ctrl(
+    input           if_stall,
     input           id_stall,
     input           ex_stall,
     input           mem_stall,
@@ -14,14 +15,14 @@ module ctrl(
     output          wb_valid
 );
 
-assign if_ena = ~(id_stall || ex_stall || mem_stall);
+assign if_ena = ~(if_stall || id_stall || ex_stall || mem_stall);
 assign id_ena = ~(id_stall || ex_stall || mem_stall);
 assign ex_ena = ~(ex_stall || mem_stall);
 assign mem_ena = ~mem_stall;
 assign wb_ena = 1'b1;
 
 assign if_valid = 1'b1;
-assign id_valid = 1'b1;
+assign id_valid = ~if_stall;
 assign ex_valid = ~id_stall;
 assign mem_valid = ~(ex_stall);
 assign wb_valid = ~(mem_stall);
