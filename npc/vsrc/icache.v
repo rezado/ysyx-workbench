@@ -142,7 +142,7 @@ assign ram_cen = ~((state == LOOKUP && cache_hit) || (state == MISS) || (state =
 // 写cache： REPLACE阶段
 assign ram_wen = ~(state == REPLACE);
 assign ram_addr = (state == LOOKUP || state == REPLACE) ? reg_index : 6'b0;
-assign ram_wdata = replace_way ? {64'b0, ret_data} : {ret_data, 64'b0};
+assign ram_wdata = replace_way ? {ret_data, 64'b0} : {64'b0, ret_data};
 
 S011HD1P_X32Y2D128 
 u_S011HD1P_X32Y2D128(
