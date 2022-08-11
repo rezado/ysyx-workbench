@@ -154,7 +154,7 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declBit(c+111,"top u_ysyx_22040088_IFU addr_ok", false,-1);
         tracep->declBit(c+18,"top u_ysyx_22040088_IFU data_ok", false,-1);
         tracep->declBus(c+3,"top u_ysyx_22040088_IFU icache_rdata", false,-1, 31,0);
-        tracep->declBit(c+18,"top u_ysyx_22040088_IFU valid", false,-1);
+        tracep->declBit(c+111,"top u_ysyx_22040088_IFU valid", false,-1);
         tracep->declBit(c+500,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc clk", false,-1);
         tracep->declBit(c+505,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc rst", false,-1);
         tracep->declBit(c+112,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc wen", false,-1);
@@ -169,7 +169,7 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declBit(c+112,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc pc_Reg wen", false,-1);
         tracep->declBit(c+500,"top u_ysyx_22040088_IFU icache clk", false,-1);
         tracep->declBit(c+505,"top u_ysyx_22040088_IFU icache rst", false,-1);
-        tracep->declBit(c+18,"top u_ysyx_22040088_IFU icache valid", false,-1);
+        tracep->declBit(c+111,"top u_ysyx_22040088_IFU icache valid", false,-1);
         tracep->declBus(c+511,"top u_ysyx_22040088_IFU icache index", false,-1, 5,0);
         tracep->declBus(c+512,"top u_ysyx_22040088_IFU icache tag", false,-1, 22,0);
         tracep->declBus(c+513,"top u_ysyx_22040088_IFU icache offset", false,-1, 2,0);

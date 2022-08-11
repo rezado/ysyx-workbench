@@ -30,7 +30,7 @@ assign icache_ret_data = mem_rdata;
 
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.clk             (clk             ),
-	.rst             (rst || if_valid ),
+	.rst             (rst || ~if_valid ),
 	.ena             (if_ena          ),
 	.branchpc        (branchpc        ),
 	.branch          (branch          ),
