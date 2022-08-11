@@ -21,7 +21,7 @@ parameter IDLE = 0, LOOKUP = 1, MISS = 2, REPLACE = 3;
 reg [2:0] state, next_state;
 
 assign addr_ok = (state == IDLE);
-assign data_ok = (state == IDLE && cache_hit);
+assign data_ok = (state == IDLE && reg_cache_hit);
 assign rdata = load_res;
 
 // {v, tag}表
@@ -111,15 +111,17 @@ wire [63:0] way0_data, way1_data;
 assign way0_load_word = way0_data[reg_offset[2:0] * 32 +: 32];
 assign way1_load_word = way1_data[reg_offset[2:0] * 32 +: 32];
 // Selecter Buffer
-reg reg_way0_hit, reg_way1_hit;
+reg reg_way0_hit, reg_way1_hit, reg_cache_hit;
 always @(posedge clk) begin
     if (rst) begin
         reg_way0_hit <= 1'b0;
         reg_way1_hit <= 1'b0;
+        reg_cache_hit <= 1'b0;
     end
     else if (state == LOOKUP) begin
         reg_way0_hit <= way0_hit;
         reg_way1_hit <= way1_hit;
+        reg_cache_hit <= cache_hit;
     end
 end
 assign load_res = {32{reg_way0_hit}} & way0_load_word
