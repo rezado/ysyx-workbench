@@ -13,11 +13,7 @@ module icache(
     output          rd_req,
     output [ 3:0]   rd_wstrb,
     output [63:0]   rd_addr,
-    input  [63:0]   ret_data,
-    output          wr_req,
-    output [ 3:0]   wr_wstrb,
-    output [63:0]   wr_addr,
-    output [63:0]   wr_data
+    input  [63:0]   ret_data
 );
 
 parameter IDLE = 0, LOOKUP = 1, MISS = 2, REPLACE = 3;
@@ -71,20 +67,6 @@ always @(posedge clk) begin
     end
 end
 
-// // Missing Buffer
-// reg [63:0] reg_ret_data;
-// reg reg_replace_way;
-// always @(posedge clk) begin
-//     if (rst) begin
-//         reg_ret_data <= 64'b0;
-//         reg_replace_way <= 1'b0;
-//     end
-//     else if (state == MISS) begin
-//         reg_ret_data <= ret_data;
-//         reg_replace_way <= replace_way; 
-//     end
-// end
-
 // Tag Compare
 wire way0_hit, way1_hit, cache_hit;
 wire way0_v, way1_v;
@@ -109,6 +91,19 @@ always @(posedge clk) begin
     end
 end
 
+// Missing Buffer
+reg [63:0] reg_ret_data;
+// reg reg_replace_way;
+always @(posedge clk) begin
+    if (rst) begin
+        reg_ret_data <= 64'b0;
+        // reg_replace_way <= 1'b0;
+    end
+    else if (state == MISS) begin
+        reg_ret_data <= ret_data;
+        // reg_replace_way <= replace_way; 
+    end
+end
 
 // Data Select
 wire [31:0] way0_load_word, way1_load_word, load_res;
@@ -138,12 +133,12 @@ wire [127:0] ram_rdata, ram_wdata;
 wire ram_cen, ram_wen;
 wire [5:0] ram_addr;
 wire [127:0] ram_bwen;
-// 读cache: 1.state == LOOKUP && cache命中  2.MISS读被替换的Cache行
-assign ram_cen = ~((state == LOOKUP && cache_hit) || (state == MISS) || (state == REPLACE));
+// 读cache: 1.state == LOOKUP && cache命中
+assign ram_cen = ~((state == LOOKUP && cache_hit) || (state == REPLACE));
 // 写cache： REPLACE阶段
 assign ram_wen = ~(state == REPLACE);
 assign ram_addr = (state == LOOKUP || state == REPLACE) ? reg_index : 6'b0;
-assign ram_wdata = replace_way ? {ret_data, 64'b0} : {64'b0, ret_data};
+assign ram_wdata = replace_way ? {reg_ret_data, 64'b0} : {64'b0, reg_ret_data};
 assign ram_bwen = replace_way ? 128'hffffffff_00000000 : 128'h00000000_ffffffff;
 
 S011HD1P_X32Y2D128 
@@ -173,17 +168,9 @@ assign way1_data = ram_rdata[127:64];
 
 // MISS
 // 向内存请求读
-assign rd_req = (state == REPLACE);
+assign rd_req = (state == MISS);
 assign rd_wstrb = 4'b1111;
 assign rd_addr = {32'b0, reg_tag, reg_index, reg_offset};
-
-// REPLACE 向内存请求写
-wire replace_req;
-assign replace_req = replace_way ? |way1_tag : |way0_tag;
-assign wr_req = (state == REPLACE) & replace_req;
-assign wr_wstrb = 4'b1111;
-assign wr_addr = {32'b0, reg_tag, reg_index, reg_offset};
-assign wr_data = replace_data;
 
 // 组合逻辑
 always @(*) begin
