@@ -52,6 +52,7 @@ end
 
 // Request Buffer
 reg [5:0] reg_index;
+/* verilator lint_off UNUSED */
 reg [2:0] reg_offset;
 reg [22:0] reg_tag;
 always @(posedge clk) begin
@@ -161,7 +162,7 @@ assign way1_data = ram_rdata[127:64];
 // 向内存请求读
 assign rd_req = (state == MISS);
 assign rd_wstrb = 4'b1111;
-assign rd_addr = {32'b0, reg_tag, reg_index, reg_offset};
+assign rd_addr = {32'b0, reg_tag, reg_index, 3'b0};
 
 // 组合逻辑
 always @(*) begin
