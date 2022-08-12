@@ -140,7 +140,7 @@ assign ram_cen = ~((state == LOOKUP && cache_hit) || (state == REPLACE));
 assign ram_wen = ~(state == REPLACE);
 assign ram_addr = (state == LOOKUP || state == REPLACE) ? reg_index : 6'b0;
 assign ram_wdata = replace_way ? {reg_ret_data, 64'b0} : {64'b0, reg_ret_data};
-assign ram_bwen = replace_way ? 128'hffffffff_00000000 : 128'h00000000_ffffffff;
+assign ram_bwen = replace_way ? 128'hffffffff_ffffffff_00000000_00000000 : 128'h00000000_00000000_ffffffff_ffffffff;
 
 S011HD1P_X32Y2D128 
 u_S011HD1P_X32Y2D128(
