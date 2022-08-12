@@ -21,7 +21,7 @@ parameter IDLE = 0, LOOKUP = 1, MISS = 2, REPLACE = 3;
 reg [2:0] state, next_state;
 
 assign addr_ok = (state == IDLE);
-assign data_ok = (state == IDLE && cache_hit);
+assign data_ok = (state == IDLE && reg_cache_hit);
 assign rdata = load_res;
 
 // {v, tag}表
@@ -108,18 +108,20 @@ end
 // Data Select
 wire [31:0] way0_load_word, way1_load_word, load_res;
 wire [63:0] way0_data, way1_data;
-assign way0_load_word = way0_data[reg_offset[2:0] * 32 +: 32];
-assign way1_load_word = way1_data[reg_offset[2:0] * 32 +: 32];
+assign way0_load_word = way0_data[reg_offset[2] * 32 +: 32];
+assign way1_load_word = way1_data[reg_offset[2] * 32 +: 32];
 // Selecter Buffer
-reg reg_way0_hit, reg_way1_hit;
+reg reg_way0_hit, reg_way1_hit, reg_cache_hit;
 always @(posedge clk) begin
     if (rst) begin
         reg_way0_hit <= 1'b0;
         reg_way1_hit <= 1'b0;
+        reg_cache_hit <= 1'b0;
     end
     else if (state == LOOKUP) begin
         reg_way0_hit <= way0_hit;
         reg_way1_hit <= way1_hit;
+        reg_cache_hit <= cache_hit;
     end
 end
 assign load_res = {32{reg_way0_hit}} & way0_load_word
@@ -138,17 +140,7 @@ assign ram_cen = ~((state == LOOKUP && cache_hit) || (state == REPLACE));
 assign ram_wen = ~(state == REPLACE);
 assign ram_addr = (state == LOOKUP || state == REPLACE) ? reg_index : 6'b0;
 assign ram_wdata = replace_way ? {reg_ret_data, 64'b0} : {64'b0, reg_ret_data};
-assign ram_bwen = replace_way ? 128'hffffffff_00000000 : 128'h00000000_ffffffff;
-
-S011HD1P_X32Y2D128 
-u_S011HD1P_X32Y2D128(
-    .Q   (ram_rdata   ),
-    .CLK (clk ),
-    .CEN (ram_cen ),
-    .WEN (ram_wen ),
-    .A   (ram_addr   ),
-    .D   (ram_wdata   )
-);
+assign ram_bwen = replace_way ? 128'h00000000_00000000_ffffffff_ffffffff : 128'hffffffff_ffffffff_00000000_00000000;
 
 S011HD1P_X32Y2D128_BW 
 u_S011HD1P_X32Y2D128_BW(

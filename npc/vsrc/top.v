@@ -258,14 +258,14 @@ MEM_reg u_MEM_reg(
 	.mem_csr_data    (mem_csr_data    )
 );
 
-wire mem_ena, mem_wen;
+wire MEM_ena, MEM_wen;
 wire [3:0] mem_mask;
 wire [63:0] mem_addr;
 wire [63:0] mem_rdata;
 wire [63:0] mem_wdata;
 wire [ 1:0] sel_memdata;
-assign mem_ena = mem_mem_ena || icache_rd_req;
-assign mem_wen = mem_mem_wen;
+assign MEM_ena = mem_mem_ena || icache_rd_req;
+assign MEM_wen = mem_mem_wen;
 assign mem_mask = mem_mem_ena || mem_mem_wen ? mem_mem_mask :
 					  icache_rd_req ? icache_rd_wstrb :
 					  				  4'b0;
@@ -279,8 +279,8 @@ assign sel_memdata = (icache_rd_req) ? 2'b01:
 
 MEM u_MEM(
 	.clk         (clk         ),
-	.ena         (mem_ena  ),
-	.wen         (mem_wen         ),
+	.ena         (MEM_ena  ),
+	.wen         (MEM_wen         ),
 	.mem_mask    (mem_mask   ),
 	.addr        (mem_addr        ),
 	.wdata       (mem_wdata       ),

@@ -50,9 +50,9 @@ wire [ 2:0]   off;
 wire addr_ok, data_ok;  // 握手信号
 wire [31:0] icache_rdata;
 wire valid;
-assign off = pc[2:0];
-assign index = pc[8:3];
-assign tag = pc[31:9];
+assign off = nextpc[2:0];
+assign index = nextpc[8:3];
+assign tag = nextpc[31:9];
 assign valid = addr_ok;
 
 assign inst = icache_rdata;
