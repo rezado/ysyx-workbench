@@ -53,15 +53,17 @@ static void prbuf() {
 #endif
 // static bool skip = false;
 // static uint64_t pre_pc;
+static bool hit_first = false;
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
   if (ITRACE_COND) { log_write("%s\n", _this->logbuf); }
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   // DIFFTEST比DUT晚一个周期更新
-  if (sim_time <= 5 || instr.val == 0) {
+  if (!hit_first || instr.val == 0) {
     // difftest_skip_ref();
     // printf("time:%d pc:%x inst:%x\n", g_nr_guest_inst, _this->pc, instr.val);
+    if (instr.val != 0) hit_first = true;
   }
   // else if (instr.val == 0) {
   //   skip = true;
