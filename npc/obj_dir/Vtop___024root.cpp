@@ -820,8 +820,9 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
                                                   & vlSelf->top__DOT__id_inst))));
     if (vlSelf->rst) {
         vlSelf->top__DOT__pc_out = 0x80000000ULL;
-    } else if (((IData)(vlSelf->top__DOT__if_ena) & 
-                (0U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)))) {
+    } else if ((((IData)(vlSelf->top__DOT__if_ena) 
+                 & (0U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state))) 
+                | (IData)(vlSelf->top__DOT__branch))) {
         vlSelf->top__DOT__pc_out = vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__nextpc;
     }
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__we_forward_ex 
