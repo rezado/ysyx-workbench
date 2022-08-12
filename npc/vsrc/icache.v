@@ -108,8 +108,8 @@ end
 // Data Select
 wire [31:0] way0_load_word, way1_load_word, load_res;
 wire [63:0] way0_data, way1_data;
-assign way0_load_word = way0_data[reg_offset[2:0] * 32 +: 32];
-assign way1_load_word = way1_data[reg_offset[2:0] * 32 +: 32];
+assign way0_load_word = way0_data[reg_offset[2] * 32 +: 32];
+assign way1_load_word = way1_data[reg_offset[2] * 32 +: 32];
 // Selecter Buffer
 reg reg_way0_hit, reg_way1_hit, reg_cache_hit;
 always @(posedge clk) begin
