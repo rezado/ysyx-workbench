@@ -68,11 +68,11 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
     hit = true;
   }
   else if (hit) {
-    hit = false;
+    printf("dnpc:%x inst:%x\n", dnpc, instr.val);
     IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
   }
   else {
-    // printf("dnpc:%x inst:%x\n", dnpc, instr.val);
+    printf("dnpc:%x inst:%x\n", dnpc, instr.val);
     IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
   }
 #ifdef CONFIG_WATCHPOINT
