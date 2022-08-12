@@ -369,21 +369,25 @@ void Vtop___024root__traceChgSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep) 
             tracep->chgCData(oldp+138,(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_addr),6);
             if (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__replace_way) {
                 __Vtemp174[0U] = 0U;
-                __Vtemp174[1U] = 0xffffffffU;
+                __Vtemp174[1U] = 0U;
+                __Vtemp174[2U] = 0xffffffffU;
+                __Vtemp174[3U] = 0xffffffffU;
             } else {
                 __Vtemp174[0U] = 0xffffffffU;
-                __Vtemp174[1U] = 0U;
+                __Vtemp174[1U] = 0xffffffffU;
+                __Vtemp174[2U] = 0U;
+                __Vtemp174[3U] = 0U;
             }
-            __Vtemp174[2U] = 0U;
-            __Vtemp174[3U] = 0U;
             tracep->chgWData(oldp+139,(__Vtemp174),128);
             tracep->chgBit(oldp+143,((3U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state))));
             __Vtemp178[0U] = (~ ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__replace_way)
                                   ? 0U : 0xffffffffU));
             __Vtemp178[1U] = (~ ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__replace_way)
+                                  ? 0U : 0xffffffffU));
+            __Vtemp178[2U] = (~ ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__replace_way)
                                   ? 0xffffffffU : 0U));
-            __Vtemp178[2U] = 0xffffffffU;
-            __Vtemp178[3U] = 0xffffffffU;
+            __Vtemp178[3U] = (~ ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__replace_way)
+                                  ? 0xffffffffU : 0U));
             tracep->chgWData(oldp+144,(__Vtemp178),128);
             tracep->chgCData(oldp+148,((0x1fU & (vlSelf->top__DOT__id_inst 
                                                  >> 0xfU))),5);

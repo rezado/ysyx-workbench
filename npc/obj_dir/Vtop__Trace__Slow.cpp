@@ -1127,21 +1127,25 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->fullCData(oldp+139,(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_addr),6);
         if (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__replace_way) {
             __Vtemp139[0U] = 0U;
-            __Vtemp139[1U] = 0xffffffffU;
+            __Vtemp139[1U] = 0U;
+            __Vtemp139[2U] = 0xffffffffU;
+            __Vtemp139[3U] = 0xffffffffU;
         } else {
             __Vtemp139[0U] = 0xffffffffU;
-            __Vtemp139[1U] = 0U;
+            __Vtemp139[1U] = 0xffffffffU;
+            __Vtemp139[2U] = 0U;
+            __Vtemp139[3U] = 0U;
         }
-        __Vtemp139[2U] = 0U;
-        __Vtemp139[3U] = 0U;
         tracep->fullWData(oldp+140,(__Vtemp139),128);
         tracep->fullBit(oldp+144,((3U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state))));
         __Vtemp143[0U] = (~ ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__replace_way)
                               ? 0U : 0xffffffffU));
         __Vtemp143[1U] = (~ ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__replace_way)
+                              ? 0U : 0xffffffffU));
+        __Vtemp143[2U] = (~ ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__replace_way)
                               ? 0xffffffffU : 0U));
-        __Vtemp143[2U] = 0xffffffffU;
-        __Vtemp143[3U] = 0xffffffffU;
+        __Vtemp143[3U] = (~ ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__replace_way)
+                              ? 0xffffffffU : 0U));
         tracep->fullWData(oldp+145,(__Vtemp143),128);
         tracep->fullCData(oldp+149,((0x1fU & (vlSelf->top__DOT__id_inst 
                                               >> 0xfU))),5);
