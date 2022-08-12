@@ -53,23 +53,24 @@ static void prbuf() {
 #endif
 // static bool skip = false;
 // static uint64_t pre_pc;
-static bool hit_first = false;
+static bool hit = false;
 static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #ifdef CONFIG_ITRACE_COND
   if (ITRACE_COND) { log_write("%s\n", _this->logbuf); }
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   // DIFFTEST比DUT晚一个周期更新
-  if (!hit_first || instr.val == 0) {
+  if (instr.val == 0) {
     // difftest_skip_ref();
     // printf("time:%d pc:%x inst:%x\n", g_nr_guest_inst, _this->pc, instr.val);
-    if (instr.val != 0) hit_first = true;
   }
-  // else if (instr.val == 0) {
-  //   skip = true;
-  //   printf("pc:%x npc:%x inst:%x\n", _this->pc, dnpc, instr.val);
-  //   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, _this->pc));
-  // }
+  else if (!hit) {
+    hit = true;
+  }
+  else if (hit) {
+    hit = false;
+    IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
+  }
   else {
     // printf("dnpc:%x inst:%x\n", dnpc, instr.val);
     IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
