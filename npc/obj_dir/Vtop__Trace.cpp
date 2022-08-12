@@ -307,42 +307,24 @@ void Vtop___024root__traceChgSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep) 
             tracep->chgIData(oldp+115,(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_tag),23);
             tracep->chgBit(oldp+116,(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__replace_way));
             tracep->chgQData(oldp+117,(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_ret_data),64);
-            tracep->chgIData(oldp+119,((((0U == (0x1fU 
-                                                 & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
-                                                    << 5U)))
-                                          ? 0U : (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_rdata[
-                                                  (((IData)(0x1fU) 
-                                                    + 
-                                                    (0x3fU 
-                                                     & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
-                                                        << 5U))) 
-                                                   >> 5U)] 
-                                                  << 
-                                                  ((IData)(0x20U) 
-                                                   - 
-                                                   (0x1fU 
-                                                    & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
-                                                       << 5U))))) 
-                                        | (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_rdata[
-                                           (1U & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset))] 
-                                           >> (0x1fU 
-                                               & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
-                                                  << 5U))))),32);
+            tracep->chgIData(oldp+119,(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_rdata[
+                                       (1U & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
+                                              >> 2U))]),32);
             tracep->chgIData(oldp+120,((((0U == (0x1fU 
                                                  & ((IData)(0x40U) 
                                                     + 
-                                                    (0x3fU 
+                                                    (0x20U 
                                                      & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
-                                                        << 5U)))))
+                                                        << 3U)))))
                                           ? 0U : (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_rdata[
                                                   (((IData)(0x1fU) 
                                                     + 
                                                     (0x7fU 
                                                      & ((IData)(0x40U) 
                                                         + 
-                                                        (0x3fU 
+                                                        (0x20U 
                                                          & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
-                                                            << 5U))))) 
+                                                            << 3U))))) 
                                                    >> 5U)] 
                                                   << 
                                                   ((IData)(0x20U) 
@@ -350,22 +332,22 @@ void Vtop___024root__traceChgSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep) 
                                                    (0x1fU 
                                                     & ((IData)(0x40U) 
                                                        + 
-                                                       (0x3fU 
+                                                       (0x20U 
                                                         & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
-                                                           << 5U))))))) 
+                                                           << 3U))))))) 
                                         | (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_rdata[
                                            (3U & (((IData)(0x40U) 
                                                    + 
-                                                   (0x3fU 
+                                                   (0x20U 
                                                     & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
-                                                       << 5U))) 
+                                                       << 3U))) 
                                                   >> 5U))] 
                                            >> (0x1fU 
                                                & ((IData)(0x40U) 
                                                   + 
-                                                  (0x3fU 
+                                                  (0x20U 
                                                    & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
-                                                      << 5U))))))),32);
+                                                      << 3U))))))),32);
             tracep->chgQData(oldp+121,((((QData)((IData)(
                                                          vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_rdata[1U])) 
                                          << 0x20U) 

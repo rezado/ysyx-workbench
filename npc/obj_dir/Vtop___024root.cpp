@@ -882,68 +882,42 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__3(Vtop___024root* vlSelf) {
     }
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__load_res 
         = (((- (IData)((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_way0_hit))) 
-            & (((0U == (0x1fU & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
-                                 << 5U))) ? 0U : (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_rdata[
-                                                  (((IData)(0x1fU) 
-                                                    + 
-                                                    (0x3fU 
-                                                     & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
-                                                        << 5U))) 
-                                                   >> 5U)] 
-                                                  << 
-                                                  ((IData)(0x20U) 
-                                                   - 
-                                                   (0x1fU 
+            & vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_rdata[
+            (1U & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
+                   >> 2U))]) | ((- (IData)((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_way1_hit))) 
+                                & (((0U == (0x1fU & 
+                                            ((IData)(0x40U) 
+                                             + (0x20U 
+                                                & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
+                                                   << 3U)))))
+                                     ? 0U : (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_rdata[
+                                             (((IData)(0x1fU) 
+                                               + (0x7fU 
+                                                  & ((IData)(0x40U) 
+                                                     + 
+                                                     (0x20U 
+                                                      & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
+                                                         << 3U))))) 
+                                              >> 5U)] 
+                                             << ((IData)(0x20U) 
+                                                 - 
+                                                 (0x1fU 
+                                                  & ((IData)(0x40U) 
+                                                     + 
+                                                     (0x20U 
+                                                      & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
+                                                         << 3U))))))) 
+                                   | (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_rdata[
+                                      (3U & (((IData)(0x40U) 
+                                              + (0x20U 
+                                                 & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
+                                                    << 3U))) 
+                                             >> 5U))] 
+                                      >> (0x1fU & ((IData)(0x40U) 
+                                                   + 
+                                                   (0x20U 
                                                     & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
-                                                       << 5U))))) 
-               | (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_rdata[
-                  (1U & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset))] 
-                  >> (0x1fU & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
-                               << 5U))))) | ((- (IData)((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_way1_hit))) 
-                                             & (((0U 
-                                                  == 
-                                                  (0x1fU 
-                                                   & ((IData)(0x40U) 
-                                                      + 
-                                                      (0x3fU 
-                                                       & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
-                                                          << 5U)))))
-                                                  ? 0U
-                                                  : 
-                                                 (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_rdata[
-                                                  (((IData)(0x1fU) 
-                                                    + 
-                                                    (0x7fU 
-                                                     & ((IData)(0x40U) 
-                                                        + 
-                                                        (0x3fU 
-                                                         & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
-                                                            << 5U))))) 
-                                                   >> 5U)] 
-                                                  << 
-                                                  ((IData)(0x20U) 
-                                                   - 
-                                                   (0x1fU 
-                                                    & ((IData)(0x40U) 
-                                                       + 
-                                                       (0x3fU 
-                                                        & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
-                                                           << 5U))))))) 
-                                                | (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_rdata[
-                                                   (3U 
-                                                    & (((IData)(0x40U) 
-                                                        + 
-                                                        (0x3fU 
-                                                         & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
-                                                            << 5U))) 
-                                                       >> 5U))] 
-                                                   >> 
-                                                   (0x1fU 
-                                                    & ((IData)(0x40U) 
-                                                       + 
-                                                       (0x3fU 
-                                                        & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
-                                                           << 5U))))))));
+                                                       << 3U))))))));
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state 
         = ((IData)(vlSelf->rst) ? 0U : (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__next_state));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immJ 
