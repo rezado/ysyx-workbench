@@ -68,6 +68,6 @@ icache icache(
 	.ret_data (icache_ret_data )
 );
 
-assign if_stall = ~data_ok;
+assign if_stall = ~addr_ok;
 
 endmodule
