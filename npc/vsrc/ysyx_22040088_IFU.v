@@ -42,7 +42,7 @@ wire valid;
 assign off = nextpc[2:0];
 assign index = nextpc[8:3];
 assign tag = nextpc[31:9];
-assign valid = addr_ok;  // 只有跳转之后才发出icache读请求
+assign valid = (~rst && addr_ok);  // 只有跳转之后才发出icache读请求
 
 assign inst = icache_rdata;
 
