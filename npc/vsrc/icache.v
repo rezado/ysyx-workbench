@@ -127,8 +127,6 @@ assign way1_load_word = way1_data[reg_offset[2] * 32 +: 32];
 // end
 assign load_res = {32{way0_hit}} & way0_load_word
                 | {32{way1_hit}} & way1_load_word;
-assign ram_addr = (state == LOOKUP || state == REPLACE) ? reg_index : 6'b0;
-
 
 // RAM
 wire [127:0] ram_rdata, ram_wdata;
@@ -139,7 +137,7 @@ wire [127:0] ram_bwen;
 assign ram_cen = ~((state == IDLE && valid) || (state == REPLACE));
 // 写cache： REPLACE阶段
 assign ram_wen = ~(state == REPLACE);
-assign ram_addr = (state == LOOKUP || state == REPLACE) ? reg_index : 6'b0;
+assign ram_addr = reg_index;
 assign ram_wdata = replace_way ? {reg_ret_data, 64'b0} : {64'b0, reg_ret_data};
 assign ram_bwen = replace_way ? 128'h00000000_00000000_ffffffff_ffffffff : 128'hffffffff_ffffffff_00000000_00000000;
 
