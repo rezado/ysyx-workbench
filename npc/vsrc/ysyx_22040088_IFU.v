@@ -31,6 +31,7 @@ assign addpc = pc + 4;
 always @(posedge clk) begin
 	if (rst) nextpc <= 64'h80000000;
 	else if (branch) nextpc <= branchpc;
+	else if (~ena) nextpc <= pc;
 	else nextpc <= addpc;
 end
 // assign nextpc = rst    ? 64'h80000000 :
