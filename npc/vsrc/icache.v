@@ -24,6 +24,26 @@ assign addr_ok = (state == IDLE);
 assign data_ok = (state == LOOKUP && cache_hit);
 assign rdata = load_res;
 
+
+// Request Buffer
+reg [5:0] reg_index;
+/* verilator lint_off UNUSED */
+reg [2:0] reg_offset;
+reg [22:0] reg_tag;
+always @(posedge clk) begin
+    if (rst) begin
+        reg_index <= 6'b0;
+        reg_offset <= 3'b0;
+        reg_tag <= 23'b0;
+    end
+    else if (state == IDLE && valid) begin
+        reg_index <= index;
+        reg_offset <= offset;
+        reg_tag <= tag;
+    end
+end
+
+
 // {v, tag}表
 reg [23:0] way0_vtag_tab [0:63];
 reg [23:0] way1_vtag_tab [0:63];
@@ -50,23 +70,6 @@ always @(posedge clk) begin
     end
 end
 
-// Request Buffer
-reg [5:0] reg_index;
-/* verilator lint_off UNUSED */
-reg [2:0] reg_offset;
-reg [22:0] reg_tag;
-always @(posedge clk) begin
-    if (rst) begin
-        reg_index <= 6'b0;
-        reg_offset <= 3'b0;
-        reg_tag <= 23'b0;
-    end
-    else if (state == IDLE && valid) begin
-        reg_index <= index;
-        reg_offset <= offset;
-        reg_tag <= tag;
-    end
-end
 
 // Tag Compare
 wire way0_hit, way1_hit, cache_hit;
@@ -81,6 +84,7 @@ assign way0_hit = way0_v && (way0_tag == reg_tag);
 assign way1_hit = way1_v && (way1_tag == reg_tag);
 assign cache_hit = way0_hit | way1_hit;
 
+
 // 随机数发生器
 reg replace_way;
 always @(posedge clk) begin
@@ -91,6 +95,7 @@ always @(posedge clk) begin
         replace_way <= replace_way + 1;
     end
 end
+
 
 // Missing Buffer
 reg [63:0] reg_ret_data;
@@ -105,6 +110,7 @@ always @(posedge clk) begin
         // reg_replace_way <= replace_way; 
     end
 end
+
 
 // Data Select
 wire [31:0] way0_load_word, way1_load_word, load_res;
@@ -127,6 +133,8 @@ assign way1_load_word = way1_data[reg_offset[2] * 32 +: 32];
 // end
 assign load_res = {32{way0_hit}} & way0_load_word
                 | {32{way1_hit}} & way1_load_word;
+
+
 
 // RAM
 wire [127:0] ram_rdata, ram_wdata;
@@ -156,11 +164,16 @@ u_S011HD1P_X32Y2D128_BW(
 assign way0_data = ram_rdata[63:0];
 assign way1_data = ram_rdata[127:64];
 
+
+
 // MISS
 // 向内存请求读
 assign rd_req = (state == MISS);
 assign rd_wstrb = 4'b1111;
 assign rd_addr = {32'b0, reg_tag, reg_index, 3'b0};
+
+
+
 
 // 组合逻辑
 always @(*) begin
