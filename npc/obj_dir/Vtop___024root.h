@@ -173,9 +173,9 @@ VL_MODULE(Vtop___024root) {
         IData/*16:0*/ top__DOT__ex_alu_op;
         IData/*31:0*/ top__DOT__mem_inst;
         IData/*31:0*/ top__DOT__wb_inst;
+        IData/*22:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_tag;
         IData/*23:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way0_vtag;
         IData/*23:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way1_vtag;
-        IData/*22:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_tag;
         IData/*31:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__load_res;
         VlWide<4>/*127:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_rdata;
         IData/*20:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__immJ;

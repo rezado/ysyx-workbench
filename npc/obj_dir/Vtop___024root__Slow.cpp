@@ -1516,6 +1516,9 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__valid = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state = VL_RAND_RESET_I(3);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__next_state = VL_RAND_RESET_I(3);
+    vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_index = VL_RAND_RESET_I(6);
+    vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset = VL_RAND_RESET_I(3);
+    vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_tag = VL_RAND_RESET_I(23);
     for (int __Vi0=0; __Vi0<64; ++__Vi0) {
         vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way0_vtag_tab[__Vi0] = VL_RAND_RESET_I(24);
     }
@@ -1524,9 +1527,6 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     }
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way0_vtag = VL_RAND_RESET_I(24);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way1_vtag = VL_RAND_RESET_I(24);
-    vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_index = VL_RAND_RESET_I(6);
-    vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset = VL_RAND_RESET_I(3);
-    vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_tag = VL_RAND_RESET_I(23);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way0_hit = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way1_hit = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__cache_hit = VL_RAND_RESET_I(1);
