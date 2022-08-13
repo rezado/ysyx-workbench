@@ -27,7 +27,6 @@ assign rdata = load_res;
 
 // Request Buffer
 reg [5:0] reg_index;
-/* verilator lint_off UNUSED */
 reg [2:0] reg_offset;
 reg [22:0] reg_tag;
 always @(posedge clk) begin
