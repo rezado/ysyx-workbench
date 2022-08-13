@@ -77,7 +77,7 @@ assign rf_waddr_o = rd;
 // 控制单元
 wire [3:0]sel_alusrc1;
 wire [6:0]sel_alusrc2;
-wire [6:0]sel_btype;
+wire [7:0]sel_btype;
 wire      rf_re1, rf_re2;
 wire      csr_re, csr_we;
 wire [5:0]sel_csrres;
@@ -178,22 +178,27 @@ assign ltu = ~cout;
 
 // 生成跳转和分支的地址
 wire [63:0] jalrpc, bpc;
+wire [63:0] jalpc;
+wire [63:0] offset;
+assign offset = {{44{inst[31]}}, inst[19:12], inst[20], inst[30:21], 1'b0};
+assign jalpc = pc + immJ_sext;
 assign jalrpc = (rf_rdata1 + immI_sext) & ~64'b1;
 assign bpc = pc + immB_sext;
-assign branch = sel_btype[0] ? 1'b1 :
-                sel_btype[1] ? zero :
-                sel_btype[2] ? ~zero :
-                sel_btype[3] ? lt :
-                sel_btype[4] ? ltu :
-                sel_btype[5] ? ~lt :
-                sel_btype[6] ? ~ltu :
+assign branch = sel_btype[0] || sel_btype[1] ? 1'b1 :
+                sel_btype[2] ? zero :
+                sel_btype[3] ? ~zero :
+                sel_btype[4] ? lt :
+                sel_btype[5] ? ltu :
+                sel_btype[6] ? ~lt :
+                sel_btype[7] ? ~ltu :
                 (ecall || mret || tint) ? 1'b1 :
                                1'b0;
 
 // 根据条件选择
 wire        tint;  // timer interrupt
 assign branchpc= branch ? ((ecall || mret || tint) ? csr_rdata :
-                           sel_btype[0] ? jalrpc :
+                           sel_btype[0] ? jalpc :
+                           sel_btype[1] ? jalrpc :
                                           bpc) :
                           64'b0;
 

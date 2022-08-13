@@ -5,7 +5,6 @@ module ysyx_22040088_IFU(
 	input [63:0] branchpc,
 	input       branch,
     output [63:0] pc,
-	output      jump_o,
 	output [31:0] inst,
 	output        if_stall,
 	// ICache与内存接口
@@ -28,17 +27,8 @@ ysyx_22040088_pc u_ysyx_22040088_pc(
 
 assign addpc = pc + 4;
 
-// 简单译码 执行jal指令
-// wire jump;
-wire [63:0] jumppc;
-wire [63:0] offset;
-assign offset = {{44{inst[31]}}, inst[19:12], inst[20], inst[30:21], 1'b0};
-assign jump_o = (inst[6:0] == 7'b1101111);
-assign jumppc = pc + offset;
-
 // 选择nextpc
 assign nextpc = rst    ? 64'h80000000 :
-				jump_o ? jumppc :
 		        branch ? branchpc :
 				         addpc;
 
@@ -52,13 +42,13 @@ wire valid;
 assign off = nextpc[2:0];
 assign index = nextpc[8:3];
 assign tag = nextpc[31:9];
-assign valid = addr_ok && ~branch;  // 只有跳转之后才发出icache读请求
+assign valid = addr_ok;  // 只有跳转之后才发出icache读请求
 
 assign inst = icache_rdata;
 
 icache icache(
 	.clk      (clk      ),
-	.rst      (rst      ),
+	.rst      (rst || branch  ),
 	.valid    (valid    ),
 	.index    (index    ),
 	.tag      (tag      ),
