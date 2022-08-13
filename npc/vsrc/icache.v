@@ -136,8 +136,8 @@ wire [127:0] ram_rdata, ram_wdata;
 wire ram_cen, ram_wen;
 wire [5:0] ram_addr;
 wire [127:0] ram_bwen;
-// 读cache: 1.state == IDLE && 请求有效
-assign ram_cen = ~((state == IDLE && valid) || (state == REPLACE));
+// 读cache: 1.state == IDLE && 请求有效 2. LOOKUP -> LOOKUP
+assign ram_cen = ~((state == IDLE && valid) || (state == LOOKUP && next_state == LOOKUP) || (state == REPLACE));
 // 写cache： REPLACE阶段
 assign ram_wen = ~(state == REPLACE);
 assign ram_addr = reg_index;
@@ -168,7 +168,7 @@ assign rd_wstrb = 4'b1111;
 assign rd_addr = {32'b0, reg_tag, reg_index, 3'b0};
 
 
-assign addr_ok = (state == IDLE);
+assign addr_ok = (state == IDLE || (state == LOOKUP && next_state == LOOKUP));
 assign data_ok = (state == LOOKUP && cache_hit);
 assign rdata = load_res;
 
@@ -186,7 +186,8 @@ always @(*) begin
         end
         LOOKUP: begin
             if (cache_hit) begin
-                next_state = IDLE;
+                if (valid) next_state = LOOKUP;
+                else next_state = IDLE;
             end
             else begin
                 next_state = MISS;
