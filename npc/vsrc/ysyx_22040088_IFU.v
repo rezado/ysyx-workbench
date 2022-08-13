@@ -42,6 +42,7 @@ assign nextpc = rst    ? 64'h7ffffffc :
 wire [ 5:0]   index;
 wire [22:0]   tag;
 wire [ 2:0]   off;
+/* verilator lint_off UNUSED */
 wire addr_ok, data_ok;  // 握手信号
 wire [31:0] icache_rdata;
 wire valid;
@@ -51,6 +52,7 @@ assign tag = nextpc[31:9];
 assign valid = (~rst && addr_ok);  // 只有跳转之后才发出icache读请求
 
 assign inst = icache_rdata;
+
 
 icache icache(
 	.clk      (clk      ),

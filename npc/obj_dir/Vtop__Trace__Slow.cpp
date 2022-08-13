@@ -139,8 +139,8 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declBus(c+492,"top u_ysyx_22040088_IFU index", false,-1, 5,0);
         tracep->declBus(c+493,"top u_ysyx_22040088_IFU tag", false,-1, 22,0);
         tracep->declBus(c+494,"top u_ysyx_22040088_IFU off", false,-1, 2,0);
-        tracep->declBit(c+480,"top u_ysyx_22040088_IFU addr_ok", false,-1);
-        tracep->declBit(c+487,"top u_ysyx_22040088_IFU data_ok", false,-1);
+        tracep->declBit(c+487,"top u_ysyx_22040088_IFU addr_ok", false,-1);
+        tracep->declBit(c+480,"top u_ysyx_22040088_IFU data_ok", false,-1);
         tracep->declBus(c+476,"top u_ysyx_22040088_IFU icache_rdata", false,-1, 31,0);
         tracep->declBit(c+495,"top u_ysyx_22040088_IFU valid", false,-1);
         tracep->declBit(c+513,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc clk", false,-1);
@@ -161,8 +161,8 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declBus(c+492,"top u_ysyx_22040088_IFU icache index", false,-1, 5,0);
         tracep->declBus(c+493,"top u_ysyx_22040088_IFU icache tag", false,-1, 22,0);
         tracep->declBus(c+494,"top u_ysyx_22040088_IFU icache offset", false,-1, 2,0);
-        tracep->declBit(c+480,"top u_ysyx_22040088_IFU icache addr_ok", false,-1);
-        tracep->declBit(c+487,"top u_ysyx_22040088_IFU icache data_ok", false,-1);
+        tracep->declBit(c+487,"top u_ysyx_22040088_IFU icache addr_ok", false,-1);
+        tracep->declBit(c+480,"top u_ysyx_22040088_IFU icache data_ok", false,-1);
         tracep->declBus(c+476,"top u_ysyx_22040088_IFU icache rdata", false,-1, 31,0);
         tracep->declBit(c+3,"top u_ysyx_22040088_IFU icache rd_req", false,-1);
         tracep->declBus(c+519,"top u_ysyx_22040088_IFU icache rd_wstrb", false,-1, 3,0);
@@ -1611,7 +1611,7 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
                                                      (0x20U 
                                                       & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
                                                          << 3U))))))))),32);
-        tracep->fullBit(oldp+477,((1U & (~ ((~ (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__data_ok)) 
+        tracep->fullBit(oldp+477,((1U & (~ ((~ (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok)) 
                                             | (IData)(vlSelf->top__DOT__id_stall))))));
         tracep->fullQData(oldp+478,(((IData)(vlSelf->top__DOT__branch)
                                       ? ((((0x73U == vlSelf->top__DOT__id_inst) 
@@ -1644,9 +1644,8 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
                                                     << 0xdU) 
                                                    | (QData)((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immB)))))))
                                       : 0ULL)),64);
-        tracep->fullBit(oldp+480,(((0U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
-                                   | ((1U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
-                                      & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__cache_hit)))));
+        tracep->fullBit(oldp+480,(((1U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
+                                   & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__cache_hit))));
         tracep->fullBit(oldp+481,((1U & (~ ((((0U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
                                               & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__valid)) 
                                              | (1U 
@@ -1658,8 +1657,8 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
                                    | (3U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)))));
         tracep->fullBit(oldp+483,(vlSelf->top__DOT__branch));
         tracep->fullQData(oldp+484,(vlSelf->top__DOT__mem_rdata),64);
-        tracep->fullBit(oldp+486,((1U & (~ (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__data_ok)))));
-        tracep->fullBit(oldp+487,(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__data_ok));
+        tracep->fullBit(oldp+486,((1U & (~ (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok)))));
+        tracep->fullBit(oldp+487,(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok));
         tracep->fullQData(oldp+488,(vlSelf->top__DOT__id_csr_data),64);
         tracep->fullQData(oldp+490,(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__nextpc),64);
         tracep->fullCData(oldp+492,((0x3fU & (IData)(

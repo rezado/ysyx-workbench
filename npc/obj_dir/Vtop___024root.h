@@ -57,7 +57,7 @@ VL_MODULE(Vtop___024root) {
         CData/*0:0*/ top__DOT__wb_rf_we;
         CData/*4:0*/ top__DOT__wb_rf_waddr;
         CData/*0:0*/ top__DOT__wb_ebreak;
-        CData/*0:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__data_ok;
+        CData/*0:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__valid;
         CData/*2:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state;
         CData/*2:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__next_state;
