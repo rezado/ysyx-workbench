@@ -134,7 +134,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     if (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT____Vcellinp__icache__rst) {
         vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_index = 0U;
     } else if (((0U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
-                & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok))) {
+                & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__valid))) {
         vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_index 
             = (0x3fU & (IData)((vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__nextpc 
                                 >> 3U)));
@@ -415,7 +415,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     if (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT____Vcellinp__icache__rst) {
         vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_tag = 0U;
     } else if (((0U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
-                & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok))) {
+                & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__valid))) {
         vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_tag 
             = (0x7fffffU & (IData)((vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__nextpc 
                                     >> 9U)));
@@ -762,12 +762,12 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     if (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT____Vcellinp__icache__rst) {
         vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset = 0U;
     } else if (((0U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
-                & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok))) {
+                & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__valid))) {
         vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset 
             = (7U & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__nextpc));
     }
     if ((((((0U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
-            & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok)) 
+            & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__valid)) 
            | (1U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state))) 
           | (3U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state))) 
          & (3U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)))) {
@@ -814,7 +814,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
             = vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_addr;
     }
     if ((((((0U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
-            & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok)) 
+            & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__valid)) 
            | (1U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state))) 
           | (3U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state))) 
          & (3U != (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)))) {
@@ -1780,6 +1780,8 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__4(Vtop___024root* vlSelf) {
                         >> 3U))) & (IData)((vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_CSRs__DOT__mie 
                                             >> 7U))) 
            & (~ ((IData)(vlSelf->rst) | (IData)(vlSelf->top__DOT__id_stall))));
+    vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__valid 
+        = ((~ (IData)(vlSelf->rst)) & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok));
     __Vtemp117[0U] = 1U;
     __Vtemp117[1U] = 0U;
     __Vtemp117[2U] = 0U;
@@ -2039,7 +2041,7 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__4(Vtop___024root* vlSelf) {
         = ((1U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
            & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__cache_hit));
     __Vtableidx1 = (((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__cache_hit) 
-                     << 4U) | (((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok) 
+                     << 4U) | (((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__valid) 
                                 << 3U) | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)));
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__next_state 
         = Vtop__ConstPool__TABLE_e5f87c57_0[__Vtableidx1];

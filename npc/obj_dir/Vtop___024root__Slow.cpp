@@ -404,6 +404,8 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
              | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_bgeu)) 
             | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_blt)) 
            | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_bltu));
+    vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__valid 
+        = ((~ (IData)(vlSelf->rst)) & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok));
     vlSelf->top__DOT__u_MEM__DOT__u_mem__DOT__mask 
         = ((1U & (IData)(vlSelf->top__DOT__mem_mask))
             ? 0xffU : ((2U & (IData)(vlSelf->top__DOT__mem_mask))
@@ -1356,7 +1358,7 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
         = ((1U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
            & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__cache_hit));
     __Vtableidx1 = (((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__cache_hit) 
-                     << 4U) | (((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok) 
+                     << 4U) | (((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__valid) 
                                 << 3U) | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)));
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__next_state 
         = Vtop__ConstPool__TABLE_e5f87c57_0[__Vtableidx1];
@@ -1474,6 +1476,7 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__nextpc = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__data_ok = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__valid = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT____Vcellinp__icache__rst = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state = VL_RAND_RESET_I(3);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__next_state = VL_RAND_RESET_I(3);
