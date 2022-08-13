@@ -40,7 +40,6 @@ assign jumppc = pc + offset;
 assign nextpc = rst    ? 64'h80000000 :
 				jump_o ? jumppc :
 		        branch ? branchpc :
-				~ena   ? pc :
 				         addpc;
 
 // ICache
