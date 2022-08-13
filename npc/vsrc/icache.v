@@ -20,10 +20,6 @@ parameter IDLE = 0, LOOKUP = 1, MISS = 2, REPLACE = 3;
 
 reg [2:0] state, next_state;
 
-assign addr_ok = (state == IDLE);
-assign data_ok = (state == LOOKUP && reg_cache_hit);
-assign rdata = load_res;
-
 
 // Request Buffer
 reg [5:0] reg_index;
@@ -172,6 +168,9 @@ assign rd_wstrb = 4'b1111;
 assign rd_addr = {32'b0, reg_tag, reg_index, 3'b0};
 
 
+assign addr_ok = (state == IDLE);
+assign data_ok = (state == LOOKUP && reg_cache_hit);
+assign rdata = load_res;
 
 
 // 组合逻辑
