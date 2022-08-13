@@ -170,7 +170,7 @@ assign rd_wstrb = 4'b1111;
 assign rd_addr = {32'b0, reg_tag, reg_index, 3'b0};
 
 
-assign addr_ok = (state == IDLE || (state == LOOKUP && next_state == LOOKUP));
+assign addr_ok = (state == IDLE || state == LOOKUP);
 assign data_ok = (state == LOOKUP && cache_hit);
 assign rdata = load_res;
 
