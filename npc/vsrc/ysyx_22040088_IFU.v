@@ -20,7 +20,7 @@ wire [63:0]addpc;
 ysyx_22040088_pc u_ysyx_22040088_pc(
 	.clk    (clk    ),
 	.rst    (rst    ),
-	.wen    (ena && addr_ok || branch),
+	.wen    (ena),
 	.pc_src (nextpc ),
 	.pc_out (pc     )
 );
