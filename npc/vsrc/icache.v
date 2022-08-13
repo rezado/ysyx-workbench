@@ -48,7 +48,7 @@ wire we_way0_vtag, we_way1_vtag;
 wire [23:0] way0_vtag, way1_vtag;
 wire [23:0] way0_wdata, way1_wdata;
 // 读
-assign re_vtag = (state == IDLE && valid);
+assign re_vtag = (state == LOOKUP);
 assign way0_vtag = re_vtag ? way0_vtag_tab[index] : 24'b0;
 assign way1_vtag = re_vtag ? way1_vtag_tab[index] : 24'b0;
 // 写(REPLACE阶段写入替换的新tag)
@@ -112,20 +112,20 @@ wire [31:0] way0_load_word, way1_load_word, load_res;
 wire [63:0] way0_data, way1_data;
 assign way0_load_word = way0_data[reg_offset[2] * 32 +: 32];
 assign way1_load_word = way1_data[reg_offset[2] * 32 +: 32];
-// Selecter Buffer
-reg reg_way0_hit, reg_way1_hit, reg_cache_hit;
-always @(posedge clk) begin
-    if (rst) begin
-        reg_way0_hit <= 1'b0;
-        reg_way1_hit <= 1'b0;
-        reg_cache_hit <= 1'b0;
-    end
-    else if (state == IDLE && valid) begin
-        reg_way0_hit <= way0_hit;
-        reg_way1_hit <= way1_hit;
-        reg_cache_hit <= cache_hit;
-    end
-end
+// // Selecter Buffer
+// reg reg_way0_hit, reg_way1_hit, reg_cache_hit;
+// always @(posedge clk) begin
+//     if (rst) begin
+//         reg_way0_hit <= 1'b0;
+//         reg_way1_hit <= 1'b0;
+//         reg_cache_hit <= 1'b0;
+//     end
+//     else if (state == IDLE && valid) begin
+//         reg_way0_hit <= way0_hit;
+//         reg_way1_hit <= way1_hit;
+//         reg_cache_hit <= cache_hit;
+//     end
+// end
 assign load_res = {32{way0_hit}} & way0_load_word
                 | {32{way1_hit}} & way1_load_word;
 
@@ -169,7 +169,7 @@ assign rd_addr = {32'b0, reg_tag, reg_index, 3'b0};
 
 
 assign addr_ok = (state == IDLE);
-assign data_ok = (state == LOOKUP && reg_cache_hit);
+assign data_ok = (state == LOOKUP && cache_hit);
 assign rdata = load_res;
 
 
