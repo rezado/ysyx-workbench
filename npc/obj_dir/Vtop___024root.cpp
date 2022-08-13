@@ -1431,6 +1431,9 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
                           >> 0xfU))]));
     vlSelf->top__DOT__sel_memdata = ((2U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state))
                                       ? 1U : (IData)(vlSelf->top__DOT__mem_sel_memdata));
+    vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok 
+        = ((0U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
+           | (1U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)));
     vlSelf->top__DOT__mem_mask = (((IData)(vlSelf->top__DOT__mem_mem_ena) 
                                    | (IData)(vlSelf->top__DOT__mem_mem_wen))
                                    ? (IData)(vlSelf->top__DOT__mem_mem_mask)
@@ -2040,10 +2043,6 @@ VL_INLINE_OPT void Vtop___024root___combo__TOP__4(Vtop___024root* vlSelf) {
                                 << 3U) | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)));
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__next_state 
         = Vtop__ConstPool__TABLE_e5f87c57_0[__Vtableidx1];
-    vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok 
-        = ((0U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
-           | ((1U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
-              & (1U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__next_state))));
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_addr 
         = (0x3fU & ((1U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__next_state))
                      ? (IData)((vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__nextpc 
@@ -2084,11 +2083,6 @@ VL_INLINE_OPT QData Vtop___024root___change_request_1(Vtop___024root* vlSelf) {
     // Body
     // Change detection
     QData __req = false;  // Logically a bool
-    __req |= ((vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok ^ vlSelf->__Vchglast__TOP__top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok));
-    VL_DEBUG_IF( if(__req && ((vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok ^ vlSelf->__Vchglast__TOP__top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok))) VL_DBG_MSGF("        CHANGE: /home/bill/ysyx-workbench/npc/vsrc/ysyx_22040088_IFU.v:39: top.u_ysyx_22040088_IFU.addr_ok\n"); );
-    // Final
-    vlSelf->__Vchglast__TOP__top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok 
-        = vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok;
     return __req;
 }
 
