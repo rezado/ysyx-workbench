@@ -137,7 +137,7 @@ wire ram_cen, ram_wen;
 wire [5:0] ram_addr;
 wire [127:0] ram_bwen;
 // 读cache: 1.state == IDLE && 请求有效 2. LOOKUP -> LOOKUP
-assign ram_cen = ~((state == IDLE && valid) || (state == LOOKUP && next_state == LOOKUP) || (state == REPLACE));
+assign ram_cen = ~((next_state == LOOKUP) || (state == REPLACE));
 // 写cache： REPLACE阶段
 assign ram_wen = ~(state == REPLACE);
 assign ram_addr = reg_index;
