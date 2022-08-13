@@ -21,7 +21,7 @@ parameter IDLE = 0, LOOKUP = 1, MISS = 2, REPLACE = 3;
 reg [2:0] state, next_state;
 
 assign addr_ok = (state == IDLE);
-assign data_ok = (state == IDLE && reg_cache_hit);
+assign data_ok = (state == LOOKUP && cache_hit);
 assign rdata = load_res;
 
 // {v, tag}表
@@ -111,22 +111,22 @@ wire [31:0] way0_load_word, way1_load_word, load_res;
 wire [63:0] way0_data, way1_data;
 assign way0_load_word = way0_data[reg_offset[2] * 32 +: 32];
 assign way1_load_word = way1_data[reg_offset[2] * 32 +: 32];
-// Selecter Buffer
-reg reg_way0_hit, reg_way1_hit, reg_cache_hit;
-always @(posedge clk) begin
-    if (rst) begin
-        reg_way0_hit <= 1'b0;
-        reg_way1_hit <= 1'b0;
-        reg_cache_hit <= 1'b0;
-    end
-    else if (state == LOOKUP) begin
-        reg_way0_hit <= way0_hit;
-        reg_way1_hit <= way1_hit;
-        reg_cache_hit <= cache_hit;
-    end
-end
-assign load_res = {32{reg_way0_hit}} & way0_load_word
-                | {32{reg_way1_hit}} & way1_load_word;
+// // Selecter Buffer
+// reg reg_way0_hit, reg_way1_hit, reg_cache_hit;
+// always @(posedge clk) begin
+//     if (rst) begin
+//         reg_way0_hit <= 1'b0;
+//         reg_way1_hit <= 1'b0;
+//         reg_cache_hit <= 1'b0;
+//     end
+//     else if (state == LOOKUP) begin
+//         reg_way0_hit <= way0_hit;
+//         reg_way1_hit <= way1_hit;
+//         reg_cache_hit <= cache_hit;
+//     end
+// end
+assign load_res = {32{way0_hit}} & way0_load_word
+                | {32{way1_hit}} & way1_load_word;
 assign ram_addr = (state == LOOKUP || state == REPLACE) ? reg_index : 6'b0;
 
 
@@ -135,8 +135,8 @@ wire [127:0] ram_rdata, ram_wdata;
 wire ram_cen, ram_wen;
 wire [5:0] ram_addr;
 wire [127:0] ram_bwen;
-// 读cache: 1.state == LOOKUP && cache命中
-assign ram_cen = ~((state == LOOKUP && cache_hit) || (state == REPLACE));
+// 读cache: 1.state == IDLE && 请求有效
+assign ram_cen = ~((state == IDLE && valid) || (state == REPLACE));
 // 写cache： REPLACE阶段
 assign ram_wen = ~(state == REPLACE);
 assign ram_addr = (state == LOOKUP || state == REPLACE) ? reg_index : 6'b0;
@@ -187,7 +187,7 @@ always @(*) begin
             next_state = REPLACE;
         end
         REPLACE: begin
-            next_state = LOOKUP;
+            next_state = IDLE;
         end
         default: begin
             next_state = state;
