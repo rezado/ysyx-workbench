@@ -28,15 +28,15 @@ ysyx_22040088_pc u_ysyx_22040088_pc(
 assign addpc = pc + 4;
 
 // 选择nextpc
-always @(posedge clk) begin
-	if (rst) nextpc <= 64'h80000000;
-	else if (branch) nextpc <= branchpc;
-	else if (~ena) nextpc <= pc;
-	else nextpc <= addpc;
-end
-// assign nextpc = rst    ? 64'h80000000 :
-// 		        branch ? branchpc :
-// 				         addpc;
+// always @(posedge clk) begin
+// 	if (rst) nextpc <= 64'h80000000;
+// 	else if (branch) nextpc <= branchpc;
+// 	else if (~ena) nextpc <= pc;
+// 	else nextpc <= addpc;
+// end
+assign nextpc = rst    ? 64'h7ffffffc :
+		        branch ? branchpc :
+				         addpc;
 
 // ICache
 wire [ 5:0]   index;

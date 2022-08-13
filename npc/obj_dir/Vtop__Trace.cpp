@@ -93,8 +93,7 @@ void Vtop___024root__traceChgSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep) 
                                                       (0x20U 
                                                        & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_offset) 
                                                           << 3U))))))))),32);
-            tracep->chgBit(oldp+3,((1U & (~ ((~ (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__data_ok)) 
-                                             | (IData)(vlSelf->top__DOT__id_stall))))));
+            tracep->chgBit(oldp+3,(vlSelf->top__DOT__if_ena));
             tracep->chgBit(oldp+4,((2U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state))));
             tracep->chgQData(oldp+5,((((QData)((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_tag)) 
                                        << 9U) | (QData)((IData)(

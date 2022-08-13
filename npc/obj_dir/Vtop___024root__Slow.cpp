@@ -949,6 +949,8 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
                         >> 3U))) & (IData)((vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_CSRs__DOT__mie 
                                             >> 7U))) 
            & (~ ((IData)(vlSelf->rst) | (IData)(vlSelf->top__DOT__id_stall))));
+    vlSelf->top__DOT__if_ena = (1U & (~ ((~ (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__data_ok)) 
+                                         | (IData)(vlSelf->top__DOT__id_stall))));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__rf_rdata1 
         = ((((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__ForwardA_ex) 
              | (IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__ForwardA_mem)) 
@@ -1370,6 +1372,7 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->rst = VL_RAND_RESET_I(1);
     vlSelf->pc = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__pc_out = VL_RAND_RESET_Q(64);
+    vlSelf->top__DOT__if_ena = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__branch = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__id_pc = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__id_inst = VL_RAND_RESET_I(32);

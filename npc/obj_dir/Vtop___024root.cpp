@@ -361,7 +361,9 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
                                                      & ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immB) 
                                                         >> 0xcU))))) 
                                  << 0xdU) | (QData)((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immB)))))))
-                 : 0ULL) : (4ULL + vlSelf->top__DOT__pc_out));
+                 : 0ULL) : ((IData)(vlSelf->top__DOT__if_ena)
+                             ? (4ULL + vlSelf->top__DOT__pc_out)
+                             : vlSelf->top__DOT__pc_out));
         vlSelf->top__DOT__wb_sel_rfres = vlSelf->top__DOT__mem_sel_rfres;
     }
     vlSelf->top__DOT__ex_alu_src2 = (((IData)(vlSelf->rst) 
@@ -730,8 +732,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
                                                   & vlSelf->top__DOT__id_inst))));
     if (vlSelf->rst) {
         vlSelf->top__DOT__pc_out = 0x80000000ULL;
-    } else if ((1U & (~ ((~ (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__data_ok)) 
-                         | (IData)(vlSelf->top__DOT__id_stall))))) {
+    } else if (vlSelf->top__DOT__if_ena) {
         vlSelf->top__DOT__pc_out = vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__nextpc;
     }
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__we_forward_ex 
@@ -1803,6 +1804,8 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__id_alu_src1 = ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__hit)
                                       ? vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__lut_out
                                       : 0ULL);
+    vlSelf->top__DOT__if_ena = (1U & (~ ((~ (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__data_ok)) 
+                                         | (IData)(vlSelf->top__DOT__id_stall))));
 }
 
 extern const VlUnpacked<CData/*2:0*/, 32> Vtop__ConstPool__TABLE_e5f87c57_0;
