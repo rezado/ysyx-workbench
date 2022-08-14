@@ -22,20 +22,20 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
     if (false && tracep && c) {}  // Prevent unused
     // Body
     {
-        tracep->declBit(c+510,"clk", false,-1);
-        tracep->declBit(c+511,"rst", false,-1);
-        tracep->declQuad(c+512,"pc", false,-1, 63,0);
-        tracep->declBit(c+510,"top clk", false,-1);
-        tracep->declBit(c+511,"top rst", false,-1);
-        tracep->declQuad(c+512,"top pc", false,-1, 63,0);
+        tracep->declBit(c+509,"clk", false,-1);
+        tracep->declBit(c+510,"rst", false,-1);
+        tracep->declQuad(c+511,"pc", false,-1, 63,0);
+        tracep->declBit(c+509,"top clk", false,-1);
+        tracep->declBit(c+510,"top rst", false,-1);
+        tracep->declQuad(c+511,"top pc", false,-1, 63,0);
         tracep->declQuad(c+1,"top pc_out", false,-1, 63,0);
         tracep->declBus(c+3,"top inst", false,-1, 31,0);
         tracep->declBit(c+4,"top if_ena", false,-1);
-        tracep->declBit(c+519,"top if_valid", false,-1);
-        tracep->declQuad(c+514,"top branchpc", false,-1, 63,0);
+        tracep->declBit(c+518,"top if_valid", false,-1);
+        tracep->declQuad(c+513,"top branchpc", false,-1, 63,0);
         tracep->declBit(c+491,"top branch", false,-1);
         tracep->declBit(c+5,"top icache_rd_req", false,-1);
-        tracep->declBus(c+520,"top icache_rd_wstrb", false,-1, 3,0);
+        tracep->declBus(c+519,"top icache_rd_wstrb", false,-1, 3,0);
         tracep->declQuad(c+6,"top icache_rd_addr", false,-1, 63,0);
         tracep->declQuad(c+492,"top icache_ret_data", false,-1, 63,0);
         tracep->declBit(c+8,"top if_stall", false,-1);
@@ -60,13 +60,13 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declBit(c+29,"top id_load", false,-1);
         tracep->declQuad(c+494,"top id_csr_data", false,-1, 63,0);
         tracep->declQuad(c+30,"top rf_wdata", false,-1, 63,0);
-        tracep->declBit(c+521,"top inst_inv", false,-1);
+        tracep->declBit(c+520,"top inst_inv", false,-1);
         tracep->declBit(c+32,"top id_ebreak", false,-1);
         tracep->declBit(c+33,"top id_stall", false,-1);
         tracep->declBit(c+34,"top mtcmp_we", false,-1);
         tracep->declBit(c+35,"top mtcmp_re", false,-1);
         tracep->declQuad(c+36,"top mtcmp_wdata", false,-1, 63,0);
-        tracep->declBit(c+519,"top ex_ena", false,-1);
+        tracep->declBit(c+518,"top ex_ena", false,-1);
         tracep->declBit(c+12,"top ex_valid", false,-1);
         tracep->declQuad(c+38,"top ex_pc", false,-1, 63,0);
         tracep->declBus(c+40,"top ex_inst", false,-1, 31,0);
@@ -86,15 +86,15 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declBit(c+57,"top ex_load", false,-1);
         tracep->declQuad(c+58,"top ex_csr_data", false,-1, 63,0);
         tracep->declQuad(c+60,"top ex_alu_result", false,-1, 63,0);
-        tracep->declBit(c+519,"top mem_ena", false,-1);
-        tracep->declBit(c+519,"top mem_valid", false,-1);
+        tracep->declBit(c+518,"top mem_ena", false,-1);
+        tracep->declBit(c+518,"top mem_valid", false,-1);
         tracep->declQuad(c+62,"top mem_pc", false,-1, 63,0);
         tracep->declBus(c+64,"top mem_inst", false,-1, 31,0);
         tracep->declBus(c+65,"top mem_sel_rfres", false,-1, 2,0);
         tracep->declBit(c+66,"top mem_mem_wen", false,-1);
         tracep->declBit(c+67,"top mem_mem_ena", false,-1);
         tracep->declBus(c+68,"top mem_mem_mask", false,-1, 3,0);
-        tracep->declBus(c+522,"top mem_sel_alures", false,-1, 3,0);
+        tracep->declBus(c+521,"top mem_sel_alures", false,-1, 3,0);
         tracep->declQuad(c+69,"top mem_rf_rdata2", false,-1, 63,0);
         tracep->declQuad(c+71,"top mem_alu_result", false,-1, 63,0);
         tracep->declBus(c+73,"top mem_sel_memdata", false,-1, 1,0);
@@ -110,8 +110,8 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declQuad(c+492,"top mem_rdata", false,-1, 63,0);
         tracep->declQuad(c+84,"top mem_wdata", false,-1, 63,0);
         tracep->declBus(c+86,"top sel_memdata", false,-1, 1,0);
-        tracep->declBit(c+519,"top wb_ena", false,-1);
-        tracep->declBit(c+519,"top wb_valid", false,-1);
+        tracep->declBit(c+518,"top wb_ena", false,-1);
+        tracep->declBit(c+518,"top wb_valid", false,-1);
         tracep->declQuad(c+87,"top wb_pc", false,-1, 63,0);
         tracep->declQuad(c+89,"top wb_alu_result", false,-1, 63,0);
         tracep->declQuad(c+91,"top wb_rdata", false,-1, 63,0);
@@ -121,17 +121,17 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declBus(c+96,"top wb_rf_waddr", false,-1, 4,0);
         tracep->declBit(c+97,"top wb_ebreak", false,-1);
         tracep->declQuad(c+98,"top wb_csr_data", false,-1, 63,0);
-        tracep->declBit(c+521,"top inv", false,-1);
-        tracep->declBit(c+510,"top u_ysyx_22040088_IFU clk", false,-1);
-        tracep->declBit(c+511,"top u_ysyx_22040088_IFU rst", false,-1);
+        tracep->declBit(c+520,"top inv", false,-1);
+        tracep->declBit(c+509,"top u_ysyx_22040088_IFU clk", false,-1);
+        tracep->declBit(c+510,"top u_ysyx_22040088_IFU rst", false,-1);
         tracep->declBit(c+4,"top u_ysyx_22040088_IFU ena", false,-1);
-        tracep->declQuad(c+514,"top u_ysyx_22040088_IFU branchpc", false,-1, 63,0);
+        tracep->declQuad(c+513,"top u_ysyx_22040088_IFU branchpc", false,-1, 63,0);
         tracep->declBit(c+491,"top u_ysyx_22040088_IFU branch", false,-1);
         tracep->declQuad(c+1,"top u_ysyx_22040088_IFU pc", false,-1, 63,0);
         tracep->declBus(c+3,"top u_ysyx_22040088_IFU inst", false,-1, 31,0);
         tracep->declBit(c+8,"top u_ysyx_22040088_IFU if_stall", false,-1);
         tracep->declBit(c+5,"top u_ysyx_22040088_IFU icache_rd_req", false,-1);
-        tracep->declBus(c+520,"top u_ysyx_22040088_IFU icache_rd_wstrb", false,-1, 3,0);
+        tracep->declBus(c+519,"top u_ysyx_22040088_IFU icache_rd_wstrb", false,-1, 3,0);
         tracep->declQuad(c+6,"top u_ysyx_22040088_IFU icache_rd_addr", false,-1, 63,0);
         tracep->declQuad(c+492,"top u_ysyx_22040088_IFU icache_ret_data", false,-1, 63,0);
         tracep->declQuad(c+496,"top u_ysyx_22040088_IFU nextpc", false,-1, 63,0);
@@ -143,20 +143,20 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declBit(c+102,"top u_ysyx_22040088_IFU data_ok", false,-1);
         tracep->declBus(c+3,"top u_ysyx_22040088_IFU icache_rdata", false,-1, 31,0);
         tracep->declBit(c+501,"top u_ysyx_22040088_IFU valid", false,-1);
-        tracep->declBit(c+510,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc clk", false,-1);
-        tracep->declBit(c+511,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc rst", false,-1);
+        tracep->declBit(c+509,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc clk", false,-1);
+        tracep->declBit(c+510,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc rst", false,-1);
         tracep->declBit(c+4,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc wen", false,-1);
         tracep->declQuad(c+496,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc pc_src", false,-1, 63,0);
         tracep->declQuad(c+1,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc pc_out", false,-1, 63,0);
-        tracep->declBus(c+523,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc pc_Reg WIDTH", false,-1, 31,0);
-        tracep->declQuad(c+524,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc pc_Reg RESET_VAL", false,-1, 63,0);
-        tracep->declBit(c+510,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc pc_Reg clk", false,-1);
-        tracep->declBit(c+511,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc pc_Reg rst", false,-1);
+        tracep->declBus(c+522,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc pc_Reg WIDTH", false,-1, 31,0);
+        tracep->declQuad(c+523,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc pc_Reg RESET_VAL", false,-1, 63,0);
+        tracep->declBit(c+509,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc pc_Reg clk", false,-1);
+        tracep->declBit(c+510,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc pc_Reg rst", false,-1);
         tracep->declQuad(c+496,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc pc_Reg din", false,-1, 63,0);
         tracep->declQuad(c+1,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc pc_Reg dout", false,-1, 63,0);
         tracep->declBit(c+4,"top u_ysyx_22040088_IFU u_ysyx_22040088_pc pc_Reg wen", false,-1);
-        tracep->declBit(c+510,"top u_ysyx_22040088_IFU icache clk", false,-1);
-        tracep->declBit(c+502,"top u_ysyx_22040088_IFU icache rst", false,-1);
+        tracep->declBit(c+509,"top u_ysyx_22040088_IFU icache clk", false,-1);
+        tracep->declBit(c+510,"top u_ysyx_22040088_IFU icache rst", false,-1);
         tracep->declBit(c+501,"top u_ysyx_22040088_IFU icache valid", false,-1);
         tracep->declBus(c+498,"top u_ysyx_22040088_IFU icache index", false,-1, 5,0);
         tracep->declBus(c+499,"top u_ysyx_22040088_IFU icache tag", false,-1, 22,0);
@@ -165,15 +165,15 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declBit(c+102,"top u_ysyx_22040088_IFU icache data_ok", false,-1);
         tracep->declBus(c+3,"top u_ysyx_22040088_IFU icache rdata", false,-1, 31,0);
         tracep->declBit(c+5,"top u_ysyx_22040088_IFU icache rd_req", false,-1);
-        tracep->declBus(c+520,"top u_ysyx_22040088_IFU icache rd_wstrb", false,-1, 3,0);
+        tracep->declBus(c+519,"top u_ysyx_22040088_IFU icache rd_wstrb", false,-1, 3,0);
         tracep->declQuad(c+6,"top u_ysyx_22040088_IFU icache rd_addr", false,-1, 63,0);
         tracep->declQuad(c+492,"top u_ysyx_22040088_IFU icache ret_data", false,-1, 63,0);
-        tracep->declBus(c+526,"top u_ysyx_22040088_IFU icache IDLE", false,-1, 31,0);
-        tracep->declBus(c+527,"top u_ysyx_22040088_IFU icache LOOKUP", false,-1, 31,0);
-        tracep->declBus(c+528,"top u_ysyx_22040088_IFU icache MISS", false,-1, 31,0);
-        tracep->declBus(c+529,"top u_ysyx_22040088_IFU icache REPLACE", false,-1, 31,0);
+        tracep->declBus(c+525,"top u_ysyx_22040088_IFU icache IDLE", false,-1, 31,0);
+        tracep->declBus(c+526,"top u_ysyx_22040088_IFU icache LOOKUP", false,-1, 31,0);
+        tracep->declBus(c+527,"top u_ysyx_22040088_IFU icache MISS", false,-1, 31,0);
+        tracep->declBus(c+528,"top u_ysyx_22040088_IFU icache REPLACE", false,-1, 31,0);
         tracep->declBus(c+103,"top u_ysyx_22040088_IFU icache state", false,-1, 2,0);
-        tracep->declBus(c+503,"top u_ysyx_22040088_IFU icache next_state", false,-1, 2,0);
+        tracep->declBus(c+502,"top u_ysyx_22040088_IFU icache next_state", false,-1, 2,0);
         tracep->declBus(c+104,"top u_ysyx_22040088_IFU icache reg_index", false,-1, 5,0);
         tracep->declBus(c+105,"top u_ysyx_22040088_IFU icache reg_offset", false,-1, 2,0);
         tracep->declBus(c+106,"top u_ysyx_22040088_IFU icache reg_tag", false,-1, 22,0);
@@ -200,34 +200,34 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declQuad(c+128,"top u_ysyx_22040088_IFU icache way1_data", false,-1, 63,0);
         tracep->declArray(c+130,"top u_ysyx_22040088_IFU icache ram_rdata", false,-1, 127,0);
         tracep->declArray(c+134,"top u_ysyx_22040088_IFU icache ram_wdata", false,-1, 127,0);
-        tracep->declBit(c+516,"top u_ysyx_22040088_IFU icache ram_cen", false,-1);
+        tracep->declBit(c+515,"top u_ysyx_22040088_IFU icache ram_cen", false,-1);
         tracep->declBit(c+138,"top u_ysyx_22040088_IFU icache ram_wen", false,-1);
-        tracep->declBus(c+504,"top u_ysyx_22040088_IFU icache ram_addr", false,-1, 5,0);
+        tracep->declBus(c+503,"top u_ysyx_22040088_IFU icache ram_addr", false,-1, 5,0);
         tracep->declArray(c+139,"top u_ysyx_22040088_IFU icache ram_bwen", false,-1, 127,0);
-        tracep->declBus(c+530,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW Bits", false,-1, 31,0);
-        tracep->declBus(c+523,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW Word_Depth", false,-1, 31,0);
-        tracep->declBus(c+531,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW Add_Width", false,-1, 31,0);
-        tracep->declBus(c+530,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW Wen_Width", false,-1, 31,0);
+        tracep->declBus(c+529,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW Bits", false,-1, 31,0);
+        tracep->declBus(c+522,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW Word_Depth", false,-1, 31,0);
+        tracep->declBus(c+530,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW Add_Width", false,-1, 31,0);
+        tracep->declBus(c+529,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW Wen_Width", false,-1, 31,0);
         tracep->declArray(c+130,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW Q", false,-1, 127,0);
-        tracep->declBit(c+510,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW CLK", false,-1);
-        tracep->declBit(c+516,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW CEN", false,-1);
+        tracep->declBit(c+509,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW CLK", false,-1);
+        tracep->declBit(c+515,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW CEN", false,-1);
         tracep->declBit(c+138,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW WEN", false,-1);
         tracep->declArray(c+139,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW BWEN", false,-1, 127,0);
-        tracep->declBus(c+504,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW A", false,-1, 5,0);
+        tracep->declBus(c+503,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW A", false,-1, 5,0);
         tracep->declArray(c+134,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW D", false,-1, 127,0);
-        tracep->declBit(c+517,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW cen", false,-1);
+        tracep->declBit(c+516,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW cen", false,-1);
         tracep->declBit(c+143,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW wen", false,-1);
         tracep->declArray(c+144,"top u_ysyx_22040088_IFU icache u_S011HD1P_X32Y2D128_BW bwen", false,-1, 127,0);
-        tracep->declBit(c+510,"top u_ID_reg clk", false,-1);
-        tracep->declBit(c+511,"top u_ID_reg rst", false,-1);
+        tracep->declBit(c+509,"top u_ID_reg clk", false,-1);
+        tracep->declBit(c+510,"top u_ID_reg rst", false,-1);
         tracep->declBit(c+13,"top u_ID_reg valid", false,-1);
         tracep->declBit(c+12,"top u_ID_reg ena", false,-1);
         tracep->declQuad(c+1,"top u_ID_reg if_pc", false,-1, 63,0);
         tracep->declBus(c+3,"top u_ID_reg if_inst", false,-1, 31,0);
         tracep->declQuad(c+9,"top u_ID_reg id_pc", false,-1, 63,0);
         tracep->declBus(c+11,"top u_ID_reg id_inst", false,-1, 31,0);
-        tracep->declBit(c+510,"top u_ysyx_22040088_IDU clk", false,-1);
-        tracep->declBit(c+511,"top u_ysyx_22040088_IDU rst", false,-1);
+        tracep->declBit(c+509,"top u_ysyx_22040088_IDU clk", false,-1);
+        tracep->declBit(c+510,"top u_ysyx_22040088_IDU rst", false,-1);
         tracep->declQuad(c+9,"top u_ysyx_22040088_IDU pc", false,-1, 63,0);
         tracep->declBus(c+11,"top u_ysyx_22040088_IDU inst", false,-1, 31,0);
         tracep->declQuad(c+30,"top u_ysyx_22040088_IDU rf_wdata", false,-1, 63,0);
@@ -249,7 +249,7 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declBit(c+16,"top u_ysyx_22040088_IDU mem_wen", false,-1);
         tracep->declBit(c+17,"top u_ysyx_22040088_IDU mem_ena", false,-1);
         tracep->declBus(c+18,"top u_ysyx_22040088_IDU mem_mask", false,-1, 3,0);
-        tracep->declBit(c+521,"top u_ysyx_22040088_IDU inv", false,-1);
+        tracep->declBit(c+520,"top u_ysyx_22040088_IDU inv", false,-1);
         tracep->declBus(c+19,"top u_ysyx_22040088_IDU sel_alures", false,-1, 3,0);
         tracep->declBus(c+20,"top u_ysyx_22040088_IDU sel_memdata", false,-1, 1,0);
         tracep->declBit(c+27,"top u_ysyx_22040088_IDU rf_we_o", false,-1);
@@ -261,7 +261,7 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declQuad(c+21,"top u_ysyx_22040088_IDU alu_src1", false,-1, 63,0);
         tracep->declQuad(c+23,"top u_ysyx_22040088_IDU alu_src2", false,-1, 63,0);
         tracep->declQuad(c+25,"top u_ysyx_22040088_IDU rf_rdata2", false,-1, 63,0);
-        tracep->declQuad(c+514,"top u_ysyx_22040088_IDU branchpc", false,-1, 63,0);
+        tracep->declQuad(c+513,"top u_ysyx_22040088_IDU branchpc", false,-1, 63,0);
         tracep->declQuad(c+494,"top u_ysyx_22040088_IDU csr_data", false,-1, 63,0);
         tracep->declBus(c+28,"top u_ysyx_22040088_IDU rd", false,-1, 4,0);
         tracep->declBus(c+148,"top u_ysyx_22040088_IDU rs1", false,-1, 4,0);
@@ -298,15 +298,15 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declQuad(c+188,"top u_ysyx_22040088_IDU bpc", false,-1, 63,0);
         tracep->declQuad(c+190,"top u_ysyx_22040088_IDU jalpc", false,-1, 63,0);
         tracep->declQuad(c+192,"top u_ysyx_22040088_IDU offset", false,-1, 63,0);
-        tracep->declBit(c+505,"top u_ysyx_22040088_IDU tint", false,-1);
+        tracep->declBit(c+504,"top u_ysyx_22040088_IDU tint", false,-1);
         tracep->declBit(c+194,"top u_ysyx_22040088_IDU ForwardA", false,-1);
         tracep->declBit(c+195,"top u_ysyx_22040088_IDU ForwardB", false,-1);
         tracep->declQuad(c+196,"top u_ysyx_22040088_IDU ForA_data", false,-1, 63,0);
         tracep->declQuad(c+198,"top u_ysyx_22040088_IDU ForB_data", false,-1, 63,0);
-        tracep->declQuad(c+506,"top u_ysyx_22040088_IDU csr_wdata", false,-1, 63,0);
+        tracep->declQuad(c+505,"top u_ysyx_22040088_IDU csr_wdata", false,-1, 63,0);
         tracep->declQuad(c+200,"top u_ysyx_22040088_IDU zimm", false,-1, 63,0);
-        tracep->declQuad(c+508,"top u_ysyx_22040088_IDU csr_rdata", false,-1, 63,0);
-        tracep->declBit(c+518,"top u_ysyx_22040088_IDU tint_ena", false,-1);
+        tracep->declQuad(c+507,"top u_ysyx_22040088_IDU csr_rdata", false,-1, 63,0);
+        tracep->declBit(c+517,"top u_ysyx_22040088_IDU tint_ena", false,-1);
         tracep->declBus(c+11,"top u_ysyx_22040088_IDU u_ysyx_22040088_controlunit inst", false,-1, 31,0);
         tracep->declBus(c+14,"top u_ysyx_22040088_IDU u_ysyx_22040088_controlunit alu_op", false,-1, 16,0);
         tracep->declBit(c+27,"top u_ysyx_22040088_IDU u_ysyx_22040088_controlunit rf_we", false,-1);
@@ -317,7 +317,7 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declBit(c+17,"top u_ysyx_22040088_IDU u_ysyx_22040088_controlunit mem_ena", false,-1);
         tracep->declBit(c+16,"top u_ysyx_22040088_IDU u_ysyx_22040088_controlunit mem_wen", false,-1);
         tracep->declBus(c+18,"top u_ysyx_22040088_IDU u_ysyx_22040088_controlunit mem_mask", false,-1, 3,0);
-        tracep->declBit(c+521,"top u_ysyx_22040088_IDU u_ysyx_22040088_controlunit inv", false,-1);
+        tracep->declBit(c+520,"top u_ysyx_22040088_IDU u_ysyx_22040088_controlunit inv", false,-1);
         tracep->declBus(c+19,"top u_ysyx_22040088_IDU u_ysyx_22040088_controlunit sel_alures", false,-1, 3,0);
         tracep->declBus(c+20,"top u_ysyx_22040088_IDU u_ysyx_22040088_controlunit sel_memdata", false,-1, 1,0);
         tracep->declBit(c+29,"top u_ysyx_22040088_IDU u_ysyx_22040088_controlunit load", false,-1);
@@ -405,7 +405,7 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declBit(c+274,"top u_ysyx_22040088_IDU u_ysyx_22040088_controlunit b_type", false,-1);
         tracep->declBit(c+16,"top u_ysyx_22040088_IDU u_ysyx_22040088_controlunit store", false,-1);
         tracep->declBit(c+275,"top u_ysyx_22040088_IDU u_ysyx_22040088_controlunit word", false,-1);
-        tracep->declBit(c+510,"top u_ysyx_22040088_IDU u_ysyx_22040088_regfile clk", false,-1);
+        tracep->declBit(c+509,"top u_ysyx_22040088_IDU u_ysyx_22040088_regfile clk", false,-1);
         tracep->declQuad(c+30,"top u_ysyx_22040088_IDU u_ysyx_22040088_regfile wdata", false,-1, 63,0);
         tracep->declBus(c+96,"top u_ysyx_22040088_IDU u_ysyx_22040088_regfile waddr", false,-1, 4,0);
         tracep->declBit(c+95,"top u_ysyx_22040088_IDU u_ysyx_22040088_regfile wen", false,-1);
@@ -415,42 +415,42 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declQuad(c+168,"top u_ysyx_22040088_IDU u_ysyx_22040088_regfile rdata2", false,-1, 63,0);
         {int i; for (i=0; i<32; i++) {
                 tracep->declQuad(c+276+i*2,"top u_ysyx_22040088_IDU u_ysyx_22040088_regfile rf", true,(i+0), 63,0);}}
-        tracep->declBus(c+532,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext1 IN_WIDTH", false,-1, 31,0);
-        tracep->declBus(c+523,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext1 EXT_WIDTH", false,-1, 31,0);
+        tracep->declBus(c+531,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext1 IN_WIDTH", false,-1, 31,0);
+        tracep->declBus(c+522,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext1 EXT_WIDTH", false,-1, 31,0);
         tracep->declBus(c+150,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext1 in", false,-1, 11,0);
         tracep->declQuad(c+170,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext1 out", false,-1, 63,0);
-        tracep->declBus(c+533,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext2 IN_WIDTH", false,-1, 31,0);
-        tracep->declBus(c+523,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext2 EXT_WIDTH", false,-1, 31,0);
+        tracep->declBus(c+532,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext2 IN_WIDTH", false,-1, 31,0);
+        tracep->declBus(c+522,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext2 EXT_WIDTH", false,-1, 31,0);
         tracep->declBus(c+151,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext2 in", false,-1, 20,0);
         tracep->declQuad(c+172,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext2 out", false,-1, 63,0);
-        tracep->declBus(c+534,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext4 IN_WIDTH", false,-1, 31,0);
-        tracep->declBus(c+523,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext4 EXT_WIDTH", false,-1, 31,0);
+        tracep->declBus(c+533,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext4 IN_WIDTH", false,-1, 31,0);
+        tracep->declBus(c+522,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext4 EXT_WIDTH", false,-1, 31,0);
         tracep->declBus(c+153,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext4 in", false,-1, 12,0);
         tracep->declQuad(c+176,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext4 out", false,-1, 63,0);
-        tracep->declBus(c+532,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext5 IN_WIDTH", false,-1, 31,0);
-        tracep->declBus(c+523,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext5 EXT_WIDTH", false,-1, 31,0);
+        tracep->declBus(c+531,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext5 IN_WIDTH", false,-1, 31,0);
+        tracep->declBus(c+522,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext5 EXT_WIDTH", false,-1, 31,0);
         tracep->declBus(c+154,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext5 in", false,-1, 11,0);
         tracep->declQuad(c+178,"top u_ysyx_22040088_IDU u_ysyx_22040088_signext5 out", false,-1, 63,0);
         tracep->declQuad(c+164,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 rdata1", false,-1, 63,0);
         tracep->declQuad(c+9,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 pc", false,-1, 63,0);
         tracep->declBus(c+155,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 sel_alusrc1", false,-1, 3,0);
         tracep->declQuad(c+21,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 alu_src1", false,-1, 63,0);
-        tracep->declBus(c+535,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+535,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault KEY_LEN", false,-1, 31,0);
-        tracep->declBus(c+523,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault DATA_LEN", false,-1, 31,0);
+        tracep->declBus(c+534,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+534,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+522,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault DATA_LEN", false,-1, 31,0);
         tracep->declQuad(c+21,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault out", false,-1, 63,0);
         tracep->declBus(c+155,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault key", false,-1, 3,0);
-        tracep->declQuad(c+536,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault default_out", false,-1, 63,0);
+        tracep->declQuad(c+535,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault default_out", false,-1, 63,0);
         tracep->declArray(c+340,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault lut", false,-1, 271,0);
-        tracep->declBus(c+535,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 NR_KEY", false,-1, 31,0);
-        tracep->declBus(c+535,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 KEY_LEN", false,-1, 31,0);
-        tracep->declBus(c+523,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 DATA_LEN", false,-1, 31,0);
-        tracep->declBus(c+527,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 HAS_DEFAULT", false,-1, 31,0);
+        tracep->declBus(c+534,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 NR_KEY", false,-1, 31,0);
+        tracep->declBus(c+534,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 KEY_LEN", false,-1, 31,0);
+        tracep->declBus(c+522,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 DATA_LEN", false,-1, 31,0);
+        tracep->declBus(c+526,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 HAS_DEFAULT", false,-1, 31,0);
         tracep->declQuad(c+21,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 out", false,-1, 63,0);
         tracep->declBus(c+155,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 key", false,-1, 3,0);
-        tracep->declQuad(c+536,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 default_out", false,-1, 63,0);
+        tracep->declQuad(c+535,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 default_out", false,-1, 63,0);
         tracep->declArray(c+340,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 lut", false,-1, 271,0);
-        tracep->declBus(c+538,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 PAIR_LEN", false,-1, 31,0);
+        tracep->declBus(c+537,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 PAIR_LEN", false,-1, 31,0);
         {int i; for (i=0; i<4; i++) {
                 tracep->declArray(c+349+i*3,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 pair_list", true,(i+0), 67,0);}}
         {int i; for (i=0; i<4; i++) {
@@ -459,7 +459,7 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
                 tracep->declQuad(c+365+i*2,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 data_list", true,(i+0), 63,0);}}
         tracep->declQuad(c+373,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 lut_out", false,-1, 63,0);
         tracep->declBit(c+375,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 hit", false,-1);
-        tracep->declBus(c+539,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 i", false,-1, 31,0);
+        tracep->declBus(c+538,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc1 u_MuxKeyWithDefault i0 i", false,-1, 31,0);
         tracep->declQuad(c+25,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 rdata2", false,-1, 63,0);
         tracep->declQuad(c+170,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 immI", false,-1, 63,0);
         tracep->declQuad(c+174,"top u_ysyx_22040088_IDU u_ysyx_22040088_genALUsrc2 immU", false,-1, 63,0);
@@ -494,25 +494,25 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declBit(c+382,"top u_ysyx_22040088_IDU u_forwarding we_forward_ex", false,-1);
         tracep->declBit(c+383,"top u_ysyx_22040088_IDU u_forwarding we_forward_mem", false,-1);
         tracep->declBit(c+95,"top u_ysyx_22040088_IDU u_forwarding we_forward_wb", false,-1);
-        tracep->declBus(c+540,"top u_ysyx_22040088_IDU u_ysyx_22040088_zeroext IN_WIDTH", false,-1, 31,0);
-        tracep->declBus(c+523,"top u_ysyx_22040088_IDU u_ysyx_22040088_zeroext EXT_WIDTH", false,-1, 31,0);
+        tracep->declBus(c+539,"top u_ysyx_22040088_IDU u_ysyx_22040088_zeroext IN_WIDTH", false,-1, 31,0);
+        tracep->declBus(c+522,"top u_ysyx_22040088_IDU u_ysyx_22040088_zeroext EXT_WIDTH", false,-1, 31,0);
         tracep->declBus(c+148,"top u_ysyx_22040088_IDU u_ysyx_22040088_zeroext in", false,-1, 4,0);
         tracep->declQuad(c+200,"top u_ysyx_22040088_IDU u_ysyx_22040088_zeroext out", false,-1, 63,0);
-        tracep->declBit(c+510,"top u_ysyx_22040088_IDU u_CSRs clk", false,-1);
-        tracep->declBit(c+511,"top u_ysyx_22040088_IDU u_CSRs rst", false,-1);
+        tracep->declBit(c+509,"top u_ysyx_22040088_IDU u_CSRs clk", false,-1);
+        tracep->declBit(c+510,"top u_ysyx_22040088_IDU u_CSRs rst", false,-1);
         tracep->declBus(c+150,"top u_ysyx_22040088_IDU u_CSRs csr_id", false,-1, 11,0);
         tracep->declBit(c+160,"top u_ysyx_22040088_IDU u_CSRs csr_re", false,-1);
         tracep->declBit(c+160,"top u_ysyx_22040088_IDU u_CSRs csr_we", false,-1);
         tracep->declBit(c+163,"top u_ysyx_22040088_IDU u_CSRs mret", false,-1);
         tracep->declBit(c+162,"top u_ysyx_22040088_IDU u_CSRs ecall", false,-1);
         tracep->declQuad(c+9,"top u_ysyx_22040088_IDU u_CSRs epc", false,-1, 63,0);
-        tracep->declQuad(c+506,"top u_ysyx_22040088_IDU u_CSRs csr_wdata", false,-1, 63,0);
-        tracep->declBit(c+518,"top u_ysyx_22040088_IDU u_CSRs tint_ena", false,-1);
+        tracep->declQuad(c+505,"top u_ysyx_22040088_IDU u_CSRs csr_wdata", false,-1, 63,0);
+        tracep->declBit(c+517,"top u_ysyx_22040088_IDU u_CSRs tint_ena", false,-1);
         tracep->declBit(c+34,"top u_ysyx_22040088_IDU u_CSRs mtcmp_we", false,-1);
         tracep->declBit(c+35,"top u_ysyx_22040088_IDU u_CSRs mtcmp_re", false,-1);
         tracep->declQuad(c+36,"top u_ysyx_22040088_IDU u_CSRs mtcmp_wdata", false,-1, 63,0);
-        tracep->declQuad(c+508,"top u_ysyx_22040088_IDU u_CSRs csr_rdata", false,-1, 63,0);
-        tracep->declBit(c+505,"top u_ysyx_22040088_IDU u_CSRs tint", false,-1);
+        tracep->declQuad(c+507,"top u_ysyx_22040088_IDU u_CSRs csr_rdata", false,-1, 63,0);
+        tracep->declBit(c+504,"top u_ysyx_22040088_IDU u_CSRs tint", false,-1);
         tracep->declQuad(c+384,"top u_ysyx_22040088_IDU u_CSRs mepc", false,-1, 63,0);
         tracep->declQuad(c+386,"top u_ysyx_22040088_IDU u_CSRs mstatus", false,-1, 63,0);
         tracep->declQuad(c+388,"top u_ysyx_22040088_IDU u_CSRs mcause", false,-1, 63,0);
@@ -540,22 +540,22 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declBit(c+415,"top u_ysyx_22040088_IDU u_CSRs we_mtvec", false,-1);
         tracep->declBit(c+416,"top u_ysyx_22040088_IDU u_CSRs we_mie", false,-1);
         tracep->declBit(c+411,"top u_ysyx_22040088_IDU u_CSRs we_mip", false,-1);
-        tracep->declBit(c+510,"top u_ysyx_22040088_IDU u_CSRs u_clint clk", false,-1);
-        tracep->declBit(c+511,"top u_ysyx_22040088_IDU u_CSRs u_clint rst", false,-1);
-        tracep->declBit(c+518,"top u_ysyx_22040088_IDU u_CSRs u_clint ena", false,-1);
+        tracep->declBit(c+509,"top u_ysyx_22040088_IDU u_CSRs u_clint clk", false,-1);
+        tracep->declBit(c+510,"top u_ysyx_22040088_IDU u_CSRs u_clint rst", false,-1);
+        tracep->declBit(c+517,"top u_ysyx_22040088_IDU u_CSRs u_clint ena", false,-1);
         tracep->declBit(c+396,"top u_ysyx_22040088_IDU u_CSRs u_clint MIE", false,-1);
         tracep->declBit(c+397,"top u_ysyx_22040088_IDU u_CSRs u_clint MTIE", false,-1);
         tracep->declBit(c+34,"top u_ysyx_22040088_IDU u_CSRs u_clint mtcmp_we", false,-1);
         tracep->declQuad(c+36,"top u_ysyx_22040088_IDU u_CSRs u_clint mtcmp_wdata", false,-1, 63,0);
-        tracep->declBit(c+505,"top u_ysyx_22040088_IDU u_CSRs u_clint tint", false,-1);
+        tracep->declBit(c+504,"top u_ysyx_22040088_IDU u_CSRs u_clint tint", false,-1);
         tracep->declQuad(c+398,"top u_ysyx_22040088_IDU u_CSRs u_clint mtcmp_rdata", false,-1, 63,0);
         tracep->declQuad(c+417,"top u_ysyx_22040088_IDU u_CSRs u_clint mtime", false,-1, 63,0);
         tracep->declQuad(c+398,"top u_ysyx_22040088_IDU u_CSRs u_clint mtimecmp", false,-1, 63,0);
         tracep->declBit(c+419,"top u_ysyx_22040088_IDU u_CSRs u_clint mtime_bigger", false,-1);
-        tracep->declBit(c+510,"top u_EX_reg clk", false,-1);
-        tracep->declBit(c+511,"top u_EX_reg rst", false,-1);
+        tracep->declBit(c+509,"top u_EX_reg clk", false,-1);
+        tracep->declBit(c+510,"top u_EX_reg rst", false,-1);
         tracep->declBit(c+12,"top u_EX_reg valid", false,-1);
-        tracep->declBit(c+519,"top u_EX_reg ena", false,-1);
+        tracep->declBit(c+518,"top u_EX_reg ena", false,-1);
         tracep->declQuad(c+9,"top u_EX_reg id_pc", false,-1, 63,0);
         tracep->declBus(c+11,"top u_EX_reg id_inst", false,-1, 31,0);
         tracep->declBus(c+14,"top u_EX_reg id_alu_op", false,-1, 16,0);
@@ -638,10 +638,10 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declBit(c+471,"top u_ysyx_22040088_EXU u_ysyx_22040088_ALU adder_cin", false,-1);
         tracep->declQuad(c+439,"top u_ysyx_22040088_EXU u_ysyx_22040088_ALU adder_result", false,-1, 63,0);
         tracep->declBit(c+472,"top u_ysyx_22040088_EXU u_ysyx_22040088_ALU adder_cout", false,-1);
-        tracep->declBit(c+510,"top u_MEM_reg clk", false,-1);
-        tracep->declBit(c+511,"top u_MEM_reg rst", false,-1);
-        tracep->declBit(c+519,"top u_MEM_reg valid", false,-1);
-        tracep->declBit(c+519,"top u_MEM_reg ena", false,-1);
+        tracep->declBit(c+509,"top u_MEM_reg clk", false,-1);
+        tracep->declBit(c+510,"top u_MEM_reg rst", false,-1);
+        tracep->declBit(c+518,"top u_MEM_reg valid", false,-1);
+        tracep->declBit(c+518,"top u_MEM_reg ena", false,-1);
         tracep->declQuad(c+38,"top u_MEM_reg ex_pc", false,-1, 63,0);
         tracep->declBus(c+40,"top u_MEM_reg ex_inst", false,-1, 31,0);
         tracep->declQuad(c+60,"top u_MEM_reg ex_alu_result", false,-1, 63,0);
@@ -670,7 +670,7 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declBit(c+76,"top u_MEM_reg mem_ebreak", false,-1);
         tracep->declBit(c+77,"top u_MEM_reg mem_load", false,-1);
         tracep->declQuad(c+78,"top u_MEM_reg mem_csr_data", false,-1, 63,0);
-        tracep->declBit(c+510,"top u_MEM clk", false,-1);
+        tracep->declBit(c+509,"top u_MEM clk", false,-1);
         tracep->declBit(c+80,"top u_MEM ena", false,-1);
         tracep->declBit(c+66,"top u_MEM wen", false,-1);
         tracep->declBus(c+81,"top u_MEM mem_mask", false,-1, 3,0);
@@ -688,7 +688,7 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declBit(c+477,"top u_MEM sel_mtcmp", false,-1);
         tracep->declQuad(c+478,"top u_MEM mem_zext", false,-1, 63,0);
         tracep->declQuad(c+480,"top u_MEM mem_sext", false,-1, 63,0);
-        tracep->declBit(c+510,"top u_MEM u_mem clk", false,-1);
+        tracep->declBit(c+509,"top u_MEM u_mem clk", false,-1);
         tracep->declBit(c+474,"top u_MEM u_mem ena", false,-1);
         tracep->declBit(c+473,"top u_MEM u_mem wen", false,-1);
         tracep->declBus(c+81,"top u_MEM u_mem mem_mask", false,-1, 3,0);
@@ -701,10 +701,10 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declBus(c+487,"top u_MEM u_mem idx", false,-1, 2,0);
         tracep->declBus(c+488,"top u_MEM u_mem offset", false,-1, 5,0);
         tracep->declQuad(c+489,"top u_MEM u_mem tmpdata", false,-1, 63,0);
-        tracep->declBit(c+510,"top u_WB_reg clk", false,-1);
-        tracep->declBit(c+511,"top u_WB_reg rst", false,-1);
-        tracep->declBit(c+519,"top u_WB_reg valid", false,-1);
-        tracep->declBit(c+519,"top u_WB_reg ena", false,-1);
+        tracep->declBit(c+509,"top u_WB_reg clk", false,-1);
+        tracep->declBit(c+510,"top u_WB_reg rst", false,-1);
+        tracep->declBit(c+518,"top u_WB_reg valid", false,-1);
+        tracep->declBit(c+518,"top u_WB_reg ena", false,-1);
         tracep->declQuad(c+62,"top u_WB_reg mem_pc", false,-1, 63,0);
         tracep->declBus(c+64,"top u_WB_reg mem_inst", false,-1, 31,0);
         tracep->declQuad(c+71,"top u_WB_reg mem_alu_result", false,-1, 63,0);
@@ -730,18 +730,18 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declQuad(c+30,"top u_WB rf_wdata", false,-1, 63,0);
         tracep->declBit(c+8,"top u_ctrl if_stall", false,-1);
         tracep->declBit(c+33,"top u_ctrl id_stall", false,-1);
-        tracep->declBit(c+521,"top u_ctrl ex_stall", false,-1);
-        tracep->declBit(c+521,"top u_ctrl mem_stall", false,-1);
+        tracep->declBit(c+520,"top u_ctrl ex_stall", false,-1);
+        tracep->declBit(c+520,"top u_ctrl mem_stall", false,-1);
         tracep->declBit(c+4,"top u_ctrl if_ena", false,-1);
-        tracep->declBit(c+519,"top u_ctrl if_valid", false,-1);
+        tracep->declBit(c+518,"top u_ctrl if_valid", false,-1);
         tracep->declBit(c+12,"top u_ctrl id_ena", false,-1);
         tracep->declBit(c+13,"top u_ctrl id_valid", false,-1);
-        tracep->declBit(c+519,"top u_ctrl ex_ena", false,-1);
+        tracep->declBit(c+518,"top u_ctrl ex_ena", false,-1);
         tracep->declBit(c+12,"top u_ctrl ex_valid", false,-1);
-        tracep->declBit(c+519,"top u_ctrl mem_ena", false,-1);
-        tracep->declBit(c+519,"top u_ctrl mem_valid", false,-1);
-        tracep->declBit(c+519,"top u_ctrl wb_ena", false,-1);
-        tracep->declBit(c+519,"top u_ctrl wb_valid", false,-1);
+        tracep->declBit(c+518,"top u_ctrl mem_ena", false,-1);
+        tracep->declBit(c+518,"top u_ctrl mem_valid", false,-1);
+        tracep->declBit(c+518,"top u_ctrl wb_ena", false,-1);
+        tracep->declBit(c+518,"top u_ctrl wb_valid", false,-1);
     }
 }
 
@@ -1692,16 +1692,15 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
                                                           >> 9U)))),23);
         tracep->fullCData(oldp+500,((7U & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__nextpc))),3);
         tracep->fullBit(oldp+501,(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__valid));
-        tracep->fullBit(oldp+502,(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT____Vcellinp__icache__rst));
-        tracep->fullCData(oldp+503,(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__next_state),3);
-        tracep->fullCData(oldp+504,(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_addr),6);
-        tracep->fullBit(oldp+505,(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__tint));
-        tracep->fullQData(oldp+506,(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__csr_wdata),64);
-        tracep->fullQData(oldp+508,(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__csr_rdata),64);
-        tracep->fullBit(oldp+510,(vlSelf->clk));
-        tracep->fullBit(oldp+511,(vlSelf->rst));
-        tracep->fullQData(oldp+512,(vlSelf->pc),64);
-        tracep->fullQData(oldp+514,(((IData)(vlSelf->top__DOT__branch)
+        tracep->fullCData(oldp+502,(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__next_state),3);
+        tracep->fullCData(oldp+503,(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_addr),6);
+        tracep->fullBit(oldp+504,(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__tint));
+        tracep->fullQData(oldp+505,(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__csr_wdata),64);
+        tracep->fullQData(oldp+507,(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__csr_rdata),64);
+        tracep->fullBit(oldp+509,(vlSelf->clk));
+        tracep->fullBit(oldp+510,(vlSelf->rst));
+        tracep->fullQData(oldp+511,(vlSelf->pc),64);
+        tracep->fullQData(oldp+513,(((IData)(vlSelf->top__DOT__branch)
                                       ? ((((0x73U == vlSelf->top__DOT__id_inst) 
                                            | (0x30200073U 
                                               == vlSelf->top__DOT__id_inst)) 
@@ -1732,36 +1731,36 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
                                                     << 0xdU) 
                                                    | (QData)((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__immB)))))))
                                       : 0ULL)),64);
-        tracep->fullBit(oldp+516,((1U & (~ ((((0U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
+        tracep->fullBit(oldp+515,((1U & (~ ((((0U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
                                               & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__valid)) 
                                              | (1U 
                                                 == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state))) 
                                             | (3U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)))))));
-        tracep->fullBit(oldp+517,(((((0U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
+        tracep->fullBit(oldp+516,(((((0U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
                                      & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__valid)) 
                                     | (1U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state))) 
                                    | (3U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)))));
-        tracep->fullBit(oldp+518,((1U & (~ ((IData)(vlSelf->rst) 
+        tracep->fullBit(oldp+517,((1U & (~ ((IData)(vlSelf->rst) 
                                             | (IData)(vlSelf->top__DOT__id_stall))))));
-        tracep->fullBit(oldp+519,(1U));
-        tracep->fullCData(oldp+520,(0xfU),4);
-        tracep->fullBit(oldp+521,(0U));
-        tracep->fullCData(oldp+522,(vlSelf->top__DOT__mem_sel_alures),4);
-        tracep->fullIData(oldp+523,(0x40U),32);
-        tracep->fullQData(oldp+524,(0x7ffffffcULL),64);
-        tracep->fullIData(oldp+526,(0U),32);
-        tracep->fullIData(oldp+527,(1U),32);
-        tracep->fullIData(oldp+528,(2U),32);
-        tracep->fullIData(oldp+529,(3U),32);
-        tracep->fullIData(oldp+530,(0x80U),32);
-        tracep->fullIData(oldp+531,(6U),32);
-        tracep->fullIData(oldp+532,(0xcU),32);
-        tracep->fullIData(oldp+533,(0x15U),32);
-        tracep->fullIData(oldp+534,(0xdU),32);
-        tracep->fullIData(oldp+535,(4U),32);
-        tracep->fullQData(oldp+536,(0ULL),64);
-        tracep->fullIData(oldp+538,(0x44U),32);
-        tracep->fullIData(oldp+539,(4U),32);
-        tracep->fullIData(oldp+540,(5U),32);
+        tracep->fullBit(oldp+518,(1U));
+        tracep->fullCData(oldp+519,(0xfU),4);
+        tracep->fullBit(oldp+520,(0U));
+        tracep->fullCData(oldp+521,(vlSelf->top__DOT__mem_sel_alures),4);
+        tracep->fullIData(oldp+522,(0x40U),32);
+        tracep->fullQData(oldp+523,(0x7ffffffcULL),64);
+        tracep->fullIData(oldp+525,(0U),32);
+        tracep->fullIData(oldp+526,(1U),32);
+        tracep->fullIData(oldp+527,(2U),32);
+        tracep->fullIData(oldp+528,(3U),32);
+        tracep->fullIData(oldp+529,(0x80U),32);
+        tracep->fullIData(oldp+530,(6U),32);
+        tracep->fullIData(oldp+531,(0xcU),32);
+        tracep->fullIData(oldp+532,(0x15U),32);
+        tracep->fullIData(oldp+533,(0xdU),32);
+        tracep->fullIData(oldp+534,(4U),32);
+        tracep->fullQData(oldp+535,(0ULL),64);
+        tracep->fullIData(oldp+537,(0x44U),32);
+        tracep->fullIData(oldp+538,(4U),32);
+        tracep->fullIData(oldp+539,(5U),32);
     }
 }
