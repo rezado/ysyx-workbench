@@ -32,7 +32,7 @@ always @(posedge clk) begin
         reg_offset <= 3'b0;
         reg_tag <= 23'b0;
     end
-    else if (state == IDLE && valid) begin
+    else if ((state == IDLE && valid) || (state == LOOKUP && next_state == LOOKUP)) begin
         reg_index <= index;
         reg_offset <= offset;
         reg_tag <= tag;
