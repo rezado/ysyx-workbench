@@ -16,7 +16,7 @@ module icache(
     input  [63:0]   ret_data
 );
 
-parameter IDLE = 0, LOOKUP = 1, MISS = 2, REPLACE = 3, REFILL = 4;
+parameter IDLE = 0, LOOKUP = 1, MISS = 2, REPLACE = 3;
 
 reg [2:0] state, next_state;
 
@@ -172,7 +172,7 @@ assign rd_addr = {32'b0, reg_tag, reg_index, 3'b0};
 
 // 输出信号赋值
 assign addr_ok = (state == IDLE || (state == LOOKUP && cache_hit));
-assign data_ok = (state == LOOKUP && cache_hit) || (state == REFILL);
+assign data_ok = (state == LOOKUP && cache_hit) || (state == REPLACE);
 assign rdata = (state == IDLE) ? reg_ret_data[reg_offset[2] * 32 +: 32] : load_res;
 
 
@@ -200,9 +200,6 @@ always @(*) begin
             next_state = REPLACE;
         end
         REPLACE: begin
-            next_state = REFILL;
-        end
-        REFILL: begin
             next_state = IDLE;
         end
         default: begin
