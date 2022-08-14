@@ -138,7 +138,7 @@ wire ram_cen, ram_wen;
 wire [5:0] ram_addr;
 wire [127:0] ram_bwen;
 // 读cache: 1.state == IDLE && 请求有效 2. LOOKUP -> LOOKUP
-assign ram_cen = ~((state == IDLE && valid ) || (state == LOOKUP) || (state == REPLACE));
+assign ram_cen = ~((state == IDLE && valid ) || (state == LOOKUP) || (state == MISS));
 // 写cache： REPLACE阶段
 assign ram_wen = ~(state == REPLACE);
 assign ram_addr = (next_state == LOOKUP) ? index :
@@ -166,7 +166,7 @@ assign way1_data = ram_rdata[127:64];
 
 // MISS
 // 向内存请求读
-assign rd_req = (state == REPLACE);
+assign rd_req = (state == MISS);
 assign rd_wstrb = 4'b1111;
 assign rd_addr = {32'b0, reg_tag, reg_index, 3'b0};
 
