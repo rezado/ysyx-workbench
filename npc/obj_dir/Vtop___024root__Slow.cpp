@@ -296,9 +296,6 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
                                    ? (IData)(vlSelf->top__DOT__mem_mem_mask)
                                    : ((2U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state))
                                        ? 0xfU : 0U));
-    vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__re_vtag 
-        = ((1U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)) 
-           | (4U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)));
     vlSelf->top__DOT__MEM_ena = ((IData)(vlSelf->top__DOT__mem_mem_ena) 
                                  | (2U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state)));
     vlSelf->top__DOT__mem_addr = (((IData)(vlSelf->top__DOT__mem_mem_ena) 
@@ -1328,7 +1325,7 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
                                                     : 
                                                    (4ULL 
                                                     + vlSelf->top__DOT__pc_out)));
-    if (vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__re_vtag) {
+    if ((1U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state))) {
         vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way0_vtag 
             = vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way0_vtag_tab
             [(0x3fU & (IData)((vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__nextpc 
@@ -1489,7 +1486,6 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     for (int __Vi0=0; __Vi0<64; ++__Vi0) {
         vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way1_vtag_tab[__Vi0] = VL_RAND_RESET_I(24);
     }
-    vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__re_vtag = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way0_vtag = VL_RAND_RESET_I(24);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way1_vtag = VL_RAND_RESET_I(24);
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way0_hit = VL_RAND_RESET_I(1);

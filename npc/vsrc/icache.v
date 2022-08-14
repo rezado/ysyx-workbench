@@ -101,7 +101,7 @@ always @(posedge clk) begin
         reg_ret_data <= 64'b0;
         // reg_replace_way <= 1'b0;
     end
-    else if (state == MISS) begin
+    else if (state == REPLACE) begin
         reg_ret_data <= ret_data;
         // reg_replace_way <= replace_way; 
     end
@@ -166,7 +166,7 @@ assign way1_data = ram_rdata[127:64];
 
 // MISS
 // 向内存请求读
-assign rd_req = (state == MISS);
+assign rd_req = (state == REPLACE);
 assign rd_wstrb = 4'b1111;
 assign rd_addr = {32'b0, reg_tag, reg_index, 3'b0};
 
