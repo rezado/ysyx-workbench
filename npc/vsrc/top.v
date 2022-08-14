@@ -18,7 +18,7 @@ wire			icache_rd_req;
 wire [ 3:0]   icache_rd_wstrb;
 wire [63:0]	icache_rd_addr;
 wire [63:0]	icache_ret_data;
-wire if_stall;
+wire if_stall, all_stall;
 
 assign icache_ret_data = mem_rdata;
 
@@ -31,6 +31,7 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.pc              (pc_out          ),
 	.inst            (inst            ),
 	.if_stall        (if_stall        ),
+	.all_stall		 (all_stall       ),
 	.icache_rd_req   (icache_rd_req   ),
 	.icache_rd_wstrb (icache_rd_wstrb ),
 	.icache_rd_addr  (icache_rd_addr  ),
@@ -361,6 +362,7 @@ ctrl u_ctrl(
 	.id_stall  (id_stall  ),
 	.ex_stall  (1'b0      ),
 	.mem_stall (1'b0      ),
+	.all_stall (all_stall ),
 	.if_ena    (if_ena    ),
 	.if_valid  (if_valid  ),
 	.id_ena    (id_ena    ),

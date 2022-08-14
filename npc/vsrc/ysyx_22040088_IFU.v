@@ -7,6 +7,7 @@ module ysyx_22040088_IFU(
     output [63:0] pc,
 	output [31:0] inst,
 	output        if_stall,
+	output        all_stall,
 	// ICache与内存接口
 	output			icache_rd_req,
 	output [ 3:0]   icache_rd_wstrb,
@@ -70,6 +71,7 @@ icache icache(
 	.ret_data (icache_ret_data )
 );
 
-assign if_stall = ~addr_ok;
+assign all_stall = ~addr_ok;
+assign if_stall = branch;
 
 endmodule
