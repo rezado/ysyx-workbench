@@ -22,7 +22,7 @@ assign ex_ena = ~(all_stall ||ex_stall || mem_stall);
 assign mem_ena = ~(all_stall || mem_stall);
 assign wb_ena = ~all_stall;
 
-assign if_valid = ~all_stall;
+assign if_valid = 1'b1;
 assign id_valid = ~if_stall;
 assign ex_valid = ~id_stall;
 assign mem_valid = ~(ex_stall);
