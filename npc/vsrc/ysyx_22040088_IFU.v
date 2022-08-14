@@ -72,6 +72,6 @@ icache icache(
 );
 
 assign all_stall = ~addr_ok;
-assign if_stall = branch;
+assign if_stall = 1'b0;
 
 endmodule
