@@ -59,10 +59,10 @@ assign way0_wdata = {1'b1, reg_tag};
 assign way1_wdata = {1'b1, reg_tag};
 always @(posedge clk) begin
     if (we_way0_vtag) begin
-        way0_vtag_tab[reg_index] <= way0_wdata;
+        way0_vtag_tab[index] <= way0_wdata;
     end
     if (we_way1_vtag) begin
-        way1_vtag_tab[reg_index] <= way1_wdata;
+        way1_vtag_tab[index] <= way1_wdata;
     end
 end
 
@@ -141,7 +141,7 @@ wire [127:0] ram_bwen;
 assign ram_cen = ~((state == IDLE && valid ) || (state == LOOKUP) || (state == MISS));
 // 写cache： REPLACE阶段
 assign ram_wen = ~(state == REPLACE);
-assign ram_addr = (next_state == LOOKUP) ? index :
+assign ram_addr = (next_state == LOOKUP) ? reg_index :
                   (state == REPLACE) ? reg_index :
                                        6'b0;
 assign ram_wdata = replace_way ? {reg_ret_data, 64'b0} : {64'b0, reg_ret_data};
