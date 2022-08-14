@@ -804,7 +804,7 @@ void Vtop___024root__traceFullSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
     // Body
     {
         tracep->fullQData(oldp+1,(vlSelf->top__DOT__pc_out),64);
-        tracep->fullBit(oldp+3,((2U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state))));
+        tracep->fullBit(oldp+3,((3U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state))));
         tracep->fullQData(oldp+4,((((QData)((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_tag)) 
                                     << 9U) | (QData)((IData)(
                                                              ((IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_index) 

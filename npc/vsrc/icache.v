@@ -173,7 +173,7 @@ assign rd_addr = {32'b0, reg_tag, reg_index, 3'b0};
 // 输出信号赋值
 assign addr_ok = (state == IDLE || (state == LOOKUP && cache_hit));
 assign data_ok = (state == LOOKUP && cache_hit) || (state == REFILL);
-assign rdata = (state == REFILL) ? reg_ret_data[reg_offset[2] * 32 +: 32] : load_res;
+assign rdata = (state == IDLE) ? reg_ret_data[reg_offset[2] * 32 +: 32] : load_res;
 
 
 // 组合逻辑
