@@ -49,7 +49,7 @@ wire we_way0_vtag, we_way1_vtag;
 wire [23:0] way0_vtag, way1_vtag;
 wire [23:0] way0_wdata, way1_wdata;
 // 读
-assign re_vtag = (state == LOOKUP);
+assign re_vtag = (state == LOOKUP) || (state == REFILL);
 assign way0_vtag = re_vtag ? way0_vtag_tab[index] : 24'b0;
 assign way1_vtag = re_vtag ? way1_vtag_tab[index] : 24'b0;
 // 写(REPLACE阶段写入替换的新tag)
@@ -170,7 +170,7 @@ assign rd_req = (state == MISS);
 assign rd_wstrb = 4'b1111;
 assign rd_addr = {32'b0, reg_tag, reg_index, 3'b0};
 
-
+// 输出信号赋值
 assign addr_ok = (state == IDLE || (state == LOOKUP && cache_hit));
 assign data_ok = (state == LOOKUP && cache_hit) || (state == REFILL);
 assign rdata = load_res;
