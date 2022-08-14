@@ -59,10 +59,10 @@ assign way0_wdata = {1'b1, reg_tag};
 assign way1_wdata = {1'b1, reg_tag};
 always @(posedge clk) begin
     if (we_way0_vtag) begin
-        way0_vtag_tab[index] <= way0_wdata;
+        way0_vtag_tab[reg_index] <= way0_wdata;
     end
     if (we_way1_vtag) begin
-        way1_vtag_tab[index] <= way1_wdata;
+        way1_vtag_tab[reg_index] <= way1_wdata;
     end
 end
 
