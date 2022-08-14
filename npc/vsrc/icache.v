@@ -101,7 +101,7 @@ always @(posedge clk) begin
         reg_ret_data <= 64'b0;
         // reg_replace_way <= 1'b0;
     end
-    else if (state == REPLACE) begin
+    else if (state == MISS) begin
         reg_ret_data <= ret_data;
         // reg_replace_way <= replace_way; 
     end
@@ -172,7 +172,7 @@ assign rd_addr = {32'b0, reg_tag, reg_index, 3'b0};
 
 // 输出信号赋值
 assign addr_ok = (state == IDLE || (state == LOOKUP && cache_hit));
-assign data_ok = (state == LOOKUP && cache_hit) || (state == REPLACE);
+assign data_ok = (state == LOOKUP && cache_hit);
 assign rdata = (state == IDLE) ? reg_ret_data[reg_offset[2] * 32 +: 32] : load_res;
 
 
