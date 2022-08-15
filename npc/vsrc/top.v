@@ -1,8 +1,12 @@
 module top(
     input   clk,
     input   rst,
-	output [63:0] pc
+	output [63:0] pc,
+	output  stall
 );
+
+assign stall = all_stall;
+
 /* verilator lint_off UNUSED */
 wire [63:0] pc_out;
 wire [31:0] inst;
