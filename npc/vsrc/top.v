@@ -53,11 +53,13 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 wire [63:0] if_pc, id_pc;
 wire [31:0] if_inst, id_inst;
 wire        id_ena, id_valid;
+wire branch_flush;
 assign if_pc = pc_out;
 assign if_inst = inst;
+assign branch_flush = branch && ~ all_stall;
 ID_reg u_ID_reg(
 	.clk     (clk     ),
-	.rst     (rst     ),
+	.rst     (rst || branch_flush),
 	.valid   (id_valid    ),
 	.ena     (id_ena     ),
 	.if_pc   (if_pc   ),

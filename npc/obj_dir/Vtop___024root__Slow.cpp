@@ -1271,8 +1271,6 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__key_list[3U] 
         = (0xfU & vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__pair_list
            [3U][2U]);
-    vlSelf->top__DOT____Vcellinp__u_ID_reg__rst = ((IData)(vlSelf->rst) 
-                                                   | (IData)(vlSelf->top__DOT__branch));
     vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__nextpc 
         = ((IData)(vlSelf->rst) ? 0x7ffffffcULL : ((IData)(vlSelf->top__DOT__branch)
                                                     ? 
@@ -1419,7 +1417,6 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__id_pc = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__id_inst = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__id_ena = VL_RAND_RESET_I(1);
-    vlSelf->top__DOT____Vcellinp__u_ID_reg__rst = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__id_alu_op = VL_RAND_RESET_I(17);
     vlSelf->top__DOT__id_alu_src1 = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__id_rf_rdata2 = VL_RAND_RESET_Q(64);
