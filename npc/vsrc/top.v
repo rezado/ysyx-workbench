@@ -16,7 +16,7 @@ wire        if_valid;
 wire [63:0] branchpc;
 wire        branch;
 
-assign pc = wb_pc;
+// assign pc = wb_pc;
 
 wire			icache_rd_req;
 wire [ 3:0]   icache_rd_wstrb;
@@ -39,7 +39,8 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.icache_rd_req   (icache_rd_req   ),
 	.icache_rd_wstrb (icache_rd_wstrb ),
 	.icache_rd_addr  (icache_rd_addr  ),
-	.icache_ret_data (icache_ret_data )
+	.icache_ret_data (icache_ret_data ),
+	.npc			 (pc              )
 );
 
 
