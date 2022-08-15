@@ -23,6 +23,7 @@ VL_MODULE(Vtop___024root) {
     VL_IN8(rst,0,0);
     VL_OUT8(stall,0,0);
     VL_OUT64(pc,63,0);
+    VL_OUT64(npc,63,0);
 
     // LOCAL SIGNALS
     // Anonymous structures to workaround compiler member-count bugs
@@ -181,6 +182,7 @@ VL_MODULE(Vtop___024root) {
         IData/*20:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__immJ;
         QData/*63:0*/ top__DOT__pc_out;
         QData/*63:0*/ top__DOT__id_pc;
+        QData/*63:0*/ top__DOT__id_npc;
         QData/*63:0*/ top__DOT__id_alu_src1;
         QData/*63:0*/ top__DOT__id_rf_rdata2;
         QData/*63:0*/ top__DOT__id_csr_data;
@@ -190,17 +192,20 @@ VL_MODULE(Vtop___024root) {
         QData/*63:0*/ top__DOT__ex_alu_src2;
         QData/*63:0*/ top__DOT__ex_rf_rdata2;
         QData/*63:0*/ top__DOT__ex_csr_data;
+        QData/*63:0*/ top__DOT__ex_npc;
         QData/*63:0*/ top__DOT__ex_alu_result;
         QData/*63:0*/ top__DOT__mem_pc;
         QData/*63:0*/ top__DOT__mem_rf_rdata2;
         QData/*63:0*/ top__DOT__mem_alu_result;
         QData/*63:0*/ top__DOT__mem_csr_data;
+        QData/*63:0*/ top__DOT__mem_npc;
         QData/*63:0*/ top__DOT__mem_addr;
         QData/*63:0*/ top__DOT__mem_rdata;
         QData/*63:0*/ top__DOT__wb_pc;
         QData/*63:0*/ top__DOT__wb_alu_result;
         QData/*63:0*/ top__DOT__wb_rdata;
         QData/*63:0*/ top__DOT__wb_csr_data;
+        QData/*63:0*/ top__DOT__wb_npc;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__nextpc;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_ret_data;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__rf_rdata1;
@@ -219,12 +224,12 @@ VL_MODULE(Vtop___024root) {
         QData/*63:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_CSRs__DOT__u_clint__DOT__mtimecmp;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__alu_res;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__slt_result;
+    };
+    struct {
         QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_b;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_result;
         QData/*63:0*/ top__DOT__u_MEM__DOT__mem_rdata;
         QData/*63:0*/ top__DOT__u_MEM__DOT__u_mem__DOT__tmpdata;
-    };
-    struct {
         VlUnpacked<IData/*23:0*/, 64> top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way0_vtag_tab;
         VlUnpacked<IData/*23:0*/, 64> top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way1_vtag_tab;
         VlUnpacked<VlWide<4>/*127:0*/, 64> top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__u_S011HD1P_X32Y2D128_BW__DOT__ram;
