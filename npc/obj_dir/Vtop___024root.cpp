@@ -708,7 +708,7 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
            | ((- (QData)((IData)((1U & (vlSelf->top__DOT__ex_alu_op 
                                         >> 0x10U))))) 
               & VL_MODDIV_QQQ(64, vlSelf->top__DOT__ex_alu_src1, vlSelf->top__DOT__ex_alu_src2)));
-    if (((IData)(vlSelf->rst) | (IData)(vlSelf->top__DOT__branch))) {
+    if (vlSelf->rst) {
         vlSelf->top__DOT__id_pc = 0x80000000ULL;
     } else if (vlSelf->top__DOT__id_ena) {
         vlSelf->top__DOT__id_pc = vlSelf->top__DOT__pc_out;
@@ -794,14 +794,13 @@ VL_INLINE_OPT void Vtop___024root___sequent__TOP__2(Vtop___024root* vlSelf) {
     }
     if (vlSelf->rst) {
         vlSelf->top__DOT__pc_out = 0x7ffffffcULL;
-    } else if ((1U & (~ (((~ (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok)) 
-                          | (IData)(vlSelf->top__DOT__branch)) 
+    } else if ((1U & (~ ((~ (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok)) 
                          | (IData)(vlSelf->top__DOT__id_stall))))) {
         vlSelf->top__DOT__pc_out = vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__nextpc;
     }
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__we_forward_ex 
         = ((IData)(vlSelf->top__DOT__ex_rf_we) & (~ (IData)(vlSelf->top__DOT__ex_load)));
-    if (((IData)(vlSelf->rst) | (IData)(vlSelf->top__DOT__branch))) {
+    if (vlSelf->rst) {
         vlSelf->top__DOT__id_inst = 0U;
     } else if (vlSelf->top__DOT__id_ena) {
         vlSelf->top__DOT__id_inst = ((0U == (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state))
