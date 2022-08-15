@@ -60,7 +60,7 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
     Vtop___024root____Vdpiimwrap_top__DOT__get_inv_TOP(0U);
     if (VL_UNLIKELY(vlSelf->top__DOT__wb_ebreak)) {
         Vtop___024root____Vdpiimwrap_top__DOT__finish_sim_TOP();
-        VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 344, "");
+        VL_FINISH_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 346, "");
     }
     Vtop___024root____Vdpiimwrap_top__DOT__get_inst_TOP(vlSelf->top__DOT__wb_inst);
     vlSelf->pc = vlSelf->top__DOT__wb_pc;
@@ -1314,6 +1314,9 @@ void Vtop___024root___settle__TOP__1(Vtop___024root* vlSelf) {
                                                     : 
                                                    (4ULL 
                                                     + vlSelf->top__DOT__pc_out)));
+    vlSelf->top__DOT____Vcellinp__u_ID_reg__rst = ((IData)(vlSelf->rst) 
+                                                   | ((IData)(vlSelf->top__DOT__branch) 
+                                                      & (IData)(vlSelf->top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok)));
     vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__lut_out 
         = ((- (QData)((IData)(((IData)(vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__sel_alusrc1) 
                                == vlSelf->top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_genALUsrc1__DOT__u_MuxKeyWithDefault__DOT__i0__DOT__key_list
@@ -1417,6 +1420,7 @@ void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__id_pc = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__id_inst = VL_RAND_RESET_I(32);
     vlSelf->top__DOT__id_ena = VL_RAND_RESET_I(1);
+    vlSelf->top__DOT____Vcellinp__u_ID_reg__rst = VL_RAND_RESET_I(1);
     vlSelf->top__DOT__id_alu_op = VL_RAND_RESET_I(17);
     vlSelf->top__DOT__id_alu_src1 = VL_RAND_RESET_Q(64);
     vlSelf->top__DOT__id_rf_rdata2 = VL_RAND_RESET_Q(64);
