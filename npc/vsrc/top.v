@@ -200,7 +200,8 @@ EX_reg u_EX_reg(
 	.ex_rf_waddr    (ex_rf_waddr    ),
 	.ex_ebreak      (ex_ebreak      ),
 	.ex_load        (ex_load        ),
-	.ex_csr_data    (ex_csr_data    )
+	.ex_csr_data    (ex_csr_data    ),
+	.ex_npc         (ex_npc         )
 );
 
 

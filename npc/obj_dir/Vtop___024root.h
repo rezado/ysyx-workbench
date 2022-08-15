@@ -21,24 +21,15 @@ VL_MODULE(Vtop___024root) {
     // PORTS
     VL_IN8(clk,0,0);
     VL_IN8(rst,0,0);
-<<<<<<< HEAD
-=======
     VL_OUT8(stall,0,0);
->>>>>>> temp
     VL_OUT64(pc,63,0);
     VL_OUT64(npc,63,0);
 
     // LOCAL SIGNALS
     // Anonymous structures to workaround compiler member-count bugs
     struct {
-<<<<<<< HEAD
-        CData/*0:0*/ top__DOT__if_ena;
-        CData/*0:0*/ top__DOT__branch;
-        CData/*0:0*/ top__DOT__id_jump;
-=======
         CData/*0:0*/ top__DOT__branch;
         CData/*0:0*/ top__DOT__id_ena;
->>>>>>> temp
         CData/*0:0*/ top__DOT__id_load;
         CData/*0:0*/ top__DOT__id_stall;
         CData/*0:0*/ top__DOT__mtcmp_re;
@@ -63,22 +54,15 @@ VL_MODULE(Vtop___024root) {
         CData/*0:0*/ top__DOT__mem_ebreak;
         CData/*0:0*/ top__DOT__mem_load;
         CData/*0:0*/ top__DOT__MEM_ena;
-<<<<<<< HEAD
-=======
         CData/*0:0*/ top__DOT__MEM_wen;
->>>>>>> temp
         CData/*3:0*/ top__DOT__mem_mask;
         CData/*1:0*/ top__DOT__sel_memdata;
         CData/*2:0*/ top__DOT__wb_sel_rfres;
         CData/*0:0*/ top__DOT__wb_rf_we;
         CData/*4:0*/ top__DOT__wb_rf_waddr;
         CData/*0:0*/ top__DOT__wb_ebreak;
-<<<<<<< HEAD
-        CData/*0:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__data_ok;
-=======
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__addr_ok;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__valid;
->>>>>>> temp
         CData/*2:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__state;
         CData/*2:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__next_state;
         CData/*5:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_index;
@@ -87,20 +71,10 @@ VL_MODULE(Vtop___024root) {
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way1_hit;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__cache_hit;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__replace_way;
-<<<<<<< HEAD
-        CData/*0:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_way0_hit;
-        CData/*0:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_way1_hit;
-        CData/*0:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_cache_hit;
-        CData/*5:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_addr;
-        CData/*3:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__sel_alusrc1;
-        CData/*6:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__sel_alusrc2;
-        CData/*6:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__sel_btype;
-=======
         CData/*5:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_addr;
         CData/*3:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__sel_alusrc1;
         CData/*6:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__sel_alusrc2;
         CData/*7:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__sel_btype;
->>>>>>> temp
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__rf_re1;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__rf_re2;
         CData/*5:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__sel_csrres;
@@ -116,17 +90,10 @@ VL_MODULE(Vtop___024root) {
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_ld;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sd;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_lw;
-<<<<<<< HEAD
-    };
-    struct {
-        CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sw;
-        CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_lh;
-=======
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sw;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_lh;
     };
     struct {
->>>>>>> temp
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sh;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_lb;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_ysyx_22040088_controlunit__DOT__inst_sb;
@@ -189,17 +156,10 @@ VL_MODULE(Vtop___024root) {
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__ForwardB_mem;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__ForwardB_wb;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__we_forward_ex;
-<<<<<<< HEAD
-    };
-    struct {
-        CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__we_forward_mem;
-        CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_CSRs__DOT__we_mepc;
-=======
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_forwarding__DOT__we_forward_mem;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_CSRs__DOT__we_mepc;
     };
     struct {
->>>>>>> temp
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_CSRs__DOT__we_mstatus;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_CSRs__DOT__we_mcause;
         CData/*0:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_CSRs__DOT__we_mtvec;
@@ -216,15 +176,6 @@ VL_MODULE(Vtop___024root) {
         IData/*16:0*/ top__DOT__ex_alu_op;
         IData/*31:0*/ top__DOT__mem_inst;
         IData/*31:0*/ top__DOT__wb_inst;
-<<<<<<< HEAD
-        IData/*23:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way0_vtag;
-        IData/*23:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way1_vtag;
-        IData/*22:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_tag;
-        IData/*31:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__load_res;
-        VlWide<4>/*127:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_rdata;
-        IData/*20:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__immJ;
-        QData/*63:0*/ top__DOT__pc_out;
-=======
         IData/*22:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_tag;
         IData/*23:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way0_vtag;
         IData/*23:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__way1_vtag;
@@ -232,7 +183,6 @@ VL_MODULE(Vtop___024root) {
         IData/*20:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__immJ;
         QData/*63:0*/ top__DOT__pc_out;
         QData/*63:0*/ top__DOT__branchpc;
->>>>>>> temp
         QData/*63:0*/ top__DOT__id_pc;
         QData/*63:0*/ top__DOT__id_alu_src1;
         QData/*63:0*/ top__DOT__id_rf_rdata2;
@@ -243,29 +193,20 @@ VL_MODULE(Vtop___024root) {
         QData/*63:0*/ top__DOT__ex_alu_src2;
         QData/*63:0*/ top__DOT__ex_rf_rdata2;
         QData/*63:0*/ top__DOT__ex_csr_data;
-<<<<<<< HEAD
-=======
         QData/*63:0*/ top__DOT__ex_npc;
->>>>>>> temp
         QData/*63:0*/ top__DOT__ex_alu_result;
         QData/*63:0*/ top__DOT__mem_pc;
         QData/*63:0*/ top__DOT__mem_rf_rdata2;
         QData/*63:0*/ top__DOT__mem_alu_result;
         QData/*63:0*/ top__DOT__mem_csr_data;
-<<<<<<< HEAD
-=======
         QData/*63:0*/ top__DOT__mem_npc;
->>>>>>> temp
         QData/*63:0*/ top__DOT__mem_addr;
         QData/*63:0*/ top__DOT__mem_rdata;
         QData/*63:0*/ top__DOT__wb_pc;
         QData/*63:0*/ top__DOT__wb_alu_result;
         QData/*63:0*/ top__DOT__wb_rdata;
         QData/*63:0*/ top__DOT__wb_csr_data;
-<<<<<<< HEAD
-=======
         QData/*63:0*/ top__DOT__wb_npc;
->>>>>>> temp
         QData/*63:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__nextpc;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__reg_ret_data;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__rf_rdata1;
@@ -283,15 +224,9 @@ VL_MODULE(Vtop___024root) {
         QData/*63:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_CSRs__DOT__u_clint__DOT__mtime;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__u_CSRs__DOT__u_clint__DOT__mtimecmp;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__alu_res;
-<<<<<<< HEAD
-        QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__slt_result;
-    };
-    struct {
-=======
     };
     struct {
         QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__slt_result;
->>>>>>> temp
         QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_b;
         QData/*63:0*/ top__DOT__u_ysyx_22040088_EXU__DOT__u_ysyx_22040088_ALU__DOT__adder_result;
         QData/*63:0*/ top__DOT__u_MEM__DOT__mem_rdata;

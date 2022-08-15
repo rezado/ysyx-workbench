@@ -5,15 +5,9 @@ module ysyx_22040088_IFU(
 	input [63:0] branchpc,
 	input       branch,
     output [63:0] pc,
-<<<<<<< HEAD
-	output      jump_o,
-	output [31:0] inst,
-	output        if_stall,
-=======
 	output [31:0] inst,
 	output        if_stall,
 	output        all_stall,
->>>>>>> temp
 	// ICache与内存接口
 	output			icache_rd_req,
 	output [ 3:0]   icache_rd_wstrb,
@@ -27,31 +21,13 @@ wire [63:0]addpc;
 ysyx_22040088_pc u_ysyx_22040088_pc(
 	.clk    (clk    ),
 	.rst    (rst    ),
-<<<<<<< HEAD
-	.wen    (ena && addr_ok),
-=======
 	.wen    (ena    ),
->>>>>>> temp
 	.pc_src (nextpc ),
 	.pc_out (pc     )
 );
 
 assign addpc = pc + 4;
 
-<<<<<<< HEAD
-// 简单译码 执行jal指令
-// wire jump;
-wire [63:0] jumppc;
-wire [63:0] offset;
-assign offset = {{44{inst[31]}}, inst[19:12], inst[20], inst[30:21], 1'b0};
-assign jump_o = (inst[6:0] == 7'b1101111);
-assign jumppc = pc + offset;
-
-// 选择nextpc
-assign nextpc = rst    ? 64'h80000000 :
-				~ena   ? pc :
-				jump_o ? jumppc :
-=======
 // 选择nextpc
 // always @(posedge clk) begin
 // 	if (rst) nextpc <= 64'h80000000;
@@ -60,7 +36,6 @@ assign nextpc = rst    ? 64'h80000000 :
 // 	else nextpc <= addpc;
 // end
 assign nextpc = rst    ? 64'h7ffffffc :
->>>>>>> temp
 		        branch ? branchpc :
 				         addpc;
 
@@ -68,28 +43,18 @@ assign nextpc = rst    ? 64'h7ffffffc :
 wire [ 5:0]   index;
 wire [22:0]   tag;
 wire [ 2:0]   off;
-<<<<<<< HEAD
-=======
 /* verilator lint_off UNUSED */
->>>>>>> temp
 wire addr_ok, data_ok;  // 握手信号
 wire [31:0] icache_rdata;
 wire valid;
 assign off = nextpc[2:0];
 assign index = nextpc[8:3];
 assign tag = nextpc[31:9];
-<<<<<<< HEAD
-assign valid = addr_ok;
-
-assign inst = icache_rdata;
-
-=======
 assign valid = (~rst && addr_ok);  // 只有跳转之后才发出icache读请求
 
 assign inst = icache_rdata;
 
 
->>>>>>> temp
 icache icache(
 	.clk      (clk      ),
 	.rst      (rst      ),
@@ -106,11 +71,7 @@ icache icache(
 	.ret_data (icache_ret_data )
 );
 
-<<<<<<< HEAD
-assign if_stall = ~data_ok;
-=======
 assign all_stall = ~addr_ok;
 assign if_stall = 1'b0;
->>>>>>> temp
 
 endmodule

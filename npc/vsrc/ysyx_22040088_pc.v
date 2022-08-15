@@ -7,11 +7,7 @@ module ysyx_22040088_pc(
     output reg  [63:0] pc_out
 );
 
-<<<<<<< HEAD
-Reg #(64, 64'h80000000) pc_Reg(
-=======
 Reg #(64, 64'h7ffffffc) pc_Reg(
->>>>>>> temp
     .clk(clk),
     .rst(rst),
     .din(pc_src),
