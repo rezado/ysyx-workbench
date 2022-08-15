@@ -1,25 +1,30 @@
 module top(
     input   clk,
     input   rst,
-	output [63:0] pc
+	output [63:0] pc,
+	output [63:0] npc,
+	output  stall
 );
+
+assign stall = all_stall;
+
 /* verilator lint_off UNUSED */
 wire [63:0] pc_out;
 wire [31:0] inst;
-wire        if_jump;
 wire        if_ena;
 wire        if_valid;
 // IFU
 wire [63:0] branchpc;
 wire        branch;
 
+assign npc = wb_npc;
 assign pc = wb_pc;
 
 wire			icache_rd_req;
 wire [ 3:0]   icache_rd_wstrb;
 wire [63:0]	icache_rd_addr;
 wire [63:0]	icache_ret_data;
-wire if_stall;
+wire if_stall, all_stall;
 
 assign icache_ret_data = mem_rdata;
 
@@ -30,9 +35,9 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.branchpc        (branchpc        ),
 	.branch          (branch          ),
 	.pc              (pc_out          ),
-	.jump_o          (if_jump         ),
 	.inst            (inst            ),
 	.if_stall        (if_stall        ),
+	.all_stall		 (all_stall       ),
 	.icache_rd_req   (icache_rd_req   ),
 	.icache_rd_wstrb (icache_rd_wstrb ),
 	.icache_rd_addr  (icache_rd_addr  ),
@@ -49,21 +54,20 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 // IF_ID
 wire [63:0] if_pc, id_pc;
 wire [31:0] if_inst, id_inst;
-wire        id_jump;
 wire        id_ena, id_valid;
+wire branch_flush;
 assign if_pc = pc_out;
 assign if_inst = inst;
+assign branch_flush = branch && ~ all_stall;
 ID_reg u_ID_reg(
 	.clk     (clk     ),
-	.rst     (rst     ),
+	.rst     (rst || branch_flush),
 	.valid   (id_valid    ),
 	.ena     (id_ena     ),
 	.if_pc   (if_pc   ),
 	.if_inst (if_inst ),
-	.if_jump (if_jump ),
 	.id_pc   (id_pc   ),
-	.id_inst (id_inst ),
-	.id_jump (id_jump )
+	.id_inst (id_inst )
 );
 
 
@@ -154,6 +158,9 @@ wire [ 4:0] ex_rf_waddr;
 wire		ex_ebreak;
 wire        ex_load;
 wire [63:0] ex_csr_data;
+wire [63:0] ex_npc;
+wire [63:0] id_npc;
+assign id_npc = branch ? branchpc : if_pc;
 EX_reg u_EX_reg(
 	.clk            (clk           ),
 	.rst            (rst           ),
@@ -176,6 +183,7 @@ EX_reg u_EX_reg(
 	.id_ebreak      (id_ebreak      ),
 	.id_load        (id_load        ),
 	.id_csr_data    (id_csr_data    ),
+	.id_npc         (id_npc         ),
 	.ex_pc          (ex_pc          ),
 	.ex_inst        (ex_inst        ),
 	.ex_alu_op      (ex_alu_op      ),
@@ -223,6 +231,7 @@ wire [ 4:0] mem_rf_waddr;
 wire		mem_ebreak;
 wire        mem_load;
 wire [63:0] mem_csr_data;
+wire [63:0] mem_npc;
 MEM_reg u_MEM_reg(
 	.clk             (clk             ),
 	.rst             (rst             ),
@@ -242,6 +251,7 @@ MEM_reg u_MEM_reg(
 	.ex_ebreak       (ex_ebreak       ),
 	.ex_load         (ex_load         ),
 	.ex_csr_data     (ex_csr_data     ),
+	.ex_npc          (ex_npc          ),
 	.mem_pc          (mem_pc          ),
 	.mem_inst        (mem_inst        ),
 	.mem_alu_result  (mem_alu_result  ),
@@ -255,7 +265,8 @@ MEM_reg u_MEM_reg(
 	.mem_rf_waddr    (mem_rf_waddr    ),
 	.mem_ebreak		 (mem_ebreak      ),
 	.mem_load        (mem_load        ),
-	.mem_csr_data    (mem_csr_data    )
+	.mem_csr_data    (mem_csr_data    ),
+	.mem_npc         (mem_npc         )
 );
 
 wire MEM_ena, MEM_wen;
@@ -264,16 +275,17 @@ wire [63:0] mem_addr;
 wire [63:0] mem_rdata;
 wire [63:0] mem_wdata;
 wire [ 1:0] sel_memdata;
+// 访存指令与ICache读请求冲突时 阻塞访存优先ICache
 assign MEM_ena = mem_mem_ena || icache_rd_req;
-assign MEM_wen = mem_mem_wen;
-assign mem_mask = mem_mem_ena || mem_mem_wen ? mem_mem_mask :
-					  icache_rd_req ? icache_rd_wstrb :
-					  				  4'b0;
-assign mem_addr = mem_mem_ena || mem_mem_wen ? mem_alu_result :
-				  icache_rd_req ? icache_rd_addr :
-				  				  64'b0;
+assign MEM_wen = icache_rd_req ? 1'b0 : mem_mem_wen;
+assign mem_mask = icache_rd_req              ? icache_rd_wstrb :
+                  mem_mem_ena || mem_mem_wen ? mem_mem_mask :
+				                               4'b0;
+assign mem_addr = icache_rd_req              ? icache_rd_addr :
+				  mem_mem_ena || mem_mem_wen ? mem_alu_result :
+				  				               64'b0;
 assign mem_wdata = mem_mem_wen ? mem_rf_rdata2 :
-				   				   64'b0;
+				   				 64'b0;
 assign sel_memdata = (icache_rd_req) ? 2'b01:
 					 				   mem_sel_memdata;
 
@@ -302,6 +314,7 @@ wire        wb_rf_we;
 wire [ 4:0] wb_rf_waddr;
 wire		wb_ebreak;
 wire [63:0] wb_csr_data;
+wire [63:0] wb_npc;
 WB_reg u_WB_reg(
 	.clk            (clk            ),
 	.rst            (rst            ),
@@ -316,6 +329,7 @@ WB_reg u_WB_reg(
 	.mem_rf_waddr   (mem_rf_waddr   ),
 	.mem_ebreak     (mem_ebreak     ),
 	.mem_csr_data   (mem_csr_data   ),
+	.mem_npc        (mem_npc        ),
 	.wb_pc          (wb_pc          ),
 	.wb_inst        (wb_inst        ),
 	.wb_alu_result  (wb_alu_result  ),
@@ -324,7 +338,8 @@ WB_reg u_WB_reg(
 	.wb_rf_we       (wb_rf_we       ),
 	.wb_rf_waddr    (wb_rf_waddr    ),
 	.wb_ebreak		(wb_ebreak      ),
-	.wb_csr_data    (wb_csr_data    )
+	.wb_csr_data    (wb_csr_data    ),
+	.wb_npc         (wb_npc         )
 );
 
 
@@ -366,6 +381,7 @@ ctrl u_ctrl(
 	.id_stall  (id_stall  ),
 	.ex_stall  (1'b0      ),
 	.mem_stall (1'b0      ),
+	.all_stall (all_stall ),
 	.if_ena    (if_ena    ),
 	.if_valid  (if_valid  ),
 	.id_ena    (id_ena    ),

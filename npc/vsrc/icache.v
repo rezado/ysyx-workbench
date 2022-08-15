@@ -20,35 +20,6 @@ parameter IDLE = 0, LOOKUP = 1, MISS = 2, REPLACE = 3;
 
 reg [2:0] state, next_state;
 
-assign addr_ok = (state == IDLE);
-assign data_ok = (state == IDLE && reg_cache_hit);
-assign rdata = load_res;
-
-// {v, tag}表
-reg [23:0] way0_vtag_tab [0:63];
-reg [23:0] way1_vtag_tab [0:63];
-
-wire re_vtag;
-wire we_way0_vtag, we_way1_vtag;
-wire [23:0] way0_vtag, way1_vtag;
-wire [23:0] way0_wdata, way1_wdata;
-// 读
-assign re_vtag = (state == LOOKUP);
-assign way0_vtag = re_vtag ? way0_vtag_tab[index] : 24'b0;
-assign way1_vtag = re_vtag ? way1_vtag_tab[index] : 24'b0;
-// 写(REPLACE阶段写入替换的新tag)
-assign we_way0_vtag = (state == REPLACE) & ~replace_way;
-assign we_way1_vtag = (state == REPLACE) & replace_way;
-assign way0_wdata = {1'b1, reg_tag};
-assign way1_wdata = {1'b1, reg_tag};
-always @(posedge clk) begin
-    if (we_way0_vtag) begin
-        way0_vtag_tab[index] <= way0_wdata;
-    end
-    if (we_way1_vtag) begin
-        way1_vtag_tab[index] <= way1_wdata;
-    end
-end
 
 // Request Buffer
 reg [5:0] reg_index;
@@ -61,12 +32,40 @@ always @(posedge clk) begin
         reg_offset <= 3'b0;
         reg_tag <= 23'b0;
     end
-    else if (state == IDLE && valid) begin
+    else if ((state == IDLE && valid) || (state == LOOKUP && next_state == LOOKUP)) begin
         reg_index <= index;
         reg_offset <= offset;
         reg_tag <= tag;
     end
 end
+
+
+// {v, tag}表
+reg [23:0] way0_vtag_tab [0:63];
+reg [23:0] way1_vtag_tab [0:63];
+
+wire re_vtag;
+wire we_way0_vtag, we_way1_vtag;
+wire [23:0] way0_vtag, way1_vtag;
+wire [23:0] way0_wdata, way1_wdata;
+// 读
+assign re_vtag = (state == LOOKUP);
+assign way0_vtag = re_vtag ? way0_vtag_tab[reg_index] : 24'b0;
+assign way1_vtag = re_vtag ? way1_vtag_tab[reg_index] : 24'b0;
+// 写(REPLACE阶段写入替换的新tag)
+assign we_way0_vtag = (state == REPLACE) & ~replace_way;
+assign we_way1_vtag = (state == REPLACE) & replace_way;
+assign way0_wdata = {1'b1, reg_tag};
+assign way1_wdata = {1'b1, reg_tag};
+always @(posedge clk) begin
+    if (we_way0_vtag) begin
+        way0_vtag_tab[reg_index] <= way0_wdata;
+    end
+    if (we_way1_vtag) begin
+        way1_vtag_tab[reg_index] <= way1_wdata;
+    end
+end
+
 
 // Tag Compare
 wire way0_hit, way1_hit, cache_hit;
@@ -111,23 +110,23 @@ wire [31:0] way0_load_word, way1_load_word, load_res;
 wire [63:0] way0_data, way1_data;
 assign way0_load_word = way0_data[reg_offset[2] * 32 +: 32];
 assign way1_load_word = way1_data[reg_offset[2] * 32 +: 32];
-// Selecter Buffer
-reg reg_way0_hit, reg_way1_hit, reg_cache_hit;
-always @(posedge clk) begin
-    if (rst) begin
-        reg_way0_hit <= 1'b0;
-        reg_way1_hit <= 1'b0;
-        reg_cache_hit <= 1'b0;
-    end
-    else if (state == LOOKUP) begin
-        reg_way0_hit <= way0_hit;
-        reg_way1_hit <= way1_hit;
-        reg_cache_hit <= cache_hit;
-    end
-end
-assign load_res = {32{reg_way0_hit}} & way0_load_word
-                | {32{reg_way1_hit}} & way1_load_word;
-assign ram_addr = (state == LOOKUP || state == REPLACE) ? reg_index : 6'b0;
+// // Selecter Buffer
+// reg reg_way0_hit, reg_way1_hit, reg_cache_hit;
+// always @(posedge clk) begin
+//     if (rst) begin
+//         reg_way0_hit <= 1'b0;
+//         reg_way1_hit <= 1'b0;
+//         reg_cache_hit <= 1'b0;
+//     end
+//     else if (state == IDLE && valid) begin
+//         reg_way0_hit <= way0_hit;
+//         reg_way1_hit <= way1_hit;
+//         reg_cache_hit <= cache_hit;
+//     end
+// end
+assign load_res = {32{way0_hit}} & way0_load_word
+                | {32{way1_hit}} & way1_load_word;
+
 
 
 // RAM
@@ -135,11 +134,13 @@ wire [127:0] ram_rdata, ram_wdata;
 wire ram_cen, ram_wen;
 wire [5:0] ram_addr;
 wire [127:0] ram_bwen;
-// 读cache: 1.state == LOOKUP && cache命中
-assign ram_cen = ~((state == LOOKUP && cache_hit) || (state == REPLACE));
+// 读cache: 1.state == IDLE && 请求有效 2. LOOKUP -> LOOKUP
+assign ram_cen = ~((state == IDLE && valid ) || (state == LOOKUP) || (state == REPLACE));
 // 写cache： REPLACE阶段
 assign ram_wen = ~(state == REPLACE);
-assign ram_addr = (state == LOOKUP || state == REPLACE) ? reg_index : 6'b0;
+assign ram_addr = (next_state == LOOKUP) ? index :
+                  (state == REPLACE) ? reg_index :
+                                       6'b0;
 assign ram_wdata = replace_way ? {reg_ret_data, 64'b0} : {64'b0, reg_ret_data};
 assign ram_bwen = replace_way ? 128'h00000000_00000000_ffffffff_ffffffff : 128'hffffffff_ffffffff_00000000_00000000;
 
@@ -158,11 +159,19 @@ u_S011HD1P_X32Y2D128_BW(
 assign way0_data = ram_rdata[63:0];
 assign way1_data = ram_rdata[127:64];
 
+
+
 // MISS
 // 向内存请求读
 assign rd_req = (state == MISS);
 assign rd_wstrb = 4'b1111;
 assign rd_addr = {32'b0, reg_tag, reg_index, 3'b0};
+
+// 输出信号赋值
+assign addr_ok = (state == IDLE || (state == LOOKUP && cache_hit));
+assign data_ok = (state == LOOKUP && cache_hit) ;
+assign rdata = (state == IDLE) ? reg_ret_data[reg_offset[2] * 32 +: 32] : load_res;
+
 
 // 组合逻辑
 always @(*) begin
@@ -177,7 +186,8 @@ always @(*) begin
         end
         LOOKUP: begin
             if (cache_hit) begin
-                next_state = IDLE;
+                if (valid) next_state = LOOKUP;
+                else next_state = IDLE;
             end
             else begin
                 next_state = MISS;
@@ -187,7 +197,7 @@ always @(*) begin
             next_state = REPLACE;
         end
         REPLACE: begin
-            next_state = LOOKUP;
+            next_state = IDLE;
         end
         default: begin
             next_state = state;
@@ -198,7 +208,7 @@ end
 // 时序逻辑
 always @(posedge clk) begin
     if (rst) begin
-        state <= 3'b0;
+        state <= IDLE;
     end
     else begin
         state <= next_state;

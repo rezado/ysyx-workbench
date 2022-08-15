@@ -20,6 +20,7 @@ module EX_reg(
     input             id_ebreak,
     input             id_load,
     input      [63:0] id_csr_data,
+    input      [63:0] id_npc,
     
     output reg [63:0] ex_pc,
     output reg [31:0] ex_inst,
@@ -37,7 +38,8 @@ module EX_reg(
     output reg [ 4:0] ex_rf_waddr,
     output reg        ex_ebreak,
     output reg        ex_load,
-    output reg [63:0] ex_csr_data
+    output reg [63:0] ex_csr_data,
+    output reg [63:0] ex_npc
 );
 
 always @(posedge clk) begin
@@ -59,6 +61,7 @@ always @(posedge clk) begin
         ex_ebreak <= 1'b0;
         ex_load <= 1'b0;
         ex_csr_data <= 64'b0;
+        ex_npc <= 64'b0;
     end
     else if (ena) begin
         ex_pc <= id_pc;
@@ -78,6 +81,7 @@ always @(posedge clk) begin
         ex_ebreak <= id_ebreak;
         ex_load <= id_load;
         ex_csr_data <= id_csr_data;
+        ex_npc <= id_npc;
     end
 end
 

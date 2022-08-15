@@ -12,6 +12,7 @@ module WB_reg(
     input       [ 4:0] mem_rf_waddr,
     input              mem_ebreak,
     input       [63:0] mem_csr_data,
+    input       [63:0] mem_npc,
 
     output reg  [63:0] wb_pc,
     output reg  [31:0] wb_inst,
@@ -21,7 +22,8 @@ module WB_reg(
     output reg         wb_rf_we,
     output reg  [ 4:0] wb_rf_waddr,
     output reg         wb_ebreak,
-    output reg  [63:0] wb_csr_data
+    output reg  [63:0] wb_csr_data,
+    output reg  [63:0] wb_npc
 );
 
 always @(posedge clk) begin
@@ -35,6 +37,7 @@ always @(posedge clk) begin
         wb_rf_waddr <= 5'b0;
         wb_ebreak <= 1'b0;
         wb_csr_data <= 64'b0;
+        wb_npc <= 64'b0;
     end
     else if (ena) begin
         wb_pc <= mem_pc;
@@ -46,6 +49,7 @@ always @(posedge clk) begin
         wb_rf_waddr <= mem_rf_waddr;
         wb_ebreak <= mem_ebreak;
         wb_csr_data <= mem_csr_data;
+        wb_npc <= mem_npc;
     end
 end
 

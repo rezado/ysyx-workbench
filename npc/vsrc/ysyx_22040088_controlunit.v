@@ -4,7 +4,7 @@ module ysyx_22040088_controlunit(
     output         rf_we,
     output  [ 3:0] sel_alusrc1,
     output  [ 6:0] sel_alusrc2,
-    output  [ 6:0] sel_btype,
+    output  [ 7:0] sel_btype,
     output  [ 2:0] sel_rfres,
     output         mem_ena,
     output         mem_wen,
@@ -260,7 +260,8 @@ assign sel_btype = {inst_bgeu,
                     inst_blt,
                     inst_bne,
                     inst_beq,
-                    inst_jalr};
+                    inst_jalr,
+                    inst_jal};
 assign sel_rfres = {csrr, load, ~(load | csrr)};
 assign mem_ena = load | store;
 assign mem_wen = store;

@@ -20,6 +20,10 @@
 #define CONFIG_TIMER_GETTIMEOFDAY 1
 #define CONFIG_ENGINE_INTERPRETER 1
 #define CONFIG_CC_OPT "-O2"
+<<<<<<< HEAD
+=======
+#define CONFIG_MTRACE 1
+>>>>>>> temp
 #define CONFIG_RT_CHECK 1
 #define CONFIG_ISA64 1
 #define CONFIG_CC_GPP 1

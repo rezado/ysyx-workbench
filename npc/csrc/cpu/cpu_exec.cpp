@@ -60,20 +60,18 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
 #endif
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   // DIFFTEST比DUT晚一个周期更新
-  if (instr.val == 0) {
-    // difftest_skip_ref();
-    // printf("time:%d pc:%x inst:%x\n", g_nr_guest_inst, _this->pc, instr.val);
-  }
-  else if (!hit) {
-    hit = true;
-  }
-  else if (hit) {
-    printf("dnpc:%x inst:%x\n", dnpc, instr.val);
+  if (hit) {
+    printf("difftest dnpc:%x inst:%x\n", dnpc, instr.val);
     IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
+  }
+  if (instr.val == 0 || top->stall == 1) {
+    // difftest_skip_ref();
+    hit = false;
+    printf("skip time:%d pc:%x inst:%x\n", g_nr_guest_inst, _this->pc, instr.val);
   }
   else {
-    printf("dnpc:%x inst:%x\n", dnpc, instr.val);
-    IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
+    printf("hit time:%d pc:%x inst:%x\n", g_nr_guest_inst, _this->pc, instr.val);
+    hit = true;
   }
 #ifdef CONFIG_WATCHPOINT
   // scan watchpoints
@@ -88,6 +86,7 @@ extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int
 static void exec_once(Decode *s) {
   s->pc = top->pc;
   s->snpc = top->pc;
+  s->dnpc = top->npc;
 
   isa_exec_once(s);
   gprcpy();  // 通过DPI-C更新寄存器状态
@@ -130,7 +129,7 @@ void execute(uint64_t n) {
     g_nr_guest_inst ++;
     sim_time++;
 	  t++;
-    trace_and_difftest(&s, CPU.pc);
+    trace_and_difftest(&s, s.dnpc);
     if (npc_state.state != NEMU_RUNNING) break;
     IFDEF(CONFIG_DEVICE, device_update());
     #ifdef CONFIG_DUMPWAVE
