@@ -69,6 +69,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   }
   else if (hit) {
     printf("dnpc:%x inst:%x\n", dnpc, instr.val);
+    hit = false;
     IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
   }
   else {
