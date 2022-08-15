@@ -16,7 +16,6 @@ wire        if_valid;
 // IFU
 wire [63:0] branchpc;
 wire        branch;
-wire [63:0] if_npc;
 
 assign npc = wb_npc;
 assign pc = wb_pc;
@@ -42,8 +41,7 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.icache_rd_req   (icache_rd_req   ),
 	.icache_rd_wstrb (icache_rd_wstrb ),
 	.icache_rd_addr  (icache_rd_addr  ),
-	.icache_ret_data (icache_ret_data ),
-	.npc			 (if_npc          )
+	.icache_ret_data (icache_ret_data )
 );
 
 
@@ -57,7 +55,6 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 wire [63:0] if_pc, id_pc;
 wire [31:0] if_inst, id_inst;
 wire        id_ena, id_valid;
-wire [63:0] id_npc;
 wire branch_flush;
 assign if_pc = pc_out;
 assign if_inst = inst;
@@ -69,10 +66,8 @@ ID_reg u_ID_reg(
 	.ena     (id_ena     ),
 	.if_pc   (if_pc   ),
 	.if_inst (if_inst ),
-	.if_npc  (if_npc  ),
 	.id_pc   (id_pc   ),
-	.id_inst (id_inst ),
-	.id_npc  (id_npc  )
+	.id_inst (id_inst )
 );
 
 
@@ -164,6 +159,8 @@ wire		ex_ebreak;
 wire        ex_load;
 wire [63:0] ex_csr_data;
 wire [63:0] ex_npc;
+wire [63:0] id_npc;
+assign id_npc = branch ? branchpc : if_pc;
 EX_reg u_EX_reg(
 	.clk            (clk           ),
 	.rst            (rst           ),

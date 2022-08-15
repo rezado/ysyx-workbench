@@ -12,14 +12,11 @@ module ysyx_22040088_IFU(
 	output			icache_rd_req,
 	output [ 3:0]   icache_rd_wstrb,
 	output [63:0]	icache_rd_addr,
-	input  [63:0]	icache_ret_data,
-	output [63:0]   npc
+	input  [63:0]	icache_ret_data
 );
 
 wire [63:0]nextpc;
 wire [63:0]addpc;
-
-assign npc = nextpc;
 
 ysyx_22040088_pc u_ysyx_22040088_pc(
 	.clk    (clk    ),
