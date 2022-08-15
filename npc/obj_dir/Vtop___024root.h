@@ -181,8 +181,8 @@ VL_MODULE(Vtop___024root) {
         VlWide<4>/*127:0*/ top__DOT__u_ysyx_22040088_IFU__DOT__icache__DOT__ram_rdata;
         IData/*20:0*/ top__DOT__u_ysyx_22040088_IDU__DOT__immJ;
         QData/*63:0*/ top__DOT__pc_out;
+        QData/*63:0*/ top__DOT__branchpc;
         QData/*63:0*/ top__DOT__id_pc;
-        QData/*63:0*/ top__DOT__id_npc;
         QData/*63:0*/ top__DOT__id_alu_src1;
         QData/*63:0*/ top__DOT__id_rf_rdata2;
         QData/*63:0*/ top__DOT__id_csr_data;
