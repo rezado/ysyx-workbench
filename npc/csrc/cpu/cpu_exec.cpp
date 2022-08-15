@@ -61,15 +61,16 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   // DIFFTEST比DUT晚一个周期更新
   if (hit) {
-    printf("dnpc:%x inst:%x\n", dnpc, instr.val);
+    printf("difftest dnpc:%x inst:%x\n", dnpc, instr.val);
     hit = false;
     IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
   }
   else if (instr.val == 0 || top->stall == 1) {
     // difftest_skip_ref();
-    printf("time:%d pc:%x inst:%x\n", g_nr_guest_inst, _this->pc, instr.val);
+    printf("skip time:%d pc:%x inst:%x\n", g_nr_guest_inst, _this->pc, instr.val);
   }
   else {
+    printf("hit time:%d pc:%x inst:%x\n", g_nr_guest_inst, _this->pc, instr.val);
     hit = true;
   }
 #ifdef CONFIG_WATCHPOINT

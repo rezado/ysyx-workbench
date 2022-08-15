@@ -2,12 +2,10 @@ module top(
     input   clk,
     input   rst,
 	output [63:0] pc,
-	output reg stall
+	output  stall
 );
 
-always @(posedge clk) begin
-	stall <= all_stall;
-end
+assign stall = all_stall;
 
 /* verilator lint_off UNUSED */
 wire [63:0] pc_out;
