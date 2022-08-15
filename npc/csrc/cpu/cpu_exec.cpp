@@ -86,6 +86,7 @@ extern "C" void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int
 static void exec_once(Decode *s) {
   s->pc = top->pc;
   s->snpc = top->pc;
+  s->dnpc = top->npc;
 
   isa_exec_once(s);
   gprcpy();  // 通过DPI-C更新寄存器状态
@@ -128,7 +129,7 @@ void execute(uint64_t n) {
     g_nr_guest_inst ++;
     sim_time++;
 	  t++;
-    trace_and_difftest(&s, CPU.pc);
+    trace_and_difftest(&s, s.dnpc);
     if (npc_state.state != NEMU_RUNNING) break;
     IFDEF(CONFIG_DEVICE, device_update());
     #ifdef CONFIG_DUMPWAVE

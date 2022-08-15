@@ -17,6 +17,7 @@ module MEM_reg(
     input              ex_ebreak,
     input              ex_load,
     input       [63:0] ex_csr_data,
+    input       [63:0] ex_npc,
     
     output  reg [63:0] mem_pc,
     output  reg [31:0] mem_inst,
@@ -31,7 +32,8 @@ module MEM_reg(
     output  reg [ 4:0] mem_rf_waddr,
     output  reg        mem_ebreak,
     output  reg        mem_load,
-    output  reg [63:0] mem_csr_data
+    output  reg [63:0] mem_csr_data,
+    output  reg [63:0] mem_npc
 );
 
 always @(posedge clk) begin
@@ -50,6 +52,7 @@ always @(posedge clk) begin
         mem_ebreak <= 1'b0;
         mem_load <= 1'b0;
         mem_csr_data <= 64'b0;
+        mem_npc <= 64'b0;
     end
     else if (ena) begin
         mem_pc <= ex_pc;
@@ -66,6 +69,7 @@ always @(posedge clk) begin
         mem_ebreak <= ex_ebreak;
         mem_load <= ex_load;
         mem_csr_data <= ex_csr_data;
+        mem_npc <= ex_npc;
     end
 end
 

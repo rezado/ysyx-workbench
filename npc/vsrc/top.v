@@ -2,6 +2,7 @@ module top(
     input   clk,
     input   rst,
 	output [63:0] pc,
+	output [63:0] npc,
 	output  stall
 );
 
@@ -15,8 +16,10 @@ wire        if_valid;
 // IFU
 wire [63:0] branchpc;
 wire        branch;
+wire [63:0] if_npc;
 
-// assign pc = wb_pc;
+assign npc = wb_npc;
+assign pc = wb_pc;
 
 wire			icache_rd_req;
 wire [ 3:0]   icache_rd_wstrb;
@@ -40,7 +43,7 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 	.icache_rd_wstrb (icache_rd_wstrb ),
 	.icache_rd_addr  (icache_rd_addr  ),
 	.icache_ret_data (icache_ret_data ),
-	.npc			 (pc              )
+	.npc			 (if_npc          )
 );
 
 
@@ -54,6 +57,7 @@ ysyx_22040088_IFU u_ysyx_22040088_IFU(
 wire [63:0] if_pc, id_pc;
 wire [31:0] if_inst, id_inst;
 wire        id_ena, id_valid;
+wire [63:0] id_npc;
 wire branch_flush;
 assign if_pc = pc_out;
 assign if_inst = inst;
@@ -65,8 +69,10 @@ ID_reg u_ID_reg(
 	.ena     (id_ena     ),
 	.if_pc   (if_pc   ),
 	.if_inst (if_inst ),
+	.if_npc  (if_npc  ),
 	.id_pc   (id_pc   ),
-	.id_inst (id_inst )
+	.id_inst (id_inst ),
+	.id_npc  (id_npc  )
 );
 
 
@@ -157,6 +163,7 @@ wire [ 4:0] ex_rf_waddr;
 wire		ex_ebreak;
 wire        ex_load;
 wire [63:0] ex_csr_data;
+wire [63:0] ex_npc;
 EX_reg u_EX_reg(
 	.clk            (clk           ),
 	.rst            (rst           ),
@@ -179,6 +186,7 @@ EX_reg u_EX_reg(
 	.id_ebreak      (id_ebreak      ),
 	.id_load        (id_load        ),
 	.id_csr_data    (id_csr_data    ),
+	.id_npc         (id_npc         ),
 	.ex_pc          (ex_pc          ),
 	.ex_inst        (ex_inst        ),
 	.ex_alu_op      (ex_alu_op      ),
@@ -195,7 +203,8 @@ EX_reg u_EX_reg(
 	.ex_rf_waddr    (ex_rf_waddr    ),
 	.ex_ebreak      (ex_ebreak      ),
 	.ex_load        (ex_load        ),
-	.ex_csr_data    (ex_csr_data    )
+	.ex_csr_data    (ex_csr_data    ),
+	.ex_npc         (ex_npc         )
 );
 
 
@@ -226,6 +235,7 @@ wire [ 4:0] mem_rf_waddr;
 wire		mem_ebreak;
 wire        mem_load;
 wire [63:0] mem_csr_data;
+wire [63:0] mem_npc;
 MEM_reg u_MEM_reg(
 	.clk             (clk             ),
 	.rst             (rst             ),
@@ -245,6 +255,7 @@ MEM_reg u_MEM_reg(
 	.ex_ebreak       (ex_ebreak       ),
 	.ex_load         (ex_load         ),
 	.ex_csr_data     (ex_csr_data     ),
+	.ex_npc          (ex_npc          ),
 	.mem_pc          (mem_pc          ),
 	.mem_inst        (mem_inst        ),
 	.mem_alu_result  (mem_alu_result  ),
@@ -258,7 +269,8 @@ MEM_reg u_MEM_reg(
 	.mem_rf_waddr    (mem_rf_waddr    ),
 	.mem_ebreak		 (mem_ebreak      ),
 	.mem_load        (mem_load        ),
-	.mem_csr_data    (mem_csr_data    )
+	.mem_csr_data    (mem_csr_data    ),
+	.mem_npc         (mem_npc         )
 );
 
 wire MEM_ena, MEM_wen;
@@ -305,6 +317,7 @@ wire        wb_rf_we;
 wire [ 4:0] wb_rf_waddr;
 wire		wb_ebreak;
 wire [63:0] wb_csr_data;
+wire [63:0] wb_npc;
 WB_reg u_WB_reg(
 	.clk            (clk            ),
 	.rst            (rst            ),
@@ -319,6 +332,7 @@ WB_reg u_WB_reg(
 	.mem_rf_waddr   (mem_rf_waddr   ),
 	.mem_ebreak     (mem_ebreak     ),
 	.mem_csr_data   (mem_csr_data   ),
+	.mem_npc        (mem_npc        ),
 	.wb_pc          (wb_pc          ),
 	.wb_inst        (wb_inst        ),
 	.wb_alu_result  (wb_alu_result  ),
@@ -327,7 +341,8 @@ WB_reg u_WB_reg(
 	.wb_rf_we       (wb_rf_we       ),
 	.wb_rf_waddr    (wb_rf_waddr    ),
 	.wb_ebreak		(wb_ebreak      ),
-	.wb_csr_data    (wb_csr_data    )
+	.wb_csr_data    (wb_csr_data    ),
+	.wb_npc         (wb_npc         )
 );
 
 

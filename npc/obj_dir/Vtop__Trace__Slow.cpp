@@ -139,6 +139,7 @@ void Vtop___024root__traceInitSub0(Vtop___024root* vlSelf, VerilatedVcd* tracep)
         tracep->declBus(c+523,"top u_ysyx_22040088_IFU icache_rd_wstrb", false,-1, 3,0);
         tracep->declQuad(c+6,"top u_ysyx_22040088_IFU icache_rd_addr", false,-1, 63,0);
         tracep->declQuad(c+493,"top u_ysyx_22040088_IFU icache_ret_data", false,-1, 63,0);
+        tracep->declQuad(c+513,"top u_ysyx_22040088_IFU npc", false,-1, 63,0);
         tracep->declQuad(c+497,"top u_ysyx_22040088_IFU nextpc", false,-1, 63,0);
         tracep->declQuad(c+101,"top u_ysyx_22040088_IFU addpc", false,-1, 63,0);
         tracep->declBus(c+499,"top u_ysyx_22040088_IFU index", false,-1, 5,0);
