@@ -62,13 +62,13 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   // DIFFTEST比DUT晚一个周期更新
   if (instr.val == 0) {
     // difftest_skip_ref();
-    // printf("time:%d pc:%x inst:%x\n", g_nr_guest_inst, _this->pc, instr.val);
+    printf("time:%d pc:%x inst:%x\n", g_nr_guest_inst, _this->pc, instr.val);
   }
   else if (!hit) {
     hit = true;
   }
   else if (hit) {
-    // printf("dnpc:%x inst:%x\n", dnpc, instr.val);
+    printf("dnpc:%x inst:%x\n", dnpc, instr.val);
     IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
   }
   else {
