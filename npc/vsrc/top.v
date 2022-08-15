@@ -276,16 +276,17 @@ wire [63:0] mem_addr;
 wire [63:0] mem_rdata;
 wire [63:0] mem_wdata;
 wire [ 1:0] sel_memdata;
+// 访存指令与ICache读请求冲突时 阻塞访存优先ICache
 assign MEM_ena = mem_mem_ena || icache_rd_req;
-assign MEM_wen = mem_mem_wen;
-assign mem_mask = mem_mem_ena || mem_mem_wen ? mem_mem_mask :
-					  icache_rd_req ? icache_rd_wstrb :
-					  				  4'b0;
-assign mem_addr = mem_mem_ena || mem_mem_wen ? mem_alu_result :
-				  icache_rd_req ? icache_rd_addr :
-				  				  64'b0;
+assign MEM_wen = icache_rd_req ? 1'b0 : mem_mem_wen;
+assign mem_mask = icache_rd_req              ? icache_rd_wstrb :
+                  mem_mem_ena || mem_mem_wen ? mem_mem_mask :
+				                               4'b0;
+assign mem_addr = icache_rd_req              ? icache_rd_addr :
+				  mem_mem_ena || mem_mem_wen ? mem_alu_result :
+				  				               64'b0;
 assign mem_wdata = mem_mem_wen ? mem_rf_rdata2 :
-				   				   64'b0;
+				   				 64'b0;
 assign sel_memdata = (icache_rd_req) ? 2'b01:
 					 				   mem_sel_memdata;
 
