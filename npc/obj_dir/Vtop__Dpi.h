@@ -13,11 +13,11 @@ extern "C" {
 
 
     // DPI IMPORTS
-    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:336:30
+    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:340:30
     extern void finish_sim();
-    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:354:30
+    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:358:30
     extern void get_inst(int inst);
-    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:347:30
+    // DPI import at /home/bill/ysyx-workbench/npc/vsrc/top.v:351:30
     extern void get_inv(int inv);
     // DPI import at /home/bill/ysyx-workbench/npc/vsrc/mem.v:12:30
     extern void npc_read(long long raddr, long long* rdata);
