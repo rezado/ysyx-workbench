@@ -1,3 +1,5 @@
+`include "defines.v"
+
 module icache(
     input           clk,
     input           rst,
@@ -10,10 +12,12 @@ module icache(
     output          data_ok,  // 返回数据
     output [31:0]   rdata,
     // 与内存接口之间
-    output          rd_req,
-    output [ 3:0]   rd_wstrb,
+    input           rd_ready,
+    input  [63:0]   ret_data,
+    output          rd_valid,
+    output          rw_req,
     output [63:0]   rd_addr,
-    input  [63:0]   ret_data
+    output [ 1:0]   rd_size
 );
 
 parameter IDLE = 0, LOOKUP = 1, MISS = 2, REPLACE = 3;
@@ -91,19 +95,6 @@ always @(posedge clk) begin
     end
 end
 
-// Missing Buffer
-reg [63:0] reg_ret_data;
-// reg reg_replace_way;
-always @(posedge clk) begin
-    if (rst) begin
-        reg_ret_data <= 64'b0;
-        // reg_replace_way <= 1'b0;
-    end
-    else if (state == MISS) begin
-        reg_ret_data <= ret_data;
-        // reg_replace_way <= replace_way; 
-    end
-end
 
 // Data Select
 wire [31:0] way0_load_word, way1_load_word, load_res;
@@ -129,7 +120,7 @@ assign load_res = {32{way0_hit}} & way0_load_word
 
 
 
-// RAM
+// CACHE RAM
 wire [127:0] ram_rdata, ram_wdata;
 wire ram_cen, ram_wen;
 wire [5:0] ram_addr;
@@ -161,16 +152,31 @@ assign way1_data = ram_rdata[127:64];
 
 
 
-// MISS
+// AXI接口
 // 向内存请求读
-assign rd_req = (state == MISS);
-assign rd_wstrb = 4'b1111;
+assign rd_size = `SIZE_D;
+assign rd_valid = (state == MISS);
+assign rw_req = `REQ_READ;
 assign rd_addr = {32'b0, reg_tag, reg_index, 3'b0};
 
 // 输出信号赋值
 assign addr_ok = (state == IDLE || (state == LOOKUP && cache_hit));
 assign data_ok = (state == LOOKUP && cache_hit) ;
 assign rdata = (state == IDLE) ? reg_ret_data[reg_offset[2] * 32 +: 32] : load_res;
+
+// Missing Buffer
+reg [63:0] reg_ret_data;
+// reg reg_replace_way;
+always @(posedge clk) begin
+    if (rst) begin
+        reg_ret_data <= 64'b0;
+        // reg_replace_way <= 1'b0;
+    end
+    else if (state == MISS && rd_ready == 1'b1) begin
+        reg_ret_data <= ret_data;
+        // reg_replace_way <= replace_way; 
+    end
+end
 
 
 // 组合逻辑
@@ -194,7 +200,7 @@ always @(*) begin
             end
         end
         MISS: begin
-            next_state = REPLACE;
+            if (rd_ready) next_state = REPLACE;
         end
         REPLACE: begin
             next_state = IDLE;

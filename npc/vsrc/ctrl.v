@@ -17,7 +17,7 @@ module ctrl(
 );
 
 assign if_ena = ~(all_stall || if_stall || id_stall || ex_stall || mem_stall);
-assign id_ena = ~(all_stall ||id_stall || ex_stall || mem_stall);
+assign id_ena = ~(all_stall || id_stall || ex_stall || mem_stall);
 assign ex_ena = ~(all_stall ||ex_stall || mem_stall);
 assign mem_ena = ~(all_stall || mem_stall);
 assign wb_ena = ~all_stall;

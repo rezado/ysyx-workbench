@@ -29,22 +29,22 @@ wire if_stall, all_stall;
 assign icache_ret_data = mem_rdata;
 
 ysyx_22040088_IFU u_ysyx_22040088_IFU(
-	.clk             (clk             ),
-	.rst             (rst || ~if_valid ),
-	.ena             (if_ena          ),
-	.branchpc        (branchpc        ),
-	.branch          (branch          ),
-	.pc              (pc_out          ),
-	.inst            (inst            ),
-	.if_stall        (if_stall        ),
-	.all_stall		 (all_stall       ),
-	.icache_rd_req   (icache_rd_req   ),
-	.icache_rd_wstrb (icache_rd_wstrb ),
-	.icache_rd_addr  (icache_rd_addr  ),
-	.icache_ret_data (icache_ret_data )
+	.clk       (clk       ),
+	.rst       (rst || ~if_valid        ),
+	.ena       (if_ena       ),
+	.branchpc  (branchpc  ),
+	.branch    (branch    ),
+	.rw_ready  (rw_ready  ),
+	.data_read (data_read ),
+	.pc        (pc_out        ),
+	.inst      (inst      ),
+	.if_stall  (if_stall  ),
+	.all_stall (all_stall ),
+	.rw_valid  (rw_valid  ),
+	.rw_req    (rw_req    ),
+	.rw_addr   (rw_addr   ),
+	.rw_size   (rw_size   )
 );
-
-
 
 // always @(posedge clk) begin
 // 	$display("read at ", pc, "inst: ", inst);
