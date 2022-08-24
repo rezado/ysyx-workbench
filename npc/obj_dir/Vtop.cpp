@@ -16,6 +16,35 @@ Vtop::Vtop(VerilatedContext* _vcontextp__, const char* _vcname__)
     , pc{vlSymsp->TOP.pc}
     , npc{vlSymsp->TOP.npc}
     , stall{vlSymsp->TOP.stall}
+    , axi_aw_ready_i{vlSymsp->TOP.axi_aw_ready_i}
+    , axi_aw_valid_o{vlSymsp->TOP.axi_aw_valid_o}
+    , axi_aw_addr_o{vlSymsp->TOP.axi_aw_addr_o}
+    , axi_aw_id_o{vlSymsp->TOP.axi_aw_id_o}
+    , axi_aw_len_o{vlSymsp->TOP.axi_aw_len_o}
+    , axi_aw_size_o{vlSymsp->TOP.axi_aw_size_o}
+    , axi_aw_burst_o{vlSymsp->TOP.axi_aw_burst_o}
+    , axi_w_ready_i{vlSymsp->TOP.axi_w_ready_i}
+    , axi_w_valid_o{vlSymsp->TOP.axi_w_valid_o}
+    , axi_w_data_o{vlSymsp->TOP.axi_w_data_o}
+    , axi_w_strb_o{vlSymsp->TOP.axi_w_strb_o}
+    , axi_w_last_o{vlSymsp->TOP.axi_w_last_o}
+    , axi_b_ready_o{vlSymsp->TOP.axi_b_ready_o}
+    , axi_b_valid_i{vlSymsp->TOP.axi_b_valid_i}
+    , axi_b_resp_i{vlSymsp->TOP.axi_b_resp_i}
+    , axi_b_id_i{vlSymsp->TOP.axi_b_id_i}
+    , axi_ar_ready_i{vlSymsp->TOP.axi_ar_ready_i}
+    , axi_ar_valid_o{vlSymsp->TOP.axi_ar_valid_o}
+    , axi_ar_addr_o{vlSymsp->TOP.axi_ar_addr_o}
+    , axi_ar_id_o{vlSymsp->TOP.axi_ar_id_o}
+    , axi_ar_len_o{vlSymsp->TOP.axi_ar_len_o}
+    , axi_ar_size_o{vlSymsp->TOP.axi_ar_size_o}
+    , axi_ar_burst_o{vlSymsp->TOP.axi_ar_burst_o}
+    , axi_r_ready_o{vlSymsp->TOP.axi_r_ready_o}
+    , axi_r_valid_i{vlSymsp->TOP.axi_r_valid_i}
+    , axi_r_resp_i{vlSymsp->TOP.axi_r_resp_i}
+    , axi_r_data_i{vlSymsp->TOP.axi_r_data_i}
+    , axi_r_last_i{vlSymsp->TOP.axi_r_last_i}
+    , axi_r_id_i{vlSymsp->TOP.axi_r_id_i}
     , rootp{&(vlSymsp->TOP)}
 {
 }
@@ -62,7 +91,7 @@ static void _eval_initial_loop(Vtop__Syms* __restrict vlSymsp) {
             Verilated::debug(1);
             __Vchange = Vtop___024root___change_request(&(vlSymsp->TOP));
             Verilated::debug(__Vsaved_debug);
-            VL_FATAL_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 1, "",
+            VL_FATAL_MT("//home/bill/ysyx-workbench/npc/vsrc/top.v", 4, "",
                 "Verilated model didn't DC converge\n"
                 "- See https://verilator.org/warn/DIDNOTCONVERGE");
         } else {
@@ -93,7 +122,7 @@ void Vtop::eval_step() {
             Verilated::debug(1);
             __Vchange = Vtop___024root___change_request(&(vlSymsp->TOP));
             Verilated::debug(__Vsaved_debug);
-            VL_FATAL_MT("/home/bill/ysyx-workbench/npc/vsrc/top.v", 1, "",
+            VL_FATAL_MT("//home/bill/ysyx-workbench/npc/vsrc/top.v", 4, "",
                 "Verilated model didn't converge\n"
                 "- See https://verilator.org/warn/DIDNOTCONVERGE");
         } else {

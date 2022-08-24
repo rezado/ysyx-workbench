@@ -3,7 +3,9 @@ TOPNAME = top
 VERILATOR = verilator
 VERILATOR_CFLAGS += -MMD --build -cc  \
 				-O3 --x-assign fast --x-initial fast --noassert
-VERILATOR_SIM_CFLAGS += -Wall --trace --cc --exe --build
+VERILATOR_INCPATH = $(abspath ./vsrc)/defines.v
+VERILATOR_INCFLAGS = -I $(VERILATOR_INCPATH)
+VERILATOR_SIM_CFLAGS += -Wall --trace --cc --exe --build $(VERILATOR_INCFLAGS)
 
 BUILD_DIR = ./build
 OBJ_DIR = $(BUILD_DIR)/obj_dir

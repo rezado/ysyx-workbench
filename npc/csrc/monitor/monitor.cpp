@@ -1,5 +1,8 @@
 #include <isa.h>
 #include <memory/paddr.h>
+#include <axi4_mem.hpp>
+
+extern axi4_mem<64, 64, 4> mem;
 
 void init_rand();
 void init_log(const char *log_file);
@@ -44,15 +47,7 @@ static long load_img() {
 
   Log("The image is %s, size = %ld", img_file, size);
 
-  fseek(fp, 0, SEEK_SET);
-  int ret = fread(guest_to_host(RESET_VECTOR), size, 1, fp);
-  assert(ret == 1);
-
   fclose(fp);
-
-  // for (int i = 0; i < size; i++)
-  //   printf("%x ", *guest_to_host(RESET_VECTOR + i));
-  // puts("");
 
   return size;
 }
@@ -112,6 +107,7 @@ void init_monitor(int argc, char *argv[]) {
 
   /* Load the image to memory. This will overwrite the built-in image. */
   long img_size = load_img();
+  mem.load_binary(img_file, 0x80000000);
 
   /* Initialize differential testing. */
   init_difftest(diff_so_file, img_size, difftest_port);
