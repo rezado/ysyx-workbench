@@ -12,9 +12,9 @@ PERL = perl
 # Path to Verilator kit (from $VERILATOR_ROOT)
 VERILATOR_ROOT = /usr/local/share/verilator
 # SystemC include directory with systemc.h (from $SYSTEMC_INCLUDE)
-SYSTEMC_INCLUDE ?= /usr/local/systemc-2.3.3/include
+SYSTEMC_INCLUDE ?= 
 # SystemC library directory with libsystemc.a (from $SYSTEMC_LIBDIR)
-SYSTEMC_LIBDIR ?= /usr/local/systemc-2.3.3/lib-linux64
+SYSTEMC_LIBDIR ?= 
 
 ### Switches...
 # C++ code coverage  0/1 (from --prof-c)
@@ -44,8 +44,8 @@ VM_USER_CFLAGS = \
 	-MMD \
 	-Wall \
 	-I/home/bill/ysyx-workbench/npc/include \
-	-I/home/bill/ysyx-workbench/npc/csrc/engine/interpreter \
-	-I/home/bill/ysyx-workbench/npc/csrc/isa/riscv64/include \
+	-I//home/bill/ysyx-workbench/npc/csrc/isa/riscv64/include \
+	-I//home/bill/ysyx-workbench/npc/csrc/engine/interpreter \
 	-DTOP_NAME="Vtop" \
 	-I/usr/lib/llvm-12/include \
 	-std=c++14 \
